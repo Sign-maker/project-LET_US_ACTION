@@ -1,0 +1,99 @@
+@import-normalize; /* bring in normalize.css styles */
+@import url(./reset.css);
+
+/* 400 */
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Regular.woff2') format('woff2'),
+    url('./fonts/Roboto-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 500 */
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Medium.woff2') format('woff2'),
+    url('./fonts/Roboto-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 700 */
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Bold.woff2') format('woff2'),
+    url('./fonts/Roboto-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* colors */
+  --primary-white-FFFFFF: #ffffff;
+  --primary-black-2F2F2F: |#2F2F2F;
+  --primary-blue-407BFF: |#407BFF;
+  --secondary-2-ECF2FF: |#ECF2FF;
+  --secondary-red-EF5050F: |#EF5050;
+  --secondary-2-ECF2FF: |#ECF2FF;
+  --secondary-orange-FF9D43: |#FF9D43;
+  --secondary-4-9EBBFF: |#9EBBFF;
+  --secondary-5-D7E3FF: |#D7E3FF;
+
+  /* transition params */
+  --my-transition-duration: 250ms;
+  --my-transition-timing-function: ease-in-out;
+  --my-transition-delay: 250ms;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* ===================CONTAINER================*/
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  /* max-width: 375px; */
+  padding-left: 20px;
+  padding-right: 20px;
+  outline: 1px solid red;
+}
+@media (min-width: 320px) {
+  .container {
+    max-width: 320px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
