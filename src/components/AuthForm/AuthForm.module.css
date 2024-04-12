@@ -38,7 +38,6 @@
 
 .input {
   display: block;
-  /* width: calc(100% - 30px); */
   width: 100%;
   padding: 10px 12px;
   padding-right: 30px;
@@ -73,13 +72,9 @@
 
 .inputContainer {
   position: relative;
-  /* margin-bottom: 20px; */
 }
 
 .passwordIcon {
-  /* position: absolute;
-  top: 50%;
-  right: 10px; */
   transform: translateY(-50%);
   cursor: pointer;
   color: #407bff;
