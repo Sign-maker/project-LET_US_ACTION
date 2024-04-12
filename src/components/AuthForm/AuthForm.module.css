@@ -1,0 +1,143 @@
+@import '../../styles/index.css';
+
+.container {
+  max-width: 280px;
+  height: 304px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  margin: 0 auto;
+  outline: 1px solid red;
+}
+
+.title {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #2f2f2f;
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #2f2f2f;
+}
+
+.fieldContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  display: block;
+  /* width: calc(100% - 30px); */
+  width: 100%;
+  padding: 10px 12px;
+  padding-right: 30px;
+  margin-bottom: 16px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid #d7e3ff;
+  outline: none;
+  color: #407bff;
+  font-size: 16px;
+  line-height: 20px;
+}
+.input:hover,
+.input:focus {
+  color: #407bff;
+}
+
+.input::placeholder {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #9ebbff;
+}
+
+.passwordIconContainer {
+  position: absolute;
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.inputContainer {
+  position: relative;
+  /* margin-bottom: 20px; */
+}
+
+.passwordIcon {
+  /* position: absolute;
+  top: 50%;
+  right: 10px; */
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #407bff;
+}
+
+.button {
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  background-color: #407bff;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.link {
+  font-size: 16px;
+  line-height: 20px;
+  color: #407bff;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  color: #ef5050;
+  font-size: 14px;
+}
+
+.inputError {
+  border: 1px solid #ef5050;
+  color: #ef5050;
+}
+
+.inputError::placeholder {
+  color: #ef5050;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 336px;
+    margin-left: 32px;
+    margin-top: 40px;
+  }
+
+  .button {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 384px;
+    height: 312px;
+    margin-top: 162px;
+    margin-left: 840px;
+  }
+}
