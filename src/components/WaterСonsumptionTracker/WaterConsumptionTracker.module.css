@@ -11,7 +11,8 @@
 }
 
 .title {
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: normal;
     line-height: 1.25;
     width: 199px;
     margin-bottom: 24px;
@@ -31,7 +32,7 @@
 .welcomeicon {
     width: 32px;
     height: 32px;
-    color: #407BFF;
+    color: var(--primary-blue-407BFF);
 }
 
 .btn {
@@ -43,8 +44,8 @@
     border-radius: 10px;
     width: 280px;
     height: 36px;
-    background-color: #407BFF;
-    color: #ffffff;
+    background-color: var(--primary-blue-407BFF);
+    color: var(--primary-white-FFFFFF);
 }
 
 .btn:hover,
@@ -66,6 +67,7 @@
 }
 
 .text {
+    font-size: 16px;
     line-height: 1.25;
 }
 

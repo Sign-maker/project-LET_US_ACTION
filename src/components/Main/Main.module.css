@@ -2,7 +2,6 @@
     min-height: 98vh;
     background-image: url('/src/images/background/mob/bg-main-page-mob@1x.png');
     background-position: center;
-    padding-top: 68px;
     background-repeat: no-repeat;
 }
 
@@ -36,5 +35,30 @@
         justify-content: center;
         gap: 81px;
         align-items: flex-end;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx) {
+
+    .welcomeSection {
+        background-image: url('/src/images/background/mob/bg-main-page-mob@2x.png');
+    }
+
+    @media (min-width: 768px) {
+        .welcomeSection {
+            background-image: url('/src/images/background/tab/bg-main-page-tab@2x.png');
+            padding-top: 88px;
+        }
+
+        .div {
+            gap: 60px;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .welcomeSection {
+            background-image: url('/src/images/background/desktop/bg-main-page-desk@2x.png'), url('/src/images/background/desktop/bg-el-main-page-desk@2x.png');
+        }
     }
 }
