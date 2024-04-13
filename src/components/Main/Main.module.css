@@ -1,0 +1,64 @@
+.welcomeSection {
+    min-height: 98vh;
+    background-image: url('/src/images/background/mob/bg-main-page-mob@1x.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 40px;
+} 
+
+@media (min-width: 768px) {
+    .welcomeSection {
+        background-image: url('/src/images/background/tab/bg-main-page-tab@1x.png');
+        padding-top: 88px;
+    }
+    .div{
+        gap: 60px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .welcomeSection {
+        background-image: url('/src/images/background/desktop/bg-main-page-desk@1x.png'), url('/src/images/background/desktop/bg-el-main-page-desk@1x.png');
+        padding-top: 97px;
+        background-size: 100%;
+        background-position-y: 100%;
+    }
+    .div{
+        flex-direction: row;
+        justify-content: center;
+        gap: 81px;
+        align-items: flex-end;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx) {
+
+    .welcomeSection {
+        background-image: url('/src/images/background/mob/bg-main-page-mob@2x.png');
+    }
+
+    @media (min-width: 768px) {
+        .welcomeSection {
+            background-image: url('/src/images/background/tab/bg-main-page-tab@2x.png');
+            padding-top: 88px;
+        }
+
+        .div {
+            gap: 60px;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .welcomeSection {
+            background-image: url('/src/images/background/desktop/bg-main-page-desk@2x.png'), url('/src/images/background/desktop/bg-el-main-page-desk@2x.png');
+        }
+    }
+}
