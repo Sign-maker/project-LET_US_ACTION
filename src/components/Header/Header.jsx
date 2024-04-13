@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Modal from 'components/Modal/Modal';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../images/Logo.svg';
+import { ReactComponent as Logo } from '../../images/logo/logo.svg';
 import { IconContext } from 'react-icons';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import css from './Header.module.css';
 import { ButtonPopUp } from 'components/ButtonPopUp/ButtonPopUp';
 import { useAuth } from 'hooks/useAuth';
+import { routes } from 'constants/routes';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -21,9 +22,9 @@ const Header = () => {
 
   return (
     <header className={css.header}>
-      <div className={css.container}>
+      <div className="container">
         <div className={css.wrap}>
-          <NavLink className={css.logo} to="/home">
+          <NavLink className={css.logo} to={routes.MAIN}>
             <Logo />
           </NavLink>
           {!isLoggedIn ? (

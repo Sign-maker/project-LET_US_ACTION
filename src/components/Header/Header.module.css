@@ -36,6 +36,9 @@
   transition-duration: var(--my-transition-duration);
   transition-timing-function: var(--my-transition-timing-function);
 }
+.signIn:hover {
+  color: var(--secondary-orange-FF9D43);
+}
 .iconDown {
   color: var(--primary-blue-407BFF);
   width: 16px;
@@ -59,16 +62,8 @@
 }
 
 @media (min-width: 320px) {
-  .container {
-    max-width: 320px;
-  }
 }
 @media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
   .signIn {
     font-size: 18px;
     font-weight: 400;
@@ -76,9 +71,4 @@
   }
 }
 @media (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding-left: 112px;
-    padding-right: 112px;
-  }
 }
