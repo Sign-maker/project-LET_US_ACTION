@@ -1,0 +1,39 @@
+.welcomeSection {
+    background-image: url('/src/images/welcomeMob.png');
+    background-position: center;
+    padding-top: 68px;
+    background-repeat: no-repeat;
+}
+
+.div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 40px;
+} 
+
+@media (min-width: 768px) {
+    .welcomeSection {
+        background-image: url('/src/images/welcomeTab.png');
+        padding-top: 88px;
+    }
+    .div{
+        gap: 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .welcomeSection {
+        background-image: url('/src/images/welcomeDesk.png');
+        padding-top: 97px;
+        background-size: 100%;
+        background-position-y: 96px;
+    }
+    .div{
+        flex-direction: row;
+        justify-content: center;
+        gap: 81px;
+        align-items: flex-end;
+    }
+}
