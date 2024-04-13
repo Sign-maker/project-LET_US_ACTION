@@ -1,8 +1,9 @@
 .div {
-    width: 280px;
+    width: auto;
 }
 
 .mainTitle {
+    width: 280px;
     font-weight: 700;
     font-size: 28px;
     line-height: 1.14;
@@ -30,6 +31,7 @@
 .welcomeicon {
     width: 32px;
     height: 32px;
+    color: #407BFF;
 }
 
 .btn {
@@ -42,6 +44,12 @@
     width: 280px;
     height: 36px;
     background-color: #407BFF;
+    color: #ffffff;
+}
+
+.btn:hover,
+.btn:focus {
+    box-shadow: 0 4px 14px #407BFF8A;
 }
 
 .list {
@@ -91,7 +99,7 @@
     }
 }
 
-@media (min-width: 1480px) {
+@media (min-width: 1440px) {
     .btn{
         width: 384px;
         height: 44px;

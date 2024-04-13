@@ -13,7 +13,7 @@ const WelcomePage = () => {
 
     return (
       <section className={css.welcomeSection}>
-        <div className={css.div}>
+        <div className={`${css.div} container`}>
           <WaterConsumptionTracker handleClick={handleClick} />
           <WhyDrinkWater />
         </div>

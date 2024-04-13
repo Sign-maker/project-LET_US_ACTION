@@ -18,7 +18,7 @@
 .whyDrinkWaterListItem::before {
     left: 0;
     content: '';
-    bottom: 43%;
+    bottom: 31%;
     position: absolute;
     width: 8px;
     height: 8px;
@@ -28,7 +28,8 @@
 
 .whyDrinkWaterDiv {
     padding: 24px 16px 50px 16px;
-    background-color: var(--secondary-2-ECF2FF);
+    background-color: #ECF2FF;
+    /* background-color: var(--secondary-2-ECF2FF); */
     border-radius: 10px;
     box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
 }
@@ -40,7 +41,7 @@
     }
 }
 
-@media (min-width: 1480px) {
+@media (min-width: 1440px) {
     .whyDrinkWaterDiv {
         min-height: 332px;
     }
