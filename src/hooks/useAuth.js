@@ -12,7 +12,7 @@ export const useAuth = () => {
   // const dispatch = useDispatch();
   // const user = useSelector(selectUser);
   // const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   // const isRefreshing = useSelector(selectIsRefreshing);
   const isRefreshing = false;
   // const isAuthLoading = useSelector(selectIsAuthLoading);

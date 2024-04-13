@@ -34,12 +34,12 @@
 :root {
   /* colors */
   --primary-white-FFFFFF: #ffffff;
-  --primary-black-2F2F2F: |#2F2F2F;
-  --primary-blue-407BFF: |#407BFF;
+  --primary-black-2F2F2F: #2f2f2f;
+  --primary-blue-407BFF: #407bff;
   --secondary-2-ECF2FF: |#ECF2FF;
   --secondary-red-EF5050F: |#EF5050;
   --secondary-2-ECF2FF: |#ECF2FF;
-  --secondary-orange-FF9D43: |#FF9D43;
+  --secondary-orange-FF9D43: #ff9d43;
   --secondary-4-9EBBFF: |#9EBBFF;
   --secondary-5-D7E3FF: |#D7E3FF;
 
