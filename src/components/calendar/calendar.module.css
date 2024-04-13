@@ -1,0 +1,43 @@
+.monthHeader {
+  display: flex;
+}
+
+.month {
+  color: #000000;
+}
+.monthName {
+  color: #407bff;
+}
+
+.dayliList {
+  background-color: #9ebbff;
+  width: 280px;
+  padding: 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+.day:not(:last-child) {
+  margin-right: 26px;
+  margin-bottom: 16px;
+}
+.daySpan {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 6px;
+  margin-bottom: 4px;
+}
