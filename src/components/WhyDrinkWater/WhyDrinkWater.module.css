@@ -1,0 +1,52 @@
+.whyDrinkWaterList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.whyDrinkWaterListItem {
+    padding-left: 16px;
+    display: flex;
+    position: relative;
+    font-size: 16px;
+}
+
+.whyDrinkWaterListItem::before {
+    left: 0;
+    content: '';
+    bottom: 50%;
+    transform: translateY(50%);
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--primary-blue-407BFF);
+}
+
+.whyDrinkWaterDiv {
+    padding: 24px 16px 50px 16px;
+    background-color: var(--secondary-2-ECF2FF);
+    border-radius: 10px;
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
+}
+
+@media (min-width: 768px) {
+    .whyDrinkWaterDiv {
+        width: 494px;
+        padding: 32px 24px 50px 24px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .whyDrinkWaterDiv {
+        min-height: 332px;
+    }
+}
+
+.whyDrinkWaterHeader {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.11;
+}
