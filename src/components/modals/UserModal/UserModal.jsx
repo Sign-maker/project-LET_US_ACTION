@@ -1,151 +1,200 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import { IconContext } from 'react-icons';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { HiOutlineEyeSlash } from 'react-icons/hi2';
 import { HiOutlineEye } from 'react-icons/hi2';
 
-import {
-  Button,
-  TextField,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-  IconButton,
-  InputAdornment,
-  //   Input,
-} from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import css from './User.modal.module.css';
+import css from './UserModal.module.css';
 
 const initialValues = {
   photo: '',
   gender: '',
   name: '',
   email: '',
-  currentPassword: '',
+  password: '',
   newPassword: '',
   repeatPassword: '',
 };
-
-const validate = values => {
-  const errors = {};
-
-  // Додайте вашу логіку валідації тут
-
-  return errors;
-};
-
-const onSubmit = async values => {
-  try {
-    // Ваша логіка відправки даних на сервер
-  } catch (error) {
-    // Обробка помилок
+function validateEmail(value) {
+  let error;
+  if (!value) {
+    error = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    error = 'Invalid email address';
   }
-};
+  return error;
+}
 
-const UserModal = () => {
-  const formik = useFormik({
-    initialValues,
-    validate,
-    onSubmit,
-  });
-
+export const UserModal = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
-  const handleShowPassword = () => {
+  const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+  const toggleRepeatPasswordVisibility = () => {
+    setShowRepeatPassword(!showRepeatPassword);
+  };
   return (
     <div className={css.modalWrap}>
       <h1 className={css.title}>Setting</h1>
-      <form onSubmit={formik.handleSubmit}>
-        <FormLabel component="legend">Your photo</FormLabel>
-        <input
-          id="photo"
-          name="photo"
-          type="file"
-          onChange={event => {
-            // Запит на сервер для збереження фото
-          }}
-        />
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Your gender identity</FormLabel>
-          <RadioGroup
-            row
-            aria-label="gender"
-            name="gender"
-            value={formik.values.gender}
-            onChange={formik.handleChange}
-          >
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-          </RadioGroup>
-        </FormControl>
-        <TextField
-          fullWidth
-          id="name"
-          name="name"
-          label="Your name"
-          placeholder="Enter your name"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-        />
-        <TextField
-          fullWidth
-          id="email"
-          name="email"
-          label="E-mail"
-          placeholder="Enter your email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-        />
-        <FormControl fullWidth>
-          <TextField
-            id="currentPassword"
-            name="currentPassword"
-            label="Outdated password"
-            type={showPassword ? 'text' : 'password'}
-            value={formik.values.currentPassword}
-            onChange={formik.handleChange}
-            InputProps={
-              <IconContext.Provider>
-                <div>
-                  <HiOutlineEye />
+
+      <Formik
+        initialValues={initialValues}
+        onSubmit={values => {
+          // same shape as initial values
+          console.log(values);
+        }}
+      >
+        {({ errors, touched, isValidating }) => (
+          <Form className={css.form}>
+            <div className={css.inputWrapperPhoto}>
+              <label className={css.labelPhoto} htmlFor="photo">
+                Your photo
+              </label>
+              <input
+                id="photo"
+                name="photo"
+                type="file"
+                onChange={event => {
+                  // Handle file upload and send to backend
+                  console.log('Uploaded file:', event.target.files[0]);
+                }}
+              />
+            </div>
+            <div className={css.inputWrapperGender}>
+              <label className={css.labelGenderWrapper}>
+                Your gender identity
+              </label>
+              <div className={css.genderWrapper}>
+                <label className={css.labelGender}>
+                  <Field
+                    className={css.radioBtn}
+                    type="radio"
+                    name="gender"
+                    value="male"
+                  />
+                  Woman
+                </label>
+                <label className={css.labelGender}>
+                  <Field
+                    className={css.radioBtn}
+                    type="radio"
+                    name="gender"
+                    value="female"
+                  />
+                  Man
+                </label>
+              </div>
+            </div>
+            <div className={css.inputWrapperName}>
+              <label className={css.labelName} htmlFor="name">
+                Your name
+              </label>
+              <Field
+                className={css.input}
+                id="name"
+                name="name"
+                placeholder="Name"
+                type="text"
+                // validate={validateUsername}
+              />
+            </div>
+            <div className={css.inputWrapperEmail}>
+              <label className={css.labelEmail} htmlFor="email">
+                E-mail
+              </label>
+              <Field
+                className={css.input}
+                id="email"
+                name="email"
+                placeholder="E-mail"
+                type="email"
+                validate={validateEmail}
+              />
+              {errors.email && touched.email && (
+                <div className={css.errorMessage}>{errors.email}</div>
+              )}
+            </div>
+            <div className={css.passwordWrapper}>
+              <label className={css.labelPassword}>Password</label>
+              <div className={css.iconWrapper}>
+                <input
+                  className={css.input}
+                  name="newPassword"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Password"
+                />
+                <div className={css.passwordIconContainer}>
+                  {showPassword ? (
+                    <HiOutlineEye
+                      className={css.passwordIcon}
+                      onClick={togglePasswordVisibility}
+                    />
+                  ) : (
+                    <HiOutlineEyeSlash
+                      className={css.passwordIcon}
+                      onClick={togglePasswordVisibility}
+                    />
+                  )}
                 </div>
-              </IconContext.Provider>
-            }
-          />
-          <TextField
-            id="newPassword"
-            name="newPassword"
-            label="New Password"
-            type={showPassword ? 'text' : 'password'}
-            value={formik.values.newPassword}
-            onChange={formik.handleChange}
-          />
-          <TextField
-            id="repeatPassword"
-            name="repeatPassword"
-            label="Repeat new password"
-            type={showPassword ? 'text' : 'password'}
-            value={formik.values.repeatPassword}
-            onChange={formik.handleChange}
-          />
-        </FormControl>
-        <Button type="submit" color="primary" variant="contained">
-          Save
-        </Button>
-      </form>
+              </div>
+              <div className={css.inputWrapper}>
+                <label className={css.password}>New password:</label>
+                <div className={css.iconWrapper}>
+                  <input
+                    className={css.input}
+                    name="newPassword"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                  />
+                  <div className={css.passwordIconContainer}>
+                    {showNewPassword ? (
+                      <HiOutlineEye
+                        className={css.newPasswordIcon}
+                        onClick={toggleNewPasswordVisibility}
+                      />
+                    ) : (
+                      <HiOutlineEyeSlash
+                        className={css.newPasswordIcon}
+                        onClick={toggleNewPasswordVisibility}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className={css.inputWrapper}>
+                <label className={css.password}>Repeat new password:</label>
+                <div className={css.iconWrapper}>
+                  <input
+                    className={css.input}
+                    name="newPassword"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                  />
+                  <div className={css.passwordIconContainer}>
+                    {showRepeatPassword ? (
+                      <HiOutlineEye
+                        className={css.newRepeatPasswordIcon}
+                        onClick={toggleRepeatPasswordVisibility}
+                      />
+                    ) : (
+                      <HiOutlineEyeSlash
+                        className={css.newRepeatPasswordIcon}
+                        onClick={toggleRepeatPasswordVisibility}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit">Save</button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
-
-export default UserModal;

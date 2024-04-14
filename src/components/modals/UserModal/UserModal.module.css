@@ -1,0 +1,108 @@
+.modalWrap {
+  width: 280px;
+  height: 100vh;
+  background-color: var(--primary-white-FFFFFF);
+  padding: 32px 12px;
+}
+.title {
+  margin-bottom: 24px;
+  font-style: 26px;
+  line-height: 32px;
+}
+/* .icon {
+  stroke: var(--primary-blue-407BFF);
+  color: transparent;
+} */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.inputWrapperPhoto,
+.inputWrapperGender,
+.inputWrapperName,
+.inputWrapperEmail {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.passwordWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.genderWrapper {
+  display: flex;
+  gap: 24px;
+}
+.labelPhoto,
+.labelName,
+.labelEmail {
+  margin-bottom: 8px;
+}
+.labelGenderWrapper {
+  margin-bottom: 12px;
+}
+.labelGender {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.labelPhoto,
+.labelGender,
+.labelName,
+.labelEmail,
+.labelPassword {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.password {
+  font-size: 16px;
+  line-height: 20px;
+}
+/* styles.css */
+.radioBtn {
+  display: block;
+  margin-bottom: 10px;
+}
+.input {
+  width: 256px;
+  height: 44px;
+  border-radius: 6px;
+  border: solid 1px var(--primary-blue-407BFF);
+  color: var(--primary-blue-407BFF);
+
+  font-size: 16px;
+  line-height: 20px;
+}
+.input:focus {
+  border-color: var(--primary-blue-407BFF);
+}
+input::placeholder {
+  color: var(--primary-blue-407BFF);
+}
+.input:focus::placeholder {
+  color: var(--primary-blue-407BFF);
+}
+.iconWrapper {
+  position: relative;
+}
+.passwordIcon,
+.newPasswordIcon,
+.newRepeatPasswordIcon {
+  stroke: var(--primary-blue-407BFF);
+  position: absolute;
+  left: 230px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.errorMessage {
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--secondary-red-EF5050F);
+}
