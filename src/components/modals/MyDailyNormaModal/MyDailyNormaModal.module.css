@@ -1,0 +1,223 @@
+@media (min-width: 320px) {
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    max-height: 90%;
+    padding: 24px 12px;
+    border-radius: 10px;
+    border: 1px solid red;
+    width: 280px;
+    overflow: auto;
+    background: var(--primary-white-FFFFFF);
+  }
+
+  .header {
+    display: flex;
+    font-size: 26px;
+    margin-bottom: 24px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title {
+    font-family: 'Roboto' sans-serif;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.23;
+    color: var(---primary-black-2F2F2F);
+  }
+  .closeButton {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-white-FFFFFF);
+  }
+
+  .closeIcon {
+    /* position: absolute; */
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: var(--primary-blue-407BFF);
+    background: var(--primary-white-FFFFFF);
+    /* cursor: pointer; */
+  }
+
+  .formulaBody {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .formulaBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .formula {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    gap: 16px;
+  }
+
+  .text {
+    font-family: 'Roboto' sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--primary-black-2F2F2F);
+  }
+
+  .formulaText {
+    font-family: 'Roboto' sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    margin-left: 4px;
+    color: var(--primary-blue-407BFF);
+  }
+  .formulaExplain {
+    border: 1px solid var(--secondary-5-D7E3FF);
+    border-radius: 6px;
+    padding: 10px;
+    color: #8f8f8f;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.25;
+  }
+  .calc {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .calcTitle {
+    font-family: 'Roboto' sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.12;
+    color: var(--primary-black-2F2F2F);
+  }
+  .calcForm {
+    display: flex;
+    gap: 24px;
+  }
+  .choiceGender {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: var(--primary-blue-407BFF);
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--primary-blue-407BFF);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .choiceGender::before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-blue-407BFF);
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+  }
+
+  .choiceGender:checked::before {
+    visibility: visible;
+  }
+
+  .calcWeight {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .calcLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .calcInput {
+    border: 1px solid var(--secondary-5-D7E3FF);
+    color: var(--primary-blue-407BFF);
+    border-radius: 6px;
+    padding: 12px 10px;
+    height: 44px;
+    background-color: transparent;
+  }
+  .calcInput::placeholder {
+    color: var(--primary-blue-407BFF);
+  }
+  .calcQuantity {
+    display: flex;
+    gap: 12px;
+  }
+  .quantitytext {
+    width: 190px;
+  }
+  .quantityInput {
+    position: relative;
+    color: var(--primary-blue-407BFF);
+    font-size: 18px;
+    align-self: center;
+    font-weight: 700;
+    line-height: 1.33;
+  }
+  .drinkQuantity {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .drinkInput {
+    border: 1px solid var(--secondary-5-D7E3FF);
+    color: var(--primary-blue-407BFF);
+    border-radius: 6px;
+    padding: 12px 10px;
+    height: 44px;
+  }
+  .drinkInput::placeholder {
+    color: var(--primary-blue-407BFF);
+  }
+}
+@media (min-width: 768px) {
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 704px;
+    padding: 32px 24px;
+    line-height: 1.23;
+    border-radius: 10px;
+  }
+  .formula {
+    flex-direction: row;
+    display: flex;
+    margin-bottom: 0px;
+    gap: 24px;
+  }
+  .quantitytext {
+    display: contents;
+    margin-right: 12px;
+  }
+  .saveButton {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+}
+@media (min-width: 1440px) {
+  .modal {
+    width: 592px;
+  }
+}
