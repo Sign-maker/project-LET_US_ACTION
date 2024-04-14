@@ -1,8 +1,6 @@
 @import '../../styles/index.css';
 
-.wrapper {
-  max-width: 320px;
-  margin: 0 auto;
+.AuthFormSection {
   background-image: image-set(
       url('../../images/background/mob/bg-el-sign-in-mob@1x.png') 1x,
       url('../../images/background/mob/bg-el-sign-in-mob@2x.png') 2x
@@ -12,9 +10,8 @@
       url('../../images/background/mob/bottle-for-sign-in-mob@2x.png') 2x
     );
   background-repeat: no-repeat, no-repeat;
-  background-position: center top 28px, center top 360px;
+  background-position: center top 53px, center top 360px;
   background-size: auto, auto;
-  outline: 1px solid red;
 }
 
 .signinContainer {
@@ -22,8 +19,7 @@
   height: 600px;
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
-  margin: 24px auto 20px;
+  padding-top: 24px;
 }
 
 .title {
@@ -133,22 +129,20 @@
 }
 
 @media (min-width: 768px) {
-  .wrapper {
-    max-width: 768px;
+  .AuthFormSection {
     background-image: image-set(
       url('../../images/background/tab/bottle-for-sign\ in-tab@1x.png') 1x,
       url('../../images/background/tab/bottle-for-sign\ in-tab@2x.png') 2x
     );
     background-repeat: no-repeat;
-    background-position: center top -90px;
-    background-size: auto;
+    background-position: top -60px right 0px;
+    background-size: cover;
   }
 
   .signinContainer {
     max-width: 336px;
     height: 680px;
-    margin-left: 32px;
-    margin-top: 40px;
+    padding-top: 40px;
   }
 
   .button {
@@ -158,11 +152,9 @@
 }
 
 @media (min-width: 1440px) {
-  .wrapper {
-    max-width: 1280px;
+  .AuthFormSection {
     height: 680px;
-    padding-top: 113px;
-    margin-top: 49px;
+    padding-top: 49px;
     background-image: image-set(
         url('../../images/background/desktop/bg-el-main-page-desk@1x.png') 1x,
         url('../../images/background/desktop/bg-el-main-page-desk@2x.png') 2x
@@ -172,13 +164,15 @@
         url('../../images/background/desktop/bottle-for-sign-in-desk@2x.png') 2x
       );
     background-repeat: no-repeat, no-repeat;
-    background-position: 0 center, -90px center;
+    background-position: 0 50px, -90px -10px;
     background-size: contain, auto;
   }
 
   .signinContainer {
+    padding-top: 0;
     max-width: 384px;
     height: 312px;
-    margin-left: 760px;
+    margin-top: 113px;
+    margin-left: 728px;
   }
 }
