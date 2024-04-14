@@ -1,13 +1,27 @@
 @import '../../styles/index.css';
 
+.wrapper {
+  background-image: image-set(
+      url('../../images/background/mob/bg-el-sign-in-mob@1x.png') 1x,
+      url('../../images/background/mob/bg-el-sign-in-mob@2x.png') 2x
+    ),
+    image-set(
+      url('../../images/background/mob/bottle-for-sign-in-mob@1x.png') 1x,
+      url('../../images/background/mob/bottle-for-sign-in-mob@2x.png') 2x
+    );
+  background-repeat: no-repeat, no-repeat;
+  background-position: center top 28px, center top 360px;
+  background-size: auto, auto;
+}
+
 .container {
   max-width: 280px;
-  height: 304px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   margin-top: 24px;
-  margin: 0 auto;
-  outline: 1px solid red;
+  margin: 24px auto 20px;
+  /* outline: 1px solid red; */
 }
 
 .title {
@@ -89,7 +103,8 @@
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  margin-bottom: 16px;
+  margin-bottom: 13px;
+  margin-top: 3px;
 }
 
 .link {
@@ -100,10 +115,10 @@
 
 .errorMessage {
   position: absolute;
-  bottom: -1px;
+  bottom: -2px;
   left: 0;
   color: #ef5050;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .inputError {
@@ -116,8 +131,19 @@
 }
 
 @media (min-width: 768px) {
+  .wrapper {
+    background-image: image-set(
+      url('../../images/background/tab/bottle-for-sign\ in-tab@1x.png') 1x,
+      url('../../images/background/tab/bottle-for-sign\ in-tab@2x.png') 2x
+    );
+    background-repeat: no-repeat;
+    background-position: center top -90px;
+    background-size: auto;
+  }
+
   .container {
     max-width: 336px;
+    height: 680px;
     margin-left: 32px;
     margin-top: 40px;
   }
@@ -129,10 +155,27 @@
 }
 
 @media (min-width: 1440px) {
+  .wrapper {
+    max-width: 1404px;
+    height: 680px;
+    padding-top: 113px;
+    margin-top: 49px;
+    background-image: image-set(
+        url('../../images/background/desktop/bg-el-main-page-desk@1x.png') 1x,
+        url('../../images/background/desktop/bg-el-main-page-desk@2x.png') 2x
+      ),
+      image-set(
+        url('../../images/background/desktop/bottle-for-sign-in-desk@1x.png') 1x,
+        url('../../images/background/desktop/bottle-for-sign-in-desk@2x.png') 2x
+      );
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 center, -90px center;
+    background-size: auto, auto;
+  }
+
   .container {
     max-width: 384px;
     height: 312px;
-    margin-top: 162px;
-    margin-left: 840px;
+    margin-left: 822px;
   }
 }
