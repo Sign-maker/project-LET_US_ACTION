@@ -12,6 +12,7 @@ const HomePage = () => {
 
   return (
     <section className={css.section_HomePage}>
+      <h2 class="visually-hidden"  aria-label="Water tracker">Water tracker join us</h2>
       <div className={`container ${css.container_HomePage}`}>
         <div className={css.container_daliNorma}>
           {/* <DailyNorma />

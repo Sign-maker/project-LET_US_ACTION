@@ -1,13 +1,20 @@
 .section_HomePage {
-    background-image: url(../../images/background/mob/bg-el-home-page-mob@1x.png), url(../../images/background/mob/bg-el-home-page-mob@2x.png);
+    background-image: url(../../images/background/mob/bg-el-home-page-mob@1x.png);
     width: 100%;
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 24px 0;
+
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        background-image: url(../../images/background/mob/bg-el-home-page-mob@2x.png);
+    }
 }
 
 .container_HomePage {
-    background-image: url(../../images/background/mob/botle-home-screen-mob@1x.png), url(../../images/background/mob/botle-home-screen-mo@2x.png);
+    background-image: url(../../images/background/mob/botle-home-screen-mob@1x.png);
     background-position: center top 106px;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -15,6 +22,13 @@
     flex-direction: column;
     padding-top: 24px;
     padding-bottom: 20px;
+
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        background-image: url(../../images/background/mob/botle-home-screen-mo@2x.png);
+    }
 }
 
 .container_daliNorma {
@@ -39,12 +53,31 @@
 
 @media screen and (min-width: 768px) {
     .section_HomePage {
-        background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png), url(../../images/background/tab/bg-el-home-page-tab@2x.png);
+        background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png);
     }
 
-   .container_HomePage {
-        background-image: url(../../images/background/tab/botle-home-screen-tab@1x.png), url(../../images/background/tab/botle-home-screen-tab@2x.png);
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        .section_HomePage {
+            background-image: url(../../images/background/tab/bg-el-home-page-tab@2x.png);
+        }
+    }
+
+
+    .container_HomePage {
+        background-image: url(../../images/background/tab/botle-home-screen-tab@1x.png);
         background-position: center top;
+    }
+
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        .container_HomePage {
+            background-image: url(../../images/background/tab/botle-home-screen-tab@2x.png);
+        }
     }
 
     .container_MonthStats {
@@ -62,12 +95,21 @@
 
 @media screen and (min-width: 1440px) {
     .section_HomePage {
-        background-image: url(../../images/background/desktop/bg-el-main-page-desk@1x.png), url(../../images/background/desktop/bg-el-main-page-desk@2x.png);
+        background-image: url(../../images/background/desktop/bg-el-main-page-desk@1x.png);
 
     }
 
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        .section_HomePage {
+            background-image: url(../../images/background/desktop/bg-el-main-page-desk@2x.png);
+        }
+    }
+
     .container_HomePage {
-        background-image: url(../../images/background/desktop/botle-home-screen-desk@1x.png), url(../../images/background/desktop/botle-home-screen-desk@2x.png);
+        background-image: url(../../images/background/desktop/botle-home-screen-desk@1x.png);
         background-size: 55%;
         background-position: left top;
         flex-direction: row;
@@ -75,7 +117,16 @@
         justify-content: center;
     }
 
-    .container_daliNorma{
+    @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        .container_HomePage {
+            background-image: url(../../images/background/desktop/botle-home-screen-desk@2x.png);
+        }
+    }
+
+    .container_daliNorma {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
