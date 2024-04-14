@@ -8,6 +8,7 @@ import css from './Header.module.css';
 import { ButtonPopUp } from 'components/ButtonPopUp/ButtonPopUp';
 import { useAuth } from 'hooks/useAuth';
 import { routes } from 'constants/routes';
+import UserModal from 'components/modals/UserModal/UserModal';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -40,7 +41,11 @@ const Header = () => {
             <ButtonPopUp handleOpenModal={handleOpenModal} />
           )}
         </div>
-        {!isVisible && <Modal onClose={handleCloseModal}></Modal>}
+        {!isVisible && (
+          <Modal onClose={handleCloseModal}>
+            <UserModal />
+          </Modal>
+        )}
       </div>
     </header>
   );
