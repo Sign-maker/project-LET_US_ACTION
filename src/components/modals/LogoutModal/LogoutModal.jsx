@@ -1,5 +1,31 @@
 import React from 'react'
-// import css from '../LogoutModal/LogoutModal.module.css';
+import css from '../LogoutModal/LogoutModal.module.css';
+import { IoCloseOutline } from 'react-icons/io5';
+
+export const LogoutModal = () => {
+  return (
+    <>
+      <div className={css.modal_content}>
+        <div className={css.header}>
+          <h2>Log out</h2>
+          <button type="button" className={css.btn_close}>
+            <IoCloseOutline className={css.icon_close} />
+          </button>
+        </div>
+        <p className={css.modal_text}>Do you really want to leave?</p>
+
+        <div className={css.btn_container}>
+          <button type="button" className={css.btn_cancel}>
+            Cancel
+          </button>
+          <button type="button" className={css.btn_logout}>
+            Logout
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
 
 //!Модалка - использование в месте рендера
   // const [showModal, setShowModal] = useState(false);
@@ -23,19 +49,4 @@ import React from 'react'
   // );
   //////////!
 
-export const LogoutModal = () => {
-  return (
-    <>
-      <div>
-        <button type="button">x</button>
-        <h2>Log out</h2>
-        <p>Do you really want to leave?</p>
 
-        <div>
-          <button type="button">Cancel</button>
-          <button type="button">Logout</button>
-        </div>
-      </div>
-    </>
-  );
-}
