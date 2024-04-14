@@ -1,6 +1,8 @@
 @import '../../styles/index.css';
 
 .wrapper {
+  max-width: 320px;
+  margin: 0 auto;
   background-image: image-set(
       url('../../images/background/mob/bg-el-sign-in-mob@1x.png') 1x,
       url('../../images/background/mob/bg-el-sign-in-mob@2x.png') 2x
@@ -12,23 +14,23 @@
   background-repeat: no-repeat, no-repeat;
   background-position: center top 28px, center top 360px;
   background-size: auto, auto;
+  outline: 1px solid red;
 }
 
-.container {
+.signinContainer {
   max-width: 280px;
   height: 600px;
   display: flex;
   flex-direction: column;
   margin-top: 24px;
   margin: 24px auto 20px;
-  /* outline: 1px solid red; */
 }
 
 .title {
   font-size: 26px;
   line-height: 32px;
   font-weight: 500;
-  color: #2f2f2f;
+  color: var(--primary-black-2F2F2F);
   margin-bottom: 16px;
 }
 
@@ -41,7 +43,7 @@
   font-size: 18px;
   line-height: 24px;
   font-weight: 400;
-  color: #2f2f2f;
+  color: var(--primary-black-2F2F2F);
 }
 
 .fieldContainer {
@@ -55,25 +57,25 @@
   width: 100%;
   padding: 10px 12px;
   padding-right: 30px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   margin-top: 8px;
   border-radius: 6px;
-  border: 1px solid #d7e3ff;
+  border: 1px solid var(--secondary-5-D7E3FF);
   outline: none;
-  color: #407bff;
+  color: var(--primary-blue-407BFF);
   font-size: 16px;
   line-height: 20px;
 }
 .input:hover,
 .input:focus {
-  color: #407bff;
+  color: var(--primary-blue-407BFF);
 }
 
 .input::placeholder {
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
-  color: #9ebbff;
+  color: var(--secondary-5-D7E3FF);
 }
 
 .passwordIconContainer {
@@ -91,14 +93,14 @@
 .passwordIcon {
   transform: translateY(-50%);
   cursor: pointer;
-  color: #407bff;
+  color: var(--primary-blue-407BFF);
 }
 
 .button {
   font-size: 16px;
   line-height: 20px;
-  color: #ffffff;
-  background-color: #407bff;
+  color: var(--primary-white-FFFFFF);
+  background-color: var(--primary-blue-407BFF);
   padding: 10px 30px;
   border-radius: 10px;
   border: none;
@@ -110,28 +112,29 @@
 .link {
   font-size: 16px;
   line-height: 20px;
-  color: #407bff;
+  color: var(--primary-blue-407BFF);
 }
 
 .errorMessage {
   position: absolute;
-  bottom: -2px;
+  bottom: 1px;
   left: 0;
-  color: #ef5050;
-  font-size: 12px;
+  color: var(--secondary-red-EF5050F);
+  font-size: 14px;
 }
 
 .inputError {
-  border: 1px solid #ef5050;
-  color: #ef5050;
+  border: 1px solid var(--secondary-red-EF5050F);
+  color: var(--secondary-red-EF5050F);
 }
 
 .inputError::placeholder {
-  color: #ef5050;
+  color: var(--secondary-red-EF5050F);
 }
 
 @media (min-width: 768px) {
   .wrapper {
+    max-width: 768px;
     background-image: image-set(
       url('../../images/background/tab/bottle-for-sign\ in-tab@1x.png') 1x,
       url('../../images/background/tab/bottle-for-sign\ in-tab@2x.png') 2x
@@ -141,7 +144,7 @@
     background-size: auto;
   }
 
-  .container {
+  .signinContainer {
     max-width: 336px;
     height: 680px;
     margin-left: 32px;
@@ -156,7 +159,7 @@
 
 @media (min-width: 1440px) {
   .wrapper {
-    max-width: 1404px;
+    max-width: 1280px;
     height: 680px;
     padding-top: 113px;
     margin-top: 49px;
@@ -170,12 +173,12 @@
       );
     background-repeat: no-repeat, no-repeat;
     background-position: 0 center, -90px center;
-    background-size: auto, auto;
+    background-size: contain, auto;
   }
 
-  .container {
+  .signinContainer {
     max-width: 384px;
     height: 312px;
-    margin-left: 822px;
+    margin-left: 760px;
   }
 }
