@@ -97,6 +97,7 @@
   line-height: 20px;
   color: var(--primary-white-FFFFFF);
   background-color: var(--primary-blue-407BFF);
+
   padding: 10px 30px;
   border-radius: 10px;
   border: none;
@@ -105,10 +106,20 @@
   margin-top: 3px;
 }
 
+.button:hover,
+.button:focus {
+  box-shadow: rgba(64, 123, 255, 0.34) 0px 4px 8px 0px;
+}
 .link {
   font-size: 16px;
   line-height: 20px;
   color: var(--primary-blue-407BFF);
+}
+
+.link:hover,
+.link:focus {
+  color: var(--secondary-orange-FF9D43);
+  transition: transform 300ms ease;
 }
 
 .errorMessage {
