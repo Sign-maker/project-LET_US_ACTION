@@ -121,17 +121,16 @@
 
 // export default AuthForm;
 
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { logIn, register } from 'redux-store/auth/authOperations';
 import css from './AuthForm.module.css';
 import { HiOutlineEyeSlash, HiOutlineEye } from 'react-icons/hi2';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAuth } from 'hooks/useAuth';
 
 const AuthForm = () => {
-  const dispatch = useDispatch();
+  const { logIn, register } = useAuth();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -162,13 +161,14 @@ const AuthForm = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
+      const { email, password } = values;
       const action = isSignUp ? register : logIn;
-      await dispatch(action(values));
+      await action({ email, password });
+      if (isSignUp) resetForm();
     } catch (error) {
       console.error(`${isSignUp ? 'Sign Up' : 'Sign In'} failed:`, error);
     } finally {
       setSubmitting(false);
-      if (isSignUp) resetForm();
     }
   };
 
