@@ -36,7 +36,9 @@ export const ButtonPopUp = ({ handleOpenModal }) => {
               <HiOutlineArrowRightOnRectangle />
             </div>
           </IconContext.Provider>
-          <span className={css.span}>Log out</span>
+          <span className={css.span} onClick={handleOpenModal}>
+            Log out
+          </span>
         </button>
       </div>
     </Popup>
