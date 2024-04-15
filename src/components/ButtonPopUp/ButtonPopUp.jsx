@@ -9,13 +9,34 @@ import { useAuth } from 'hooks/useAuth';
 
 export const ButtonPopUp = ({ handleOpenModal }) => {
   const { user, logOut } = useAuth();
-  // написать логику, если имени пользователя нет, то показывать часть емеила до собаки, например так:
-  const currentName = user.name ? user.name : user.email.split('@')[0];
+
+  console.log(user.avatarURL);
   return (
     <Popup
       trigger={
         <button className={css.button}>
-          <span className={css.name}>{currentName}</span>
+          {user.avatarURL ? (
+            <>
+              <img
+                src={user.avatarURL}
+                alt={user.name}
+                className={css.avatar}
+              />
+              <span className={css.name}>{user.name}</span>
+            </>
+          ) : user.name ? (
+            <>
+              <div className={css.avatar}>
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+              <span className={css.name}>{user.name}</span>
+            </>
+          ) : (
+            <span className={css.name}>
+              {user.email.charAt(0).toUpperCase()}
+            </span>
+          )}
+          {/* <span className={css.name}>{currentName}</span> */}
           <IconContext.Provider value={{ className: css.icon }}>
             <div>
               <GoChevronDown />
