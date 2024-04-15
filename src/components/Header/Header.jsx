@@ -49,7 +49,7 @@ const Header = () => {
         </div>
         {!isVisible && (
           <Modal onClose={handleCloseModal}>
-            <UserModal />
+            <UserModal onClose={handleCloseModal} />
           </Modal>
         )}
       </div>
