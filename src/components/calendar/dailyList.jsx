@@ -4,16 +4,14 @@ import { onDayClick } from '../servises/waterServise';
 
 const DayList = ({ month, waterConsumptionData }) => {
   const getClassForDay = day => {
-    // Отримуємо дані про споживання води для поточного дня
     const dayData = waterConsumptionData[{}];
     console.log(dayData);
 
-    // Перевіряємо, чи користувач не виконав план щодо випиття води для цього дня
     if (dayData && dayData.consumption < dayData.plan) {
-      return 'not-achieved'; // Якщо план не виконано, повертаємо клас "not-achieved" для виділення
+      return 'not-achieved';
     }
 
-    return ''; // Якщо план виконано або дані відсутні, повертаємо порожній рядок
+    return '';
   };
 
   return (
@@ -30,7 +28,7 @@ const DayList = ({ month, waterConsumptionData }) => {
       ).map(day => (
         <li key={day} className={css.day} onClick={() => onDayClick(day)}>
           <span className={`${getClassForDay(day)} ${css.daySpan}`}>{day}</span>
-          <p>60%</p>
+          <p className={css.percent}>60%</p>
         </li>
       ))}
     </ul>
