@@ -13,6 +13,12 @@
   font-style: 26px;
   line-height: 32px;
 }
+.photoText {
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+}
 /* .icon {
   stroke: var(--primary-blue-407BFF);
   color: transparent;
@@ -162,7 +168,8 @@ input::placeholder {
   width: 80px;
   height: 80px;
   border-radius: 50px;
-  background-color: var(--secondary-4-9EBBFF);
+  border: 1px solid black;
+  /* background-color: var(--secondary-4-9EBBFF); */
 }
 .buttonAvatar {
   display: flex;

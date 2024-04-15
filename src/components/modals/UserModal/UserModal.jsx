@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { HiOutlineEyeSlash } from 'react-icons/hi2';
@@ -7,8 +7,14 @@ import { HiOutlineArrowUpTray } from 'react-icons/hi2';
 import { HiOutlineXMark } from 'react-icons/hi2';
 
 import css from './UserModal.module.css';
+import { useAuth } from 'hooks/useAuth';
 
 export const UserModal = ({ onClose }) => {
+  const { user } = useAuth();
+  const fileInputRef = useRef(null);
+
+  const [imageUrl, setImageUrl] = useState(null); // стан для URL-адреси зображення
+  const [file, setFile] = useState(null); // стан для обраного файлу
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -23,11 +29,32 @@ export const UserModal = ({ onClose }) => {
     setShowRepeatPassword(!showRepeatPassword);
   };
 
+  const baseURL = 'http://localhost:8000/';
+  console.log(user);
+  const url = user.avatarURL.startsWith('http')
+    ? user.avatarURL
+    : `${baseURL}${user.avatarURL}`;
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = event => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const imageUrl = URL.createObjectURL(selectedFile);
+      console.log(imageUrl);
+
+      setImageUrl(imageUrl); // оновлення стану URL-адреси
+      setFile(selectedFile); // збереження обраного файлу
+      // Обробка завантаженого файлу
+    }
+  };
+
+  const urlBase = file ? imageUrl : url;
+
   const SignupSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(32, 'Too Long!')
-      .required('Required'),
+    name: Yup.string().min(2, 'Too Short!').max(32, 'Too Long!'),
     email: Yup.string().email('Invalid email').required('Required'),
     oldPassword: Yup.string()
       .min(8, 'Password must be at least 8 characters')
@@ -46,16 +73,17 @@ export const UserModal = ({ onClose }) => {
     <div className={css.modalWrap}>
       <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
       <h1 className={css.title}>Setting</h1>
+      <p className={css.photoText}>Your photo</p>
       <div className={css.wrapperAvatar}>
-        <img src="" alt="" className={css.img} />
-        <button className={css.buttonAvatar}>
+        <img src={urlBase} alt={user.name} className={css.img} />
+        <button className={css.buttonAvatar} onClick={handleButtonClick}>
           <HiOutlineArrowUpTray /> Upload a photo
         </button>
       </div>
       <Formik
         initialValues={{
-          name: '',
-          email: '',
+          name: user.name ? user.name : '',
+          email: user.email,
           oldPassword: '',
           password: '',
           repeatPassword: '',
@@ -71,15 +99,17 @@ export const UserModal = ({ onClose }) => {
             <div className={css.inputWrapperPhoto}>
               <label className={css.labelPhoto} htmlFor="photo"></label>
               <input
-                className={css.inputPhoto}
+                ref={fileInputRef}
+                // className={css.inputPhoto}
                 id="photo"
                 name="photo"
                 type="file"
                 style={{ display: 'none' }}
-                onChange={event => {
-                  // Handle file upload and send to backend
-                  //   console.log('Uploaded file:', event.target.files[0]);
-                }}
+                onChange={handleFileChange}
+                // onChange={event => {
+                //   Handle file upload and send to backend
+                //    console.log('Uploaded file:', event.target.files[0]);
+                // }}
               />
             </div>
             <div className={css.inputWrapperGender}>
