@@ -1,0 +1,71 @@
+.container {
+    width: 280px;
+    margin-bottom: 16px;
+
+    @media screen and (min-width: 768px) {
+        width: 704px;
+    }
+
+    @media screen and (min-width: 1440px) {
+        margin-bottom: 24px;
+        width: 624px;
+    }
+}
+
+.contentsDailyNorma {
+    width: 164px;
+    height: 74px;
+    margin-bottom: 8px;
+    padding: 8px 20px 8px 20px;
+    border-radius: 10px;
+
+    border: 1px solid var(--secondary-4-9EBBFF);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0px 4px 8px 4px rgba(158, 187, 255, 0.12);
+    background: var(--primary-white-FFFFFF);
+
+    @media screen and (min-width: 768px) {
+        position: absolute;
+        height: 76px;
+    }
+
+    @media screen and (min-width: 1440px) {
+        margin-top: 30px;
+    }
+}
+
+.titleDailyNorma {
+    width: 124px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: calc(24 / 18);
+}
+
+.contentsDailyNormaWater {
+    display: flex;
+    gap: 12px;
+}
+
+.titleDailyNormaWater {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: var(--primary-blue-407BFF);
+
+    @media screen and (min-width: 768px) {
+        font-size: 24px;
+    }
+}
+
+.Button {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: calc(20 / 16);
+    border: none;
+    background-color: transparent;
+
+    color: var(--secondary-6-8BAEFF);
+}
