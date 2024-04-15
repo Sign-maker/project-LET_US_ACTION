@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
 import css from '../LogoutModal/LogoutModal.module.css';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useAuth } from 'hooks/useAuth';
 
 export const LogoutModal = ({ logoutModalToggleClose }) => {
+  const [logOut] = useAuth();
+
   return (
     <>
       <div className={css.modal_content}>
@@ -26,7 +29,13 @@ export const LogoutModal = ({ logoutModalToggleClose }) => {
           >
             Cancel
           </button>
-          <button type="button" className={css.btn_logout}>
+          <button
+            type="button"
+            className={css.btn_logout}
+            onClick={() => {
+              logOut();
+            }}
+          >
             Logout
           </button>
         </div>
@@ -34,27 +43,3 @@ export const LogoutModal = ({ logoutModalToggleClose }) => {
     </>
   );
 };
-
-//!Модалка - использование в месте рендера
-  // const [showModal, setShowModal] = useState(false);
-
-  // const ToggleOpenModal = () => {
-  //   setShowModal(!showModal);
-  // };
-
-
-  // return (
-  //   <div>
-  //     <button type="button" onClick={ToggleOpenModal}>
-  //       Open
-  //     </button>
-      // {showModal && (
-      //   <Modal onClose={ToggleOpenModal}>
-      //     {/* Здесь рендерить компоненты с контентом модальных окон */}
-      //   </Modal>
-      // )}
-  //   </div>
-  // );
-  //////////!
-
-
