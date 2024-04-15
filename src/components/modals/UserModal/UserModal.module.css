@@ -21,6 +21,9 @@
   display: flex;
   flex-direction: column;
 }
+.inputContainer {
+  position: relative;
+}
 .inputWrapperPhoto,
 .inputWrapperGender,
 .inputWrapperName,
@@ -84,9 +87,11 @@
   font-size: 16px;
   line-height: 20px;
 }
+.input:hover,
 .input:focus {
-  border-color: var(--secondary-4-9EBBFF);
+  color: var(--secondary-4-9EBBFF);
 }
+
 input::placeholder {
   color: var(--secondary-4-9EBBFF);
 }
@@ -106,11 +111,33 @@ input::placeholder {
   transform: translateY(-50%);
   cursor: pointer;
 }
-.errorMessage {
+/* .errorMessage {
   font-size: 14px;
   line-height: 18px;
   color: var(--secondary-red-EF5050F);
+} */
+.errorNameMessage {
+  position: absolute;
+  left: 0;
+  color: var(--secondary-red-EF5050F);
+  font-size: 12px;
 }
+.errorMessage {
+  position: absolute;
+  left: 0;
+  color: var(--secondary-red-EF5050F);
+  font-size: 12px;
+}
+
+.inputError {
+  border: 1px solid var(--secondary-red-EF5050F);
+  color: var(--secondary-red-EF5050F);
+}
+
+.inputError::placeholder {
+  color: var(--secondary-red-EF5050F);
+}
+
 .button {
   margin-top: 24px;
   height: 36px;

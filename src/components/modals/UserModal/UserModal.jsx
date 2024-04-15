@@ -1,30 +1,12 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import { HiOutlineEyeSlash } from 'react-icons/hi2';
 import { HiOutlineEye } from 'react-icons/hi2';
 import { HiOutlineArrowUpTray } from 'react-icons/hi2';
 import { HiOutlineXMark } from 'react-icons/hi2';
 
 import css from './UserModal.module.css';
-
-const initialValues = {
-  photo: '',
-  gender: '',
-  name: '',
-  email: '',
-  password: '',
-  newPassword: '',
-  repeatPassword: '',
-};
-function validateEmail(value) {
-  let error;
-  if (!value) {
-    error = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid email address';
-  }
-  return error;
-}
 
 export const UserModal = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -40,24 +22,51 @@ export const UserModal = ({ onClose }) => {
   const toggleRepeatPasswordVisibility = () => {
     setShowRepeatPassword(!showRepeatPassword);
   };
+
+  const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, 'Too Short!')
+      .max(32, 'Too Long!')
+      .required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    oldPassword: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .max(64, 'Password must be no more than 64 characters')
+      .required('Password is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .max(64, 'Password must be no more than 64 characters')
+      .required('Password is required'),
+    repeatPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm password is required'),
+  });
+
   return (
     <div className={css.modalWrap}>
       <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
       <h1 className={css.title}>Setting</h1>
       <div className={css.wrapperAvatar}>
-        <img src="" className={css.img} />
+        <img src="" alt="" className={css.img} />
         <button className={css.buttonAvatar}>
           <HiOutlineArrowUpTray /> Upload a photo
         </button>
       </div>
       <Formik
-        initialValues={initialValues}
+        initialValues={{
+          name: '',
+          email: '',
+          oldPassword: '',
+          password: '',
+          repeatPassword: '',
+        }}
+        validationSchema={SignupSchema}
         onSubmit={values => {
           // same shape as initial values
           console.log(values);
         }}
       >
-        {({ errors, touched, isValidating }) => (
+        {({ errors, touched }) => (
           <Form className={css.form}>
             <div className={css.inputWrapperPhoto}>
               <label className={css.labelPhoto} htmlFor="photo"></label>
@@ -102,64 +111,87 @@ export const UserModal = ({ onClose }) => {
               <label className={css.labelName} htmlFor="name">
                 Your name
               </label>
-              <Field
-                className={css.input}
-                id="name"
-                name="name"
-                placeholder="Name"
-                type="text"
-                // validate={validateUsername}
-              />
+              <div className={css.inputContainer}>
+                <Field
+                  className={`${css.input} ${
+                    errors.name && touched.name ? css.inputError : ''
+                  }`}
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  type="text"
+                />
+                {errors.name && touched.name ? (
+                  <div className={css.errorNameMessage}>{errors.name}</div>
+                ) : null}
+              </div>
             </div>
             <div className={css.inputWrapperEmail}>
               <label className={css.labelEmail} htmlFor="email">
                 E-mail
               </label>
-              <Field
-                className={css.input}
-                id="email"
-                name="email"
-                placeholder="E-mail"
-                type="email"
-                validate={validateEmail}
-              />
-              {errors.email && touched.email && (
-                <div className={css.errorMessage}>{errors.email}</div>
-              )}
+              <div className={css.inputContainer}>
+                <Field
+                  className={`${css.input} ${
+                    errors.email && touched.email ? css.inputError : ''
+                  }`}
+                  id="email"
+                  name="email"
+                  placeholder="E-mail"
+                  type="email"
+                />
+                {errors.email && touched.email ? (
+                  <div className={css.errorNameMessage}>{errors.email}</div>
+                ) : null}
+              </div>
             </div>
             <div className={css.passwordWrapper}>
               <label>Password</label>
-              <label className={css.password}>Outdated password:</label>
-              <div className={css.iconWrapper}>
-                <input
-                  className={css.input}
-                  name="newPassword"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Password"
-                />
-                <div className={css.passwordIconContainer}>
-                  {showPassword ? (
-                    <HiOutlineEye
-                      className={css.passwordIcon}
-                      onClick={togglePasswordVisibility}
-                    />
-                  ) : (
-                    <HiOutlineEyeSlash
-                      className={css.passwordIcon}
-                      onClick={togglePasswordVisibility}
-                    />
-                  )}
+              <div className={css.inputWrapper}>
+                <label className={css.password}>Outdated password:</label>
+                <div className={css.iconWrapper}>
+                  <Field
+                    className={`${css.input} ${
+                      errors.oldPassword && touched.oldPassword
+                        ? css.inputError
+                        : ''
+                    }`}
+                    name="oldPassword"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                  />
+                  {errors.oldPassword && touched.oldPassword ? (
+                    <div className={css.errorMessage}>{errors.oldPassword}</div>
+                  ) : null}
+                  <div className={css.passwordIconContainer}>
+                    {showPassword ? (
+                      <HiOutlineEye
+                        className={css.passwordIcon}
+                        onClick={togglePasswordVisibility}
+                      />
+                    ) : (
+                      <HiOutlineEyeSlash
+                        className={css.passwordIcon}
+                        onClick={togglePasswordVisibility}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
               <div className={css.inputWrapper}>
                 <label className={css.password}>New password:</label>
                 <div className={css.iconWrapper}>
-                  <input
-                    className={css.input}
-                    name="newPassword"
-                    type={showPassword ? 'text' : 'password'}
+                  <Field
+                    className={`${css.input} ${
+                      errors.password && touched.password ? css.inputError : ''
+                    }`}
+                    name="password"
+                    type={showNewPassword ? 'text' : 'password'}
                     placeholder="Password"
                   />
+                  {errors.password && touched.password ? (
+                    <div className={css.errorMessage}>{errors.password}</div>
+                  ) : null}
                   <div className={css.passwordIconContainer}>
                     {showNewPassword ? (
                       <HiOutlineEye
@@ -178,12 +210,21 @@ export const UserModal = ({ onClose }) => {
               <div className={css.inputWrapper}>
                 <label className={css.password}>Repeat new password:</label>
                 <div className={css.iconWrapper}>
-                  <input
-                    className={css.input}
-                    name="newPassword"
-                    type={showPassword ? 'text' : 'password'}
+                  <Field
+                    className={`${css.input} ${
+                      errors.repeatPassword && touched.repeatPassword
+                        ? css.inputError
+                        : ''
+                    }`}
+                    name="repeatPassword"
+                    type={showRepeatPassword ? 'text' : 'password'}
                     placeholder="Password"
                   />
+                  {errors.repeatPassword && touched.repeatPassword ? (
+                    <div className={css.errorMessage}>
+                      {errors.repeatPassword}
+                    </div>
+                  ) : null}
                   <div className={css.passwordIconContainer}>
                     {showRepeatPassword ? (
                       <HiOutlineEye
