@@ -6,7 +6,7 @@ import { HiOutlineCog6Tooth } from 'react-icons/hi2';
 import { HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
 import css from './ButtonPopUp.module.css';
 
-export const ButtonPopUp = ({ handleOpenModal }) => {
+export const ButtonPopUp = ({ handleOpenModal, logoutModalToggle }) => {
   return (
     <Popup
       trigger={
@@ -30,15 +30,13 @@ export const ButtonPopUp = ({ handleOpenModal }) => {
           </IconContext.Provider>
           <span className={css.span}>Setting</span>
         </button>
-        <button className={css.button}>
+        <button className={css.button} onClick={logoutModalToggle}>
           <IconContext.Provider value={{ className: css.icon }}>
             <div>
               <HiOutlineArrowRightOnRectangle />
             </div>
           </IconContext.Provider>
-          <span className={css.span} onClick={handleOpenModal}>
-            Log out
-          </span>
+          <span className={css.span}>Log out</span>
         </button>
       </div>
     </Popup>
