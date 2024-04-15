@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { HiOutlineEyeSlash } from 'react-icons/hi2';
 import { HiOutlineEye } from 'react-icons/hi2';
+import { HiOutlineArrowUpTray } from 'react-icons/hi2';
+import { HiOutlineXMark } from 'react-icons/hi2';
 
 import css from './UserModal.module.css';
 
@@ -24,7 +26,7 @@ function validateEmail(value) {
   return error;
 }
 
-export const UserModal = () => {
+export const UserModal = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -40,8 +42,14 @@ export const UserModal = () => {
   };
   return (
     <div className={css.modalWrap}>
+      <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
       <h1 className={css.title}>Setting</h1>
-
+      <div className={css.wrapperAvatar}>
+        <img src="" className={css.img} />
+        <button className={css.buttonAvatar}>
+          <HiOutlineArrowUpTray /> Upload a photo
+        </button>
+      </div>
       <Formik
         initialValues={initialValues}
         onSubmit={values => {
@@ -52,16 +60,16 @@ export const UserModal = () => {
         {({ errors, touched, isValidating }) => (
           <Form className={css.form}>
             <div className={css.inputWrapperPhoto}>
-              <label className={css.labelPhoto} htmlFor="photo">
-                Your photo
-              </label>
+              <label className={css.labelPhoto} htmlFor="photo"></label>
               <input
+                className={css.inputPhoto}
                 id="photo"
                 name="photo"
                 type="file"
+                style={{ display: 'none' }}
                 onChange={event => {
                   // Handle file upload and send to backend
-                  console.log('Uploaded file:', event.target.files[0]);
+                  //   console.log('Uploaded file:', event.target.files[0]);
                 }}
               />
             </div>
@@ -120,7 +128,8 @@ export const UserModal = () => {
               )}
             </div>
             <div className={css.passwordWrapper}>
-              <label className={css.labelPassword}>Password</label>
+              <label>Password</label>
+              <label className={css.password}>Outdated password:</label>
               <div className={css.iconWrapper}>
                 <input
                   className={css.input}
@@ -191,7 +200,9 @@ export const UserModal = () => {
                 </div>
               </div>
             </div>
-            <button type="submit">Save</button>
+            <button className={css.button} type="submit">
+              Save
+            </button>
           </Form>
         )}
       </Formik>
