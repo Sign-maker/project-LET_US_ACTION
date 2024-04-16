@@ -6,14 +6,14 @@ import { IconContext } from 'react-icons';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import css from './Header.module.css';
 import { ButtonPopUp } from 'components/ButtonPopUp/ButtonPopUp';
-import { LogoutModal } from '../../components/modals/LogoutModal/LogoutModal';
+import LogoutModal from 'components/modals/LogoutModal/LogoutModal';
 import { useAuth } from 'hooks/useAuth';
 import { routes } from 'constants/routes';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [logoutVisible, setLogoutVisible] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const [isLogoutVisible, setLogoutVisible] = useState(true);
+  const { isLoggedIn, logOut } = useAuth();
 
   const handleOpenModal = () => {
     setIsVisible(false);
@@ -22,9 +22,6 @@ const Header = () => {
     setIsVisible(true);
   };
 
-  const logoutModalToggle = () => {
-    setLogoutVisible(!logoutVisible);
-  };
   return (
     <header className={css.header}>
       <div className="container">
@@ -44,7 +41,9 @@ const Header = () => {
           ) : (
             <ButtonPopUp
               handleOpenModal={handleOpenModal}
-              logoutModalToggle={logoutModalToggle}
+              openLogoutModal={() => {
+                setLogoutVisible(false);
+              }}
             />
           )}
         </div>
@@ -53,9 +52,19 @@ const Header = () => {
             {/* Тут рендериться SettingModal */}
           </Modal>
         )}
-        {logoutVisible && (
-          <Modal onClose={logoutModalToggle}>
-            <LogoutModal logoutModalToggleClose={logoutModalToggle} />
+
+        {!isLogoutVisible && (
+          <Modal
+            onClose={() => {
+              setLogoutVisible(true);
+            }}
+          >
+            <LogoutModal
+              onCloseLogout={() => {
+                setLogoutVisible(true);
+              }}
+              onLogout={() => {logOut()}}
+            />
           </Modal>
         )}
       </div>

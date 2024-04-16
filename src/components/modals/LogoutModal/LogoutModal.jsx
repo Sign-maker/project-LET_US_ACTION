@@ -1,10 +1,8 @@
 import React from 'react';
 import css from '../LogoutModal/LogoutModal.module.css';
 import { IoCloseOutline } from 'react-icons/io5';
-import { useAuth } from 'hooks/useAuth';
 
-export const LogoutModal = ({ logoutModalToggleClose }) => {
-  const [logOut] = useAuth();
+const LogoutModal = ({ onCloseLogout, onLogout }) => {
 
   return (
     <>
@@ -14,7 +12,7 @@ export const LogoutModal = ({ logoutModalToggleClose }) => {
           <button
             type="button"
             className={css.btn_close}
-            onClick={logoutModalToggleClose}
+            onClick={onCloseLogout}
           >
             <IoCloseOutline className={css.icon_close} />
           </button>
@@ -25,16 +23,14 @@ export const LogoutModal = ({ logoutModalToggleClose }) => {
           <button
             type="button"
             className={css.btn_cancel}
-            onClick={logoutModalToggleClose}
+            onClick={onCloseLogout}
           >
             Cancel
           </button>
           <button
             type="button"
             className={css.btn_logout}
-            onClick={() => {
-              logOut();
-            }}
+            onClick={onLogout}
           >
             Logout
           </button>
@@ -43,3 +39,5 @@ export const LogoutModal = ({ logoutModalToggleClose }) => {
     </>
   );
 };
+
+export default LogoutModal;
