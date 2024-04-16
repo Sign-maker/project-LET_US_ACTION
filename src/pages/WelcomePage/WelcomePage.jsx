@@ -1,7 +1,10 @@
 import React from 'react';
+import Main from '../../components/Main/Main';
 
 const WelcomePage = () => {
-  return <div>WelcomePage</div>;
+  return (
+    <Main />
+  );
 };
 
 export default WelcomePage;

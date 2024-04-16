@@ -1,0 +1,54 @@
+.content {
+  max-width: 118px;
+  max-height: 88px;
+  background-color: var(--primary-white-FFFFFF);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 11px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+.span {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--primary-blue-407BFF);
+  transition-property: color;
+  transition-duration: var(--my-transition-duration);
+  transition-timing-function: var(--my-transition-timing-function);
+}
+.name {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--primary-black-2F2F2F);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  color: var(--primary-blue-407BFF);
+  transition-property: color;
+  transition-duration: var(--my-transition-duration);
+  transition-timing-function: var(--my-transition-timing-function);
+}
+.button:hover .span,
+.button:hover .icon {
+  color: var(--secondary-orange-FF9D43);
+}
