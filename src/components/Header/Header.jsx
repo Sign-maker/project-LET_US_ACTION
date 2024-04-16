@@ -7,13 +7,15 @@ import { IconContext } from 'react-icons';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import css from './Header.module.css';
 import { ButtonPopUp } from 'components/ButtonPopUp/ButtonPopUp';
+import LogoutModal from 'components/modals/LogoutModal/LogoutModal';
 import { useAuth } from 'hooks/useAuth';
 import { routes } from 'constants/routes';
 import { UserModal } from 'components/modals/UserModal/UserModal';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const { isLoggedIn } = useAuth();
+  const [isLogoutVisible, setLogoutVisible] = useState(true);
+  const { isLoggedIn, logOut } = useAuth();
 
   const navigate = useNavigate();
 
@@ -44,12 +46,33 @@ const Header = () => {
               </IconContext.Provider>
             </button>
           ) : (
-            <ButtonPopUp handleOpenModal={handleOpenModal} />
+            <ButtonPopUp
+              handleOpenModal={handleOpenModal}
+              openLogoutModal={() => {
+                setLogoutVisible(false);
+              }}
+            />
           )}
         </div>
         {!isVisible && (
           <Modal onClose={handleCloseModal}>
             <UserModal onClose={handleCloseModal} />
+          </Modal>
+        )}
+
+        {!isLogoutVisible && (
+          <Modal
+            onClose={() => {
+              setLogoutVisible(true);
+            }}
+          >
+            <LogoutModal
+              onCloseLogout={() => {
+                setLogoutVisible(true);
+              }}
+              onLogout={() => {logOut()}}
+            />
+
           </Modal>
         )}
       </div>
