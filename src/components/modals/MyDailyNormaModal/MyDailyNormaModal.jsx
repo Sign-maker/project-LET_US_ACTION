@@ -5,10 +5,7 @@ import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDail
 
 const MyDailyNormaModal = () => {
   return (
-    <div
-      className={Styles['modal']}
-      style={{ backgroundColor: 'var(--primary-white-FFFFFF)' }}
-    >
+    <div className={Styles['modal']}>
       <div className={Styles['header']}>
         <p className={Styles['title']}>My daily norma</p>
         <button className={Styles['closeButton']}>
@@ -48,7 +45,7 @@ const MyDailyNormaModal = () => {
                 <input
                   className={Styles['choiceGender']}
                   type="radio"
-                  name="sex"
+                  name="gender"
                   value="woman"
                 ></input>
                 For woman
@@ -57,7 +54,7 @@ const MyDailyNormaModal = () => {
                 <input
                   className={Styles['choiceGender']}
                   type="radio"
-                  name="sex"
+                  name="gender"
                   value="man"
                 ></input>
                 For man
@@ -73,6 +70,9 @@ const MyDailyNormaModal = () => {
                 name="weight"
                 placeholder="0"
                 type="number"
+                min="0"
+                max="200"
+                step="0.1"
               ></input>
             </div>
             <div className={Styles['calcWeight']}>
@@ -85,6 +85,9 @@ const MyDailyNormaModal = () => {
                 name="time"
                 type="number"
                 placeholder="0"
+                min="0Hr"
+                max="24Hr"
+                step="0.5Hr"
               ></input>
             </div>
             <label className={Styles['calcQuantity']}>
@@ -104,7 +107,7 @@ const MyDailyNormaModal = () => {
               name="myDailyNorma"
               placeholder="0"
               min="0"
-              max="15"
+              max="15L"
               step="0.250"
             ></input>
           </div>

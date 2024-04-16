@@ -107,12 +107,13 @@
     gap: 24px;
   }
   .choiceGender {
+    margin-right: 6px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     color: var(--primary-blue-407BFF);
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     border: 1px solid var(--primary-blue-407BFF);
     border-radius: 50%;
     outline: none;
@@ -122,8 +123,8 @@
   .choiceGender::before {
     content: '';
     display: block;
-    width: 12px;
-    height: 12px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background-color: var(--primary-blue-407BFF);
     position: relative;

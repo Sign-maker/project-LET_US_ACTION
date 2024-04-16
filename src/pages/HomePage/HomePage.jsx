@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './HomePage.module.css';
 
-import { DailyNorma }  from '../../components/DailyNorma/DailyNorma';
+import { DailyNorma } from '../../components/DailyNorma/DailyNorma';
 // import WaterRatioPanel  from '';
 // import CalendarContainer from '';
 // import TodayWaterList from '';
@@ -10,7 +10,6 @@ import { DailyNorma }  from '../../components/DailyNorma/DailyNorma';
 // import { useSelector } from 'react-redux';
 const HomePage = () => {
   return (
-    
     <section className={css.section_HomePage}>
       <h2 className="visually-hidden" aria-label="Water tracker">
         Water tracker join us
