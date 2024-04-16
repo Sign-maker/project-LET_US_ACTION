@@ -7,9 +7,8 @@ import { HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
 import css from './ButtonPopUp.module.css';
 import { useAuth } from 'hooks/useAuth';
 
-
 export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
-  const { user, logOut } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Popup
