@@ -5,13 +5,38 @@ import { GoChevronDown } from 'react-icons/go';
 import { HiOutlineCog6Tooth } from 'react-icons/hi2';
 import { HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
 import css from './ButtonPopUp.module.css';
+import { useAuth } from 'hooks/useAuth';
+
 
 export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
+  const { user, logOut } = useAuth();
+
   return (
     <Popup
       trigger={
         <button className={css.button}>
-          <span className={css.name}>David</span>
+          {user.avatarURL ? (
+            <>
+              <img
+                src={user.avatarURL}
+                alt={user.name}
+                className={css.avatar}
+              />
+              <span className={css.name}>{user.name}</span>
+            </>
+          ) : user.name ? (
+            <>
+              <div className={css.avatar}>
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+              <span className={css.name}>{user.name}</span>
+            </>
+          ) : (
+            <span className={css.name}>
+              {user.email.charAt(0).toUpperCase()}
+            </span>
+          )}
+          {/* <span className={css.name}>{currentName}</span> */}
           <IconContext.Provider value={{ className: css.icon }}>
             <div>
               <GoChevronDown />

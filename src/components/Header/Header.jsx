@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'components/Modal/Modal';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../images/logo/logo.svg';
 import { IconContext } from 'react-icons';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
@@ -9,17 +10,23 @@ import { ButtonPopUp } from 'components/ButtonPopUp/ButtonPopUp';
 import LogoutModal from 'components/modals/LogoutModal/LogoutModal';
 import { useAuth } from 'hooks/useAuth';
 import { routes } from 'constants/routes';
+import { UserModal } from 'components/modals/UserModal/UserModal';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isLogoutVisible, setLogoutVisible] = useState(true);
   const { isLoggedIn, logOut } = useAuth();
 
+  const navigate = useNavigate();
+
   const handleOpenModal = () => {
     setIsVisible(false);
   };
   const handleCloseModal = () => {
     setIsVisible(true);
+  };
+  const handleClick = () => {
+    navigate(routes.SIGNIN);
   };
 
   return (
@@ -30,7 +37,7 @@ const Header = () => {
             <Logo />
           </NavLink>
           {!isLoggedIn ? (
-            <button className={css.button}>
+            <button className={css.button} onClick={handleClick}>
               <span className={css.signIn}>Sign in</span>
               <IconContext.Provider value={{ className: css.icon }}>
                 <div>
@@ -49,7 +56,7 @@ const Header = () => {
         </div>
         {!isVisible && (
           <Modal onClose={handleCloseModal}>
-            {/* Тут рендериться SettingModal */}
+            <UserModal onClose={handleCloseModal} />
           </Modal>
         )}
 
@@ -65,6 +72,7 @@ const Header = () => {
               }}
               onLogout={() => {logOut()}}
             />
+
           </Modal>
         )}
       </div>

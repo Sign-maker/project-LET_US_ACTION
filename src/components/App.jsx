@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 
 
 import { useAuth } from 'hooks/useAuth';
@@ -14,15 +14,13 @@ const SignupPage = lazy(() => import('pages/SignupPage/SignupPage'));
 const SigninPage = lazy(() => import('pages/SigninPage/SigninPage'));
 
 export const App = () => {
-  // const { refreshUser, isRefreshing } = useAuth();
-  const { isRefreshing } = useAuth();
+  const { refreshUser, isRefreshing } = useAuth();
 
 
+  useEffect(() => {
+    refreshUser();
+  }, [refreshUser]);
 
-  
-  // useEffect(() => {
-  //   refreshUser();
-  // }, [refreshUser]);
 
   return isRefreshing ? (
     <p>Refreshing user data</p>

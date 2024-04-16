@@ -1,8 +1,12 @@
 .header {
-  padding-top: 26px;
-  padding-bottom: 26px;
-  background-color: var(--primary-white-FFFFFF);
+  position: absolute;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: transparent;
+  /* background-color: var(--primary-white-FFFFFF); */
   cursor: pointer;
+  z-index: 10;
 }
 .container {
   margin: 0 auto;
@@ -64,6 +68,10 @@
 @media (min-width: 320px) {
 }
 @media (min-width: 768px) {
+  .header {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
   .signIn {
     font-size: 18px;
     font-weight: 400;
@@ -71,4 +79,8 @@
   }
 }
 @media (min-width: 1440px) {
+  .header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
