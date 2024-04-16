@@ -1,10 +1,12 @@
 @media (min-width: 320px) {
-  .calendar {
-    width: 280px;
-    background-color: #ecf2ff;
-    /* background-color: var(--secondary-2-ECF2FF); */
-    padding: 24px 8px;
-  }
+  /* .calendar {
+    width: 280px; */
+  /* background-color: #ecf2ff; */
+  /* background-color: var(--secondary-2-ECF2FF); */
+
+  /* border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(64, 123, 255, 0.3); */
+
   .monthHeader {
     display: flex;
     align-items: center;
@@ -16,20 +18,23 @@
   }
   .monthBtn {
     background-color: inherit;
-    color: #407bff;
-    /* color: var(--primary-blue-407BFF); */
+    /* color: #407bff; */
+    color: var(--primary-blue-407BFF);
   }
   .monthName {
-    /* color: var(--primary-blue-407BFF); */
-    color: #407bff;
+    color: var(--primary-blue-407BFF);
+    /* color: #407bff; */
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
+    margin-right: 12px;
+    margin-left: 12px;
   }
+
   .dayliList {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 26px;
+    column-gap: 24px;
     row-gap: 16px;
     padding-top: 16px;
   }
@@ -53,17 +58,17 @@
     line-height: 18px;
   }
   .percent {
-    /* color: var(--secondary-4-9EBBFF); */
-    color: #9ebbff;
-    font-size: 10px;
+    color: var(--secondary-4-9EBBFF);
+    /* color: #9ebbff;
+    font-size: 10px; */
     font-weight: 400;
     line-height: 16px;
   }
 }
 
 @media (min-width: 768px) {
-  .calendar {
-    width: 704px;
+  .monthHeader {
+    max-width: 646px;
   }
   .month {
     font-size: 26px;
@@ -93,12 +98,6 @@
 }
 
 @media (min-width: 1440px) {
-  .calendar {
-    width: 592px;
-    padding: 24px;
-    padding-bottom: 32px;
-  }
-
   .monthName {
     font-size: 16px;
     font-weight: 400;

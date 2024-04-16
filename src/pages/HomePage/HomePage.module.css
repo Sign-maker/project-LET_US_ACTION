@@ -1,150 +1,148 @@
 .section_HomePage {
-    display: block;
-    position: relative;
-    background-position: center 28px;
-    background-image: url(../../images/background/mob/bg-el-home-page-mob@1x.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-top: 80px;
+  display: block;
+  position: relative;
+  background-position: center 28px;
+  background-image: url(../../images/background/mob/bg-el-home-page-mob@1x.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 80px;
 
-    @media (min-device-pixel-ratio: 2),
+  @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-        background-image: url(../../images/background/mob/bg-el-home-page-mob@2x.png);
-    }
+    background-image: url(../../images/background/mob/bg-el-home-page-mob@2x.png);
+  }
 }
 
 .container_HomePage {
-    background-image: url(../../images/background/mob/botle-home-screen-mob@1x.png);
-    background-position: center top 106px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: flex;
-    flex-direction: column;
+  background-image: url(../../images/background/mob/botle-home-screen-mob@1x.png);
+  background-position: center top 106px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: flex;
+  flex-direction: column;
 
-
-    @media (min-device-pixel-ratio: 2),
+  @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-        background-image: url(../../images/background/mob/botle-home-screen-mo@2x.png);
-    }
+    background-image: url(../../images/background/mob/botle-home-screen-mo@2x.png);
+  }
 }
 
 .container_daliNorma {
-    height: 410px;
-    margin-bottom: 75px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
+  height: 410px;
+  margin-bottom: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container_MonthStats {
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    padding: 24px 8px;
-    width: 280px;
-    height: 840px;
-    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
-    background: var(--secondary-2-ECF2FF);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 24px 8px;
+  width: 280px;
+  height: 840px;
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
+  background: var(--secondary-2-ECF2FF);
+  align-items: center;
 }
 
 @media screen and (min-width: 768px) {
+  .section_HomePage {
+    padding-top: 104px;
+    background-position: center 0px;
+    background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png);
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
     .section_HomePage {
-        padding-top: 104px;
-        background-position: center 0px;
-        background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png);
+      background-image: url(../../images/background/tab/bg-el-home-page-tab@2x.png);
     }
+  }
 
-    @media (min-device-pixel-ratio: 2),
+  .container_HomePage {
+    background-image: url(../../images/background/tab/botle-home-screen-tab@1x.png);
+    background-position: center top;
+  }
+
+  @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-        .section_HomePage {
-            background-image: url(../../images/background/tab/bg-el-home-page-tab@2x.png);
-        }
-    }
-
     .container_HomePage {
-        background-image: url(../../images/background/tab/botle-home-screen-tab@1x.png);
-        background-position: center top;
+      background-image: url(../../images/background/tab/botle-home-screen-tab@2x.png);
     }
+  }
 
-    @media (min-device-pixel-ratio: 2),
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-        .container_HomePage {
-            background-image: url(../../images/background/tab/botle-home-screen-tab@2x.png);
-        }
-    }
+  .container_MonthStats {
+    padding: 32px 24px;
+    width: 704px;
+    height: 688px;
+    align-items: flex-start;
+  }
 
-    .container_MonthStats {
-        padding: 32px 24px;
-        width: 704px;
-        height: 688px;
-    }
-
-    .container_daliNorma {
-        height: 600px;
-        margin-bottom: 40px;
-
-    }
+  .container_daliNorma {
+    height: 600px;
+    margin-bottom: 40px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
+  .section_HomePage {
+    padding-top: 80px;
+    background-size: 100%;
+    background-size: contain;
+    background-repeat: repeat;
+    background-image: url(../../images/background/desktop/bg-el-main-page-desk@1x.png);
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
     .section_HomePage {
-        padding-top: 80px;
-        background-size: 100%;
-        background-size: contain;
-        background-repeat: repeat;
-        background-image: url(../../images/background/desktop/bg-el-main-page-desk@1x.png);
-
+      background-image: url(../../images/background/desktop/bg-el-main-page-desk@2x.png);
     }
+  }
 
-    @media (min-device-pixel-ratio: 2),
+  .container_HomePage {
+    background-image: url(../../images/background/desktop/botle-home-screen-desk@1x.png);
+    background-size: 55%;
+    background-position: left top;
+    flex-direction: row;
+    height: 92vh;
+    gap: 32px;
+    justify-content: center;
+  }
+
+  @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-        .section_HomePage {
-            background-image: url(../../images/background/desktop/bg-el-main-page-desk@2x.png);
-        }
-    }
-
     .container_HomePage {
-        background-image: url(../../images/background/desktop/botle-home-screen-desk@1x.png);
-        background-size: 55%;
-        background-position: left top;
-        flex-direction: row;
-        height: 92vh;
-        gap: 32px;
-        justify-content: center;
+      background-image: url(../../images/background/desktop/botle-home-screen-desk@2x.png);
     }
+  }
 
-    @media (min-device-pixel-ratio: 2),
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-        .container_HomePage {
-            background-image: url(../../images/background/desktop/botle-home-screen-desk@2x.png);
-        }
-    }
+  .container_daliNorma {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0 16px;
+    margin-bottom: 0;
+    height: 680px;
+    width: 590px;
+  }
 
-    .container_daliNorma {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 30px 0 16px;
-        margin-bottom: 0;
-        height: 680px;
-        width: 590px;
-    }
-
-    .container_MonthStats {
-        width: 592px;
-        height: 680px;
-    }
+  .container_MonthStats {
+    width: 592px;
+    height: 680px;
+  }
 }

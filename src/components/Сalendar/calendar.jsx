@@ -42,21 +42,22 @@ const Calendar = () => {
     <div className={css.calendar}>
       <div className={css.monthHeader}>
         <p className={css.month}>Month</p>
+        <div className={css.monthHeaderBtn}>
+          <button className={css.monthBtn} onClick={goToPreviousMonth}>
+            {'<'}
+          </button>
 
-        <button className={css.monthBtn} onClick={goToPreviousMonth}>
-          {'<'}
-        </button>
+          <span className={css.monthName}>
+            {currentMonth.toLocaleString('en-US', {
+              month: 'long',
+            })}
+            , {currentMonth.getFullYear()}
+          </span>
 
-        <span className={css.monthName}>
-          {currentMonth.toLocaleString('default', {
-            month: 'long',
-          })}
-          , {currentMonth.getFullYear()}
-        </span>
-
-        <button className={css.monthBtn} onClick={goToNextMonth}>
-          {'>'}
-        </button>
+          <button className={css.monthBtn} onClick={goToNextMonth}>
+            {'>'}
+          </button>
+        </div>
       </div>
 
       <DayList
