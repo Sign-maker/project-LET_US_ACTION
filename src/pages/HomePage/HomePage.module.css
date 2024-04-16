@@ -1,9 +1,11 @@
 .section_HomePage {
+    display: block;
+    position: relative;
+    background-position: center 28px;
     background-image: url(../../images/background/mob/bg-el-home-page-mob@1x.png);
-    width: 100%;
     background-repeat: no-repeat;
-    background-size: 100%;
-    padding: 24px 0;
+    background-size: cover;
+    padding-top: 80px;
 
     @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
@@ -20,8 +22,7 @@
     background-size: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 24px;
-    padding-bottom: 20px;
+
 
     @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
@@ -53,6 +54,8 @@
 
 @media screen and (min-width: 768px) {
     .section_HomePage {
+        padding-top: 104px;
+        background-position: center 0px;
         background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png);
     }
 
@@ -94,6 +97,10 @@
 
 @media screen and (min-width: 1440px) {
     .section_HomePage {
+        padding-top: 80px;
+        background-size: 100%;
+        background-size: contain;
+        background-repeat: repeat;
         background-image: url(../../images/background/desktop/bg-el-main-page-desk@1x.png);
 
     }
@@ -112,6 +119,7 @@
         background-size: 55%;
         background-position: left top;
         flex-direction: row;
+        height: 92vh;
         gap: 32px;
         justify-content: center;
     }

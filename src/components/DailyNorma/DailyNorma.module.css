@@ -68,4 +68,13 @@
     background-color: transparent;
 
     color: var(--secondary-6-8BAEFF);
+
+    transition-duration: var(--my-transition-duration);
+    transition-timing-function: var(--my-transition-timing-function);
+  
+    &:hover {
+        cursor: pointer;
+        color: var(--secondary-orange-FF9D43);
+
+    }
 }
