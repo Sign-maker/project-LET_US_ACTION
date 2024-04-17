@@ -5,7 +5,7 @@ import { onDayClick } from '../servises/waterServise';
 const DayList = ({ month, waterConsumptionData }) => {
   const getClassForDay = day => {
     const dayData = waterConsumptionData[{}];
-    console.log(dayData);
+    // console.log(dayData);
 
     if (dayData && dayData.consumption < dayData.plan) {
       return 'not-achieved';

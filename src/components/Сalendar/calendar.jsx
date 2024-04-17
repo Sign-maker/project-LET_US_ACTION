@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DayList from './dailyList';
 
 import css from './calendar.module.css';
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [waterConsumptionData, setWaterConsumptionData] = useState([]);
+  // const [waterConsumptionData, setWaterConsumptionData] = useState([]);
+  const [waterConsumptionData] = useState([]);
 
-  const fetchWaterConsumptionData = async (req, res, next) => {
-    try {
-      const response = await fetch('/');
-      const data = await response.json();
+  // const fetchWaterConsumptionData = async (req, res, next) => {
+  //   try {
+  //     const response = await fetch('/');
+  //     const data = await response.json();
 
-      setWaterConsumptionData(data);
-    } catch (error) {
-      console.error('Помилка під час отримання даних:', error);
-    }
-  };
+  //     setWaterConsumptionData(data);
+  //   } catch (error) {
+  //     console.error('Помилка під час отримання даних:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchWaterConsumptionData();
-  }, []);
+  // useEffect(() => {
+  //   fetchWaterConsumptionData();
+  // }, []);
 
   const goToPreviousMonth = () => {
     setCurrentMonth(prevMonth => {

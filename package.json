@@ -53,12 +53,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "Acest proiect a fost creat cu ajutorul\r [Create React App](https://github.com/facebook/create-react-app). Pentru prezentări\r și configurarea de funcții suplimentare\r [consultă documentația](https://facebook.github.io/create-react-app/docs/getting-started).",
-  "main": "index.js",
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^3.1.0"
   }
 }
