@@ -3,7 +3,7 @@ import css from './HomePage.module.css';
 
 import { DailyNorma } from '../../components/DailyNorma/DailyNorma';
 import { WaterRatioPanel }  from '../../components/WaterRatioPanel/WaterRatioPanel';
-// import CalendarContainer from '';
+import Calendar from '../../components/Сalendar/calendar';
 import {TodayWaterList} from '../../components/TodayWaterList/TodayWaterList';
 
 // import { useAuth } from 'hooks/useAuth';
