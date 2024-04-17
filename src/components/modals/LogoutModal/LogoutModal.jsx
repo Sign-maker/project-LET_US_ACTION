@@ -3,6 +3,11 @@ import css from '../LogoutModal/LogoutModal.module.css';
 import { IoCloseOutline } from 'react-icons/io5';
 
 const LogoutModal = ({ onCloseLogout, onLogout }) => {
+  const handleLogout = () => {
+    onLogout();
+
+    onCloseLogout();
+  };
 
   return (
     <>
@@ -30,7 +35,7 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
           <button
             type="button"
             className={css.btn_logout}
-            onClick={onLogout}
+            onClick={handleLogout}
           >
             Logout
           </button>
