@@ -10,6 +10,12 @@ import { useAuth } from 'hooks/useAuth';
 export const ButtonPopUp = ({ handleOpenModal }) => {
   const { user, logOut } = useAuth();
 
+  const baseURL = 'http://localhost:8000/';
+  console.log(user);
+  const url = user.avatarURL.startsWith('http')
+    ? user.avatarURL
+    : `${baseURL}${user.avatarURL}`;
+
   console.log(user.avatarURL);
   return (
     <Popup
@@ -17,11 +23,7 @@ export const ButtonPopUp = ({ handleOpenModal }) => {
         <button className={css.button}>
           {user.avatarURL ? (
             <>
-              <img
-                src={user.avatarURL}
-                alt={user.name}
-                className={css.avatar}
-              />
+              <img src={url} alt={user.name} className={css.avatar} />
               <span className={css.name}>{user.name}</span>
             </>
           ) : user.name ? (

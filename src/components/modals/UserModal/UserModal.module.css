@@ -60,11 +60,6 @@
 .labelGenderWrapper {
   margin-bottom: 12px;
 }
-.labelGender {
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-}
 .labelPhoto,
 .labelGender,
 .labelName,
@@ -72,6 +67,16 @@
 .labelPassword {
   font-size: 18px;
   font-weight: 500;
+  line-height: 20px;
+}
+.labelGender {
+  margin-bottom: 12px;
+}
+.gender {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 16px;
   line-height: 20px;
 }
 .password {

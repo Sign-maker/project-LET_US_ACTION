@@ -19,6 +19,9 @@ export const useAuth = () => {
   const logIn = formData => dispatch(operations.logIn(formData)).unwrap();
   const logOut = () => dispatch(operations.logOut());
   const updateAvatar = file => dispatch(operations.updateAvatar(file));
+  const updateProfile = newProfile =>
+    dispatch(operations.updateProfile(newProfile));
+
   // const updateName = name => dispatch(operations.updateName(name));
   const refreshUser = useCallback(
     () => dispatch(operations.refreshUser()).unwrap(),
@@ -34,7 +37,7 @@ export const useAuth = () => {
     logOut,
     refreshUser,
     updateAvatar,
-    // updateProfile,
+    updateProfile,
     // updateName,
   };
 };

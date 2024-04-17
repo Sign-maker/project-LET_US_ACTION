@@ -10,7 +10,7 @@ import css from './UserModal.module.css';
 import { useAuth } from 'hooks/useAuth';
 
 export const UserModal = ({ onClose }) => {
-  const { user } = useAuth();
+  const { user, updateProfile, updateAvatar } = useAuth();
   const fileInputRef = useRef(null);
 
   const [imageUrl, setImageUrl] = useState(null); // стан для URL-адреси зображення
@@ -50,24 +50,81 @@ export const UserModal = ({ onClose }) => {
       // Обробка завантаженого файлу
     }
   };
-
   const urlBase = file ? imageUrl : url;
 
   const SignupSchema = Yup.object().shape({
-    name: Yup.string().min(2, 'Too Short!').max(32, 'Too Long!'),
+    name: Yup.string().max(32, 'Too Long!'),
     email: Yup.string().email('Invalid email').required('Required'),
     oldPassword: Yup.string()
       .min(8, 'Password must be at least 8 characters')
-      .max(64, 'Password must be no more than 64 characters')
-      .required('Password is required'),
+      .max(64, 'Password must be no more than 64 characters'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
-      .max(64, 'Password must be no more than 64 characters')
-      .required('Password is required'),
+      .max(64, 'Password must be no more than 64 characters'),
     repeatPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm password is required'),
+      .min(8, 'Password must be at least 8 characters')
+      .max(64, 'Password must be no more than 64 characters'),
   });
+
+  const handleSubmit = async (values, { setErrors }) => {
+    if (values.oldPassword && !values.password && !values.repeatPassword) {
+      setErrors({
+        password: 'Password must be at least 8 characters',
+        repeatPassword: 'Password must be at least 8 characters',
+      });
+      return;
+    }
+    if (values.password !== values.repeatPassword) {
+      setErrors({ repeatPassword: 'Passwords must match' });
+      return;
+    }
+    if (!values.oldPassword && values.password && values.repeatPassword) {
+      setErrors({
+        oldPassword: 'Password must be at least 8 characters',
+      });
+      return;
+    }
+    if (!values.oldPassword && values.password && values.repeatPassword) {
+      setErrors({
+        oldPassword: 'Password must be at least 8 characters',
+      });
+      return;
+    }
+    // if (values.oldPassword === values.password) {
+    //   setErrors({
+    //     password: 'New password can not be the old one',
+    //   });
+    //   return;
+    // }
+
+    let newProfile = {};
+    if (user.name !== values.name) {
+      newProfile = {
+        ...newProfile,
+        name: values.name,
+      };
+    } else if (user.email !== values.email) {
+      newProfile = {
+        ...newProfile,
+        email: values.email,
+      };
+    } else if (user.gender !== values.gender) {
+      newProfile = {
+        ...newProfile,
+        gender: values.gender,
+      };
+    }
+    if (Object.keys(newProfile).length > 0) {
+      console.log(newProfile);
+      updateProfile(newProfile);
+    }
+
+    if (!file) {
+      return;
+    }
+    updateAvatar(file);
+    console.log('Form submitted successfully!', values);
+  };
 
   return (
     <div className={css.modalWrap}>
@@ -84,15 +141,14 @@ export const UserModal = ({ onClose }) => {
         initialValues={{
           name: user.name ? user.name : '',
           email: user.email,
+          gender: user.gender,
           oldPassword: '',
           password: '',
           repeatPassword: '',
         }}
         validationSchema={SignupSchema}
-        onSubmit={values => {
-          // same shape as initial values
-          console.log(values);
-        }}
+        // onSubmitCapture={true}
+        onSubmit={handleSubmit}
       >
         {({ errors, touched }) => (
           <Form className={css.form}>
@@ -106,18 +162,12 @@ export const UserModal = ({ onClose }) => {
                 type="file"
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
-                // onChange={event => {
-                //   Handle file upload and send to backend
-                //    console.log('Uploaded file:', event.target.files[0]);
-                // }}
               />
             </div>
             <div className={css.inputWrapperGender}>
-              <label className={css.labelGenderWrapper}>
-                Your gender identity
-              </label>
+              <label className={css.labelGender}>Your gender identity</label>
               <div className={css.genderWrapper}>
-                <label className={css.labelGender}>
+                <label className={css.gender}>
                   <Field
                     className={css.radioBtn}
                     type="radio"
@@ -126,7 +176,7 @@ export const UserModal = ({ onClose }) => {
                   />
                   Woman
                 </label>
-                <label className={css.labelGender}>
+                <label className={css.gender}>
                   <Field
                     className={css.radioBtn}
                     type="radio"
@@ -176,7 +226,7 @@ export const UserModal = ({ onClose }) => {
               </div>
             </div>
             <div className={css.passwordWrapper}>
-              <label>Password</label>
+              <label className={css.labelPassword}>Password</label>
               <div className={css.inputWrapper}>
                 <label className={css.password}>Outdated password:</label>
                 <div className={css.iconWrapper}>
