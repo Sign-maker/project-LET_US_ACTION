@@ -1,0 +1,230 @@
+.container {
+    max-width: 280px;
+
+    @media screen and (min-width: 768px) {
+        max-width: 704px;
+        display: flex;
+        align-items: center;
+    }
+
+}
+
+@media only screen and (min-width: 1440px) {
+    .container {
+        max-width: 592px;
+        height: 90px;
+    }
+}
+
+.containerPanel {
+    margin-bottom: 16px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media screen and (min-width: 768px) {
+        width: 356px;
+        height: 90px;
+        margin-right: 12px;
+        margin-bottom: 0;
+    }
+
+}
+
+@media only screen and (min-width: 1440px) {
+    .containerPanel {
+        width: 391px;
+        margin-right: 23px;
+    }
+}
+
+.panelText {
+    margin-bottom: 8px;
+    align-self: baseline;
+    color: var(--primary-blue-407BFF);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.33;
+
+    @media screen and (min-width: 768px) {
+        margin-bottom: 16px;
+    }
+}
+
+.percentsRange {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 256px;
+    border-radius: 30px;
+    margin-bottom: 6px;
+    outline: none;
+    background: var(--secondary-5-D7E3FF);
+
+    background-image: linear-gradient(to right,
+        var(--secondary-4-9EBBFF),
+        var(--primary-blue-407BFF));
+
+    background-repeat: no-repeat;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 14px;
+        width: 14px;
+        margin-top: -3px;
+
+        border-radius: 50%;
+        background-color: var(--primary-white-FFFFFF);
+        border: 1px solid var(--primary-blue-407BFF);
+    }
+
+    &::-webkit-slider-runnable-track {
+        height: 8px;
+        border-radius: 30px;
+        background: var(--secondary-4-9EBBFF);
+        -webkit-appearance: none;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+    }
+
+    &::-webkit-slider-thumb:hover {
+        background: var(--primary-white-FFFFFF);
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .percentsRange {
+        width: 325px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .percentsRange {
+        width: 360px;
+    }
+}
+
+.percentsPoint {
+    width: 256px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+
+    & span {
+        font-size: 8px;
+        color: var(--secondary-5-D7E3FF);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .percentsPoint {
+        width: 325px;
+        margin-bottom: 8px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .percentsPoint {
+        width: 360px;
+        margin-bottom: 4px;
+    }
+}
+
+
+.percentsValue {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    & span {
+            color: var(--primary-blue-407BFF);
+            text-align: center;
+            width: 30px;
+        }
+    /* & span {
+        color: var(--primary-blue-407BFF);
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.33;
+        width: 30px;
+    } */
+
+    /* & span:nth-child(2) {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.25;
+    } */
+}
+
+.valueCurent {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+.valueNotCurent {
+    font-size: 16px;
+    font-size: 12px;
+        line-height: 1.33;
+}
+.addBtn {
+    width: 100%;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: var(--primary-blue-407BFF);
+    box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+
+    transition: box-shadow var(--my-transition-duration), var(--my-cubic-bezier);
+
+    & span {
+        font-size: 16px;
+
+        color: var(--primary-white-FFFFFF);
+        line-height: 1.25;
+    }
+
+    &:hover {
+        box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+        cursor: pointer;
+    }
+
+    &:active {
+        box-shadow: 0 0;
+    }
+
+    & svg {
+        width: 24px;
+        height: 24px;
+
+        & use {
+            fill: var(--primary-white-FFFFFF);
+        }
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .addBtn {
+        width: 336px;
+        height: 44px;
+
+        & span {
+            font-size: 18px;
+        }
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .addBtn {
+        width: 178px;
+    }
+}
