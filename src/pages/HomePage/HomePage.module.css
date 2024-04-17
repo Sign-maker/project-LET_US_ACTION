@@ -5,7 +5,7 @@
   background-image: url(../../images/background/mob/bg-el-home-page-mob@1x.png);
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 80px;
+  padding-top: 24px;
 
   @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
@@ -54,7 +54,7 @@
 
 @media screen and (min-width: 768px) {
   .section_HomePage {
-    padding-top: 104px;
+    padding-top: 40px;
     background-position: center 0px;
     background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png);
   }
@@ -97,7 +97,7 @@
 
 @media screen and (min-width: 1440px) {
   .section_HomePage {
-    padding-top: 80px;
+    padding-top: 52px;
     background-size: 100%;
     background-size: contain;
     background-repeat: repeat;
