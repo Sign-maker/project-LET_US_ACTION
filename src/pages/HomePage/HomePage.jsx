@@ -2,7 +2,7 @@ import React from 'react';
 import css from './HomePage.module.css';
 
 import { DailyNorma } from '../../components/DailyNorma/DailyNorma';
-// import WaterRatioPanel  from '';
+import { WaterRatioPanel }  from '../../components/WaterRatioPanel/WaterRatioPanel';
 // import CalendarContainer from '';
 import {TodayWaterList} from '../../components/TodayWaterList/TodayWaterList';
 
@@ -18,7 +18,7 @@ const HomePage = () => {
       <div className={css.container_HomePage}>
         <div className={css.container_daliNorma}>
           <DailyNorma />
-          {/* <WaterRatioPanel /> */}
+          <WaterRatioPanel />
         </div>
 
         <div className={css.container_MonthStats}>

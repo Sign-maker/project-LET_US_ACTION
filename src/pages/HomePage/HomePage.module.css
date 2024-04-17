@@ -34,7 +34,7 @@
 
 .container_daliNorma {
     height: 410px;
-    margin-bottom: 75px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -47,7 +47,7 @@
     border-radius: 10px;
     padding: 24px 8px;
     width: 280px;
-    height: 840px;
+    height: 836px;
     box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
     background: var(--secondary-2-ECF2FF);
 }

@@ -1,4 +1,4 @@
-import sprite from './sprite.svg';
+import sprite from '../../images/sprite.svg';
 import css from './TodayWaterList.module.css';
 
 export const TodayWaterList = () => {
@@ -24,8 +24,7 @@ export const TodayWaterList = () => {
           {/* отработка 1 item */}
             {/* //  временное решение после удалить */}
           <li className={css.listItem} key={_id}>
-            
-                <div className={css.infoWrap}>
+                 <div className={css.infoWrap}>
                     <svg>
                       <use href={sprite + '#cup'}></use>
                     </svg>
