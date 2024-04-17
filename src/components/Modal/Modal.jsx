@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import css from './Modal.module.css';
+import MyDailyNormaModal from 'components/modals/MyDailyNormaModal/MyDailyNormaModal';
 
 const rootModal = document.querySelector('#modal-root');
 
@@ -34,6 +35,7 @@ const Modal = ({ onClose, children }) => {
   return createPortal(
     <div className={css.backdrop} onClick={handleBackdropClick}>
       {children}
+      <MyDailyNormaModal />
     </div>,
     rootModal
   );
