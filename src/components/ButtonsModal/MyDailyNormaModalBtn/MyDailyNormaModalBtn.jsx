@@ -1,10 +1,10 @@
 import React from 'react';
-import Style from './MyDailyNormaModalBtn.module.css';
+import css from './MyDailyNormaModalBtn.module.css';
 
 const MyDailyNormaModalBtn = () => {
   return (
     <div>
-      <button type="submit" className={Style['save-button']}>
+      <button type="submit" className={css.saveButton}>
         Save
       </button>
     </div>
