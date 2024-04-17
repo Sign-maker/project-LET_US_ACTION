@@ -1,12 +1,12 @@
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as operations from "redux-store/auth/authOperations";
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as operations from 'redux-store/auth/authOperations';
 import {
   selectIsAuthLoading,
   selectIsLoggedIn,
   selectIsRefreshing,
   selectUser,
-} from "redux-store/auth/authSelectors";
+} from 'redux-store/auth/authSelectors';
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -15,11 +15,13 @@ export const useAuth = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
   const isAuthLoading = useSelector(selectIsAuthLoading);
 
-  const register = (formData) =>
-    dispatch(operations.register(formData)).unwrap();
-  const logIn = (formData) => dispatch(operations.logIn(formData)).unwrap();
+  const register = formData => dispatch(operations.register(formData)).unwrap();
+  const logIn = formData => dispatch(operations.logIn(formData)).unwrap();
   const logOut = () => dispatch(operations.logOut());
-  const updateAvatar = (file) => dispatch(operations.updateAvatar(file));
+  const updateAvatar = file => dispatch(operations.updateAvatar(file));
+  const updateProfile = newProfile =>
+    dispatch(operations.updateProfile(newProfile)).unwrap();
+
   // const updateName = name => dispatch(operations.updateName(name));
   const refreshUser = useCallback(
     () => dispatch(operations.refreshUser()).unwrap(),
@@ -35,7 +37,7 @@ export const useAuth = () => {
     logOut,
     refreshUser,
     updateAvatar,
-    // updateProfile,
+    updateProfile,
     // updateName,
   };
 };
