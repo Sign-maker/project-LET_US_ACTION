@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/project-LET_US_ACTION/static/css/main.a80d516c.css",
-    "main.js": "/project-LET_US_ACTION/static/js/main.e52b9a36.js",
+    "main.js": "/project-LET_US_ACTION/static/js/main.53935ed8.js",
     "static/css/795.149a8d58.chunk.css": "/project-LET_US_ACTION/static/css/795.149a8d58.chunk.css",
     "static/js/795.19bf8295.chunk.js": "/project-LET_US_ACTION/static/js/795.19bf8295.chunk.js",
     "static/css/108.91da3c7b.chunk.css": "/project-LET_US_ACTION/static/css/108.91da3c7b.chunk.css",
     "static/js/108.fb9904d7.chunk.js": "/project-LET_US_ACTION/static/js/108.fb9904d7.chunk.js",
-    "static/js/659.ea74fd20.chunk.js": "/project-LET_US_ACTION/static/js/659.ea74fd20.chunk.js",
-    "static/js/454.ceacd16c.chunk.js": "/project-LET_US_ACTION/static/js/454.ceacd16c.chunk.js",
-    "static/css/464.7601d40f.chunk.css": "/project-LET_US_ACTION/static/css/464.7601d40f.chunk.css",
+    "static/js/659.8d3b72ee.chunk.js": "/project-LET_US_ACTION/static/js/659.8d3b72ee.chunk.js",
+    "static/js/454.73ef4a9d.chunk.js": "/project-LET_US_ACTION/static/js/454.73ef4a9d.chunk.js",
+    "static/css/464.a47495eb.chunk.css": "/project-LET_US_ACTION/static/css/464.a47495eb.chunk.css",
     "static/media/bottle-for-sign-in-desk@2x.png": "/project-LET_US_ACTION/static/media/bottle-for-sign-in-desk@2x.48c8622f4a853db99060.png",
-    "static/media/bottle-for-sign in-tab@2x.png": "/project-LET_US_ACTION/static/media/bottle-for-sign in-tab@2x.820d499c6c0f9f5939ba.png",
     "static/media/Roboto-Medium.woff": "/project-LET_US_ACTION/static/media/Roboto-Medium.8fe3f99a84745a795ef8.woff",
     "static/media/Roboto-Bold.woff": "/project-LET_US_ACTION/static/media/Roboto-Bold.49946fb03c6eb61475ce.woff",
     "static/media/Roboto-Regular.woff": "/project-LET_US_ACTION/static/media/Roboto-Regular.a58c1338fa15ac8b4330.woff",
     "static/media/botle-home-screen-desk@2x.png": "/project-LET_US_ACTION/static/media/botle-home-screen-desk@2x.1775bd96fc412d403b4f.png",
+    "static/media/bottle-for-signin-tab@2x.png": "/project-LET_US_ACTION/static/media/bottle-for-signin-tab@2x.7526b3bdec95f8c3507d.png",
     "static/media/bg-main-page-tab@2x.png": "/project-LET_US_ACTION/static/media/bg-main-page-tab@2x.4e9817b8cedabd35f2e5.png",
     "static/media/bg-main-page-desk@2x.png": "/project-LET_US_ACTION/static/media/bg-main-page-desk@2x.65a21a17dee3fb579064.png",
     "static/media/Roboto-Medium.woff2": "/project-LET_US_ACTION/static/media/Roboto-Medium.55a1ee68e40eeca8c84e.woff2",
@@ -22,9 +22,9 @@
     "static/media/Roboto-Regular.woff2": "/project-LET_US_ACTION/static/media/Roboto-Regular.727e3c83bd6c9c8e3b50.woff2",
     "static/media/botle-home-screen-tab@2x.png": "/project-LET_US_ACTION/static/media/botle-home-screen-tab@2x.5c52f919da333e45d456.png",
     "static/media/bottle-for-sign-in-desk@1x.png": "/project-LET_US_ACTION/static/media/bottle-for-sign-in-desk@1x.abfbe239550c8bdcad14.png",
-    "static/media/bottle-for-sign in-tab@1x.png": "/project-LET_US_ACTION/static/media/bottle-for-sign in-tab@1x.85f4f45f374a65be51e7.png",
     "static/media/bg-el-home-page-tab@2x.png": "/project-LET_US_ACTION/static/media/bg-el-home-page-tab@2x.9359fcf09df6a0d867ab.png",
     "static/media/botle-home-screen-desk@1x.png": "/project-LET_US_ACTION/static/media/botle-home-screen-desk@1x.f101329f2fabf31caa2d.png",
+    "static/media/bottle-for-signin-tab@1x.png": "/project-LET_US_ACTION/static/media/bottle-for-signin-tab@1x.49d10df20988bdf42a1e.png",
     "static/media/bg-main-page-tab@1x.png": "/project-LET_US_ACTION/static/media/bg-main-page-tab@1x.0c4824a52fdfb0d79a06.png",
     "static/media/bg-el-main-page-desk@2x.png": "/project-LET_US_ACTION/static/media/bg-el-main-page-desk@2x.c7334e62591998721850.png",
     "static/media/bottle-for-sign-in-mob@2x.png": "/project-LET_US_ACTION/static/media/bottle-for-sign-in-mob@2x.67678305699754b34c12.png",
@@ -35,6 +35,7 @@
     "static/media/logo.svg": "/project-LET_US_ACTION/static/media/logo.65f3174cebdce76ea4fd03a3aec221cc.svg",
     "static/media/bg-el-home-page-mob@2x.png": "/project-LET_US_ACTION/static/media/bg-el-home-page-mob@2x.2c57300c614c1fb69392.png",
     "static/media/bg-el-home-page-tab@1x.png": "/project-LET_US_ACTION/static/media/bg-el-home-page-tab@1x.ed9b398e7408b3f2f03e.png",
+    "static/media/bg-el-signin-page-tab@2x.png": "/project-LET_US_ACTION/static/media/bg-el-signin-page-tab@2x.fecf5da3c05eae632ac9.png",
     "static/media/bg-el-sign-in-mob@2x.png": "/project-LET_US_ACTION/static/media/bg-el-sign-in-mob@2x.3a860bc486e5da924db8.png",
     "static/media/bottle-for-sign-in-mob@1x.png": "/project-LET_US_ACTION/static/media/bottle-for-sign-in-mob@1x.61472a60a11845c5980d.png",
     "static/media/botle-home-screen-mob@1x.png": "/project-LET_US_ACTION/static/media/botle-home-screen-mob@1x.67bfbdf7fb46f03c7cdc.png",
@@ -43,17 +44,17 @@
     "static/media/sprite.svg": "/project-LET_US_ACTION/static/media/sprite.a8721442ebb821c65ba361e33c92bada.svg",
     "index.html": "/project-LET_US_ACTION/index.html",
     "main.a80d516c.css.map": "/project-LET_US_ACTION/static/css/main.a80d516c.css.map",
-    "main.e52b9a36.js.map": "/project-LET_US_ACTION/static/js/main.e52b9a36.js.map",
+    "main.53935ed8.js.map": "/project-LET_US_ACTION/static/js/main.53935ed8.js.map",
     "795.149a8d58.chunk.css.map": "/project-LET_US_ACTION/static/css/795.149a8d58.chunk.css.map",
     "795.19bf8295.chunk.js.map": "/project-LET_US_ACTION/static/js/795.19bf8295.chunk.js.map",
     "108.91da3c7b.chunk.css.map": "/project-LET_US_ACTION/static/css/108.91da3c7b.chunk.css.map",
     "108.fb9904d7.chunk.js.map": "/project-LET_US_ACTION/static/js/108.fb9904d7.chunk.js.map",
-    "659.ea74fd20.chunk.js.map": "/project-LET_US_ACTION/static/js/659.ea74fd20.chunk.js.map",
-    "454.ceacd16c.chunk.js.map": "/project-LET_US_ACTION/static/js/454.ceacd16c.chunk.js.map",
-    "464.7601d40f.chunk.css.map": "/project-LET_US_ACTION/static/css/464.7601d40f.chunk.css.map"
+    "659.8d3b72ee.chunk.js.map": "/project-LET_US_ACTION/static/js/659.8d3b72ee.chunk.js.map",
+    "454.73ef4a9d.chunk.js.map": "/project-LET_US_ACTION/static/js/454.73ef4a9d.chunk.js.map",
+    "464.a47495eb.chunk.css.map": "/project-LET_US_ACTION/static/css/464.a47495eb.chunk.css.map"
   },
   "entrypoints": [
     "static/css/main.a80d516c.css",
-    "static/js/main.e52b9a36.js"
+    "static/js/main.53935ed8.js"
   ]
 }
