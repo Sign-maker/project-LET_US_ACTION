@@ -53,36 +53,16 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 
 export const updateProfile = createAsyncThunk(
   'auth/updateProfile',
-  async ({ name, email, gender, file, oldPassword, password }, thunkAPI) => {
+  async (credentials, thunkAPI) => {
     try {
-      const formData = new FormData();
-      if (file) {
-        formData.append('avatar', file);
-      }
-      if (name) {
-        formData.append('name', name);
-      }
-      if (email) {
-        formData.append('email', email);
-      }
-      if (gender) {
-        formData.append('gender', gender);
-      }
-      if (oldPassword && password) {
-        formData.append('oldPassword', oldPassword);
-        formData.append('newPassword', password);
-      }
-      const { data } = await axios.patch('/users/profile', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const { data } = await axios.patch('/users/profile', credentials);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 export const updateAvatar = createAsyncThunk(
   'auth/updateAvatar',
   async (file, thunkAPI) => {

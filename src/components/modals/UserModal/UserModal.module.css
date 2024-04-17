@@ -10,7 +10,7 @@
 }
 .title {
   margin-bottom: 24px;
-  font-style: 26px;
+  font-size: 26px;
   line-height: 32px;
 }
 .photoText {
@@ -95,6 +95,8 @@
   border: solid 1px var(--secondary-4-9EBBFF);
   color: var(--primary-blue-407BFF);
   padding-left: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-size: 16px;
   line-height: 20px;
 }
@@ -168,13 +170,12 @@ input::placeholder {
 .wrapperAvatar {
   display: flex;
   gap: 8px;
+  margin-bottom: 24px;
 }
 .img {
   width: 80px;
   height: 80px;
   border-radius: 50px;
-  border: 1px solid black;
-  /* background-color: var(--secondary-4-9EBBFF); */
 }
 .buttonAvatar {
   display: flex;
@@ -204,4 +205,60 @@ input::placeholder {
 }
 .closeIcon:hover {
   color: var(--secondary-orange-FF9D43);
+}
+@media (min-width: 320px) {
+}
+@media (min-width: 768px) {
+  .modalWrap {
+    width: 704px;
+    padding: 32px 24px;
+  }
+  .closeIcon {
+    top: 42px;
+    right: 30px;
+  }
+  .input {
+    width: 392px;
+    height: 44px;
+  }
+  .passwordIcon,
+  .newPasswordIcon,
+  .newRepeatPasswordIcon {
+    left: 367px;
+  }
+  .button {
+    width: 160px;
+    height: 44px;
+    font-size: 18px;
+    line-height: 24px;
+    margin-left: auto;
+  }
+}
+@media (min-width: 1440px) {
+  .modalWrap {
+    width: 1008px;
+    padding: 32px 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .wrapperDesktop {
+    display: flex;
+    gap: 24px;
+  }
+  .inputWrapperGender {
+    margin-bottom: 52px;
+  }
+  .genderNameEmailWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .passwordWrapper {
+    display: flex;
+    gap: 11px;
+  }
+  .inputWrapperEmail {
+    margin-bottom: 0;
+  }
 }

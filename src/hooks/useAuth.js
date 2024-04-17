@@ -20,7 +20,7 @@ export const useAuth = () => {
   const logOut = () => dispatch(operations.logOut());
   const updateAvatar = file => dispatch(operations.updateAvatar(file));
   const updateProfile = newProfile =>
-    dispatch(operations.updateProfile(newProfile));
+    dispatch(operations.updateProfile(newProfile)).unwrap();
 
   // const updateName = name => dispatch(operations.updateName(name));
   const refreshUser = useCallback(
