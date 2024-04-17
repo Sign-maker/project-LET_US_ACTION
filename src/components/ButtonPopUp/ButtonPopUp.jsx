@@ -7,8 +7,8 @@ import { HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
 import css from './ButtonPopUp.module.css';
 import { useAuth } from 'hooks/useAuth';
 
-export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
-  const { user } = useAuth();
+export const ButtonPopUp = ({ handleOpenModal }) => {
+  const { user, logOut } = useAuth();
 
   const baseURL = 'http://localhost:8000/';
   console.log(user);
@@ -57,7 +57,13 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
           </IconContext.Provider>
           <span className={css.span}>Setting</span>
         </button>
-        <button className={css.button} onClick={openLogoutModal}>
+        <button
+          className={css.button}
+          onClick={() => {
+            logOut();
+          }}
+          // написать правильную логику logout=================================================
+        >
           <IconContext.Provider value={{ className: css.icon }}>
             <div>
               <HiOutlineArrowRightOnRectangle />
