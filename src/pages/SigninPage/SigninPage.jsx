@@ -4,8 +4,8 @@ import css from '../../components/AuthForm/AuthForm.module.css';
 
 const SigninPage = () => {
   return (
-    <section className={`${css.AuthFormSection} container`}>
-      <div>
+    <section className={css.AuthFormSection}>
+      <div className={`${css.div} container`}>
         <AuthForm />
       </div>
     </section>
