@@ -10,7 +10,7 @@ import css from './UserModal.module.css';
 import { useAuth } from 'hooks/useAuth';
 
 export const UserModal = ({ onClose }) => {
-  const { user } = useAuth();
+  const { user, updateProfile, updateAvatar } = useAuth();
   const fileInputRef = useRef(null);
 
   const [imageUrl, setImageUrl] = useState(null); // стан для URL-адреси зображення
@@ -50,24 +50,92 @@ export const UserModal = ({ onClose }) => {
       // Обробка завантаженого файлу
     }
   };
-
   const urlBase = file ? imageUrl : url;
 
   const SignupSchema = Yup.object().shape({
-    name: Yup.string().min(2, 'Too Short!').max(32, 'Too Long!'),
+    name: Yup.string().max(32, 'Too Long!'),
     email: Yup.string().email('Invalid email').required('Required'),
     oldPassword: Yup.string()
       .min(8, 'Password must be at least 8 characters')
-      .max(64, 'Password must be no more than 64 characters')
-      .required('Password is required'),
+      .max(64, 'Password must be no more than 64 characters'),
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
-      .max(64, 'Password must be no more than 64 characters')
-      .required('Password is required'),
+      .max(64, 'Password must be no more than 64 characters'),
     repeatPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm password is required'),
+      .min(8, 'Password must be at least 8 characters')
+      .max(64, 'Password must be no more than 64 characters'),
   });
+
+  const handleSubmit = async (values, { setErrors }) => {
+    if (values.oldPassword && !values.password && !values.repeatPassword) {
+      setErrors({
+        password: 'Password must be at least 8 characters',
+        repeatPassword: 'Password must be at least 8 characters',
+      });
+      return;
+    }
+    if (values.password !== values.repeatPassword) {
+      setErrors({ repeatPassword: 'Passwords must match' });
+      return;
+    }
+    if (!values.oldPassword && values.password && values.repeatPassword) {
+      setErrors({
+        oldPassword: 'Password must be at least 8 characters',
+      });
+      return;
+    }
+    if (!values.oldPassword && values.password && values.repeatPassword) {
+      setErrors({
+        oldPassword: 'Password must be at least 8 characters',
+      });
+      return;
+    }
+    if (values.oldPassword === values.password) {
+      if (values.oldPassword !== '')
+        setErrors({
+          password: 'New password can not be the old one',
+        });
+      // return;
+    }
+
+    let newProfile = {};
+    if (user.name !== values.name) {
+      newProfile = {
+        ...newProfile,
+        name: values.name,
+      };
+    }
+    if (user.email !== values.email) {
+      newProfile = {
+        ...newProfile,
+        email: values.email,
+      };
+    }
+    if (user.gender !== values.gender) {
+      newProfile = {
+        ...newProfile,
+        gender: values.gender,
+      };
+    }
+    if (values.oldPassword !== values.password) {
+      newProfile = {
+        ...newProfile,
+        oldPassword: values.oldPassword,
+        password: values.password,
+      };
+    }
+    if (Object.keys(newProfile).length > 0) {
+      console.log(newProfile);
+      updateProfile(newProfile);
+      onClose();
+    }
+    if (!file) {
+      return;
+    }
+    updateAvatar(file);
+    onClose();
+    console.log('Form submitted successfully!', values);
+  };
 
   return (
     <div className={css.modalWrap}>
@@ -84,19 +152,18 @@ export const UserModal = ({ onClose }) => {
         initialValues={{
           name: user.name ? user.name : '',
           email: user.email,
+          gender: user.gender,
           oldPassword: '',
           password: '',
           repeatPassword: '',
         }}
         validationSchema={SignupSchema}
-        onSubmit={values => {
-          // same shape as initial values
-          console.log(values);
-        }}
+        // onSubmitCapture={true}
+        onSubmit={handleSubmit}
       >
         {({ errors, touched }) => (
           <Form className={css.form}>
-            <div className={css.inputWrapperPhoto}>
+            <div>
               <label className={css.labelPhoto} htmlFor="photo"></label>
               <input
                 ref={fileInputRef}
@@ -106,167 +173,171 @@ export const UserModal = ({ onClose }) => {
                 type="file"
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
-                // onChange={event => {
-                //   Handle file upload and send to backend
-                //    console.log('Uploaded file:', event.target.files[0]);
-                // }}
               />
             </div>
-            <div className={css.inputWrapperGender}>
-              <label className={css.labelGenderWrapper}>
-                Your gender identity
-              </label>
-              <div className={css.genderWrapper}>
-                <label className={css.labelGender}>
-                  <Field
-                    className={css.radioBtn}
-                    type="radio"
-                    name="gender"
-                    value="male"
-                  />
-                  Woman
-                </label>
-                <label className={css.labelGender}>
-                  <Field
-                    className={css.radioBtn}
-                    type="radio"
-                    name="gender"
-                    value="female"
-                  />
-                  Man
-                </label>
-              </div>
-            </div>
-            <div className={css.inputWrapperName}>
-              <label className={css.labelName} htmlFor="name">
-                Your name
-              </label>
-              <div className={css.inputContainer}>
-                <Field
-                  className={`${css.input} ${
-                    errors.name && touched.name ? css.inputError : ''
-                  }`}
-                  id="name"
-                  name="name"
-                  placeholder="Name"
-                  type="text"
-                />
-                {errors.name && touched.name ? (
-                  <div className={css.errorNameMessage}>{errors.name}</div>
-                ) : null}
-              </div>
-            </div>
-            <div className={css.inputWrapperEmail}>
-              <label className={css.labelEmail} htmlFor="email">
-                E-mail
-              </label>
-              <div className={css.inputContainer}>
-                <Field
-                  className={`${css.input} ${
-                    errors.email && touched.email ? css.inputError : ''
-                  }`}
-                  id="email"
-                  name="email"
-                  placeholder="E-mail"
-                  type="email"
-                />
-                {errors.email && touched.email ? (
-                  <div className={css.errorNameMessage}>{errors.email}</div>
-                ) : null}
-              </div>
-            </div>
-            <div className={css.passwordWrapper}>
-              <label>Password</label>
-              <div className={css.inputWrapper}>
-                <label className={css.password}>Outdated password:</label>
-                <div className={css.iconWrapper}>
-                  <Field
-                    className={`${css.input} ${
-                      errors.oldPassword && touched.oldPassword
-                        ? css.inputError
-                        : ''
-                    }`}
-                    name="oldPassword"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                  />
-                  {errors.oldPassword && touched.oldPassword ? (
-                    <div className={css.errorMessage}>{errors.oldPassword}</div>
-                  ) : null}
-                  <div className={css.passwordIconContainer}>
-                    {showPassword ? (
-                      <HiOutlineEye
-                        className={css.passwordIcon}
-                        onClick={togglePasswordVisibility}
+            <div className={css.wrapperDesktop}>
+              <div className={css.genderNameEmailWrapper}>
+                <div className={css.inputWrapperGender}>
+                  <label className={css.labelGender}>
+                    Your gender identity
+                  </label>
+                  <div className={css.genderWrapper}>
+                    <label className={css.gender}>
+                      <Field
+                        className={css.radioBtn}
+                        type="radio"
+                        name="gender"
+                        value="male"
                       />
-                    ) : (
-                      <HiOutlineEyeSlash
-                        className={css.passwordIcon}
-                        onClick={togglePasswordVisibility}
+                      Woman
+                    </label>
+                    <label className={css.gender}>
+                      <Field
+                        className={css.radioBtn}
+                        type="radio"
+                        name="gender"
+                        value="female"
                       />
-                    )}
+                      Man
+                    </label>
+                  </div>
+                </div>
+                <div className={css.inputWrapperName}>
+                  <label className={css.labelName} htmlFor="name">
+                    Your name
+                  </label>
+                  <div className={css.inputContainer}>
+                    <Field
+                      className={`${css.input} ${
+                        errors.name && touched.name ? css.inputError : ''
+                      }`}
+                      id="name"
+                      name="name"
+                      placeholder="Name"
+                      type="text"
+                    />
+                    {errors.name && touched.name ? (
+                      <div className={css.errorNameMessage}>{errors.name}</div>
+                    ) : null}
+                  </div>
+                </div>
+                <div className={css.inputWrapperEmail}>
+                  <label className={css.labelEmail} htmlFor="email">
+                    E-mail
+                  </label>
+                  <div className={css.inputContainer}>
+                    <Field
+                      className={`${css.input} ${
+                        errors.email && touched.email ? css.inputError : ''
+                      }`}
+                      id="email"
+                      name="email"
+                      placeholder="E-mail"
+                      type="email"
+                    />
+                    {errors.email && touched.email ? (
+                      <div className={css.errorNameMessage}>{errors.email}</div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-              <div className={css.inputWrapper}>
-                <label className={css.password}>New password:</label>
-                <div className={css.iconWrapper}>
-                  <Field
-                    className={`${css.input} ${
-                      errors.password && touched.password ? css.inputError : ''
-                    }`}
-                    name="password"
-                    type={showNewPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                  />
-                  {errors.password && touched.password ? (
-                    <div className={css.errorMessage}>{errors.password}</div>
-                  ) : null}
-                  <div className={css.passwordIconContainer}>
-                    {showNewPassword ? (
-                      <HiOutlineEye
-                        className={css.newPasswordIcon}
-                        onClick={toggleNewPasswordVisibility}
-                      />
-                    ) : (
-                      <HiOutlineEyeSlash
-                        className={css.newPasswordIcon}
-                        onClick={toggleNewPasswordVisibility}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className={css.inputWrapper}>
-                <label className={css.password}>Repeat new password:</label>
-                <div className={css.iconWrapper}>
-                  <Field
-                    className={`${css.input} ${
-                      errors.repeatPassword && touched.repeatPassword
-                        ? css.inputError
-                        : ''
-                    }`}
-                    name="repeatPassword"
-                    type={showRepeatPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                  />
-                  {errors.repeatPassword && touched.repeatPassword ? (
-                    <div className={css.errorMessage}>
-                      {errors.repeatPassword}
+              <div className={css.passwordWrapper}>
+                <label className={css.labelPassword}>Password</label>
+                <div className={css.inputWrapper}>
+                  <label className={css.password}>Outdated password:</label>
+                  <div className={css.iconWrapper}>
+                    <Field
+                      className={`${css.input} ${
+                        errors.oldPassword && touched.oldPassword
+                          ? css.inputError
+                          : ''
+                      }`}
+                      name="oldPassword"
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                    />
+                    {errors.oldPassword && touched.oldPassword ? (
+                      <div className={css.errorMessage}>
+                        {errors.oldPassword}
+                      </div>
+                    ) : null}
+                    <div className={css.passwordIconContainer}>
+                      {showPassword ? (
+                        <HiOutlineEye
+                          className={css.passwordIcon}
+                          onClick={togglePasswordVisibility}
+                        />
+                      ) : (
+                        <HiOutlineEyeSlash
+                          className={css.passwordIcon}
+                          onClick={togglePasswordVisibility}
+                        />
+                      )}
                     </div>
-                  ) : null}
-                  <div className={css.passwordIconContainer}>
-                    {showRepeatPassword ? (
-                      <HiOutlineEye
-                        className={css.newRepeatPasswordIcon}
-                        onClick={toggleRepeatPasswordVisibility}
-                      />
-                    ) : (
-                      <HiOutlineEyeSlash
-                        className={css.newRepeatPasswordIcon}
-                        onClick={toggleRepeatPasswordVisibility}
-                      />
-                    )}
+                  </div>
+                </div>
+                <div className={css.inputWrapper}>
+                  <label className={css.password}>New password:</label>
+                  <div className={css.iconWrapper}>
+                    <Field
+                      className={`${css.input} ${
+                        errors.password && touched.password
+                          ? css.inputError
+                          : ''
+                      }`}
+                      name="password"
+                      type={showNewPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                    />
+                    {errors.password && touched.password ? (
+                      <div className={css.errorMessage}>{errors.password}</div>
+                    ) : null}
+                    <div className={css.passwordIconContainer}>
+                      {showNewPassword ? (
+                        <HiOutlineEye
+                          className={css.newPasswordIcon}
+                          onClick={toggleNewPasswordVisibility}
+                        />
+                      ) : (
+                        <HiOutlineEyeSlash
+                          className={css.newPasswordIcon}
+                          onClick={toggleNewPasswordVisibility}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className={css.inputWrapper}>
+                  <label className={css.password}>Repeat new password:</label>
+                  <div className={css.iconWrapper}>
+                    <Field
+                      className={`${css.input} ${
+                        errors.repeatPassword && touched.repeatPassword
+                          ? css.inputError
+                          : ''
+                      }`}
+                      name="repeatPassword"
+                      type={showRepeatPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                    />
+                    {errors.repeatPassword && touched.repeatPassword ? (
+                      <div className={css.errorMessage}>
+                        {errors.repeatPassword}
+                      </div>
+                    ) : null}
+                    <div className={css.passwordIconContainer}>
+                      {showRepeatPassword ? (
+                        <HiOutlineEye
+                          className={css.newRepeatPasswordIcon}
+                          onClick={toggleRepeatPasswordVisibility}
+                        />
+                      ) : (
+                        <HiOutlineEyeSlash
+                          className={css.newRepeatPasswordIcon}
+                          onClick={toggleRepeatPasswordVisibility}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

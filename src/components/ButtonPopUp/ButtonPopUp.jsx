@@ -10,17 +10,20 @@ import { useAuth } from 'hooks/useAuth';
 export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
   const { user } = useAuth();
 
+  const baseURL = 'http://localhost:8000/';
+  // console.log(user);
+  const url = user.avatarURL.startsWith('http')
+    ? user.avatarURL
+    : `${baseURL}${user.avatarURL}`;
+
+  // console.log(user.avatarURL);
   return (
     <Popup
       trigger={
         <button className={css.button}>
           {user.avatarURL ? (
             <>
-              <img
-                src={user.avatarURL}
-                alt={user.name}
-                className={css.avatar}
-              />
+              <img src={url} alt={user.name} className={css.avatar} />
               <span className={css.name}>{user.name}</span>
             </>
           ) : user.name ? (
@@ -54,7 +57,12 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
           </IconContext.Provider>
           <span className={css.span}>Setting</span>
         </button>
-        <button className={css.button} onClick={openLogoutModal}>
+        <button
+          className={css.button}
+          onClick={() => {
+            openLogoutModal();
+          }}
+        >
           <IconContext.Provider value={{ className: css.icon }}>
             <div>
               <HiOutlineArrowRightOnRectangle />

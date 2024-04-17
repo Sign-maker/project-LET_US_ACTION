@@ -4,6 +4,7 @@ import {
   logOut,
   refreshUser,
   register,
+  updateProfile,
   updateAvatar,
 } from './authOperations';
 
@@ -57,6 +58,12 @@ export const authSlice = createSlice({
     //avatars
     builder.addCase(updateAvatar.fulfilled, (state, { payload }) => {
       state.user.avatarURL = payload;
+    });
+    // profile
+    builder.addCase(updateProfile.fulfilled, (state, { payload }) => {
+      console.log(payload);
+      console.log(state.user);
+      state.user = { ...state.user, ...payload };
     });
     // //updateName
     // builder.addCase(updateName.fulfilled, (state, { payload }) => {

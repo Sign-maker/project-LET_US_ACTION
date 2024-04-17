@@ -51,6 +51,18 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
+export const updateProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.patch('/users/profile', credentials);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const updateAvatar = createAsyncThunk(
   'auth/updateAvatar',
   async (file, thunkAPI) => {
