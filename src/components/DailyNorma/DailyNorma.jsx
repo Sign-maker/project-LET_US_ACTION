@@ -8,7 +8,7 @@ export const DailyNorma = () => {
 
   const { user } = useAuth();
 
-  const dailyNormaCalc = (user.dailyNorma).toFixed(1);
+  const dailyNormaCalc = (user.dailyNorma / 1000).toFixed(1);
 
   const handleEditClick = () => {
     setModalOpen(true);
