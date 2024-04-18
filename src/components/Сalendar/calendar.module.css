@@ -1,0 +1,161 @@
+@media (min-width: 320px) {
+  /* .calendar {
+    width: 280px; */
+  /* background-color: #ecf2ff; */
+  /* background-color: var(--secondary-2-ECF2FF); */
+
+  /* border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(64, 123, 255, 0.3); */
+
+  .monthHeader {
+    display: flex;
+    align-items: center;
+  }
+  .month {
+    font-size: 24px;
+    font-weight: 500;
+    margin-right: auto;
+  }
+  .monthBtn {
+    background-color: inherit;
+    /* color: #407bff; */
+    color: var(--primary-blue-407BFF);
+  }
+  .monthName {
+    color: var(--primary-blue-407BFF);
+    /* color: #407bff; */
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+
+  .dayliList {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 16px;
+    padding-top: 16px;
+    position: relative;
+  }
+  .day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+  }
+  .daySpan {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 7px 6px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+  .percent {
+    color: var(--secondary-4-9EBBFF);
+    /* color: #9ebbff;
+    font-size: 10px; */
+    font-weight: 400;
+    line-height: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .monthHeader {
+    max-width: 646px;
+  }
+  .month {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+
+  .dayliList {
+    column-gap: 34px;
+    row-gap: 20px;
+    width: 704px;
+  }
+  .daySpan {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 7px;
+  }
+  .daySpan {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .percent {
+    font-size: 13px;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .monthHeader {
+    width: 544px;
+  }
+  .monthName {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .dayliList {
+    column-gap: 22px;
+    row-gap: 20px;
+    width: 592px;
+  }
+
+  .percent {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+/* .month {
+  color: #000000;
+}
+.monthName {
+  color: #407bff;
+}
+
+.dayliList {
+  background-color: #9ebbff;
+  width: 280px;
+  padding: 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+.day:not(:last-child) {
+  margin-right: 26px;
+  margin-bottom: 16px;
+}
+.daySpan {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 6px;
+  margin-bottom: 4px;
+} */

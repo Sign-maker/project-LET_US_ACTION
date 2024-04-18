@@ -1,17 +1,25 @@
 @import '../../styles/index.css';
 
 .AuthFormSection {
+  padding-top: 24px;
   background-image: image-set(
-      url('../../images/background/mob/bg-el-sign-in-mob@1x.png') 1x,
-      url('../../images/background/mob/bg-el-sign-in-mob@2x.png') 2x
-    ),
-    image-set(
-      url('../../images/background/mob/bottle-for-sign-in-mob@1x.png') 1x,
-      url('../../images/background/mob/bottle-for-sign-in-mob@2x.png') 2x
-    );
-  background-repeat: no-repeat, no-repeat;
-  background-position: center top 53px, center top 360px;
-  background-size: auto, auto;
+    url('../../images/background/mob/bg-el-sign-in-mob@1x.png') 1x,
+    url('../../images/background/mob/bg-el-sign-in-mob@2x.png') 2x
+  );
+
+  background-repeat: repeat;
+  background-position: center top 53px;
+  background-size: auto;
+}
+
+.div {
+  background-image: image-set(
+    url('../../images/background/mob/bottle-for-sign-in-mob@1x.png') 1x,
+    url('../../images/background/mob/bottle-for-sign-in-mob@2x.png') 2x
+  );
+  background-repeat: no-repeat;
+  background-position: center top 380px;
+  background-size: auto;
 }
 
 .signinContainer {
@@ -19,7 +27,6 @@
   height: 600px;
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
 }
 
 .title {
@@ -141,19 +148,27 @@
 
 @media (min-width: 768px) {
   .AuthFormSection {
+    padding-top: 40px;
     background-image: image-set(
-      url('../../images/background/tab/bottle-for-sign\ in-tab@1x.png') 1x,
-      url('../../images/background/tab/bottle-for-sign\ in-tab@2x.png') 2x
+      url('../../images/background/tab/bg-el-signin-page-tab@1x.png') 1x,
+      url('../../images/background/tab/bg-el-signin-page-tab@2x.png') 2x
     );
     background-repeat: no-repeat;
-    background-position: top -60px right 0px;
+    background-position: top -50px right -20px;
     background-size: cover;
+  }
+  .div {
+    background-image: image-set(
+      url('../../images/background/tab/bottle-for-signin-tab@1x.png') 1x,
+      url('../../images/background/tab/bottle-for-signin-tab@2x.png') 2x
+    );
+    background-repeat: no-repeat;
+    background-position: top 50px right 20px;
+    background-size: 80%;
   }
 
   .signinContainer {
     max-width: 336px;
-    height: 680px;
-    padding-top: 40px;
   }
 
   .button {
@@ -164,26 +179,32 @@
 
 @media (min-width: 1440px) {
   .AuthFormSection {
-    height: 680px;
+    height: 740px;
     padding-top: 49px;
     background-image: image-set(
-        url('../../images/background/desktop/bg-el-main-page-desk@1x.png') 1x,
-        url('../../images/background/desktop/bg-el-main-page-desk@2x.png') 2x
-      ),
-      image-set(
-        url('../../images/background/desktop/bottle-for-sign-in-desk@1x.png') 1x,
-        url('../../images/background/desktop/bottle-for-sign-in-desk@2x.png') 2x
-      );
-    background-repeat: no-repeat, no-repeat;
-    background-position: 0 50px, -90px -10px;
-    background-size: contain, auto;
+      url('../../images/background/desktop/bg-el-main-page-desk@1x.png') 1x,
+      url('../../images/background/desktop/bg-el-main-page-desk@2x.png') 2x
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .div {
+    height: 100%;
+    background-image: image-set(
+      url('../../images/background/desktop/bottle-for-sign-in-desk@1x.png') 1x,
+      url('../../images/background/desktop/bottle-for-sign-in-desk@2x.png') 2x
+    );
+    background-repeat: no-repeat;
+    background-position: -50px -10px;
+    background-size: auto;
   }
 
   .signinContainer {
-    padding-top: 0;
+    padding-top: 113px;
     max-width: 384px;
     height: 312px;
-    margin-top: 113px;
     margin-left: 728px;
   }
 }

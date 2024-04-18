@@ -9,7 +9,10 @@
     height: 276px;
   }
 
-  @media screen and (min-width: 1440px) {
+}
+
+@media screen and (min-width: 1440px) {
+  .containerToday {
     width: 544px;
     height: 260px;
   }
@@ -42,8 +45,9 @@
     height: 260px;
   }
 
-  @media only screen and (min-width: 1440px) {}
 }
+
+@media only screen and (min-width: 1440px) {}
 
 .ulWrap {
   height: 212px;
@@ -77,9 +81,13 @@
   align-items: center;
   gap: 38px;
 
-  padding: 0 0 12px 0;
-  margin: 12px 4px 0 4px;
+
+  margin: 12px 4px 12px 4px;
   border-bottom: 1px solid var(--secondary-5-D7E3FF);
+}
+
+.listItem:first-child {
+  margin: 0px 4px 12px 4px;
 }
 
 .waterItem {
@@ -98,18 +106,21 @@
   & svg {
     width: 26px;
     height: 26px;
+    fill: var(--primary-blue-407BFF);
 
     @media screen and (min-width: 768px) {
       width: 36px;
       height: 36px;
     }
 
-    @media only screen and (min-width: 1440px) {}
+  }
+
+  @media only screen and (min-width: 1440px) {
 
     & use {
       x: 5px;
       y: 2px;
-      fill: var(--primary-blue-407BFF);
+    
     }
   }
 }
@@ -182,7 +193,7 @@
 .addBtn {
   display: flex;
   gap: 8px;
-  padding: 12px 0 0 0;
+  /* padding: 12px 0 0 0; */
   color: var(--primary-blue-407BFF);
   border: none;
   background-color: transparent;

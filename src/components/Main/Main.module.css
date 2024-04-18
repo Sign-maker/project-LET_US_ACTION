@@ -1,9 +1,9 @@
 .welcomeSection {
+    padding-top: 24px;
     min-height: 98vh;
     background-image: url('/src/images/background/mob/bg-main-page-mob@1x.png');
     background-position: center;
     background-repeat: no-repeat;
-    padding-top: 80px;
 }
 
 .div{
@@ -16,7 +16,7 @@
 @media (min-width: 768px) {
     .welcomeSection {
         background-image: url('/src/images/background/tab/bg-main-page-tab@1x.png');
-        padding-top: 104px;
+        padding-top: 40px;
     }
     .div{
         gap: 60px;
@@ -26,7 +26,7 @@
 @media (min-width: 1440px) {
     .welcomeSection {
         background-image: url('/src/images/background/desktop/bg-main-page-desk@1x.png'), url('/src/images/background/desktop/bg-el-main-page-desk@1x.png');
-        padding-top: 109px;
+        padding-top: 49px;
         background-size: 100%;
         background-position-y: 100%;
     }
@@ -49,7 +49,6 @@
     @media (min-width: 768px) {
         .welcomeSection {
             background-image: url('/src/images/background/tab/bg-main-page-tab@2x.png');
-            padding-top: 88px;
         }
 
         .div {
