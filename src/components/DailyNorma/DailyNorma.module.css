@@ -1,6 +1,5 @@
 .container {
     width: 280px;
-    margin-bottom: 16px;
 
     @media screen and (min-width: 768px) {
         width: 704px;
@@ -15,7 +14,6 @@
 .contentsDailyNorma {
     width: 164px;
     height: 74px;
-    margin-bottom: 8px;
     padding: 8px 20px 8px 20px;
     border-radius: 10px;
 

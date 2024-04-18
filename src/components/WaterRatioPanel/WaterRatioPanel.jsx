@@ -1,13 +1,17 @@
 import sprite from '../../images/sprite.svg';
 import css from './WaterRatioPanel.module.css'
+import { useAuth } from 'hooks/useAuth';
 
 export const WaterRatioPanel = () => {
-
+ 
+  const { user } = useAuth();
   // === range (получить количество воды выпитой за день / на кол - во желаемой воды в день) * 100 
   // для получения % соотношения для ползунка 
-
     //  временное решение после удалить
-  const range = (750 / 1500) * 100;
+  const todayNorma = (user.dailyNorma * 1000).toFixed(1);
+  const todayNotes = 750;
+    
+  const range = (todayNotes / todayNorma) * 100;
   
             // ===============
   return (
