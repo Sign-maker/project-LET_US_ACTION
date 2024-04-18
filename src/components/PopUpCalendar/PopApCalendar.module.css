@@ -40,8 +40,6 @@
   .popup {
     width: 292px;
     padding: 24px 16px;
-    /* top: 827px;
-    left: 54px; */
 
     transform: translate(-112%, 76%);
   }
@@ -49,8 +47,6 @@
 
 @media (min-width: 1440px) {
   .popup {
-    /* top: 200px;
-    left: 737px; */
-    transform: translate(-5%, -44%);
+    transform: translate(-5%, -247%);
   }
 }

@@ -10,69 +10,9 @@
   }
   .monthBtn {
     background-color: inherit;
-    /* color: #407bff; */
     color: var(--primary-blue-407BFF);
-  }
-  .monthName {
-    color: var(--primary-blue-407BFF);
-    /* color: #407bff; */
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    margin-right: 12px;
-    margin-left: 12px;
-  }
-
-  .dayliList {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 24px;
-    row-gap: 16px;
-    padding-top: 16px;
-    position: relative;
-  }
-  .day {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-  }
-  .daySpan {
-    width: 32px;
-    height: 32px;
-    background-color: white;
-    border-radius: 50%;
-    padding: 7px 6px;
-    margin-bottom: 4px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-  }
-  .percent {
-    color: var(--secondary-4-9EBBFF);
-    /* color: #9ebbff;
-    font-size: 10px; */
-    font-weight: 400;
-    line-height: 16px;
-  }
-}
-
-@media (min-width: 320px) {
-  .monthHeader {
-    display: flex;
-    align-items: center;
-  }
-  .month {
-    font-size: 24px;
-    font-weight: 500;
-    margin-right: auto;
-  }
-  .monthBtn {
-    background-color: inherit;
-
-    color: var(--primary-blue-407BFF);
+    width: 5px;
+    height: 5px;
   }
   .monthName {
     color: var(--primary-blue-407BFF);
@@ -113,16 +53,77 @@
   }
   .percent {
     color: var(--secondary-4-9EBBFF);
-
+    color: #9ebbff;
     font-size: 10px;
     font-weight: 400;
     line-height: 16px;
   }
 }
 
+@media (min-width: 320px) {
+  /* .monthHeader {
+    display: flex;
+    align-items: center;
+  } */
+  /* .month {
+    font-size: 24px;
+    font-weight: 500;
+    margin-right: auto;
+  } */
+  /* .monthBtn {
+    background-color: inherit;
+
+    color: var(--primary-blue-407BFF);
+  } */
+  /* .monthName {
+    color: var(--primary-blue-407BFF);
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-right: 12px;
+    margin-left: 12px;
+  } */
+
+  .dayliList {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 26px;
+    row-gap: 16px;
+    padding-top: 16px;
+    position: relative;
+  }
+  /* .day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+  } */
+  /* .daySpan {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 7px 6px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  } */
+  /* .percent {
+    color: var(--secondary-4-9EBBFF);
+
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 16px;
+  } */
+}
+
 @media (min-width: 768px) {
   .monthHeader {
-    max-width: 646px;
+    width: 656px;
   }
   .month {
     font-size: 26px;
