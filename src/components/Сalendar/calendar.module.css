@@ -37,6 +37,7 @@
     column-gap: 24px;
     row-gap: 16px;
     padding-top: 16px;
+    position: relative;
   }
   .day {
     display: flex;
@@ -79,6 +80,7 @@
   .dayliList {
     column-gap: 34px;
     row-gap: 20px;
+    width: 704px;
   }
   .daySpan {
     width: 34px;
@@ -98,6 +100,9 @@
 }
 
 @media (min-width: 1440px) {
+  .monthHeader {
+    width: 544px;
+  }
   .monthName {
     font-size: 16px;
     font-weight: 400;
@@ -106,6 +111,7 @@
   .dayliList {
     column-gap: 22px;
     row-gap: 20px;
+    width: 592px;
   }
 
   .percent {
