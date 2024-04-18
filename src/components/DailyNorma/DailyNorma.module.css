@@ -5,12 +5,12 @@
         width: 704px;
     }
 
+    @media screen and (min-width: 1440px) {
+        margin-bottom: 24px;
+        width: 624px;
+    }
 }
- @media screen and (min-width: 1440px) {
-     .container {
-         width: 624px;
-     }
- }
+
 .contentsDailyNorma {
     width: 164px;
     height: 74px;
@@ -29,12 +29,10 @@
         height: 76px;
     }
 
+    @media screen and (min-width: 1440px) {
+        margin-top: 30px;
+    }
 }
- @media screen and (min-width: 1440px) {
-     .contentsDailyNorma {
-         margin-top: 30px;
-     }
- }
 
 .titleDailyNorma {
     width: 124px;
@@ -71,7 +69,7 @@
 
     transition-duration: var(--my-transition-duration);
     transition-timing-function: var(--my-transition-timing-function);
-
+  
     &:hover {
         cursor: pointer;
         color: var(--secondary-orange-FF9D43);

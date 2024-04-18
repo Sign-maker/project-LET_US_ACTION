@@ -8,7 +8,9 @@
     max-height: 90%;
     padding: 24px 12px;
     border-radius: 10px;
-    border: 1px solid red;
+    /* delete drop-shadow after  */
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    /* delete drop-shadow after  */
     width: 280px;
     overflow: auto;
     background: var(--primary-white-FFFFFF);

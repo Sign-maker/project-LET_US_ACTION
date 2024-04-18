@@ -5,7 +5,7 @@
   background-image: url(../../images/background/mob/bg-el-home-page-mob@1x.png);
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 80px;
+  padding-top: 24px;
 
   @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
@@ -32,29 +32,29 @@
 }
 
 .container_daliNorma {
-    height: 410px;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
+  height: 410px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container_MonthStats {
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    padding: 24px 8px;
-    width: 280px;
-    height: 836px;
-    box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
-    background: var(--secondary-2-ECF2FF);
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 24px 8px;
+  width: 280px;
+  height: 836px;
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
+  background: var(--secondary-2-ECF2FF);
+  align-items: center;
+  
 }
 
 @media screen and (min-width: 768px) {
   .section_HomePage {
-    padding-top: 104px;
+    padding-top: 40px;
     background-position: center 0px;
     background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png);
   }
@@ -97,7 +97,7 @@
 
 @media screen and (min-width: 1440px) {
   .section_HomePage {
-    padding-top: 80px;
+    padding-top: 52px;
     background-size: 100%;
     background-size: contain;
     background-repeat: repeat;

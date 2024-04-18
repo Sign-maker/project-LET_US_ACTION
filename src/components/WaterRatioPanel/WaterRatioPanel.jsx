@@ -1,4 +1,5 @@
 import sprite from '../../images/sprite.svg';
+import { useAuth } from 'hooks/useAuth';
 import css from './WaterRatioPanel.module.css';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
@@ -7,6 +8,7 @@ import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 export const WaterRatioPanel = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const { user } = useAuth();
 
   const handleOpenModal = () => {
     setIsVisible(false);
@@ -19,9 +21,20 @@ export const WaterRatioPanel = () => {
   // для получения % соотношения для ползунка
 
   //  временное решение после удалить
-  const range = (750 / 1500) * 100;
+  // const range = (750 / 1500) * 100;
 
-  // ===============
+
+ 
+  
+  // === range (получить количество воды выпитой за день / на кол - во желаемой воды в день) * 100 
+  // для получения % соотношения для ползунка 
+    //  временное решение после удалить
+  const todayNorma = (user.dailyNorma * 1000).toFixed(1);
+  const todayNotes = 750;
+    
+  const range = (todayNotes / todayNorma) * 100;
+  
+
   return (
     <div className={css.container}>
       <div className={css.containerPanel}>
