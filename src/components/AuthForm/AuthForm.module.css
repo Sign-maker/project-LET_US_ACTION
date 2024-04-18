@@ -7,7 +7,7 @@
     url('../../images/background/mob/bg-el-sign-in-mob@2x.png') 2x
   );
 
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-position: center top 53px;
   background-size: auto;
 }
