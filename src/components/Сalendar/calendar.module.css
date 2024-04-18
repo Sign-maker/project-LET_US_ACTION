@@ -7,12 +7,13 @@
     font-size: 24px;
     font-weight: 500;
     margin-right: auto;
+    line-height: 30px;
   }
   .monthBtn {
     background-color: inherit;
     color: var(--primary-blue-407BFF);
-    width: 5px;
-    height: 5px;
+    width: 14px;
+    height: 14px;
   }
   .monthName {
     color: var(--primary-blue-407BFF);
@@ -143,10 +144,7 @@
     line-height: 20px;
     padding: 7px;
   }
-  .daySpan {
-    font-size: 16px;
-    line-height: 20px;
-  }
+
   .percent {
     font-size: 13px;
     line-height: 20px;
@@ -169,8 +167,8 @@
   }
 
   .percent {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 18px;
   }
 }
 

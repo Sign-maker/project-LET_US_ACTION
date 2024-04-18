@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DayList from './dailyList';
+import DayList from './dailyList.jsx';
 
 import css from './calendar.module.css';
 
