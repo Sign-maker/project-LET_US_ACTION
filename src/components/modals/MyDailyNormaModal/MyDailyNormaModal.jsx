@@ -7,7 +7,7 @@ import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDail
 import Modal from '../../Modal/Modal';
 
 const MyDailyNormaModal = ({ onClose }) => {
-  const [formData, setFormData] = useState({
+  const [formData] = useState({
     gender: '',
     weight: 0,
     time: 0,
@@ -28,10 +28,10 @@ const MyDailyNormaModal = ({ onClose }) => {
     };
   }, [onClose]);
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const handleChange = e => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const validationSchema = Yup.object().shape({
     gender: Yup.string().required('Gender is required'),
@@ -47,29 +47,29 @@ const MyDailyNormaModal = ({ onClose }) => {
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    fetch('/api/user/waterrate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        onClose();
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      })
-      .finally(() => {
-        setSubmitting(false);
-      });
+    // fetch('/api/user/waterrate', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(values),
+    // })
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.json();
+    //   })
+    //   .then(data => {
+    //     console.log(data);
+    //     onClose();
+    //   })
+    //   .catch(error => {
+    //     console.error('There was an error!', error);
+    //   })
+    //   .finally(() => {
+    //     setSubmitting(false);
+    //   });
   };
 
   const handleBackdropClick = e => {
