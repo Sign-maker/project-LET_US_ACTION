@@ -30,11 +30,9 @@ export const UserModal = ({ onClose }) => {
   };
 
   const baseURL = 'http://localhost:8000/';
-  console.log(user);
-  const url = user.avatarURL.startsWith('http')
-    ? user.avatarURL
-    : `${baseURL}${user.avatarURL}`;
-
+  // console.log(user);
+  const url = `${baseURL}${user.avatarURL}`;
+  console.log(user.avatarURL);
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -43,7 +41,7 @@ export const UserModal = ({ onClose }) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const imageUrl = URL.createObjectURL(selectedFile);
-      console.log(imageUrl);
+      console.log(file);
 
       setImageUrl(imageUrl); // оновлення стану URL-адреси
       setFile(selectedFile); // збереження обраного файлу
@@ -120,8 +118,10 @@ export const UserModal = ({ onClose }) => {
     if (values.oldPassword !== values.password) {
       newProfile = {
         ...newProfile,
-        oldPassword: values.oldPassword,
-        password: values.password,
+        password: values.oldPassword,
+        newPassword: values.password,
+        // oldPassword: values.oldPassword,
+        // password: values.password,
       };
     }
     if (Object.keys(newProfile).length > 0) {
@@ -139,11 +139,20 @@ export const UserModal = ({ onClose }) => {
 
   return (
     <div className={css.modalWrap}>
-      <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
+      <button className={css.closeBtn}>
+        <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
+      </button>
       <h1 className={css.title}>Setting</h1>
       <p className={css.photoText}>Your photo</p>
       <div className={css.wrapperAvatar}>
-        <img src={urlBase} alt={user.name} className={css.img} />
+        {!user.avatarURL && !file ? (
+          <div className={css.fakeImg}>
+            <span>{user.email.charAt(0).toUpperCase()}</span>
+          </div>
+        ) : (
+          <img src={urlBase} alt={user.name} className={css.img} />
+        )}
+
         <button className={css.buttonAvatar} onClick={handleButtonClick}>
           <HiOutlineArrowUpTray /> Upload a photo
         </button>
