@@ -120,8 +120,10 @@ export const UserModal = ({ onClose }) => {
     if (values.oldPassword !== values.password) {
       newProfile = {
         ...newProfile,
-        oldPassword: values.oldPassword,
-        password: values.password,
+        password: values.oldPassword,
+        newPassword: values.password,
+        // oldPassword: values.oldPassword,
+        // password: values.password,
       };
     }
     if (Object.keys(newProfile).length > 0) {
