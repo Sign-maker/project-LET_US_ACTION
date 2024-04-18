@@ -4,8 +4,8 @@ import { IconContext } from 'react-icons';
 import { GoChevronDown } from 'react-icons/go';
 import { HiOutlineCog6Tooth } from 'react-icons/hi2';
 import { HiOutlineArrowRightOnRectangle } from 'react-icons/hi2';
-import css from './ButtonPopUp.module.css';
 import { useAuth } from 'hooks/useAuth';
+import css from './ButtonPopUp.module.css';
 
 export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
   const { user } = useAuth();
@@ -30,7 +30,6 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
               <div className={css.avatar}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
-              <span className={css.name}>{user.name}</span>
             </>
           ) : (
             <span className={css.name}>
