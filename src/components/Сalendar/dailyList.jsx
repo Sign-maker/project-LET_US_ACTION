@@ -28,6 +28,7 @@ const DayList = ({ month, waterConsumptionData }) => {
         ).map(day => (
           <li key={day} className={css.day} onClick={() => handleDayClick(day)}>
             <span className={css.daySpan}>{day}</span>
+            <p className={css.percent}>60%</p>
           </li>
         ))}
       </ul>
