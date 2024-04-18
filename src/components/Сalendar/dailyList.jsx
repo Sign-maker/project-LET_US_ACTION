@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import css from './calendar.module.css';
-import PopUpCalendar from 'components/PopUpCalendar/PopUpCalendar';
+import PopUpCalendar from 'components/PopApCalendar/PopUpCalendar';
 
 const DayList = ({ month, waterConsumptionData }) => {
   const [selectedDay, setSelectedDay] = useState(null);
