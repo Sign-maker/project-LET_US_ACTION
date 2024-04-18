@@ -71,6 +71,18 @@
     line-height: 1.25;
 }
 
+@media (max-width: 319px){
+    .btn {
+        width: 100%;
+    }
+    .mainTitle{
+        width: 100%;
+    }
+    .title {
+        width: 100%;
+    }
+}
+
 @media (min-width: 768px) {
     .mainTitle {
         width: auto;
