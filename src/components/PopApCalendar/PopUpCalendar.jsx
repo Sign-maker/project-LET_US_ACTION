@@ -42,19 +42,17 @@ const PopUpCalendar = ({ isOpen, onClose, selectedDay, selectedMonth }) => {
         </p>
         <ul className={css.table}>
           <li className={css.tableList}>
-            Daily norma:<spun className={css.listNorma}>1.5L</spun>
+            Daily norma:<span className={css.listNorma}>1.5L</span>
           </li>
           <li className={css.tableList}>
             Fulfillment of the daily norm:
-            <spun className={css.listNorma}>100%</spun>
+            <span className={css.listNorma}>100%</span>
           </li>
           <li className={css.tableList}>
-            How many servings of water:<spun className={css.listNorma}>6</spun>
+            How many servings of water:<span className={css.listNorma}>6</span>
           </li>
         </ul>
-        {/* <button className="close-btn" onClick={onClose}>
-          Закрыть
-        </button> */}
+        
       </div>
     </div>
   );

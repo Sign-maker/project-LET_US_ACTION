@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import css from './calendar.module.css';
-import PopUpCalendar from 'components/PopUpCalendar/PopUpCalendar';
+import PopUpCalendar from 'components/PopApCalendar/PopUpCalendar';
 
 const DayList = ({ month, waterConsumptionData }) => {
   const [selectedDay, setSelectedDay] = useState(null);
@@ -28,6 +28,7 @@ const DayList = ({ month, waterConsumptionData }) => {
         ).map(day => (
           <li key={day} className={css.day} onClick={() => handleDayClick(day)}>
             <span className={css.daySpan}>{day}</span>
+            <p className={css.percent}>60%</p>
           </li>
         ))}
       </ul>
