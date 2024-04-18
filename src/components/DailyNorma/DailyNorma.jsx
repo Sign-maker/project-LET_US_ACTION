@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import MyDailyNormaModal from '../modals/MyDailyNormaModal/MyDailyNormaModal';
 import css from './DailyNorma.module.css';
+import { useAuth } from 'hooks/useAuth';
 
 export const DailyNorma = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const dailyNormaCalc = (1500 / 1000).toFixed(1);
+  const { user } = useAuth();
+
+  const dailyNormaCalc = (user.dailyNorma).toFixed(1);
 
   const handleEditClick = () => {
     setModalOpen(true);
