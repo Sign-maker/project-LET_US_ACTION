@@ -11,10 +11,9 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
   const { user } = useAuth();
 
   const baseURL = 'http://localhost:8000/';
+
   // console.log(user);
-  const url = user.avatarURL.startsWith('http')
-    ? user.avatarURL
-    : `${baseURL}${user.avatarURL}`;
+  const url = `${baseURL}${user.avatarURL}`;
 
   // console.log(user.avatarURL);
   return (

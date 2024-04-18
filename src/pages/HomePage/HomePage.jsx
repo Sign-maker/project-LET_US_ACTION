@@ -1,12 +1,10 @@
-import React from 'react';
-import css from './HomePage.module.css';
-
+import React, { useState } from 'react';
 import { DailyNorma } from '../../components/DailyNorma/DailyNorma';
-
 import { WaterRatioPanel } from '../../components/WaterRatioPanel/WaterRatioPanel';
 import Calendar from '../../components/Сalendar/calendar';
 import { TodayWaterList } from '../../components/TodayWaterList/TodayWaterList';
 import PopUpCalendar from '../../components/PopUpCalendar/PopUpCalendar';
+import css from './HomePage.module.css';
 
 // import { useAuth } from 'hooks/useAuth';
 // import { useSelector } from 'react-redux';

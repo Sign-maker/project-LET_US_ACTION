@@ -63,7 +63,7 @@ export const authSlice = createSlice({
     builder.addCase(updateProfile.fulfilled, (state, { payload }) => {
       console.log(payload);
       console.log(state.user);
-      state.user = { ...state.user, ...payload };
+      state.user = { ...state.user, ...payload.user };
     });
     // //updateName
     // builder.addCase(updateName.fulfilled, (state, { payload }) => {
