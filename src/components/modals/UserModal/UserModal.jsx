@@ -5,7 +5,7 @@ import { HiOutlineEyeSlash } from 'react-icons/hi2';
 import { HiOutlineEye } from 'react-icons/hi2';
 import { HiOutlineArrowUpTray } from 'react-icons/hi2';
 import { HiOutlineXMark } from 'react-icons/hi2';
-
+import { ClipLoader } from 'react-spinners';
 import css from './UserModal.module.css';
 import { useAuth } from 'hooks/useAuth';
 
@@ -13,6 +13,7 @@ export const UserModal = ({ onClose }) => {
   const { user, updateProfile, updateAvatar } = useAuth();
   const fileInputRef = useRef(null);
 
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState(null); // стан для URL-адреси зображення
   const [file, setFile] = useState(null); // стан для обраного файлу
   const [showPassword, setShowPassword] = useState(false);
@@ -93,7 +94,6 @@ export const UserModal = ({ onClose }) => {
         setErrors({
           password: 'New password can not be the old one',
         });
-      // return;
     }
 
     let newProfile = {};
@@ -120,20 +120,33 @@ export const UserModal = ({ onClose }) => {
         ...newProfile,
         password: values.oldPassword,
         newPassword: values.password,
-        // oldPassword: values.oldPassword,
-        // password: values.password,
       };
     }
     if (Object.keys(newProfile).length > 0) {
       console.log(newProfile);
-      updateProfile(newProfile);
-      onClose();
+      try {
+        setSubmitLoading(true);
+        await updateProfile(newProfile);
+        onClose();
+      } catch (error) {
+      } finally {
+        setSubmitLoading(false);
+      }
     }
+
     if (!file) {
       return;
     }
-    updateAvatar(file);
-    onClose();
+
+    try {
+      setSubmitLoading(true);
+      await updateAvatar(file);
+      onClose();
+    } catch (error) {
+    } finally {
+      setSubmitLoading(false);
+    }
+
     console.log('Form submitted successfully!', values);
   };
 
@@ -351,8 +364,21 @@ export const UserModal = ({ onClose }) => {
                 </div>
               </div>
             </div>
-            <button className={css.button} type="submit">
-              Save
+            <button
+              disabled={submitLoading}
+              className={css.button}
+              type="submit"
+            >
+              {submitLoading ? (
+                <ClipLoader
+                  className={css.spinnerCss}
+                  size={20}
+                  color={'#ffffff'}
+                  loading={submitLoading}
+                />
+              ) : (
+                'Save'
+              )}
             </button>
           </Form>
         )}
