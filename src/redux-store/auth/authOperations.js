@@ -124,14 +124,15 @@ export const refreshUser = createAsyncThunk(
 );
 
 export const updateMyDailyNorma = createAsyncThunk(
-  'user/dailyNorma',
+  'auth/dailyNorma',
   async (dailyNorma, thunkAPI) => {
     try {
       const data = await axios.patch('users/waterrate', dailyNorma);
+      // console.log(data);
       toastFulfilled(
         'Your daily water allowance has been successfully updated!'
       );
-      return data.dailyNorma;
+      return data.data.dailyNorma;
     } catch (error) {
       toastRejected('Something went wrong, please try again later!');
       return thunkAPI.rejectWithValue(error.message);

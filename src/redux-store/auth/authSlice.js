@@ -88,7 +88,8 @@ export const authSlice = createSlice({
     //daylyNorms
     builder.addCase(updateMyDailyNorma.pending, handleAuthPending);
     builder.addCase(updateMyDailyNorma.fulfilled, (state, { payload }) => {
-      state.user.dailyNorma = payload.user.dailyNorma;
+      // console.log(payload);
+      state.user.dailyNorma = payload.dailyNorma;
     });
     builder.addCase(updateMyDailyNorma.rejected, handleAuthRejected);
   },

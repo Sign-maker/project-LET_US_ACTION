@@ -14,6 +14,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   const [gender, setGender] = useState('female');
   const [dailyNorma, setDailyNorma] = useState(2);
   const [userInput, setUserInput] = useState(false);
+
   const { updateMyDailyNorma } = useAuth();
 
   useEffect(() => {
@@ -38,23 +39,34 @@ const MyDailyNormaModal = ({ onClose }) => {
     }
   };
 
-  const handleSave = async (values, { setSubmitting }) => {
-    const data = {
-      dailyNorma: consumedWater > 0 ? consumedWater : dailyNorma,
-    };
-
-    await updateMyDailyNorma({ dailyNorma: data.dailyNorma * 1000 });
-    setSubmitting(false);
-    onClose();
+  const handleSave = async ({ setSubmitting }) => {
+    try {
+      const data = {
+        dailyNorma:
+          parseFloat(consumedWater) > 0
+            ? parseFloat(consumedWater)
+            : parseFloat(dailyNorma),
+      };
+      console.log('update');
+      await updateMyDailyNorma({ dailyNorma: data.dailyNorma * 1000 });
+      console.log('close');
+      onClose();
+    } catch (error) {
+      console.error('Failed to update daily norma:', error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const validationSchema = Yup.object().shape({
+  const validationSchema = Yup.object({
     weight: Yup.number()
-      .required('Weight is required')
-      .min(10, 'Weight must be at least 10 kg'),
-    time: Yup.number()
-      .required('Time is required')
-      .max(24, 'Time must be at most 24 hours'),
+      .min(10, 'Weight must be at least 10 kg')
+      .when('time', (time, schema) => {
+        return time
+          ? schema.required('Weight is required if time is provided')
+          : schema;
+      }),
+    time: Yup.number().max(24, 'Time must be at most 24 hours').nullable(),
     consumedWater: Yup.number()
       .required('Consumed water is required')
       .min(0, 'Consumed water must be at least 0'),
@@ -199,7 +211,7 @@ const MyDailyNormaModal = ({ onClose }) => {
                 placeholder="0"
                 min="0"
                 max="15"
-                step="0.25"
+                step="any"
                 value={consumedWater}
                 onChange={e => {
                   setFieldValue('consumedWater', e.target.value);
