@@ -1,84 +1,67 @@
-@media (min-width: 280px) {
-  
+.monthHeader {
+  display: flex;
+  align-items: center;
+  padding-top: 24px;
+}
+.month {
+  font-size: 24px;
+  font-weight: 500;
+  margin-right: auto;
+  line-height: 30px;
+}
+.monthHeaderBtn {
+  width: 167px;
+  display: flex;
+}
+.monthBtn {
+  background-color: inherit;
+  color: var(--primary-blue-407BFF);
+  width: 14px;
+  height: 14px;
+}
+.monthName {
+  color: var(--primary-blue-407BFF);
 
-  .monthHeader {
-    display: flex;
-    align-items: center;
-    padding-top: 24px;
-  }
-  .month {
-    font-size: 24px;
-    font-weight: 500;
-    margin-right: auto;
-    line-height: 30px;
-  }
-  .monthHeaderBtn {
-    width: 167px;
-    display: flex;
-  }
-  .monthBtn {
-    background-color: inherit;
-    color: var(--primary-blue-407BFF);
-    width: 14px;
-    height: 14px;
-  }
-  .monthName {
-    color: var(--primary-blue-407BFF);
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .dayliList {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 24px;
-    row-gap: 16px;
-    padding-top: 16px;
-  }
-  .day {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-  }
-  .daySpan {
-    width: 32px;
-    height: 32px;
-    background-color: white;
-    border-radius: 50%;
-    padding: 7px 6px;
-    margin-bottom: 4px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-  }
-  .percent {
-    color: var(--secondary-4-9EBBFF);
-    color: #9ebbff;
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 16px;
-  }
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-@media (min-width: 320px) {
- 
-
-  .dayliList {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 26px;
-    row-gap: 16px;
-    padding-top: 16px;
-    
-  }
-
+.dayliList {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  row-gap: 16px;
+  padding-top: 16px;
+}
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+.daySpan {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border-radius: 50%;
+  /* border: 1px solid var(--secondary-orange-FF9D43); */
+  padding: 7px 6px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.percent {
+  color: var(--secondary-4-9EBBFF);
+  color: #9ebbff;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 16px;
 }
 
 @media (min-width: 768px) {
@@ -130,4 +113,3 @@
     line-height: 18px;
   }
 }
-

@@ -34,7 +34,7 @@ const DayList = ({ month }) => {
             onClick={event => handleDayClick(day, event)} // Передаем event в функцию handleDayClick
           >
             <span className={css.daySpan}>{day}</span>
-            <p className={css.percent}>60%</p>
+            <p className={css.percent}>{'20%'}</p>
           </li>
         ))}
       </ul>
