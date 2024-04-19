@@ -44,11 +44,6 @@ setDeleteOpen(true);
     });
   };
 
-  //  временное решение после удалить
-
-  const amountWater = '250';
-  const date = '0';
-  const _id = '12121';
 
   const waterNotes = [
     { _id: 'id-1', amountWater: '500', date: '4' },
