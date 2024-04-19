@@ -20,11 +20,11 @@ export const TodayWaterList = () => {
   };
   
   const handleOpenDeleteModal = () => {
-    setDeleteOpen(false);
+    setDeleteOpen(true);
   }
 
   const handleCloseDeleteModal = () => {
-setDeleteOpen(true);
+setDeleteOpen(false);
   }
 
  const handleCloseModal = () => {
@@ -131,12 +131,10 @@ setDeleteOpen(true);
             Add water
           </button>
 
-          {!deleteOpen && (
+          {deleteOpen && (
             <Modal onClose={handleCloseDeleteModal}>
               <DeleteWaterModal
-                onClose={() => {
-                  handleCloseDeleteModal();
-                }}
+                onClose={handleCloseDeleteModal}
               />
             </Modal>
           )}

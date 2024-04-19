@@ -7,11 +7,9 @@ import { Formik, ErrorMessage, Field, Form } from 'formik';
 import * as Yup from 'yup';
 
 const TodayListModal = ({ onClose, isEditing }) => {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState('');
   const [time, setTime] = useState('');
-  //Здесь нужно будет использовать хук useWater();
   const [timeOptions, setTimeOptions] = useState([]);
-
 
   useEffect(() => {
     const now = new Date();
@@ -45,70 +43,35 @@ const TodayListModal = ({ onClose, isEditing }) => {
 
   const formattedDate = `${day}.${month}.${year}`;
 
-  //! отформатированное время 
- const currentHour = currentDate.getHours();
- const currentMinute = currentDate.getMinutes();
+  const currentHour = currentDate.getHours();
+  const currentMinute = currentDate.getMinutes();
 
- const formatTime = (hours, minutes) => {
-   const period = hours >= 12 ? 'PM' : 'AM';
-   const formattedHours = hours % 12 || 12;
-   const formattedMinutes = String(minutes).padStart(2, '0');
-   return `${formattedHours}:${formattedMinutes} ${period}`;
- };
-
- const formattedTime = formatTime(currentHour, currentMinute);
-
-    // const validateAmount = value => {
-    //   let errorMessage = '';
-    //   if (value > 5000) {
-    //     errorMessage = 'The value cannot exceed 5000ml';
-    //   }
-    //   return errorMessage;
-    // };
-
-  const decrementAmount = () => {
-    setAmount(prevAmount => Math.max(prevAmount - 50, 0));
+  const formatTime = (hours, minutes) => {
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    return `${formattedHours}:${formattedMinutes} ${period}`;
   };
 
-  const incrementAmount = () => {
-    const newAmount = amount + 50;
-    const maxAmount = 5000;
-    setAmount(newAmount <= maxAmount ? newAmount : maxAmount);
-  };
-
-  const handleChangeAmount = e => {
-    const newValue = parseInt(e.target.value);
-    // setAmount(newValue);
-    // console.log(newValue);
-       if (!isNaN(newValue) || e.target.value === '') {
-         // Проверяем, что новое значение не является NaN или пустым
-         setAmount(newValue);
-         console.log(newValue);
-       }
-  };
+  const formattedTime = formatTime(currentHour, currentMinute);
 
   const handleBlur = () => {
     setAmount(prevAmount => prevAmount || amount || 0);
   };
 
   const handleSubmit = async (values, { resetForm, setError }) => {
-    // const waterData = {
-    //   time: time,
-    //   amount: amount,
-    //   date: formattedDate,
-    // };
-const selectedTime = values.time;
-const selectedAmount = values.amount;
-       const finalTime = selectedTime ? selectedTime : time;
-       const finalAmount = selectedAmount ? selectedAmount : amount;
-       console.log('Form values:', {
-         amount: finalAmount,
-         time: finalTime,
-         date: formattedDate,
-       });
-    
+    const selectedTime = values.time;
+    const selectedAmount = values.amount;
+    const finalTime = selectedTime ? selectedTime : time;
+    const finalAmount = selectedAmount ? selectedAmount : amount;
+    console.log('Form values:', {
+      amount: finalAmount,
+      time: finalTime,
+      date: formattedDate,
+    });
+
     resetForm();
-    onClose()
+    onClose();
   };
 
   const validationSchema = Yup.object().shape({
@@ -130,17 +93,17 @@ const selectedAmount = values.amount;
           </button>
         </div>
         <Formik
-          initialValues={{ amount: 0, time: time }}
+          initialValues={{ amount: '', time: '' }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ values, errors, touched }) => (
+          {({ errors, touched, setFieldValue, values }) => (
             <Form autoComplete="off">
               <div className={css.add_box_modal}>
                 {isEditing && (
                   <div className={css.previos_info}>
                     <GlassSVG />
-                    <p className={css.today_volume}>{amount || 0} ml</p>
+                    <p className={css.today_volume}>{values.amount || 0} ml</p>
                     <p className={css.today_time}>{formattedTime}</p>
                   </div>
                 )}
@@ -151,19 +114,28 @@ const selectedAmount = values.amount;
                     <button
                       type="button"
                       className={css.button_ml}
-                      onClick={decrementAmount}
+                      onClick={() => {
+                        const newValue = Number(values.amount || 0) - 50;
+                        setFieldValue('amount', newValue > 0 ? newValue : 0);
+                      }}
                     >
                       <HiOutlineMinusSmall
                         className={css.increment_and_dicrement_icons}
                       />
                     </button>
                     <div className={css.amount}>
-                      <p className={css.amoun_water}>{amount || 0} ml</p>
+                      <p className={css.amoun_water}>{values.amount || 0} ml</p>
                     </div>
                     <button
                       type="button"
                       className={css.button_ml}
-                      onClick={incrementAmount}
+                      onClick={() => {
+                        const newValue = Number(values.amount || 0) + 50;
+                        setFieldValue(
+                          'amount',
+                          newValue < 5000 ? newValue : 5000
+                        );
+                      }}
                     >
                       <HiOutlinePlusSmall
                         className={css.increment_and_dicrement_icons}
@@ -198,13 +170,14 @@ const selectedAmount = values.amount;
                   <Field
                     type="number"
                     className={`${css.input_number} ${
-                      errors.amount && touched.amount ? css.inputError : ''
+                      errors.amount && touched.amount
+                        ? css.inputError
+                        : ''
                     }`}
                     name="amount"
                     min={0}
                     max={5000}
-                    value={values.amount || amount}
-                    onChange={handleChangeAmount}
+                    placeholder="0"
                     onBlur={handleBlur}
                   />
                   <ErrorMessage
@@ -215,7 +188,7 @@ const selectedAmount = values.amount;
                 </div>
 
                 <div className={css.modal_footer}>
-                  <span className={css.span_ml}>{amount || 0} ml</span>
+                  <span className={css.span_ml}>{values.amount || 0} ml</span>
                   <button className={css.add_save_btn} type="submit">
                     Save
                   </button>
@@ -230,3 +203,5 @@ const selectedAmount = values.amount;
 };
 
 export default TodayListModal;
+
+
