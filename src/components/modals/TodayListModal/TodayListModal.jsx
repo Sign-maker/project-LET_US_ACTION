@@ -45,6 +45,19 @@ const TodayListModal = ({ onClose, isEditing }) => {
 
   const formattedDate = `${day}.${month}.${year}`;
 
+  //! отформатированное время 
+ const currentHour = currentDate.getHours();
+ const currentMinute = currentDate.getMinutes();
+
+ const formatTime = (hours, minutes) => {
+   const period = hours >= 12 ? 'PM' : 'AM';
+   const formattedHours = hours % 12 || 12;
+   const formattedMinutes = String(minutes).padStart(2, '0');
+   return `${formattedHours}:${formattedMinutes} ${period}`;
+ };
+
+ const formattedTime = formatTime(currentHour, currentMinute);
+
     // const validateAmount = value => {
     //   let errorMessage = '';
     //   if (value > 5000) {
@@ -128,7 +141,7 @@ const selectedAmount = values.amount;
                   <div className={css.previos_info}>
                     <GlassSVG />
                     <p className={css.today_volume}>{amount || 0} ml</p>
-                    <p className={css.today_time}>7:00 AM</p>
+                    <p className={css.today_time}>{formattedTime}</p>
                   </div>
                 )}
                 <h3>Correct entered data:</h3>
@@ -167,7 +180,6 @@ const selectedAmount = values.amount;
                     style={{ width: '100%' }}
                     className={css.select}
                     onChange={e => setTime(e.target.value)}
-                  
                   >
                     <option key="current-time" value={time}>
                       {time}
