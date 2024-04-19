@@ -101,7 +101,7 @@
   width: 256px;
   height: 44px;
   border-radius: 6px;
-  border: solid 1px var(--secondary-4-9EBBFF);
+  border: 1px solid var(--secondary-4-9EBBFF);
   color: var(--primary-blue-407BFF);
   padding-left: 10px;
   padding-top: 12px;
@@ -118,9 +118,7 @@
 input::placeholder {
   color: var(--secondary-4-9EBBFF);
 }
-.input:focus::placeholder {
-  color: var(--primary-blue-407BFF);
-}
+
 .iconWrapper {
   position: relative;
 }
