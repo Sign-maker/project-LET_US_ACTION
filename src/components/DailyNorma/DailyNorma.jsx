@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MyDailyNormaModal from '../modals/MyDailyNormaModal/MyDailyNormaModal';
 import css from './DailyNorma.module.css';
 import { useAuth } from 'hooks/useAuth';
+import Modal from 'components/Modal/Modal';
 
 export const DailyNorma = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -12,6 +13,9 @@ export const DailyNorma = () => {
 
   const handleEditClick = () => {
     setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -31,7 +35,11 @@ export const DailyNorma = () => {
       </div>
       <div className={css.DailyNormaBackground}></div>
 
-      {modalOpen && <MyDailyNormaModal onClose={() => setModalOpen(false)} />}
+      {modalOpen && (
+        <Modal onClose={handleCloseModal}>
+          <MyDailyNormaModal onClose={handleCloseModal} />
+        </Modal>
+      )}
     </div>
   );
 };
