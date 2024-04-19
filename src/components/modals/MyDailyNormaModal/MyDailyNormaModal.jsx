@@ -47,9 +47,7 @@ const MyDailyNormaModal = ({ onClose }) => {
             ? parseFloat(consumedWater)
             : parseFloat(dailyNorma),
       };
-      console.log('update');
       await updateMyDailyNorma({ dailyNorma: data.dailyNorma * 1000 });
-      console.log('close');
       onClose();
     } catch (error) {
       console.error('Failed to update daily norma:', error);
