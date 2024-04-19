@@ -6,18 +6,23 @@ import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 
 export const TodayWaterList = () => {
    const [isVisible, setIsVisible] = useState(true);
-   const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  // const [selectedRecord, setSelectedRecord] = useState(null)
 
- const handleOpenModal = () => {
+  const handleOpenAddModal = () => {
    setIsVisible(false);
- };
+  };
+  
+   const handleOpenEditModal = () => {
+     setIsVisible(false);
+   };
  const handleCloseModal = () => {
    setIsVisible(true);
   };
   
    const handleEditItem = () => {
      setIsEditing(true);
-     handleOpenModal();
+     handleOpenEditModal();
    };
 
 
@@ -108,7 +113,7 @@ export const TodayWaterList = () => {
             className={css.addBtn}
             onClick={() => {
               setIsEditing(false);
-              handleOpenModal();
+              handleOpenAddModal();
             }}
           >
             <svg>
