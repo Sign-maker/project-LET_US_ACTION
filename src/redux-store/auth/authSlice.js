@@ -57,16 +57,19 @@ export const authSlice = createSlice({
     });
     builder.addCase(logIn.rejected, handleAuthRejected);
     //avatars
+    builder.addCase(updateAvatar.pending, handleAuthPending);
     builder.addCase(updateAvatar.fulfilled, (state, { payload }) => {
       state.user.avatarURL = payload;
     });
+    builder.addCase(updateAvatar.rejected, handleAuthRejected);
     // profile
+    builder.addCase(updateProfile.pending, handleAuthPending);
     builder.addCase(updateProfile.fulfilled, (state, { payload }) => {
       console.log(payload);
       console.log(state.user);
       state.user = { ...state.user, ...payload.user };
     });
-
+    builder.addCase(updateProfile.rejected, handleAuthRejected);
     //logout
     builder.addCase(logOut.pending, handleAuthPending);
     builder.addCase(logOut.fulfilled, state => {

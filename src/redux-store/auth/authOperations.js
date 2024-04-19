@@ -79,7 +79,16 @@ export const updateProfile = createAsyncThunk(
       toastFulfilled('Your data has been successfully updated!');
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toastRejected(error.response.data.message);
+      } else {
+        toastRejected('Something went wrong, please try again later!');
+      }
+      // toastRejected('Something went wrong, please try again later!');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -99,7 +108,15 @@ export const updateAvatar = createAsyncThunk(
       toastFulfilled('Your avatar has been successfully updated!');
       return data.avatarURL;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toastRejected(error.response.data.message);
+      } else {
+        toastRejected('Something went wrong, please try again later!');
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
