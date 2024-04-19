@@ -6,6 +6,7 @@ import {
   register,
   updateProfile,
   updateAvatar,
+  updateMyDailyNorma,
 } from './authOperations';
 
 const initialState = {
@@ -56,19 +57,19 @@ export const authSlice = createSlice({
     });
     builder.addCase(logIn.rejected, handleAuthRejected);
     //avatars
+    builder.addCase(updateAvatar.pending, handleAuthPending);
     builder.addCase(updateAvatar.fulfilled, (state, { payload }) => {
       state.user.avatarURL = payload;
     });
+    builder.addCase(updateAvatar.rejected, handleAuthRejected);
     // profile
+    builder.addCase(updateProfile.pending, handleAuthPending);
     builder.addCase(updateProfile.fulfilled, (state, { payload }) => {
       console.log(payload);
       console.log(state.user);
-      state.user = { ...state.user, ...payload };
+      state.user = { ...state.user, ...payload.user };
     });
-    // //updateName
-    // builder.addCase(updateName.fulfilled, (state, { payload }) => {
-    //   state.user.name = payload;
-    // });
+    builder.addCase(updateProfile.rejected, handleAuthRejected);
     //logout
     builder.addCase(logOut.pending, handleAuthPending);
     builder.addCase(logOut.fulfilled, state => {
@@ -87,5 +88,11 @@ export const authSlice = createSlice({
     builder.addCase(refreshUser.rejected, state => {
       state.isRefreshing = false;
     });
+    //daylyNorms
+    builder.addCase(updateMyDailyNorma.pending, handleAuthPending);
+    builder.addCase(updateMyDailyNorma.fulfilled, (state, { payload }) => {
+      state.user.dailyNorma = payload.user.dailyNorma;
+    });
+    builder.addCase(updateMyDailyNorma.rejected, handleAuthRejected);
   },
 });

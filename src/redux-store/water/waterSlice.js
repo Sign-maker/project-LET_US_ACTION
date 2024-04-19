@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTodayStats } from './waterOperations';
+import { fetchMonthStats, fetchTodayStats } from './waterOperations';
 
 const initialState = {
   todayStats: {
@@ -12,7 +12,8 @@ const initialState = {
     currentMonth: null,
     monthNotes: [],
   },
-  isWaterLoading: false,
+  isTodayLoading: false,
+  isMonthLoading: false,
   error: null,
 };
 
@@ -21,6 +22,21 @@ export const waterSlice = createSlice({
   initialState,
 
   extraReducers: builder => {
+    //fetchTodayStats
+    builder.addCase(fetchTodayStats.pending, state => {
+      state.isTodayLoading = true;
+    });
     builder.addCase(fetchTodayStats.fulfilled, (state, { payload }) => {});
+    builder.addCase(fetchTodayStats.rejected, state => {
+      state.isTodayLoading = false;
+    });
+    //fetchMonthStats
+    builder.addCase(fetchMonthStats.pending, state => {
+      state.isMonthLoading = true;
+    });
+    builder.addCase(fetchMonthStats.fulfilled, (state, { payload }) => {});
+    builder.addCase(fetchMonthStats.rejected, state => {
+      state.isMonthLoading = false;
+    });
   },
 });

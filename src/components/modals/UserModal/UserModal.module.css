@@ -27,6 +27,15 @@
   display: flex;
   flex-direction: column;
 }
+.fakeImg {
+  width: 80px;
+  height: 80px;
+  background-color: aliceblue;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .inputContainer {
   position: relative;
 }
@@ -83,7 +92,10 @@
   font-size: 16px;
   line-height: 20px;
 }
-
+.spinnerCss {
+  display: block;
+  margin: 0 auto;
+}
 .radioBtn {
   display: block;
   margin-bottom: 10px;
@@ -92,7 +104,7 @@
   width: 256px;
   height: 44px;
   border-radius: 6px;
-  border: solid 1px var(--secondary-4-9EBBFF);
+  border: 1px solid var(--secondary-4-9EBBFF);
   color: var(--primary-blue-407BFF);
   padding-left: 10px;
   padding-top: 12px;
@@ -102,15 +114,14 @@
 }
 .input:hover,
 .input:focus {
-  color: var(--secondary-4-9EBBFF);
+  color: var(--primary-blue-407BFF);
+  border: solid 1px var(--secondary-4-9EBBFF);
 }
 
 input::placeholder {
   color: var(--secondary-4-9EBBFF);
 }
-.input:focus::placeholder {
-  color: var(--primary-blue-407BFF);
-}
+
 .iconWrapper {
   position: relative;
 }
@@ -193,12 +204,18 @@ input::placeholder {
 .buttonAvatar:hover {
   color: var(--secondary-orange-FF9D43);
 }
-.closeIcon {
+.closeBtn {
   position: absolute;
-  top: 42px;
-  right: 18px;
-  color: var(--primary-blue-407BFF);
+  top: 36px;
+  right: 12px;
   cursor: pointer;
+  background-color: transparent;
+}
+.closeIcon {
+  width: 24px;
+  height: 24px;
+
+  color: var(--primary-blue-407BFF);
   transition-property: color;
   transition-duration: var(--my-transition-duration);
   transition-timing-function: var(--my-transition-timing-function);
@@ -213,9 +230,9 @@ input::placeholder {
     width: 704px;
     padding: 32px 24px;
   }
-  .closeIcon {
-    top: 42px;
-    right: 30px;
+  .closeBtn {
+    top: 36px;
+    right: 24px;
   }
   .input {
     width: 392px;

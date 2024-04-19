@@ -5,10 +5,8 @@
     border-radius: 10px;
     box-shadow: 0 4px 4px rgba(64, 123, 255, 0.3);
     padding: 24px 13px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -25%);
+    z-index: 10;
+    transform: translate(3%, -111%);
   }
   .currentDate {
     font-size: 16px;
@@ -40,13 +38,12 @@
   .popup {
     width: 292px;
     padding: 24px 16px;
-
-    transform: translate(-112%, 76%);
+    transform: translate(-8%, -111%);
   }
 }
 
 @media (min-width: 1440px) {
   .popup {
-    transform: translate(-5%, -247%);
+    transform: translate(-1%, -111%);
   }
 }

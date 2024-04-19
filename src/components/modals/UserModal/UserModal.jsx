@@ -5,7 +5,7 @@ import { HiOutlineEyeSlash } from 'react-icons/hi2';
 import { HiOutlineEye } from 'react-icons/hi2';
 import { HiOutlineArrowUpTray } from 'react-icons/hi2';
 import { HiOutlineXMark } from 'react-icons/hi2';
-
+import { ClipLoader } from 'react-spinners';
 import css from './UserModal.module.css';
 import { useAuth } from 'hooks/useAuth';
 
@@ -13,6 +13,7 @@ export const UserModal = ({ onClose }) => {
   const { user, updateProfile, updateAvatar } = useAuth();
   const fileInputRef = useRef(null);
 
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState(null); // стан для URL-адреси зображення
   const [file, setFile] = useState(null); // стан для обраного файлу
   const [showPassword, setShowPassword] = useState(false);
@@ -30,11 +31,9 @@ export const UserModal = ({ onClose }) => {
   };
 
   const baseURL = 'http://localhost:8000/';
-  console.log(user);
-  const url = user.avatarURL.startsWith('http')
-    ? user.avatarURL
-    : `${baseURL}${user.avatarURL}`;
-
+  // console.log(user);
+  const url = `${baseURL}${user.avatarURL}`;
+  console.log(user.avatarURL);
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -43,7 +42,7 @@ export const UserModal = ({ onClose }) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const imageUrl = URL.createObjectURL(selectedFile);
-      console.log(imageUrl);
+      console.log(file);
 
       setImageUrl(imageUrl); // оновлення стану URL-адреси
       setFile(selectedFile); // збереження обраного файлу
@@ -95,7 +94,6 @@ export const UserModal = ({ onClose }) => {
         setErrors({
           password: 'New password can not be the old one',
         });
-      // return;
     }
 
     let newProfile = {};
@@ -120,30 +118,54 @@ export const UserModal = ({ onClose }) => {
     if (values.oldPassword !== values.password) {
       newProfile = {
         ...newProfile,
-        oldPassword: values.oldPassword,
-        password: values.password,
+        password: values.oldPassword,
+        newPassword: values.password,
       };
     }
     if (Object.keys(newProfile).length > 0) {
       console.log(newProfile);
-      updateProfile(newProfile);
-      onClose();
+      try {
+        setSubmitLoading(true);
+        await updateProfile(newProfile);
+        onClose();
+      } catch (error) {
+      } finally {
+        setSubmitLoading(false);
+      }
     }
+
     if (!file) {
       return;
     }
-    updateAvatar(file);
-    onClose();
+
+    try {
+      setSubmitLoading(true);
+      await updateAvatar(file);
+      onClose();
+    } catch (error) {
+    } finally {
+      setSubmitLoading(false);
+    }
+
     console.log('Form submitted successfully!', values);
   };
 
   return (
     <div className={css.modalWrap}>
-      <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
+      <button className={css.closeBtn}>
+        <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
+      </button>
       <h1 className={css.title}>Setting</h1>
       <p className={css.photoText}>Your photo</p>
       <div className={css.wrapperAvatar}>
-        <img src={urlBase} alt={user.name} className={css.img} />
+        {!user.avatarURL && !file ? (
+          <div className={css.fakeImg}>
+            <span>{user.email.charAt(0).toUpperCase()}</span>
+          </div>
+        ) : (
+          <img src={urlBase} alt={user.name} className={css.img} />
+        )}
+
         <button className={css.buttonAvatar} onClick={handleButtonClick}>
           <HiOutlineArrowUpTray /> Upload a photo
         </button>
@@ -342,8 +364,21 @@ export const UserModal = ({ onClose }) => {
                 </div>
               </div>
             </div>
-            <button className={css.button} type="submit">
-              Save
+            <button
+              disabled={submitLoading}
+              className={css.button}
+              type="submit"
+            >
+              {submitLoading ? (
+                <ClipLoader
+                  className={css.spinnerCss}
+                  size={20}
+                  color={'#ffffff'}
+                  loading={submitLoading}
+                />
+              ) : (
+                'Save'
+              )}
             </button>
           </Form>
         )}

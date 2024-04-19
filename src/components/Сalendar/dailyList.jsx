@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import css from './calendar.module.css';
-import PopUpCalendar from 'components/PopUpCalendar/PopUpCalendar';
+import PopUpCalendar from 'components/PopApCalendar/PopUpCalendar';
 
-const DayList = ({ month, waterConsumptionData }) => {
+const DayList = ({ month }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
 
-  const handleDayClick = day => {
+  const handleDayClick = (day, event) => {
     setSelectedDay(day);
     setSelectedMonth(month.toLocaleString('en-US', { month: 'long' }));
     setIsPopUpOpen(true);
+    setPopupPosition({ x: event.clientX, y: event.clientY });
   };
 
   return (
@@ -26,18 +28,25 @@ const DayList = ({ month, waterConsumptionData }) => {
           },
           (_, i) => i + 1
         ).map(day => (
-          <li key={day} className={css.day} onClick={() => handleDayClick(day)}>
+          <li
+            key={day}
+            className={css.day}
+            onClick={event => handleDayClick(day, event)} // Передаем event в функцию handleDayClick
+          >
             <span className={css.daySpan}>{day}</span>
             <p className={css.percent}>60%</p>
           </li>
         ))}
       </ul>
-      <PopUpCalendar
-        isOpen={isPopUpOpen}
-        onClose={() => setIsPopUpOpen(false)} // Передаем колбэк для закрытия окна
-        selectedDay={selectedDay} // Передаем выбранный день
-        selectedMonth={selectedMonth} // Передаем выбранный месяц
-      />
+      <div className={css.popupContainer}>
+        <PopUpCalendar
+          isOpen={isPopUpOpen}
+          onClose={() => setIsPopUpOpen(false)}
+          selectedDay={selectedDay}
+          selectedMonth={selectedMonth}
+          position={popupPosition}
+        />
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   selectIsLoggedIn,
   selectIsRefreshing,
   selectUser,
+  selectError,
 } from 'redux-store/auth/authSelectors';
 
 export const useAuth = () => {
@@ -14,21 +15,24 @@ export const useAuth = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
   const isAuthLoading = useSelector(selectIsAuthLoading);
+  const error = useSelector(selectError);
 
   const register = formData => dispatch(operations.register(formData)).unwrap();
   const logIn = formData => dispatch(operations.logIn(formData)).unwrap();
   const logOut = () => dispatch(operations.logOut());
-  const updateAvatar = file => dispatch(operations.updateAvatar(file));
+  const updateAvatar = file => dispatch(operations.updateAvatar(file)).unwrap();
+  const updateMyDailyNorma = daylyNorma =>
+    dispatch(operations.updateMyDailyNorma(daylyNorma)).unwrap();
   const updateProfile = newProfile =>
     dispatch(operations.updateProfile(newProfile)).unwrap();
 
-  // const updateName = name => dispatch(operations.updateName(name));
   const refreshUser = useCallback(
     () => dispatch(operations.refreshUser()).unwrap(),
     [dispatch]
   );
   return {
     user,
+    error,
     isLoggedIn,
     isRefreshing,
     isAuthLoading,
@@ -38,6 +42,6 @@ export const useAuth = () => {
     refreshUser,
     updateAvatar,
     updateProfile,
-    // updateName,
+    updateMyDailyNorma,
   };
 };
