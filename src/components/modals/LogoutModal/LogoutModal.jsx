@@ -5,7 +5,6 @@ import { IoCloseOutline } from 'react-icons/io5';
 const LogoutModal = ({ onCloseLogout, onLogout }) => {
   const handleLogout = () => {
     onLogout();
-
     onCloseLogout();
   };
 

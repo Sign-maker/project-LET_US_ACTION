@@ -143,11 +143,7 @@ return (
 
               <Field
                 type="number"
-                className={`${css.input_number} ${
-                  formik.errors.amount && formik.touched.amount
-                    ? css.inputError
-                    : ''
-                  }`}
+                className={css.input_number}
                 value={amount}
                 name="amount"
                 onChange={handleChangeAmount}

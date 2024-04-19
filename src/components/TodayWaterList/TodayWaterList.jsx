@@ -46,8 +46,7 @@ export const TodayWaterList = () => {
       <h2 className={css.todayText}>Today</h2>
       <div className={css.containerList}>
         <ul className={css.ulWrap}>
-
-          <li className={css.listItem} key={_id}>
+          {/* <li className={css.listItem} key={_id}>
             <div className={css.infoWrap}>
               <svg>
                 <use href={sprite + '#cup'}></use>
@@ -67,14 +66,7 @@ export const TodayWaterList = () => {
                 </svg>
               </button>
             </div>
-          </li>
-
-          {/* // =============== */}
-
-          {/* работота листа по условию */}
-
-          
-
+          </li> */}
           {waterNotes?.length > 0 ? (
             waterNotes
 
@@ -93,7 +85,7 @@ export const TodayWaterList = () => {
                     <p className={css.time}>{timeFromDate(date)}</p>
                   </div>
                   <div className={css.wrapBtn}>
-                    <button className={css.editBtn} onClick={() => {}}>
+                    <button className={css.editBtn} onClick={handleEditItem}>
                       <svg>
                         <use href={sprite + '#edit'}></use>
                       </svg>
@@ -110,8 +102,7 @@ export const TodayWaterList = () => {
             <li>
               <p className={css.waterItem}>No notes yet</p>
             </li>
-
-          )} 
+          )}
 
           <button
             className={css.addBtn}
@@ -137,7 +128,6 @@ export const TodayWaterList = () => {
               />
             </Modal>
           )}
-
         </ul>
       </div>
     </div>
