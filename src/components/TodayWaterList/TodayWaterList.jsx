@@ -3,10 +3,12 @@ import sprite from '../../images/sprite.svg';
 import css from './TodayWaterList.module.css';
 import Modal from '../Modal/Modal';
 import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
+import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
 
 export const TodayWaterList = () => {
    const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false)
   // const [selectedRecord, setSelectedRecord] = useState(null)
 
   const handleOpenAddModal = () => {
@@ -15,7 +17,16 @@ export const TodayWaterList = () => {
   
    const handleOpenEditModal = () => {
      setIsVisible(false);
-   };
+  };
+  
+  const handleOpenDeleteModal = () => {
+    setDeleteOpen(false);
+  }
+
+  const handleCloseDeleteModal = () => {
+setDeleteOpen(true);
+  }
+
  const handleCloseModal = () => {
    setIsVisible(true);
   };
@@ -95,7 +106,10 @@ export const TodayWaterList = () => {
                         <use href={sprite + '#edit'}></use>
                       </svg>
                     </button>
-                    <button className={css.deleteBtn} onClick={() => {}}>
+                    <button
+                      className={css.deleteBtn}
+                      onClick={handleOpenDeleteModal}
+                    >
                       <svg>
                         <use href={sprite + '#trash'}></use>
                       </svg>
@@ -121,6 +135,16 @@ export const TodayWaterList = () => {
             </svg>
             Add water
           </button>
+
+          {!deleteOpen && (
+            <Modal onClose={handleCloseDeleteModal}>
+              <DeleteWaterModal
+                onClose={() => {
+                  handleCloseDeleteModal();
+                }}
+              />
+            </Modal>
+          )}
 
           {!isVisible && (
             <Modal onClose={handleCloseModal}>
