@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
 import { VscChromeClose } from 'react-icons/vsc';
 import css from './MyDailyNormaModal.module.css';
 import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDailyNormaModalBtn';
-import { updateMyDailyNorma } from 'redux-store/auth/authOperations';
+
+import { useAuth } from 'hooks/useAuth';
 
 const MyDailyNormaModal = ({ onClose }) => {
   const [weight, setWeight] = useState('');
@@ -14,8 +14,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   const [gender, setGender] = useState('female');
   const [dailyNorma, setDailyNorma] = useState(2);
   const [userInput, setUserInput] = useState(false);
-
-  const dispatch = useDispatch();
+  const { updateMyDailyNorma } = useAuth();
 
   useEffect(() => {
     dailyNormaCalc(weight, time, gender);
@@ -44,7 +43,8 @@ const MyDailyNormaModal = ({ onClose }) => {
       dailyNorma: consumedWater > 0 ? consumedWater : dailyNorma,
     };
 
-    await dispatch(updateMyDailyNorma(data));
+    updateMyDailyNorma({ dailyNorma: data * 1000 });
+    //пофиксить запрос!
     onClose();
   };
 

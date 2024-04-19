@@ -6,6 +6,7 @@ import {
   register,
   updateProfile,
   updateAvatar,
+  updateMyDailyNorma,
 } from './authOperations';
 
 const initialState = {
@@ -65,10 +66,7 @@ export const authSlice = createSlice({
       console.log(state.user);
       state.user = { ...state.user, ...payload.user };
     });
-    // //updateName
-    // builder.addCase(updateName.fulfilled, (state, { payload }) => {
-    //   state.user.name = payload;
-    // });
+
     //logout
     builder.addCase(logOut.pending, handleAuthPending);
     builder.addCase(logOut.fulfilled, state => {
@@ -87,5 +85,11 @@ export const authSlice = createSlice({
     builder.addCase(refreshUser.rejected, state => {
       state.isRefreshing = false;
     });
+    //daylyNorms
+    builder.addCase(updateMyDailyNorma.pending, handleAuthPending);
+    builder.addCase(updateMyDailyNorma.fulfilled, (state, { payload }) => {
+      state.user.dailyNorma = payload.user.dailyNorma;
+    });
+    builder.addCase(updateMyDailyNorma.rejected, handleAuthRejected);
   },
 });
