@@ -49,7 +49,7 @@
   height: 32px;
   background-color: white;
   border-radius: 50%;
-  border: 1px solid var(--secondary-orange-FF9D43);
+  /* border: 1px solid var(--secondary-orange-FF9D43); */
   padding: 7px 6px;
   margin-bottom: 4px;
   font-size: 14px;
