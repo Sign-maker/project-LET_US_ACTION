@@ -105,20 +105,6 @@ export const updateAvatar = createAsyncThunk(
   }
 );
 
-// export const updateName = createAsyncThunk(
-//   'auth/updateName',
-//   async (name, thunkAPI) => {
-//     try {
-//       const { data } = await axios.patch('users/update/name', { name });
-//       toastFulfilled('Your name has been successfully updated!');
-//       return data.name;
-//     } catch (error) {
-//       toastRejected('Something went wrong, please try again later!');
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
@@ -139,14 +125,9 @@ export const refreshUser = createAsyncThunk(
 
 export const updateMyDailyNorma = createAsyncThunk(
   'user/dailyNorma',
-  async (formData, thunkAPI) => {
+  async (dailyNorma, thunkAPI) => {
     try {
-      const setMyDailyNorma = async formData => {
-        const { data } = await axios.patch('user/dailyNorma', formData);
-        return data;
-      };
-
-      const data = await setMyDailyNorma(formData);
+      const data = await axios.patch('users/waterrate', dailyNorma);
       toastFulfilled(
         'Your daily water allowance has been successfully updated!'
       );

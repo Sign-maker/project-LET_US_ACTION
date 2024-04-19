@@ -6,6 +6,8 @@ export const useWater = () => {
   const dispatch = useDispatch();
   const todayStats = useSelector(selectTodayStats);
 
-  const getTodayStats = () => dispatch(operations.getTodayStats());
-  return { todayStats, getTodayStats };
+  const fetchTodayStats = () => dispatch(operations.fetchTodayStats()).unwrap();
+  const fetchMonthStats = currentMonth =>
+    dispatch(operations.fetchMonthStats(currentMonth)).unwrap();
+  return { todayStats, fetchTodayStats, fetchMonthStats };
 };
