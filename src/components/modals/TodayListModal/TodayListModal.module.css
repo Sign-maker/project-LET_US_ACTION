@@ -249,6 +249,7 @@ h3 {
   border-radius: 6px;
   border: 1px solid rgb(215, 227, 255);
   background-color: var(--primary-white-FFFFFF);
+  outline: none;
 }
 
 .input_number::-webkit-outer-spin-button,
@@ -267,6 +268,10 @@ h3 {
 
 .input_number:focus {
   outline: none;
+}
+
+.input_number:not(:placeholder-shown) {
+  color: var(--primary-blue-407BFF)
 }
 
 .modal_footer {
