@@ -170,20 +170,19 @@ const TodayListModal = ({ onClose, isEditing }) => {
                   <Field
                     type="number"
                     className={`${css.input_number} ${
-                      errors.amount && touched.amount
-                        ? css.inputError
-                        : ''
+                      errors.amount && touched.amount ? css.input_error : ''
                     }`}
                     name="amount"
                     min={0}
                     max={5000}
+                    maxlength={4}
                     placeholder="0"
                     onBlur={handleBlur}
                   />
                   <ErrorMessage
                     name="amount"
                     component="div"
-                    className={css.errorMessage}
+                    className={css.error_message}
                   />
                 </div>
 
@@ -203,5 +202,3 @@ const TodayListModal = ({ onClose, isEditing }) => {
 };
 
 export default TodayListModal;
-
-
