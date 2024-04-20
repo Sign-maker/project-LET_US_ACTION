@@ -20,9 +20,12 @@ export const useAuth = () => {
   const register = formData => dispatch(operations.register(formData)).unwrap();
   const logIn = formData => dispatch(operations.logIn(formData)).unwrap();
   const logOut = () => dispatch(operations.logOut());
+
   const updateAvatar = file => dispatch(operations.updateAvatar(file)).unwrap();
-  const updateMyDailyNorma = daylyNorma =>
-    dispatch(operations.updateMyDailyNorma(daylyNorma)).unwrap();
+  
+  const updateMyDailyNorma = dailyNorma =>
+    dispatch(operations.updateMyDailyNorma(dailyNorma)).unwrap();
+  
   const updateProfile = newProfile =>
     dispatch(operations.updateProfile(newProfile)).unwrap();
 

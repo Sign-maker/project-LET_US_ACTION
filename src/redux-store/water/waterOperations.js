@@ -33,3 +33,16 @@ export const fetchMonthStats = createAsyncThunk(
     }
   }
 );
+
+export const deleteWater = createAsyncThunk(
+  'water/delete',
+  async (id, thunkAPI) => {
+    try {
+      const { data } = axios.delete(`/water/${id}`);
+      return data;
+    } catch (error) {
+      toastRejected('Something went wrong, please try again later!');
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
