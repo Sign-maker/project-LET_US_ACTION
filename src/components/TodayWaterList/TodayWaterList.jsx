@@ -1,41 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import sprite from '../../images/sprite.svg';
 import css from './TodayWaterList.module.css';
 import Modal from '../Modal/Modal';
 import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
+import { useWater } from 'hooks/useWater';
 
 export const TodayWaterList = () => {
-   const [isVisible, setIsVisible] = useState(true);
+  const { fetchTodayStats, todayStats } = useWater();
+
+  useEffect(() => {
+    fetchTodayStats();
+  }, [fetchTodayStats]);
+
+  const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [deleteOpen, setDeleteOpen] = useState(false);
   // const [selectedRecord, setSelectedRecord] = useState(null)
 
   const handleOpenAddModal = () => {
-   setIsVisible(false);
+    setIsVisible(false);
   };
-  
-   const handleOpenEditModal = () => {
-     setIsVisible(false);
+
+  const handleOpenEditModal = () => {
+    setIsVisible(false);
   };
-  
+
   const handleOpenDeleteModal = () => {
     setDeleteOpen(true);
-  }
+  };
 
   const handleCloseDeleteModal = () => {
-setDeleteOpen(false);
-  }
-
- const handleCloseModal = () => {
-   setIsVisible(true);
+    setDeleteOpen(false);
   };
-  
-   const handleEditItem = () => {
-     setIsEditing(true);
-     handleOpenEditModal();
-   };
 
+  const handleCloseModal = () => {
+    setIsVisible(true);
+  };
+
+  const handleEditItem = () => {
+    setIsEditing(true);
+    handleOpenEditModal();
+  };
 
   const timeFromDate = date => {
     return new Date(date).toLocaleTimeString('en-US', {
@@ -44,13 +50,13 @@ setDeleteOpen(false);
     });
   };
 
-
-  const waterNotes = [
-    { _id: 'id-1', amountWater: '500', date: '4' },
-    { _id: 'id-2', amountWater: '500', date: '4' },
-    { _id: 'id-3', amountWater: '500', date: '6' },
-    { _id: 'id-4', amountWater: '500', date: '2' },
-  ];
+  const { dayNotes } = todayStats;
+  // const dayNotes = [
+  //   { _id: 'id-1', amountWater: '500', date: '4' },
+  //   { _id: 'id-2', amountWater: '500', date: '4' },
+  //   { _id: 'id-3', amountWater: '500', date: '6' },
+  //   { _id: 'id-4', amountWater: '500', date: '2' },
+  // ];
 
   return (
     <div className={css.containerToday}>
@@ -78,21 +84,20 @@ setDeleteOpen(false);
               </button>
             </div>
           </li> */}
-          {waterNotes?.length > 0 ? (
-            waterNotes
-
+          {dayNotes?.length > 0 ? (
+            dayNotes
               .slice()
               .sort(
                 (a, b) =>
                   new Date(a.date).getTime() - new Date(b.date).getTime()
               )
-              .map(({ amountWater, date, _id }) => (
+              .map(({ waterVolume, date, _id }) => (
                 <li className={css.listItem} key={_id}>
                   <div className={css.infoWrap}>
                     <svg>
                       <use href={sprite + '#cup'}></use>
                     </svg>
-                    <p className={css.volume}>{amountWater} ml</p>
+                    <p className={css.volume}>{waterVolume} ml</p>
                     <p className={css.time}>{timeFromDate(date)}</p>
                   </div>
                   <div className={css.wrapBtn}>
@@ -133,9 +138,7 @@ setDeleteOpen(false);
 
           {deleteOpen && (
             <Modal onClose={handleCloseDeleteModal}>
-              <DeleteWaterModal
-                onClose={handleCloseDeleteModal}
-              />
+              <DeleteWaterModal onClose={handleCloseDeleteModal} />
             </Modal>
           )}
 

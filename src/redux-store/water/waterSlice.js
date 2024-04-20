@@ -9,8 +9,9 @@ const initialState = {
   todayStats: {
     dailyNorma: null,
     dayNotes: [],
-    totalAmount: null,
+    totalVolume: null,
     fulfillment: null,
+    servingsCount: null,
   },
   monthStats: {
     currentMonth: null,
@@ -25,14 +26,18 @@ const initialState = {
 export const waterSlice = createSlice({
   name: 'water',
   initialState,
-
+  reducers: {
+    setDailyNorma: (state, { payload }) => {
+      state.todayStats.dailyNorma = payload;
+    },
+  },
   extraReducers: builder => {
     //fetchTodayStats
     builder.addCase(fetchTodayStats.pending, state => {
       state.isTodayLoading = true;
     });
     builder.addCase(fetchTodayStats.fulfilled, (state, { payload }) => {
-      state.todayStats = payload.todayStats;
+      state.todayStats = { ...state.todayStats, ...payload };
       state.isTodayLoading = false;
       state.error = null;
     });
