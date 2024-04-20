@@ -209,7 +209,7 @@ export const UserModal = ({ onClose }) => {
                         className={css.radioBtn}
                         type="radio"
                         name="gender"
-                        value="male"
+                        value="female"
                       />
                       Woman
                     </label>
@@ -218,7 +218,7 @@ export const UserModal = ({ onClose }) => {
                         className={css.radioBtn}
                         type="radio"
                         name="gender"
-                        value="female"
+                        value="male"
                       />
                       Man
                     </label>
