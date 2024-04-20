@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 24px 12px; 
+  padding: 24px 12px;
   background-color: var(--primary-white-FFFFFF);
   border-radius: 10px;
   min-width: 280px;
@@ -16,7 +16,7 @@
 }
 
 .modal_content::-webkit-scrollbar {
-  width: 0px; 
+  width: 0px;
 }
 
 .modal_content::-webkit-scrollbar-thumb {
@@ -24,7 +24,7 @@
 }
 
 .modal_content::-webkit-scrollbar-track {
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 .header {
@@ -183,10 +183,10 @@ h3 {
 }
 
 .select {
-   -webkit-appearance: none;
+  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
- color: var(--primary-blue-407BFF);
+  color: var(--primary-blue-407BFF);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
@@ -201,17 +201,17 @@ h3 {
 }
 
 .select:hover {
-     color: var(--primary-blue-407BFF);
+  color: var(--primary-blue-407BFF);
   border: 1px solid var(--primary-blue-407BFF);
-  }
+}
 
-  .select:focus {
+.select:focus {
   outline: none;
   border: 1px solid var(--primary-blue-407BFF);
 }
 
 .error_message {
-   position: absolute;
+  position: absolute;
   bottom: 1px;
   left: 0;
   color: var(--secondary-red-EF5050F);
@@ -277,6 +277,7 @@ h3 {
   border-radius: 6px;
   border: 1px solid rgb(215, 227, 255);
   background-color: var(--primary-white-FFFFFF);
+  outline: none;
 }
 
 .input_number::-webkit-outer-spin-button,
@@ -291,12 +292,10 @@ h3 {
 
 .input_number:hover {
   color: var(--primary-blue-407BFF);
-  border: 1px solid var(--primary-blue-407BFF);
 }
 
 .input_number:focus {
   outline: none;
-  border: 1px solid var(--primary-blue-407BFF);
 }
 
 .input_number:not(:placeholder-shown) {
@@ -311,11 +310,11 @@ h3 {
 }
 
 .span_ml {
-   color: var(--primary-blue-407BFF);
-    text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.33;
+  color: var(--primary-blue-407BFF);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.33;
 }
 .add_save_btn {
   display: flex;
@@ -374,11 +373,9 @@ h3 {
   }
 
   .select {
-     width: 97%;
+    width: 97%;
   }
 }
-
-
 
 /*? ----------------------------------- Desctop -------------------------- */
 @media screen and (min-width: 1440px) {
