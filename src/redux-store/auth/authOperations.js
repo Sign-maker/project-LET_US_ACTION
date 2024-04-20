@@ -27,19 +27,8 @@ export const register = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      switch (error.response) {
-        case 409:
-          toastRejected(
-            `This email is already in use by another user. Please try a different email!`
-          );
-          return thunkAPI.rejectWithValue(error.massage);
-        case 400:
-          toastRejected(`The password must contain at least 8 characters`);
-          return thunkAPI.rejectWithValue(error.massage);
-
-        default:
-          return thunkAPI.rejectWithValue(error.message);
-      }
+      toastRejected('Something went wrong, please try again later!');
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -49,7 +38,7 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/signin', credentials);
-      toastFulfilled('You have successfully logged into your account!');
+      // toastFulfilled('You have successfully logged into your account!');
       setAuthHeader(data.token);
 
       return data;
@@ -145,9 +134,7 @@ export const updateMyDailyNorma = createAsyncThunk(
   async (dailyNorma, thunkAPI) => {
     try {
       const { data } = await axios.patch('users/waterrate', dailyNorma);
-      toastFulfilled(
-        'Your daily water allowance has been successfully updated!'
-      );
+      toastFulfilled('Your daily water norma has been successfully updated!');
       return data;
     } catch (error) {
       toastRejected('Something went wrong, please try again later!');
