@@ -1,0 +1,138 @@
+/**--------------------- Mobile ----------------------*/
+.modal_text {
+  margin-bottom: 24px;
+  width: 232px;
+  height: 20px;
+  color: var(--primary-black-2F2F2F);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.logout_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.modal_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+  max-width: 100%;
+  padding: 44px;
+  background-color: var(--primary-white-FFFFFF);
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.btn_close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.icon_close {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-blue-407BFF);
+}
+
+.btn_container {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.btn_cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+  font-weight: 500;
+
+  width: 232px;
+  height: 36px;
+  border-radius: 10px;
+  color: var(--primary-blue-407BFF);
+  background-color: var(--secondary-4-9EBBFF);
+  &:hover,
+  &:focus {
+    box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  }
+  &:active {
+    cursor: inherit;
+  }
+}
+
+.btn_logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 18px;
+  width: 232px;
+  height: 36px;
+  border-radius: 10px;
+  color: var(--primary-white-FFFFFF);
+  background-color: var(--secondary-red-EF5050F);
+  &:hover,
+  &:focus {
+    box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  }
+  &:active {
+    cursor: inherit;
+  }
+}
+
+/**--------------------- Tablet ----------------------*/
+
+@media screen and (min-width: 768px) {
+.modal_text {
+  width: 338px;
+}
+
+  .btn_container {
+    margin-right: 0px;
+    margin-left: 254px;
+    flex-direction: row;
+  }
+
+  .btn_cancel {
+    width: 160px;
+    height: 44px;
+  }
+
+  .btn_logout {
+    width: 160px;
+    height: 44px;
+  }
+}
+
+/**--------------------- Desktop ----------------------*/
+
+@media screen and (min-width: 1440px) {
+  .btn_container {
+    margin-right: 254px;
+    margin-left: 0;
+    flex-direction: row;
+  }
+}
