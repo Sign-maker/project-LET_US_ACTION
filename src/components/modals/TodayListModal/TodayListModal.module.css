@@ -223,7 +223,7 @@ h3 {
   color: var(--secondary-red-EF5050F);
 }
 
-.inputError::placeholder {
+.input_error::placeholder {
   color: var(--secondary-red-EF5050F);
 }
 
