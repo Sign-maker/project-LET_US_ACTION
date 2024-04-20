@@ -170,9 +170,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
                   <Field
                     type="number"
                     className={`${css.input_number} ${
-                      errors.amount && touched.amount
-                        ? css.inputError
-                        : ''
+                      errors.amount && touched.amount ? css.inputError : ''
                     }`}
                     name="amount"
                     min={0}
@@ -203,5 +201,3 @@ const TodayListModal = ({ onClose, isEditing }) => {
 };
 
 export default TodayListModal;
-
-
