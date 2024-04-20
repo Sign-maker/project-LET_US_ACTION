@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  addWater,
   deleteWater,
   fetchMonthStats,
   fetchTodayStats,
+  updateWater,
 } from './waterOperations';
 
 const initialState = {
@@ -19,7 +21,7 @@ const initialState = {
   },
   isTodayLoading: false,
   isMonthLoading: false,
-  isDeleting: false,
+  isWaterUpdating: false,
   error: null,
 };
 
@@ -56,16 +58,38 @@ export const waterSlice = createSlice({
     builder.addCase(fetchMonthStats.rejected, state => {
       state.isMonthLoading = false;
     });
+    //addWater
+    builder.addCase(addWater.pending, state => {
+      state.isWaterUpdating = true;
+    });
+    builder.addCase(addWater.fulfilled, (state, { payload }) => {
+      state.todayStats.dayNotes = state.isWaterUpdating = false;
+      state.error = null;
+    });
+    builder.addCase(addWater.rejected, state => {
+      state.isWaterUpdating = false;
+    });
+    //updateWater
+    builder.addCase(updateWater.pending, state => {
+      state.isWaterUpdating = true;
+    });
+    builder.addCase(updateWater.fulfilled, (state, { payload }) => {
+      state.todayStats.dayNotes = state.isWaterUpdating = false;
+      state.error = null;
+    });
+    builder.addCase(updateWater.rejected, state => {
+      state.isWaterUpdating = false;
+    });
     //deleteWater
     builder.addCase(deleteWater.pending, state => {
-      state.isDeleting = true;
+      state.isWaterUpdating = true;
     });
     builder.addCase(deleteWater.fulfilled, (state, { payload }) => {
-      state.todayStats.dayNotes = state.isDeleting = false;
+      state.todayStats.dayNotes = state.isWaterUpdating = false;
       state.error = null;
     });
     builder.addCase(deleteWater.rejected, state => {
-      state.isDeleting = false;
+      state.isWaterUpdating = false;
     });
   },
 });

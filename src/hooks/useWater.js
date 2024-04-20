@@ -19,5 +19,22 @@ export const useWater = () => {
   const fetchMonthStats = currentMonth =>
     dispatch(operations.fetchMonthStats(currentMonth)).unwrap();
 
-  return { todayStats, fetchTodayStats, fetchMonthStats, setDailyNormaInStore };
+  const addWater = waterNote =>
+    dispatch(operations.addWater(waterNote)).unwrap();
+
+  const updateWater = waterNote =>
+    dispatch(operations.updateWater(waterNote)).unwrap();
+
+  const deleteWater = waterNote =>
+    dispatch(operations.deleteWater(waterNote)).unwrap();
+
+  return {
+    todayStats,
+    fetchTodayStats,
+    fetchMonthStats,
+    addWater,
+    updateWater,
+    deleteWater,
+    setDailyNormaInStore,
+  };
 };

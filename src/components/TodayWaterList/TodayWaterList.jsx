@@ -5,6 +5,7 @@ import Modal from '../Modal/Modal';
 import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
 import { useWater } from 'hooks/useWater';
+import { timeFromDate } from 'helpers/dateHelpers';
 
 export const TodayWaterList = () => {
   const { fetchTodayStats, todayStats } = useWater();
@@ -41,13 +42,6 @@ export const TodayWaterList = () => {
   const handleEditItem = () => {
     setIsEditing(true);
     handleOpenEditModal();
-  };
-
-  const timeFromDate = date => {
-    return new Date(date).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
   };
 
   const { dayNotes } = todayStats;

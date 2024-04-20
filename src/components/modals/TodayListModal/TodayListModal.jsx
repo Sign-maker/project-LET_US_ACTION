@@ -5,11 +5,14 @@ import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { createDateFromTimeString } from 'helpers/dateHelpers';
+import { useWater } from 'hooks/useWater';
 
 const TodayListModal = ({ onClose, isEditing }) => {
   const [amount, setAmount] = useState('');
   const [time, setTime] = useState('');
   const [timeOptions, setTimeOptions] = useState([]);
+  const { addWater, updateWater } = useWater();
 
   useEffect(() => {
     const now = new Date();
@@ -37,11 +40,11 @@ const TodayListModal = ({ onClose, isEditing }) => {
   }, []);
 
   const currentDate = new Date();
-  const day = String(currentDate.getDate()).padStart(2, '0');
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const year = String(currentDate.getFullYear());
+  // const day = String(currentDate.getDate()).padStart(2, '0');
+  // const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+  // const year = String(currentDate.getFullYear());
 
-  const formattedDate = `${day}.${month}.${year}`;
+  // const formattedDate = `${day}.${month}.${year}`;
 
   const currentHour = currentDate.getHours();
   const currentMinute = currentDate.getMinutes();
@@ -64,14 +67,20 @@ const TodayListModal = ({ onClose, isEditing }) => {
     const selectedAmount = values.amount;
     const finalTime = selectedTime ? selectedTime : time;
     const finalAmount = selectedAmount ? selectedAmount : amount;
-    console.log('Form values:', {
-      amount: finalAmount,
-      time: finalTime,
-      date: formattedDate,
-    });
 
-    resetForm();
-    onClose();
+    const payload = {
+      amount: finalAmount,
+      date: createDateFromTimeString(finalTime),
+    };
+
+    try {
+      const action = !isEditing ? addWater : updateWater;
+      await action(payload);
+      resetForm();
+    } catch (error) {
+    } finally {
+      onClose();
+    }
   };
 
   const validationSchema = Yup.object().shape({
