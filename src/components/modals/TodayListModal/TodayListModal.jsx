@@ -86,8 +86,14 @@ const TodayListModal = ({ onClose, isEditing }) => {
   const validationSchema = Yup.object().shape({
     amount: Yup.number()
       .required('Amount is required')
-      .min(0, 'Amount must be greater than or equal to 0')
-      .max(5000, 'Amount cannot exceed 5000'),
+      .min(0, 'Amount must be at least 0')
+      .max(5000, 'Amount cannot exceed 5000')
+      .test(
+        'len',
+        'Amount must be at most 4 digits',
+        val => String(val).length <= 4
+      ),
+    time: Yup.string().required('Time is required'),
   });
 
   return (
@@ -116,7 +122,9 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     <p className={css.today_time}>{formattedTime}</p>
                   </div>
                 )}
-                <h3>Correct entered data:</h3>
+                <h3>
+                  {isEditing ? 'Correct entered data:' : 'Choose a value:'}
+                </h3>
                 <div className={css.add_water}>
                   <p className={css.add_paragraf}>Amount of water:</p>
                   <div className={css.add_water_container_btn}>

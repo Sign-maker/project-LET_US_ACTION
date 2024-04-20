@@ -9,6 +9,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useWater } from 'hooks/useWater';
 
 const MyDailyNormaModal = ({ onClose }) => {
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [weight, setWeight] = useState('');
   const [time, setTime] = useState('');
   const [consumedWater, setConsumedWater] = useState('2.0');
@@ -60,6 +61,8 @@ const MyDailyNormaModal = ({ onClose }) => {
       console.error('Failed to update daily norma:', error);
     } finally {
       setSubmitting(false);
+      setSubmitLoading(false);
+      console.log('Submitting and loading state reset');
     }
   };
 
@@ -67,7 +70,7 @@ const MyDailyNormaModal = ({ onClose }) => {
     weight: Yup.number()
       .min(10, 'Weight must be at least 10 kg')
       .when('time', (time, schema) => {
-        return time
+        return time > 0
           ? schema.required('Weight is required if time is provided')
           : schema;
       }),
@@ -229,7 +232,10 @@ const MyDailyNormaModal = ({ onClose }) => {
               )}
             </div>
             <div className={css.saveButton}>
-              <MyDailyNormaModalBtn isSubmitting={isSubmitting} />
+              <MyDailyNormaModalBtn
+                isSubmitting={isSubmitting || submitLoading}
+                disabled={submitLoading}
+              />
             </div>
           </Form>
         )}
