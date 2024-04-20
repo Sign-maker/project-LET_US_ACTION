@@ -211,19 +211,19 @@ h3 {
 }
 
 .error_message {
-  position: absolute;
-  bottom: 1px;
-  left: 0;
+   position: absolute;
+  /* bottom: 1px; */
+  left: 1;
   color: var(--secondary-red-EF5050F);
   font-size: 14px;
 }
 
-.inputError {
+.input_error {
   border: 1px solid var(--secondary-red-EF5050F);
   color: var(--secondary-red-EF5050F);
 }
 
-.inputError::placeholder {
+.input_error::placeholder {
   color: var(--secondary-red-EF5050F);
 }
 
