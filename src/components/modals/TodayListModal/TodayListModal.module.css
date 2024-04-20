@@ -33,8 +33,6 @@
   justify-content: space-between;
   font-size: 26px;
   font-weight: 600;
-  margin-bottom: 24px;
-  padding-left: 12px;
 }
 
 .btn_close {
@@ -55,22 +53,19 @@
 .title {
   color: var(--primary-black-2F2F2F);
   width: 200px;
-  height: 64px;
   font-size: 26px;
   font-weight: 500;
   line-height: 1.2;
 }
 
 .add_box_modal {
-  padding-left: 12px;
   min-width: 280px;
-  padding-right: 12px;
-  padding-bottom: 24px;
   display: flex;
   flex-direction: column;
 }
 
 h3 {
+  margin-top: 24px;
   margin-bottom: 16px;
   color: var(--primary-black-2F2F2F);
   font-size: 18px;
@@ -88,12 +83,6 @@ h3 {
   width: 254px;
   margin-bottom: 24px;
 }
-
-/* .icon_glass {
-  width: 26px;
-  height: 26px;
-  margin-right: 12px;
-} */
 
 .today_volume {
   font-size: 18px;
@@ -210,23 +199,6 @@ h3 {
   border: 1px solid var(--primary-blue-407BFF);
 }
 
-.error_message {
-   position: absolute;
-  /* bottom: 1px; */
-  left: 1;
-  color: var(--secondary-red-EF5050F);
-  font-size: 14px;
-}
-
-.input_error {
-  border: 1px solid var(--secondary-red-EF5050F);
-  color: var(--secondary-red-EF5050F);
-}
-
-.input_error::placeholder {
-  color: var(--secondary-red-EF5050F);
-}
-
 .input_time {
   color: var(--primary-blue-407BFF);
   font-size: 16px;
@@ -299,7 +271,7 @@ h3 {
 }
 
 .input_number:not(:placeholder-shown) {
-  color: var(--primary-blue-407BFF);
+  color: var(--primary-blue-407BFF)
 }
 
 .modal_footer {
@@ -336,29 +308,34 @@ h3 {
   box-shadow: 0 4px 8px rgba(64, 123, 255, 0.18);
 }
 
+.error_message {
+  position: absolute;
+  bottom: 77px;
+  color: var(--secondary-red-EF5050F);
+  font-size: 14px;
+}
+
+.input_error {
+  border: 1px solid var(--secondary-red-EF5050F);
+  color: var(--secondary-red-EF5050F);
+}
+
+.input_error::placeholder {
+  color: var(--secondary-red-EF5050F);
+}
+
 /*? ---------------------------------- Tablet -------------------------- */
 
 @media screen and (min-width: 768px) {
   .modal_content {
-    min-width: 592px;
-  }
-
-  .add_box_modal {
     min-width: 704px;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-bottom: 32px;
+    padding: 32px 24px;
   }
 
   .title {
     width: 384px;
     height: 32px;
   }
-
-  /* .icon_glass {
-    width: 36px;
-    height: 36px;
-  } */
 
   .modal_footer {
     flex-direction: row;
@@ -379,7 +356,7 @@ h3 {
 
 /*? ----------------------------------- Desctop -------------------------- */
 @media screen and (min-width: 1440px) {
-  .add_box_modal {
+  .modal_content {
     min-width: 592px;
   }
 }
