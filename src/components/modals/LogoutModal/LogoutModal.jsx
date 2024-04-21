@@ -12,7 +12,7 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
     <>
       <div className={css.modal_content}>
         <div className={css.header}>
-          <h2>Log out</h2>
+          <h2 className={css.title}>Log out</h2>
           <button
             type="button"
             className={css.btn_close}

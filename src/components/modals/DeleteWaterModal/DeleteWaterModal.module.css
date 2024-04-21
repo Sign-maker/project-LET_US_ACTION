@@ -25,7 +25,7 @@
   transform: translate(-50%, -50%);
   max-height: 100%;
   max-width: 100%;
-  padding: 44px;
+  padding: 32px 24px;
   background-color: var(--primary-white-FFFFFF);
   border-radius: 10px;
 }
@@ -34,9 +34,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 26px;
   font-weight: 600;
   margin-bottom: 24px;
+}
+.title {
+  font-size: 26px;
 }
 
 .btn_close {
@@ -87,6 +89,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 24px;
   font-weight: 500;
   font-size: 18px;
   width: 232px;
@@ -106,13 +109,15 @@
 /**--------------------- Tablet ----------------------*/
 
 @media screen and (min-width: 768px) {
-.modal_text {
-  width: 338px;
-}
+  .modal_content {
+    padding: 36px 24px;
+  }
+  .modal_text {
+    width: 338px;
+  }
 
   .btn_container {
-    margin-right: 0px;
-    margin-left: 254px;
+    margin-left: 200px;
     flex-direction: row;
   }
 
@@ -122,6 +127,7 @@
   }
 
   .btn_logout {
+    margin-top: 0;
     width: 160px;
     height: 44px;
   }
@@ -131,8 +137,6 @@
 
 @media screen and (min-width: 1440px) {
   .btn_container {
-    margin-right: 254px;
-    margin-left: 0;
     flex-direction: row;
   }
 }

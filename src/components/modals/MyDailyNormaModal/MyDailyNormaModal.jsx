@@ -6,6 +6,7 @@ import css from './MyDailyNormaModal.module.css';
 import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDailyNormaModalBtn';
 
 import { useAuth } from 'hooks/useAuth';
+import { useWater } from 'hooks/useWater';
 import { toastRejected } from 'components/servises/UserNotification';
 
 const MyDailyNormaModal = ({ onClose }) => {
@@ -18,6 +19,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   const [userInput, setUserInput] = useState(false);
 
   const { updateMyDailyNorma } = useAuth();
+  const { updateStoreByDailyNorma } = useWater();
 
   useEffect(() => {
     dailyNormaCalc(weight, time, gender);
@@ -50,15 +52,17 @@ const MyDailyNormaModal = ({ onClose }) => {
             : parseFloat(dailyNorma),
       };
       setSubmitLoading(true);
-      await updateMyDailyNorma({ dailyNorma: data.dailyNorma * 1000 });
-      console.log('Submitting finished');
+      const convertedDailyNorma = data.dailyNorma * 1000;
+      await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
+      updateStoreByDailyNorma(convertedDailyNorma);
+      // await fetchTodayStats();
+
       onClose();
     } catch (error) {
       toastRejected(error);
     } finally {
-      setSubmitting(false);
+      // setSubmitting(false);
       setSubmitLoading(false);
-      console.log('Submitting and loading state reset');
     }
   };
 

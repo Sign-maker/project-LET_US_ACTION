@@ -1,14 +1,14 @@
 import sprite from '../../images/sprite.svg';
-import { useAuth } from 'hooks/useAuth';
 import css from './WaterRatioPanel.module.css';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
+import { useWater } from 'hooks/useWater';
 
 export const WaterRatioPanel = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const { user } = useAuth();
+  const { todayStats } = useWater();
 
   const handleOpenModal = () => {
     setIsVisible(false);
@@ -16,12 +16,12 @@ export const WaterRatioPanel = () => {
   const handleCloseModal = () => {
     setIsVisible(true);
   };
-  
-  const todayNorma = (user.dailyNorma * 1000).toFixed(1);
-  const todayNotes = 750;
-    
-  const range = (todayNotes / todayNorma) * 100;
-  
+
+  // const todayNorma = (user.dailyNorma * 1000).toFixed(1);
+  // const todayNotes = 750;
+
+  // const range = (todayNotes / todayNorma) * 100;
+  const range = todayStats.fulfillment ?? 0;
 
   return (
     <div className={css.container}>
@@ -71,10 +71,7 @@ export const WaterRatioPanel = () => {
 
       {!isVisible && (
         <Modal onClose={handleCloseModal}>
-          <TodayListModal
-            onClose={handleCloseModal}
-            isEditing={isEditing}
-          />
+          <TodayListModal onClose={handleCloseModal} isEditing={isEditing} />
         </Modal>
       )}
     </div>

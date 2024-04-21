@@ -1,16 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  addWater,
   deleteWater,
   fetchMonthStats,
   fetchTodayStats,
+  updateWater,
 } from './waterOperations';
+import {
+  calcFulfillment,
+  calcServingsCount,
+  calcTotalVolume,
+} from 'helpers/statsHelpers';
 
 const initialState = {
   todayStats: {
     dailyNorma: null,
     dayNotes: [],
-    totalAmount: null,
+    totalVolume: null,
     fulfillment: null,
+    servingsCount: null,
   },
   monthStats: {
     currentMonth: null,
@@ -18,21 +26,31 @@ const initialState = {
   },
   isTodayLoading: false,
   isMonthLoading: false,
-  isDeleting: false,
+  isWaterUpdating: false,
   error: null,
 };
 
 export const waterSlice = createSlice({
   name: 'water',
   initialState,
-
+  reducers: {
+    updateByDailyNorma: (state, { payload }) => {
+      state.todayStats.dailyNorma = payload;
+      if (state.todayStats.dayNotes.length > 0) {
+        state.todayStats.fulfillment = calcFulfillment(
+          state.todayStats.totalVolume,
+          payload
+        );
+      }
+    },
+  },
   extraReducers: builder => {
     //fetchTodayStats
     builder.addCase(fetchTodayStats.pending, state => {
       state.isTodayLoading = true;
     });
     builder.addCase(fetchTodayStats.fulfilled, (state, { payload }) => {
-      state.todayStats = payload.todayStats;
+      state.todayStats = { ...state.todayStats, ...payload };
       state.isTodayLoading = false;
       state.error = null;
     });
@@ -55,10 +73,10 @@ export const waterSlice = createSlice({
     });
     //deleteWater
     builder.addCase(deleteWater.pending, state => {
-      state.isDeleting = true;
+      state.isWaterUpdating = true;
     });
     builder.addCase(deleteWater.fulfilled, (state, { payload }) => {
-      state.todayStats.dayNotes = state.isDeleting = false;
+      state.todayStats.dayNotes = state.isWaterUpdating = false;
       state.error = null;
     });
     builder.addCase(deleteWater.rejected, (state, { payload }) => {
