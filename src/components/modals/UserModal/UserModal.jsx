@@ -14,8 +14,8 @@ export const UserModal = ({ onClose }) => {
   const fileInputRef = useRef(null);
 
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null); // стан для URL-адреси зображення
-  const [file, setFile] = useState(null); // стан для обраного файлу
+  const [imageUrl, setImageUrl] = useState(null);
+  const [file, setFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -30,10 +30,7 @@ export const UserModal = ({ onClose }) => {
     setShowRepeatPassword(!showRepeatPassword);
   };
 
-  const baseURL = 'http://localhost:8000/';
-  // console.log(user);
-  const url = `${baseURL}${user.avatarURL}`;
-  console.log(user.avatarURL);
+  const url = user.avatarURL;
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -44,9 +41,8 @@ export const UserModal = ({ onClose }) => {
       const imageUrl = URL.createObjectURL(selectedFile);
       console.log(file);
 
-      setImageUrl(imageUrl); // оновлення стану URL-адреси
-      setFile(selectedFile); // збереження обраного файлу
-      // Обробка завантаженого файлу
+      setImageUrl(imageUrl);
+      setFile(selectedFile);
     }
   };
   const urlBase = file ? imageUrl : url;
@@ -146,8 +142,6 @@ export const UserModal = ({ onClose }) => {
     } finally {
       setSubmitLoading(false);
     }
-
-    console.log('Form submitted successfully!', values);
   };
 
   return (
@@ -180,7 +174,6 @@ export const UserModal = ({ onClose }) => {
           repeatPassword: '',
         }}
         validationSchema={SignupSchema}
-        // onSubmitCapture={true}
         onSubmit={handleSubmit}
       >
         {({ errors, touched }) => (
@@ -189,7 +182,6 @@ export const UserModal = ({ onClose }) => {
               <label className={css.labelPhoto} htmlFor="photo"></label>
               <input
                 ref={fileInputRef}
-                // className={css.inputPhoto}
                 id="photo"
                 name="photo"
                 type="file"
