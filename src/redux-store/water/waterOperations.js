@@ -43,9 +43,9 @@ export const addWater = createAsyncThunk(
 
 export const updateWater = createAsyncThunk(
   'water/updateWater',
-  async (waterNote, thunkAPI) => {
+  async (id, waterNote, thunkAPI) => {
     try {
-      const { data } = await axios.patch('/water', waterNote);
+      const { data } = await axios.patch(`/water/${id}`, waterNote);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

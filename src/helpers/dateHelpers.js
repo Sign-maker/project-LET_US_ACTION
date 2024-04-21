@@ -13,8 +13,8 @@ export function createDateFromTimeString(timeString) {
   return today;
 }
 
-export const timeFromDate = date => {
-  return new Date(date).toLocaleTimeString('en-US', {
+export const timeFromDate = (format, date) => {
+  return new Date(date).toLocaleTimeString(format, {
     hour: '2-digit',
     minute: '2-digit',
   });

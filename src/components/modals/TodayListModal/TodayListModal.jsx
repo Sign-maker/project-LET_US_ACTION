@@ -3,14 +3,14 @@ import css from './TodayListModal.module.css';
 import { ReactComponent as GlassSVG } from '../../../images/logo/glass.svg';
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
-import { Formik, ErrorMessage, Field, Form } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { createDateFromTimeString } from 'helpers/dateHelpers';
+import { createDateFromTimeString, timeFromDate } from 'helpers/dateHelpers';
 import { useWater } from 'hooks/useWater';
 
 const TodayListModal = ({ onClose, isEditing }) => {
-  const [amount, setAmount] = useState('');
-  const [time, setTime] = useState('');
+  // const [amount, setAmount] = useState('');
+  // const [time, setTime] = useState('');
   const [timeOptions, setTimeOptions] = useState([]);
   const { addWater, updateWater } = useWater();
 
@@ -20,7 +20,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
     const currentMinute = now.getMinutes();
     const newTimeOptions = [];
 
-    for (let hour = currentHour; hour < 24; hour++) {
+    for (let hour = 0; hour < 24; hour++) {
       for (let minute = 0; minute < 60; minute += 5) {
         if (hour === currentHour && minute < currentMinute) {
           continue;
@@ -32,10 +32,10 @@ const TodayListModal = ({ onClose, isEditing }) => {
       }
     }
 
-    const formattedHour = String(currentHour).padStart(2, '0');
-    const formattedMinute = String(currentMinute).padStart(2, '0');
-    const currentTime = `${formattedHour}:${formattedMinute}`;
-    setTime(currentTime);
+    // const formattedHour = String(currentHour).padStart(2, '0');
+    // const formattedMinute = String(currentMinute).padStart(2, '0');
+    // const currentTime = `${formattedHour}:${formattedMinute}`;
+    // setTime(currentTime);
     setTimeOptions(newTimeOptions);
   }, []);
 
@@ -58,24 +58,26 @@ const TodayListModal = ({ onClose, isEditing }) => {
 
   const formattedTime = formatTime(currentHour, currentMinute);
 
-  const handleBlur = () => {
-    setAmount(prevAmount => prevAmount || amount || 0);
-  };
+  // const handleBlur = () => {
+  //   setAmount(prevAmount => prevAmount || amount || 0);
+  // };
 
   const handleSubmit = async (values, { resetForm, setError }) => {
     const selectedTime = values.time;
     const selectedAmount = values.amount;
-    const finalTime = selectedTime ? selectedTime : time;
-    const finalAmount = selectedAmount ? selectedAmount : amount;
+    const finalTime = selectedTime
+      ? selectedTime
+      : timeFromDate('en-GB', currentDate);
+    const finalAmount = selectedAmount ? selectedAmount : 1;
 
     const payload = {
-      amount: finalAmount,
+      waterVolume: finalAmount,
       date: createDateFromTimeString(finalTime),
     };
-
     try {
       const action = !isEditing ? addWater : updateWater;
       await action(payload);
+      console.log('OK');
       resetForm();
     } catch (error) {
     } finally {
@@ -83,17 +85,33 @@ const TodayListModal = ({ onClose, isEditing }) => {
     }
   };
 
+  // const handleSubmit = async (values, { resetForm, setError }) => {
+  //   const selectedTime = values.time;
+  //   const selectedAmount = values.amount;
+  //   const finalTime = selectedTime
+  //     ? selectedTime
+  //     : timeFromDate('en-GB', new Date());
+  //   const finalAmount = selectedAmount ? selectedAmount : 0;
+  //   console.log('Form values:', {
+  //     amount: finalAmount,
+  //     time: finalTime,
+  //     date: 56,
+  //   });
+
+  //   resetForm();
+  //   onClose();
+  // };
+
+  const validateLength = e => {
+    if (e.target.value.length > 4) {
+      e.target.value = e.target.value.slice(0, 4);
+    }
+  };
   const validationSchema = Yup.object().shape({
     amount: Yup.number()
       .required('Amount is required')
-      .min(0, 'Amount must be at least 0')
-      .max(5000, 'Amount cannot exceed 5000')
-      .test(
-        'len',
-        'Amount must be at most 4 digits',
-        val => String(val).length <= 4
-      ),
-    time: Yup.string().required('Time is required'),
+      .min(1, 'Amount must be at least 1')
+      .max(5000, 'Amount cannot exceed 5000'),
   });
 
   return (
@@ -108,7 +126,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
           </button>
         </div>
         <Formik
-          initialValues={{ amount: '', time: '' }}
+          initialValues={{ amount: 50, time: '' }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
@@ -133,7 +151,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
                       className={css.button_ml}
                       onClick={() => {
                         const newValue = Number(values.amount || 0) - 50;
-                        setFieldValue('amount', newValue > 0 ? newValue : 0);
+                        setFieldValue('amount', newValue > 0 ? newValue : 50);
                       }}
                     >
                       <HiOutlineMinusSmall
@@ -168,11 +186,15 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     name="time"
                     style={{ width: '100%' }}
                     className={css.select}
-                    onChange={e => setTime(e.target.value)}
+                    // onChange={e => setTime(e.target.value)}
                   >
-                    <option key="current-time" value={time}>
-                      {time}
+                    <option
+                      key="current-time"
+                      value={timeFromDate('en-GB', currentDate)}
+                    >
+                      {timeFromDate('en-GB', currentDate)}
                     </option>
+
                     {timeOptions.map(option => (
                       <option key={option} value={option}>
                         {option}
@@ -183,24 +205,20 @@ const TodayListModal = ({ onClose, isEditing }) => {
 
                 <div>
                   <h3>Enter the value of the water used:</h3>
-
                   <Field
                     type="number"
                     className={`${css.input_number} ${
-                      errors.amount && touched.amount ? css.input_error : ''
+                      errors.amount && (touched.amount || values.amount)
+                        ? css.input_error
+                        : ''
                     }`}
                     name="amount"
-                    min={0}
-                    max={5000}
-                    maxlength={4}
-                    placeholder="0"
-                    onBlur={handleBlur}
+                    onInput={validateLength}
+                    // onBlur={handleBlur}
                   />
-                  <ErrorMessage
-                    name="amount"
-                    component="div"
-                    className={css.error_message}
-                  />
+                  {errors.amount && values.amount ? (
+                    <div className={css.error_message}>{errors.amount}</div>
+                  ) : null}
                 </div>
 
                 <div className={css.modal_footer}>

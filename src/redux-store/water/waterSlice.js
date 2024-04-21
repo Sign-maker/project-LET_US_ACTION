@@ -63,7 +63,8 @@ export const waterSlice = createSlice({
       state.isWaterUpdating = true;
     });
     builder.addCase(addWater.fulfilled, (state, { payload }) => {
-      state.todayStats.dayNotes = state.isWaterUpdating = false;
+      state.todayStats.dayNotes = [...state.todayStats.dayNotes, payload];
+      state.isWaterUpdating = false;
       state.error = null;
     });
     builder.addCase(addWater.rejected, state => {

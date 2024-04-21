@@ -92,7 +92,7 @@ export const TodayWaterList = () => {
                       <use href={sprite + '#cup'}></use>
                     </svg>
                     <p className={css.volume}>{waterVolume} ml</p>
-                    <p className={css.time}>{timeFromDate(date)}</p>
+                    <p className={css.time}>{timeFromDate('en-US', date)}</p>
                   </div>
                   <div className={css.wrapBtn}>
                     <button className={css.editBtn} onClick={handleEditItem}>
