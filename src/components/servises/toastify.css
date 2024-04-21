@@ -1,0 +1,25 @@
+.toast .Toastify__toast--info {
+  background-color: var(--primary-white-FFFFFF);
+  color: var(--primary-black-2F2F2F);
+}
+
+.toast .Toastify__toast--info .Toastify__toast-icon svg {
+  fill: var(--secondary-6-8BAEFF);
+}
+
+.toast .Toastify__toast--info .Toastify__progress-bar {
+  background-color: var(--primary-blue-407BFF);
+}
+
+.toast .Toastify__toast--error {
+  background-color: var(--primary-white-FFFFFF);
+  color: var(--primary-black-2F2F2F);
+}
+
+.toast .Toastify__toast--error .Toastify__toast-icon svg {
+  fill: var(--secondary-red-EF5050F);
+}
+
+.toast .Toastify__toast--error .Toastify__progress-bar {
+  background-color: var(--secondary-red-EF5050F);
+}

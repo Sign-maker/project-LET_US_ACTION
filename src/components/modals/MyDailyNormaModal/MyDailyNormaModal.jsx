@@ -50,14 +50,12 @@ const MyDailyNormaModal = ({ onClose }) => {
       };
       setSubmitLoading(true);
       await updateMyDailyNorma({ dailyNorma: data.dailyNorma * 1000 });
-      console.log('Submitting finished');
       onClose();
     } catch (error) {
       console.error('Failed to update daily norma:', error);
     } finally {
       setSubmitting(false);
       setSubmitLoading(false);
-      console.log('Submitting and loading state reset');
     }
   };
 

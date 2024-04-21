@@ -5,11 +5,13 @@ import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const TodayListModal = ({ onClose, isEditing }) => {
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(50);
   const [time, setTime] = useState('');
   const [timeOptions, setTimeOptions] = useState([]);
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -59,25 +61,33 @@ const TodayListModal = ({ onClose, isEditing }) => {
     setAmount(prevAmount => prevAmount || amount || 0);
   };
 
-  const handleSubmit = async (values, { resetForm, setError }) => {
-    const selectedTime = values.time;
-    const selectedAmount = values.amount;
-    const finalTime = selectedTime ? selectedTime : time;
-    const finalAmount = selectedAmount ? selectedAmount : amount;
-    console.log('Form values:', {
-      amount: finalAmount,
-      time: finalTime,
-      date: formattedDate,
-    });
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      setSubmitLoading(true);
+      const selectedTime = values.time;
+      const selectedAmount = values.amount;
+      const finalTime = selectedTime ? selectedTime : time;
+      const finalAmount = selectedAmount ? selectedAmount : amount;
+      console.log('Form values:', {
+        amount: finalAmount,
+        time: finalTime,
+        date: formattedDate,
+      });
 
-    resetForm();
-    onClose();
+      resetForm();
+      onClose();
+    } catch (error) {
+      console.error('Failed to submit:', error);
+    } finally {
+      setSubmitLoading(false);
+      setSubmitting(false);
+    }
   };
 
   const validationSchema = Yup.object().shape({
     amount: Yup.number()
       .required('Amount is required')
-      .min(0, 'Amount must be at least 0')
+      .min(1, 'Amount must be at least 1')
       .max(5000, 'Amount cannot exceed 5000')
       .test(
         'len',
@@ -99,11 +109,13 @@ const TodayListModal = ({ onClose, isEditing }) => {
           </button>
         </div>
         <Formik
-          initialValues={{ amount: '', time: '' }}
+          initialValues={{ amount: 50, time: '' }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
+          validateOnChange={true}
+          validateOnBlur={true}
         >
-          {({ errors, touched, setFieldValue, values }) => (
+          {({ errors, touched, setFieldValue, values, isSubmitting }) => (
             <Form autoComplete="off">
               <div className={css.add_box_modal}>
                 {isEditing && (
@@ -113,7 +125,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     <p className={css.today_time}>{formattedTime}</p>
                   </div>
                 )}
-                <h3>
+                <h3 className={css.subtitle}>
                   {isEditing ? 'Correct entered data:' : 'Choose a value:'}
                 </h3>
                 <div className={css.add_water}>
@@ -123,7 +135,10 @@ const TodayListModal = ({ onClose, isEditing }) => {
                       type="button"
                       className={css.button_ml}
                       onClick={() => {
-                        const newValue = Number(values.amount || 0) - 50;
+                        const newValue = Math.max(
+                          Number(values.amount || 0) - 50,
+                          50
+                        );
                         setFieldValue('amount', newValue > 0 ? newValue : 0);
                       }}
                     >
@@ -173,7 +188,9 @@ const TodayListModal = ({ onClose, isEditing }) => {
                 </div>
 
                 <div>
-                  <h3>Enter the value of the water used:</h3>
+                  <h3 className={css.subtitle}>
+                    Enter the value of the water used:
+                  </h3>
 
                   <Field
                     type="number"
@@ -183,9 +200,14 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     name="amount"
                     min={0}
                     max={5000}
-                    maxlength={4}
+                    maxLength={4}
                     placeholder="0"
                     onBlur={handleBlur}
+                    onInput={e => {
+                      if (e.target.value.length > 4) {
+                        e.target.value = e.target.value.slice(0, 4);
+                      }
+                    }}
                   />
                   <ErrorMessage
                     name="amount"
@@ -196,8 +218,13 @@ const TodayListModal = ({ onClose, isEditing }) => {
 
                 <div className={css.modal_footer}>
                   <span className={css.span_ml}>{values.amount || 0} ml</span>
-                  <button className={css.add_save_btn} type="submit">
-                    Save
+                  <button
+                    className={css.add_save_btn}
+                    type="submit"
+                    disabled={isSubmitting || submitLoading}
+                  >
+                    Save{' '}
+                    {submitLoading && <ClipLoader size={24} color="#ffffff" />}
                   </button>
                 </div>
               </div>
