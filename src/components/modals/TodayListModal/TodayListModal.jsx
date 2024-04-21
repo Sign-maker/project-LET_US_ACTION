@@ -5,11 +5,13 @@ import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const TodayListModal = ({ onClose, isEditing }) => {
   const [amount, setAmount] = useState(50);
   const [time, setTime] = useState('');
   const [timeOptions, setTimeOptions] = useState([]);
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -59,19 +61,27 @@ const TodayListModal = ({ onClose, isEditing }) => {
     setAmount(prevAmount => prevAmount || amount || 0);
   };
 
-  const handleSubmit = async (values, { resetForm, setError }) => {
-    const selectedTime = values.time;
-    const selectedAmount = values.amount;
-    const finalTime = selectedTime ? selectedTime : time;
-    const finalAmount = selectedAmount ? selectedAmount : amount;
-    console.log('Form values:', {
-      amount: finalAmount,
-      time: finalTime,
-      date: formattedDate,
-    });
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      setSubmitLoading(true);
+      const selectedTime = values.time;
+      const selectedAmount = values.amount;
+      const finalTime = selectedTime ? selectedTime : time;
+      const finalAmount = selectedAmount ? selectedAmount : amount;
+      console.log('Form values:', {
+        amount: finalAmount,
+        time: finalTime,
+        date: formattedDate,
+      });
 
-    resetForm();
-    onClose();
+      resetForm();
+      onClose();
+    } catch (error) {
+      console.error('Failed to submit:', error);
+    } finally {
+      setSubmitLoading(false);
+      setSubmitting(false);
+    }
   };
 
   const validationSchema = Yup.object().shape({
@@ -105,7 +115,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
           validateOnChange={true}
           validateOnBlur={true}
         >
-          {({ errors, touched, setFieldValue, values }) => (
+          {({ errors, touched, setFieldValue, values, isSubmitting }) => (
             <Form autoComplete="off">
               <div className={css.add_box_modal}>
                 {isEditing && (
@@ -208,8 +218,13 @@ const TodayListModal = ({ onClose, isEditing }) => {
 
                 <div className={css.modal_footer}>
                   <span className={css.span_ml}>{values.amount || 0} ml</span>
-                  <button className={css.add_save_btn} type="submit">
-                    Save
+                  <button
+                    className={css.add_save_btn}
+                    type="submit"
+                    disabled={isSubmitting || submitLoading}
+                  >
+                    Save{' '}
+                    {submitLoading && <ClipLoader size={24} color="#ffffff" />}
                   </button>
                 </div>
               </div>
