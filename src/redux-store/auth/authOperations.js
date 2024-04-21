@@ -1,9 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios1 from 'axios';
-import {
-  toastFulfilled,
-  toastRejected,
-} from 'components/servises/UserNotification';
+import { toastFulfilled } from 'components/servises/UserNotification';
 
 const baseURL = process.env.REACT_APP_BASE_BACKEND_URL;
 
@@ -27,8 +24,8 @@ export const register = createAsyncThunk(
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -43,8 +40,9 @@ export const logIn = createAsyncThunk(
 
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -55,8 +53,8 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     clearAuthHeader();
     return data;
   } catch (error) {
-    toastRejected('Something went wrong, please try again later!');
-    return thunkAPI.rejectWithValue(error.message);
+    const errorMessage = error.response.data.message;
+    return thunkAPI.rejectWithValue(errorMessage);
   }
 });
 
@@ -68,17 +66,8 @@ export const updateProfile = createAsyncThunk(
       toastFulfilled('Your data has been successfully updated!');
       return data;
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        toastRejected(error.response.data.message);
-      } else {
-        toastRejected('Something went wrong, please try again later!');
-      }
-      // toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -97,16 +86,8 @@ export const updateAvatar = createAsyncThunk(
       toastFulfilled('Your avatar has been successfully updated!');
       return data.avatarURL;
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        toastRejected(error.response.data.message);
-      } else {
-        toastRejected('Something went wrong, please try again later!');
-      }
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -124,7 +105,8 @@ export const refreshUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -137,8 +119,8 @@ export const updateMyDailyNorma = createAsyncThunk(
       toastFulfilled('Your daily water norma has been successfully updated!');
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );

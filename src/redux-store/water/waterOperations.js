@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axios } from '../auth/authOperations';
-import { toastRejected } from 'components/servises/UserNotification';
 
 export const fetchTodayStats = createAsyncThunk(
   'water/fetchTodayStats',
@@ -12,8 +11,8 @@ export const fetchTodayStats = createAsyncThunk(
       const { data } = axios.get('/water/today', { params });
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -28,8 +27,8 @@ export const fetchMonthStats = createAsyncThunk(
       const { data } = axios.get('/water/month', { params });
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -41,8 +40,8 @@ export const deleteWater = createAsyncThunk(
       const { data } = axios.delete(`/water/${id}`);
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );

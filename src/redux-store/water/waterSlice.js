@@ -36,8 +36,9 @@ export const waterSlice = createSlice({
       state.isTodayLoading = false;
       state.error = null;
     });
-    builder.addCase(fetchTodayStats.rejected, state => {
+    builder.addCase(fetchTodayStats.rejected, (state, { payload }) => {
       state.isTodayLoading = false;
+      state.error = payload;
     });
     //fetchMonthStats
     builder.addCase(fetchMonthStats.pending, state => {
@@ -48,8 +49,9 @@ export const waterSlice = createSlice({
       state.isMonthLoading = false;
       state.error = null;
     });
-    builder.addCase(fetchMonthStats.rejected, state => {
+    builder.addCase(fetchMonthStats.rejected, (state, { payload }) => {
       state.isMonthLoading = false;
+      state.error = payload;
     });
     //deleteWater
     builder.addCase(deleteWater.pending, state => {
@@ -59,8 +61,9 @@ export const waterSlice = createSlice({
       state.todayStats.dayNotes = state.isDeleting = false;
       state.error = null;
     });
-    builder.addCase(deleteWater.rejected, state => {
+    builder.addCase(deleteWater.rejected, (state, { payload }) => {
       state.isDeleting = false;
+      state.error = payload;
     });
   },
 });

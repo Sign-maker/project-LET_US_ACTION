@@ -8,6 +8,7 @@ import { HiOutlineXMark } from 'react-icons/hi2';
 import { ClipLoader } from 'react-spinners';
 import css from './UserModal.module.css';
 import { useAuth } from 'hooks/useAuth';
+import { toastRejected } from 'components/servises/UserNotification';
 
 export const UserModal = ({ onClose }) => {
   const { user, updateProfile, updateAvatar } = useAuth();
@@ -125,6 +126,7 @@ export const UserModal = ({ onClose }) => {
         await updateProfile(newProfile);
         onClose();
       } catch (error) {
+        toastRejected(error);
       } finally {
         setSubmitLoading(false);
       }
@@ -139,6 +141,7 @@ export const UserModal = ({ onClose }) => {
       await updateAvatar(file);
       onClose();
     } catch (error) {
+      toastRejected(error);
     } finally {
       setSubmitLoading(false);
     }

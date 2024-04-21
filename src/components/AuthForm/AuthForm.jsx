@@ -6,9 +6,12 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
 import { ClipLoader } from 'react-spinners';
 import css from './AuthForm.module.css';
+import { toastRejected } from 'components/servises/UserNotification';
 
 const AuthForm = () => {
-  const { logIn, register } = useAuth();
+  const { logIn, register, error } = useAuth();
+  console.log(error);
+
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -51,6 +54,9 @@ const AuthForm = () => {
       await action({ email, password });
       if (isSignUp) resetForm();
     } catch (error) {
+      console.log(error);
+      toastRejected(error);
+
       console.error(`${isSignUp ? 'Sign Up' : 'Sign In'} failed:`, error);
     } finally {
       setSubmitting(false);

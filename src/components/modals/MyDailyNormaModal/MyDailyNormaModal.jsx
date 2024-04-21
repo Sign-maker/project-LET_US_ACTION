@@ -6,6 +6,7 @@ import css from './MyDailyNormaModal.module.css';
 import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDailyNormaModalBtn';
 
 import { useAuth } from 'hooks/useAuth';
+import { toastRejected } from 'components/servises/UserNotification';
 
 const MyDailyNormaModal = ({ onClose }) => {
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -53,7 +54,7 @@ const MyDailyNormaModal = ({ onClose }) => {
       console.log('Submitting finished');
       onClose();
     } catch (error) {
-      console.error('Failed to update daily norma:', error);
+      toastRejected(error);
     } finally {
       setSubmitting(false);
       setSubmitLoading(false);
