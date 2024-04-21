@@ -1,7 +1,9 @@
+.calendar {
+  padding-top: 24px;
+}
 .monthHeader {
   display: flex;
   align-items: center;
-  padding-top: 24px;
 }
 .month {
   font-size: 24px;

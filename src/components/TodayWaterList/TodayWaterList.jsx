@@ -117,19 +117,6 @@ export const TodayWaterList = () => {
             </li>
           )}
 
-          <button
-            className={css.addBtn}
-            onClick={() => {
-              setIsEditing(false);
-              handleOpenAddModal();
-            }}
-          >
-            <svg>
-              <use href={sprite + '#plus'}></use>
-            </svg>
-            Add water
-          </button>
-
           {deleteOpen && (
             <Modal onClose={handleCloseDeleteModal}>
               <DeleteWaterModal onClose={handleCloseDeleteModal} />
@@ -148,6 +135,18 @@ export const TodayWaterList = () => {
             </Modal>
           )}
         </ul>
+        <button
+          className={css.addBtn}
+          onClick={() => {
+            setIsEditing(false);
+            handleOpenAddModal();
+          }}
+        >
+          <svg>
+            <use href={sprite + '#plus'}></use>
+          </svg>
+          Add water
+        </button>
       </div>
     </div>
   );
