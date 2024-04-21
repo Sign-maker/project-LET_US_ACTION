@@ -43,6 +43,9 @@ export const waterSlice = createSlice({
         );
       }
     },
+    resetValues: state => {
+      return (state = initialState);
+    },
   },
   extraReducers: builder => {
     //fetchTodayStats
@@ -94,7 +97,24 @@ export const waterSlice = createSlice({
       state.isWaterUpdating = true;
     });
     builder.addCase(updateWater.fulfilled, (state, { payload }) => {
-      state.todayStats.dayNotes = state.isWaterUpdating = false;
+      const idx = state.todayStats.dayNotes.findIndex(
+        waterNote => waterNote._id === payload._id
+      );
+      if (idx !== -1) {
+        state.todayStats.dayNotes[idx] = payload;
+        state.todayStats.totalVolume = calcTotalVolume(
+          state.todayStats.dayNotes
+        );
+        state.todayStats.fulfillment = calcFulfillment(
+          state.todayStats.totalVolume,
+          state.todayStats.dailyNorma
+        );
+        state.todayStats.servingsCount = calcServingsCount(
+          state.todayStats.dayNotes
+        );
+      }
+
+      state.isWaterUpdating = false;
       state.error = null;
     });
     builder.addCase(updateWater.rejected, state => {
@@ -105,7 +125,19 @@ export const waterSlice = createSlice({
       state.isWaterUpdating = true;
     });
     builder.addCase(deleteWater.fulfilled, (state, { payload }) => {
-      state.todayStats.dayNotes = state.isWaterUpdating = false;
+      state.todayStats.dayNotes = state.todayStats.dayNotes.filter(
+        waterNote => (waterNote._id = payload._id)
+      );
+
+      state.todayStats.totalVolume = calcTotalVolume(state.todayStats.dayNotes);
+      state.todayStats.fulfillment = calcFulfillment(
+        state.todayStats.totalVolume,
+        state.todayStats.dailyNorma
+      );
+      state.todayStats.servingsCount = calcServingsCount(
+        state.todayStats.dayNotes
+      );
+      state.isWaterUpdating = false;
       state.error = null;
     });
     builder.addCase(deleteWater.rejected, state => {
