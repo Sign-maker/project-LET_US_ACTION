@@ -200,7 +200,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     name="amount"
                     min={0}
                     max={5000}
-                    maxlength={4}
+                    maxLength={4}
                     placeholder="0"
                     onBlur={handleBlur}
                     onInput={e => {
