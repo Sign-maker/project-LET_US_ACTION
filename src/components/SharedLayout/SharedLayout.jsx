@@ -13,11 +13,7 @@ export const SharedLayout = () => {
           <Outlet />
         </Suspense>
       </main>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-      />
+      <ToastContainer className={'toast'} />
     </>
   );
 };

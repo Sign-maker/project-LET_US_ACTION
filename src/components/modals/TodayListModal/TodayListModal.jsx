@@ -5,14 +5,14 @@ import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { createDateFromTimeString, timeFromDate } from 'helpers/dateHelpers';
 import { useWater } from 'hooks/useWater';
 
 const TodayListModal = ({ onClose, isEditing }) => {
-  // const [amount, setAmount] = useState('');
-  // const [time, setTime] = useState('');
   const [timeOptions, setTimeOptions] = useState([]);
   const { addWater, updateWater } = useWater();
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -31,38 +31,13 @@ const TodayListModal = ({ onClose, isEditing }) => {
         newTimeOptions.push(currentTime);
       }
     }
-
-    // const formattedHour = String(currentHour).padStart(2, '0');
-    // const formattedMinute = String(currentMinute).padStart(2, '0');
-    // const currentTime = `${formattedHour}:${formattedMinute}`;
-    // setTime(currentTime);
     setTimeOptions(newTimeOptions);
   }, []);
 
   const currentDate = new Date();
-  // const day = String(currentDate.getDate()).padStart(2, '0');
-  // const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  // const year = String(currentDate.getFullYear());
 
-  // const formattedDate = `${day}.${month}.${year}`;
-
-  const currentHour = currentDate.getHours();
-  const currentMinute = currentDate.getMinutes();
-
-  const formatTime = (hours, minutes) => {
-    const period = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = hours % 12 || 12;
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    return `${formattedHours}:${formattedMinutes} ${period}`;
-  };
-
-  const formattedTime = formatTime(currentHour, currentMinute);
-
-  // const handleBlur = () => {
-  //   setAmount(prevAmount => prevAmount || amount || 0);
-  // };
-
-  const handleSubmit = async (values, { resetForm, setError }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    setSubmitLoading(true);
     const selectedTime = values.time;
     const selectedAmount = values.amount;
     const finalTime = selectedTime
@@ -77,30 +52,14 @@ const TodayListModal = ({ onClose, isEditing }) => {
     try {
       const action = !isEditing ? addWater : updateWater;
       await action(payload);
-      console.log('OK');
       resetForm();
+      onClose();
     } catch (error) {
     } finally {
-      onClose();
+      setSubmitLoading(false);
+      setSubmitting(false);
     }
   };
-
-  // const handleSubmit = async (values, { resetForm, setError }) => {
-  //   const selectedTime = values.time;
-  //   const selectedAmount = values.amount;
-  //   const finalTime = selectedTime
-  //     ? selectedTime
-  //     : timeFromDate('en-GB', new Date());
-  //   const finalAmount = selectedAmount ? selectedAmount : 0;
-  //   console.log('Form values:', {
-  //     amount: finalAmount,
-  //     time: finalTime,
-  //     date: 56,
-  //   });
-
-  //   resetForm();
-  //   onClose();
-  // };
 
   const validateLength = e => {
     if (e.target.value.length > 4) {
@@ -129,18 +88,20 @@ const TodayListModal = ({ onClose, isEditing }) => {
           initialValues={{ amount: 50, time: '' }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
+          validateOnChange={true}
+          validateOnBlur={true}
         >
-          {({ errors, touched, setFieldValue, values }) => (
+          {({ errors, touched, setFieldValue, values, isSubmitting }) => (
             <Form autoComplete="off">
               <div className={css.add_box_modal}>
                 {isEditing && (
                   <div className={css.previos_info}>
                     <GlassSVG />
-                    <p className={css.today_volume}>{values.amount || 0} ml</p>
-                    <p className={css.today_time}>{formattedTime}</p>
+                    <p className={css.today_volume}>{500} ml</p>
+                    <p className={css.today_time}>{'7:55'}</p>
                   </div>
                 )}
-                <h3>
+                <h3 className={css.subtitle}>
                   {isEditing ? 'Correct entered data:' : 'Choose a value:'}
                 </h3>
                 <div className={css.add_water}>
@@ -204,7 +165,10 @@ const TodayListModal = ({ onClose, isEditing }) => {
                 </div>
 
                 <div>
-                  <h3>Enter the value of the water used:</h3>
+                  <h3 className={css.subtitle}>
+                    Enter the value of the water used:
+                  </h3>
+
                   <Field
                     type="number"
                     className={`${css.input_number} ${
@@ -214,7 +178,6 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     }`}
                     name="amount"
                     onInput={validateLength}
-                    // onBlur={handleBlur}
                   />
                   {errors.amount && values.amount ? (
                     <div className={css.error_message}>{errors.amount}</div>
@@ -223,8 +186,13 @@ const TodayListModal = ({ onClose, isEditing }) => {
 
                 <div className={css.modal_footer}>
                   <span className={css.span_ml}>{values.amount || 0} ml</span>
-                  <button className={css.add_save_btn} type="submit">
-                    Save
+                  <button
+                    className={css.add_save_btn}
+                    type="submit"
+                    disabled={isSubmitting || submitLoading}
+                  >
+                    {submitLoading && <ClipLoader size={24} color="#ffffff" />}
+                    Save{' '}
                   </button>
                 </div>
               </div>

@@ -7,7 +7,7 @@ const DeleteWaterModal = ({ onClose }) => {
     <>
       <div className={css.modal_content}>
         <div className={css.header}>
-          <h2>Delete entry</h2>
+          <h2 className={css.title}>Delete entry</h2>
           <button type="button" className={css.btn_close} onClick={onClose}>
             <IoCloseOutline className={css.icon_close} />
           </button>

@@ -50,7 +50,7 @@ const MyDailyNormaModal = ({ onClose }) => {
             ? parseFloat(consumedWater)
             : parseFloat(dailyNorma),
       };
-
+      setSubmitLoading(true);
       const convertedDailyNorma = data.dailyNorma * 1000;
       await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
       // setDailyNormaInStore(convertedDailyNorma);
@@ -62,7 +62,6 @@ const MyDailyNormaModal = ({ onClose }) => {
     } finally {
       setSubmitting(false);
       setSubmitLoading(false);
-      console.log('Submitting and loading state reset');
     }
   };
 
