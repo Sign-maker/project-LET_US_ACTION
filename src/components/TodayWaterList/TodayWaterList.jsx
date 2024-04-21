@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import sprite from '../../images/sprite.svg';
 import css from './TodayWaterList.module.css';
 import Modal from '../Modal/Modal';
@@ -8,11 +8,7 @@ import { useWater } from 'hooks/useWater';
 import { timeFromDate } from 'helpers/dateHelpers';
 
 export const TodayWaterList = () => {
-  const { fetchTodayStats, todayStats } = useWater();
-
-  useEffect(() => {
-    fetchTodayStats();
-  }, [fetchTodayStats]);
+  const { todayStats } = useWater();
 
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
