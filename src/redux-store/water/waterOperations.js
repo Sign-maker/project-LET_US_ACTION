@@ -17,6 +17,7 @@ export const fetchTodayStats = createAsyncThunk(
 export const fetchMonthStats = createAsyncThunk(
   'water/fetchMonthStats',
   async (currentMonth, thunkAPI) => {
+    //2024-04
     try {
       const params = {
         currentMonth,
@@ -43,9 +44,10 @@ export const addWater = createAsyncThunk(
 
 export const updateWater = createAsyncThunk(
   'water/updateWater',
-  async (id, waterNote, thunkAPI) => {
+  async (waterNote, thunkAPI) => {
+    const { _id } = waterNote;
     try {
-      const { data } = await axios.patch(`/water/${id}`, waterNote);
+      const { data } = await axios.patch(`/water/${_id}`, waterNote);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -55,9 +57,10 @@ export const updateWater = createAsyncThunk(
 
 export const deleteWater = createAsyncThunk(
   'water/delete',
-  async (id, thunkAPI) => {
+  async (waterNote, thunkAPI) => {
+    const { _id } = waterNote;
     try {
-      const { data } = await axios.delete(`/water/${id}`);
+      const { data } = await axios.delete(`/water/${_id}`);
       return data;
     } catch (error) {
       toastRejected('Something went wrong, please try again later!');
