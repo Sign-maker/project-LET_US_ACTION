@@ -17,7 +17,7 @@
 
 .container_HomePage {
   background-image: url(../../images/background/mob/botle-home-screen-mob@1x.png);
-  background-position: center top 106px;
+  background-position: center top 80px;
   background-repeat: no-repeat;
   background-size: 100%;
   display: flex;
@@ -42,10 +42,11 @@
 .container_MonthStats {
   display: flex;
   flex-direction: column;
+  gap: 24px;
   border-radius: 10px;
   padding: 24px 8px;
   max-width: 280px;
-  /* height: 836px; */
+  height: 836px;
   box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
   background: var(--secondary-2-ECF2FF);
   align-items: center;
@@ -70,6 +71,7 @@
   .container_HomePage {
     background-image: url(../../images/background/tab/botle-home-screen-tab@1x.png);
     background-position: center top;
+    background-size: 95%;
   }
 
   @media (min-device-pixel-ratio: 2),
@@ -115,7 +117,7 @@
   .container_HomePage {
     background-image: url(../../images/background/desktop/botle-home-screen-desk@1x.png);
     background-size: 55%;
-    background-position: left top;
+    background-position: left -30px top 40px;
     flex-direction: row;
     height: 92vh;
     gap: 32px;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import sprite from '../../images/sprite.svg';
 import css from './TodayWaterList.module.css';
 import Modal from '../Modal/Modal';
@@ -6,15 +6,17 @@ import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
 import { useWater } from 'hooks/useWater';
 import { timeFromDate } from 'helpers/dateHelpers';
-import { current } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
+// import { current } from '@reduxjs/toolkit';
 
 export const TodayWaterList = () => {
-  const { fetchTodayStats, todayStats, deleteWater } = useWater();
+  const { fetchTodayStats, todayStats} = useWater();
   const [currentModifyObj, setCurrenModifyObj] = useState(null);
 
   useEffect(() => {
     fetchTodayStats();
   }, [fetchTodayStats]);
+
 
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -130,19 +132,6 @@ export const TodayWaterList = () => {
             </li>
           )}
 
-          <button
-            className={css.addBtn}
-            onClick={() => {
-              setIsEditing(false);
-              handleOpenAddModal();
-            }}
-          >
-            <svg>
-              <use href={sprite + '#plus'}></use>
-            </svg>
-            Add water
-          </button>
-
           {deleteOpen && (
             <Modal onClose={handleCloseDeleteModal}>
               <DeleteWaterModal
@@ -167,6 +156,18 @@ export const TodayWaterList = () => {
             </Modal>
           )}
         </ul>
+        <button
+          className={css.addBtn}
+          onClick={() => {
+            setIsEditing(false);
+            handleOpenAddModal();
+          }}
+        >
+          <svg>
+            <use href={sprite + '#plus'}></use>
+          </svg>
+          Add water
+        </button>
       </div>
     </div>
   );
