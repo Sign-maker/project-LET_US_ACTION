@@ -6,6 +6,7 @@ import css from './MyDailyNormaModal.module.css';
 import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDailyNormaModalBtn';
 
 import { useAuth } from 'hooks/useAuth';
+import { useWater } from 'hooks/useWater';
 
 const MyDailyNormaModal = ({ onClose }) => {
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -17,6 +18,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   const [userInput, setUserInput] = useState(false);
 
   const { updateMyDailyNorma } = useAuth();
+  const { fetchTodayStats } = useWater();
 
   useEffect(() => {
     dailyNormaCalc(weight, time, gender);
@@ -49,7 +51,11 @@ const MyDailyNormaModal = ({ onClose }) => {
             : parseFloat(dailyNorma),
       };
       setSubmitLoading(true);
-      await updateMyDailyNorma({ dailyNorma: data.dailyNorma * 1000 });
+      const convertedDailyNorma = data.dailyNorma * 1000;
+      await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
+      // setDailyNormaInStore(convertedDailyNorma);
+      await fetchTodayStats();
+
       onClose();
     } catch (error) {
       console.error('Failed to update daily norma:', error);

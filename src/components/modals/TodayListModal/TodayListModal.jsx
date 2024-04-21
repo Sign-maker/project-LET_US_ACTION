@@ -3,14 +3,15 @@ import css from './TodayListModal.module.css';
 import { ReactComponent as GlassSVG } from '../../../images/logo/glass.svg';
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
-import { Formik, ErrorMessage, Field, Form } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { createDateFromTimeString, timeFromDate } from 'helpers/dateHelpers';
+import { useWater } from 'hooks/useWater';
 
 const TodayListModal = ({ onClose, isEditing }) => {
-  const [amount, setAmount] = useState(50);
-  const [time, setTime] = useState('');
   const [timeOptions, setTimeOptions] = useState([]);
+  const { addWater, updateWater } = useWater();
   const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
     const currentMinute = now.getMinutes();
     const newTimeOptions = [];
 
-    for (let hour = currentHour; hour < 24; hour++) {
+    for (let hour = 0; hour < 24; hour++) {
       for (let minute = 0; minute < 60; minute += 5) {
         if (hour === currentHour && minute < currentMinute) {
           continue;
@@ -30,71 +31,46 @@ const TodayListModal = ({ onClose, isEditing }) => {
         newTimeOptions.push(currentTime);
       }
     }
-
-    const formattedHour = String(currentHour).padStart(2, '0');
-    const formattedMinute = String(currentMinute).padStart(2, '0');
-    const currentTime = `${formattedHour}:${formattedMinute}`;
-    setTime(currentTime);
     setTimeOptions(newTimeOptions);
   }, []);
 
   const currentDate = new Date();
-  const day = String(currentDate.getDate()).padStart(2, '0');
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const year = String(currentDate.getFullYear());
-
-  const formattedDate = `${day}.${month}.${year}`;
-
-  const currentHour = currentDate.getHours();
-  const currentMinute = currentDate.getMinutes();
-
-  const formatTime = (hours, minutes) => {
-    const period = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = hours % 12 || 12;
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    return `${formattedHours}:${formattedMinutes} ${period}`;
-  };
-
-  const formattedTime = formatTime(currentHour, currentMinute);
-
-  const handleBlur = () => {
-    setAmount(prevAmount => prevAmount || amount || 0);
-  };
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    try {
-      setSubmitLoading(true);
-      const selectedTime = values.time;
-      const selectedAmount = values.amount;
-      const finalTime = selectedTime ? selectedTime : time;
-      const finalAmount = selectedAmount ? selectedAmount : amount;
-      console.log('Form values:', {
-        amount: finalAmount,
-        time: finalTime,
-        date: formattedDate,
-      });
+    setSubmitLoading(true);
+    const selectedTime = values.time;
+    const selectedAmount = values.amount;
+    const finalTime = selectedTime
+      ? selectedTime
+      : timeFromDate('en-GB', currentDate);
+    const finalAmount = selectedAmount ? selectedAmount : 1;
 
+    const payload = {
+      waterVolume: finalAmount,
+      date: createDateFromTimeString(finalTime),
+    };
+    try {
+      const action = !isEditing ? addWater : updateWater;
+      await action(payload);
       resetForm();
       onClose();
     } catch (error) {
-      console.error('Failed to submit:', error);
     } finally {
       setSubmitLoading(false);
       setSubmitting(false);
     }
   };
 
+  const validateLength = e => {
+    if (e.target.value.length > 4) {
+      e.target.value = e.target.value.slice(0, 4);
+    }
+  };
   const validationSchema = Yup.object().shape({
     amount: Yup.number()
       .required('Amount is required')
       .min(1, 'Amount must be at least 1')
-      .max(5000, 'Amount cannot exceed 5000')
-      .test(
-        'len',
-        'Amount must be at most 4 digits',
-        val => String(val).length <= 4
-      ),
-    time: Yup.string().required('Time is required'),
+      .max(5000, 'Amount cannot exceed 5000'),
   });
 
   return (
@@ -121,8 +97,8 @@ const TodayListModal = ({ onClose, isEditing }) => {
                 {isEditing && (
                   <div className={css.previos_info}>
                     <GlassSVG />
-                    <p className={css.today_volume}>{values.amount || 0} ml</p>
-                    <p className={css.today_time}>{formattedTime}</p>
+                    <p className={css.today_volume}>{500} ml</p>
+                    <p className={css.today_time}>{'7:55'}</p>
                   </div>
                 )}
                 <h3 className={css.subtitle}>
@@ -135,11 +111,8 @@ const TodayListModal = ({ onClose, isEditing }) => {
                       type="button"
                       className={css.button_ml}
                       onClick={() => {
-                        const newValue = Math.max(
-                          Number(values.amount || 0) - 50,
-                          50
-                        );
-                        setFieldValue('amount', newValue > 0 ? newValue : 0);
+                        const newValue = Number(values.amount || 0) - 50;
+                        setFieldValue('amount', newValue > 0 ? newValue : 50);
                       }}
                     >
                       <HiOutlineMinusSmall
@@ -174,11 +147,15 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     name="time"
                     style={{ width: '100%' }}
                     className={css.select}
-                    onChange={e => setTime(e.target.value)}
+                    // onChange={e => setTime(e.target.value)}
                   >
-                    <option key="current-time" value={time}>
-                      {time}
+                    <option
+                      key="current-time"
+                      value={timeFromDate('en-GB', currentDate)}
+                    >
+                      {timeFromDate('en-GB', currentDate)}
                     </option>
+
                     {timeOptions.map(option => (
                       <option key={option} value={option}>
                         {option}
@@ -195,25 +172,16 @@ const TodayListModal = ({ onClose, isEditing }) => {
                   <Field
                     type="number"
                     className={`${css.input_number} ${
-                      errors.amount && touched.amount ? css.input_error : ''
+                      errors.amount && (touched.amount || values.amount)
+                        ? css.input_error
+                        : ''
                     }`}
                     name="amount"
-                    min={0}
-                    max={5000}
-                    maxLength={4}
-                    placeholder="0"
-                    onBlur={handleBlur}
-                    onInput={e => {
-                      if (e.target.value.length > 4) {
-                        e.target.value = e.target.value.slice(0, 4);
-                      }
-                    }}
+                    onInput={validateLength}
                   />
-                  <ErrorMessage
-                    name="amount"
-                    component="div"
-                    className={css.error_message}
-                  />
+                  {errors.amount && values.amount ? (
+                    <div className={css.error_message}>{errors.amount}</div>
+                  ) : null}
                 </div>
 
                 <div className={css.modal_footer}>
@@ -223,8 +191,8 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     type="submit"
                     disabled={isSubmitting || submitLoading}
                   >
-                    Save{' '}
                     {submitLoading && <ClipLoader size={24} color="#ffffff" />}
+                    Save{' '}
                   </button>
                 </div>
               </div>
