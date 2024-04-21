@@ -11,6 +11,8 @@ export const useWater = () => {
   const updateStoreByDailyNorma = dailyNorma =>
     dispatch(waterSlice.actions.updateByDailyNorma(dailyNorma));
 
+  const resetWaterStore = () => dispatch(waterSlice.actions.resetValues());
+
   const fetchTodayStats = useCallback(
     () => dispatch(operations.fetchTodayStats()),
     [dispatch]
@@ -36,5 +38,6 @@ export const useWater = () => {
     updateWater,
     deleteWater,
     updateStoreByDailyNorma,
+    resetWaterStore,
   };
 };
