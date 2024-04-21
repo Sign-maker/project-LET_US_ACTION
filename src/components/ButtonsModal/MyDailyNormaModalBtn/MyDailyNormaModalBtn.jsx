@@ -4,7 +4,12 @@ import css from './MyDailyNormaModalBtn.module.css';
 
 const MyDailyNormaModalBtn = ({ isSubmitting, disabled, onClick }) => {
   return (
-    <button className={css.saveButton} onClick={onClick} disabled={disabled}>
+    <button
+      className={css.saveButton}
+      onClick={onClick}
+      type="submit"
+      disabled={disabled}
+    >
       {isSubmitting ? (
         <div className={css.spinnerCss}>
           <ClipLoader size={20} color="#ffffff" loading={isSubmitting} />
