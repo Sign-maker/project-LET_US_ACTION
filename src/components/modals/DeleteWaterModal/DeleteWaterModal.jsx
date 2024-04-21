@@ -1,8 +1,16 @@
 import React from 'react';
 import css from './DeleteWaterModal.module.css';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useWater } from 'hooks/useWater';
 
-const DeleteWaterModal = ({ onClose }) => {
+const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
+  const { deleteWater } = useWater()
+  
+  const handleDelete = () => {
+    deleteWater(deleteRecordId);
+    onClose();
+  };
+
   return (
     <>
       <div className={css.modal_content}>
@@ -20,7 +28,11 @@ const DeleteWaterModal = ({ onClose }) => {
           <button type="button" className={css.btn_cancel} onClick={onClose}>
             Cancel
           </button>
-          <button type="button" className={css.btn_logout}>
+          <button
+            type="button"
+            className={css.btn_logout}
+            onClick={handleDelete}
+          >
             Delete
           </button>
         </div>

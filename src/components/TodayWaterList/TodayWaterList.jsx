@@ -6,9 +6,11 @@ import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
 import { useWater } from 'hooks/useWater';
 import { timeFromDate } from 'helpers/dateHelpers';
+import { current } from '@reduxjs/toolkit';
 
 export const TodayWaterList = () => {
-  const { fetchTodayStats, todayStats } = useWater();
+  const { fetchTodayStats, todayStats, deleteWater } = useWater();
+  const [currentModifyObj, setCurrenModifyObj] = useState(null);
 
   useEffect(() => {
     fetchTodayStats();
@@ -17,7 +19,6 @@ export const TodayWaterList = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  // const [selectedRecord, setSelectedRecord] = useState(null)
 
   const handleOpenAddModal = () => {
     setIsVisible(false);
@@ -27,7 +28,8 @@ export const TodayWaterList = () => {
     setIsVisible(false);
   };
 
-  const handleOpenDeleteModal = () => {
+  const handleOpenDeleteModal = waterObj => {
+    setCurrenModifyObj(waterObj);
     setDeleteOpen(true);
   };
 
@@ -39,7 +41,8 @@ export const TodayWaterList = () => {
     setIsVisible(true);
   };
 
-  const handleEditItem = () => {
+  const handleEditItem = waterObj => {
+    setCurrenModifyObj(waterObj);
     setIsEditing(true);
     handleOpenEditModal();
   };
@@ -85,24 +88,34 @@ export const TodayWaterList = () => {
                 (a, b) =>
                   new Date(a.date).getTime() - new Date(b.date).getTime()
               )
-              .map(({ waterVolume, date, _id }) => (
-                <li className={css.listItem} key={_id}>
+              .map(waterObj => (
+                <li className={css.listItem} key={waterObj._id}>
                   <div className={css.infoWrap}>
                     <svg>
                       <use href={sprite + '#cup'}></use>
                     </svg>
-                    <p className={css.volume}>{waterVolume} ml</p>
-                    <p className={css.time}>{timeFromDate('en-US', date)}</p>
+                    <p className={css.volume}>{waterObj.waterVolume} ml</p>
+                    <p className={css.time}>
+                      {timeFromDate('en-US', waterObj.date)}
+                    </p>
                   </div>
                   <div className={css.wrapBtn}>
-                    <button className={css.editBtn} onClick={handleEditItem}>
+                    <button
+                      className={css.editBtn}
+                      onClick={() => {
+                        handleEditItem(waterObj);
+                        console.log('objj', waterObj);
+                      }}
+                    >
                       <svg>
                         <use href={sprite + '#edit'}></use>
                       </svg>
                     </button>
                     <button
                       className={css.deleteBtn}
-                      onClick={handleOpenDeleteModal}
+                      onClick={() => {
+                        handleOpenDeleteModal(waterObj);
+                      }}
                     >
                       <svg>
                         <use href={sprite + '#trash'}></use>
@@ -132,7 +145,10 @@ export const TodayWaterList = () => {
 
           {deleteOpen && (
             <Modal onClose={handleCloseDeleteModal}>
-              <DeleteWaterModal onClose={handleCloseDeleteModal} />
+              <DeleteWaterModal
+                onClose={handleCloseDeleteModal}
+                deleteRecordId={currentModifyObj?._id}
+              />
             </Modal>
           )}
 
@@ -144,6 +160,9 @@ export const TodayWaterList = () => {
                   handleCloseModal();
                 }}
                 isEditing={isEditing}
+                amountForEdit={currentModifyObj?.waterVolume}
+                editTimeInit={currentModifyObj?.date}
+                editRecordId={currentModifyObj?._id}
               />
             </Modal>
           )}
