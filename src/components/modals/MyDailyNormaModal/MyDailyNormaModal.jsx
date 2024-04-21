@@ -60,7 +60,7 @@ const MyDailyNormaModal = ({ onClose }) => {
     } catch (error) {
       console.error('Failed to update daily norma:', error);
     } finally {
-      setSubmitting(false);
+      // setSubmitting(false);
       setSubmitLoading(false);
     }
   };
