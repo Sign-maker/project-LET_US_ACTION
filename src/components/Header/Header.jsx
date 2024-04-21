@@ -14,8 +14,8 @@ import { UserModal } from 'components/modals/UserModal/UserModal';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [isLogoutVisible, setLogoutVisible] = useState(true);
-  const { isLoggedIn, logOut } = useAuth();
+  const [isLogoutVisible, setLogoutVisible] = useState(false);
+  const { isLoggedIn, logOut} = useAuth();
 
   const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ const Header = () => {
             <ButtonPopUp
               handleOpenModal={handleOpenModal}
               openLogoutModal={() => {
-                setLogoutVisible(false);
+                setLogoutVisible(true);
               }}
             />
           )}
@@ -60,15 +60,15 @@ const Header = () => {
           </Modal>
         )}
 
-        {!isLogoutVisible && (
+        {isLogoutVisible && (
           <Modal
             onClose={() => {
-              setLogoutVisible(true);
+              setLogoutVisible(false);
             }}
           >
             <LogoutModal
               onCloseLogout={() => {
-                setLogoutVisible(true);
+                setLogoutVisible(false);
               }}
               onLogout={() => {logOut()}}
             />

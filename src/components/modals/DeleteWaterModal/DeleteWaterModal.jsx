@@ -1,14 +1,24 @@
 import React from 'react';
 import css from './DeleteWaterModal.module.css';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useState } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { useWater } from 'hooks/useWater';
 
 const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
+  console.log(deleteRecordId)
   const { deleteWater } = useWater()
+  const [loading, setLoading] = useState(false);
   
-  const handleDelete = () => {
-    deleteWater(deleteRecordId);
-    onClose();
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+     await deleteWater({_id: deleteRecordId});
+      onClose();
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +43,7 @@ const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
             className={css.btn_logout}
             onClick={handleDelete}
           >
-            Delete
+            {loading && <ClipLoader size={24} color="#ffffff" />} Delete{' '}
           </button>
         </div>
       </div>

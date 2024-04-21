@@ -51,14 +51,6 @@ const TodayListModal = ({
       : timeFromDate('en-GB', currentDate);
     const finalAmount = selectedAmount ? selectedAmount : 1;
 
-    // const add = {
-    //   waterVolume: finalAmount,
-    //   date: createDateFromTimeString(finalTime),
-    // };
-
-    // const edit = {
-
-    // }
 
     const payload = {
       waterVolume: finalAmount,
@@ -66,10 +58,8 @@ const TodayListModal = ({
     };
 
     try {
-      // const action = !isEditing ? addWater : updateWater;
-      // await action(payload);
       if (isEditing) {
-        await updateWater({_id: editRecordId, payload});
+        await updateWater({_id: editRecordId, ...payload});
       } else {
         await addWater(payload);
       }
