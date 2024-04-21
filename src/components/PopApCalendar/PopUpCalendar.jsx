@@ -44,16 +44,21 @@ const PopUpCalendar = ({
 
       setAdjustedPosition({ x: adjustedX, y: adjustedY });
     };
+    const handleResize = () => {
+      onClose(); // Закрываем окно при изменении размера экрана
+    };
 
     if (isOpen) {
       adjustPosition();
       document.addEventListener('keydown', handleEscKeyPress);
       document.addEventListener('mousedown', handleClickOutside);
+      window.addEventListener('resize', handleResize);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscKeyPress);
       document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('resize', handleResize);
     };
   }, [isOpen, onClose, position]);
 
