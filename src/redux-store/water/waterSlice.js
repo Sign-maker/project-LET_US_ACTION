@@ -54,9 +54,8 @@ export const waterSlice = createSlice({
       state.isTodayLoading = false;
       state.error = null;
     });
-    builder.addCase(fetchTodayStats.rejected, (state, { payload }) => {
+    builder.addCase(fetchTodayStats.rejected, state => {
       state.isTodayLoading = false;
-      state.error = payload;
     });
     //fetchMonthStats
     builder.addCase(fetchMonthStats.pending, state => {
@@ -67,9 +66,39 @@ export const waterSlice = createSlice({
       state.isMonthLoading = false;
       state.error = null;
     });
-    builder.addCase(fetchMonthStats.rejected, (state, { payload }) => {
+    builder.addCase(fetchMonthStats.rejected, state => {
       state.isMonthLoading = false;
-      state.error = payload;
+    });
+    //addWater
+    builder.addCase(addWater.pending, state => {
+      state.isWaterUpdating = true;
+    });
+    builder.addCase(addWater.fulfilled, (state, { payload }) => {
+      state.todayStats.dayNotes = [...state.todayStats.dayNotes, payload];
+      state.todayStats.totalVolume = calcTotalVolume(state.todayStats.dayNotes);
+      state.todayStats.fulfillment = calcFulfillment(
+        state.todayStats.totalVolume,
+        state.todayStats.dailyNorma
+      );
+      state.todayStats.servingsCount = calcServingsCount(
+        state.todayStats.dayNotes
+      );
+      state.isWaterUpdating = false;
+      state.error = null;
+    });
+    builder.addCase(addWater.rejected, state => {
+      state.isWaterUpdating = false;
+    });
+    //updateWater
+    builder.addCase(updateWater.pending, state => {
+      state.isWaterUpdating = true;
+    });
+    builder.addCase(updateWater.fulfilled, (state, { payload }) => {
+      state.todayStats.dayNotes = state.isWaterUpdating = false;
+      state.error = null;
+    });
+    builder.addCase(updateWater.rejected, state => {
+      state.isWaterUpdating = false;
     });
     //deleteWater
     builder.addCase(deleteWater.pending, state => {
@@ -79,9 +108,8 @@ export const waterSlice = createSlice({
       state.todayStats.dayNotes = state.isWaterUpdating = false;
       state.error = null;
     });
-    builder.addCase(deleteWater.rejected, (state, { payload }) => {
-      state.isDeleting = false;
-      state.error = payload;
+    builder.addCase(deleteWater.rejected, state => {
+      state.isWaterUpdating = false;
     });
   },
 });
