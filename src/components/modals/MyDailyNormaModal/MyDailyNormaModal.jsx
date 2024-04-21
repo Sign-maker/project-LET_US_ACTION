@@ -18,7 +18,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   const [userInput, setUserInput] = useState(false);
 
   const { updateMyDailyNorma } = useAuth();
-  const { fetchTodayStats } = useWater();
+  const { updateStoreByDailyNorma } = useWater();
 
   useEffect(() => {
     dailyNormaCalc(weight, time, gender);
@@ -53,8 +53,8 @@ const MyDailyNormaModal = ({ onClose }) => {
       setSubmitLoading(true);
       const convertedDailyNorma = data.dailyNorma * 1000;
       await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
-      // setDailyNormaInStore(convertedDailyNorma);
-      await fetchTodayStats();
+      updateStoreByDailyNorma(convertedDailyNorma);
+      // await fetchTodayStats();
 
       onClose();
     } catch (error) {

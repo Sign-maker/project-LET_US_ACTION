@@ -6,6 +6,11 @@ import {
   fetchTodayStats,
   updateWater,
 } from './waterOperations';
+import {
+  calcFulfillment,
+  calcServingsCount,
+  calcTotalVolume,
+} from 'helpers/statsHelpers';
 
 const initialState = {
   todayStats: {
@@ -29,8 +34,14 @@ export const waterSlice = createSlice({
   name: 'water',
   initialState,
   reducers: {
-    setDailyNorma: (state, { payload }) => {
+    updateByDailyNorma: (state, { payload }) => {
       state.todayStats.dailyNorma = payload;
+      if (state.todayStats.dayNotes.length > 0) {
+        state.todayStats.fulfillment = calcFulfillment(
+          state.todayStats.totalVolume,
+          payload
+        );
+      }
     },
   },
   extraReducers: builder => {
@@ -64,6 +75,14 @@ export const waterSlice = createSlice({
     });
     builder.addCase(addWater.fulfilled, (state, { payload }) => {
       state.todayStats.dayNotes = [...state.todayStats.dayNotes, payload];
+      state.todayStats.totalVolume = calcTotalVolume(state.todayStats.dayNotes);
+      state.todayStats.fulfillment = calcFulfillment(
+        state.todayStats.totalVolume,
+        state.todayStats.dailyNorma
+      );
+      state.todayStats.servingsCount = calcServingsCount(
+        state.todayStats.dayNotes
+      );
       state.isWaterUpdating = false;
       state.error = null;
     });
