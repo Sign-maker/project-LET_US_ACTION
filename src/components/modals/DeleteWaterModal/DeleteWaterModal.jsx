@@ -6,14 +6,13 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { useWater } from 'hooks/useWater';
 
 const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
-  console.log(deleteRecordId)
-  const { deleteWater } = useWater()
+  const { deleteWater } = useWater();
   const [loading, setLoading] = useState(false);
-  
+
   const handleDelete = async () => {
     try {
       setLoading(true);
-     await deleteWater({_id: deleteRecordId});
+      await deleteWater({ _id: deleteRecordId });
       onClose();
     } catch (error) {
     } finally {

@@ -10,13 +10,12 @@ import { useEffect } from 'react';
 // import { current } from '@reduxjs/toolkit';
 
 export const TodayWaterList = () => {
-  const { fetchTodayStats, todayStats} = useWater();
+  const { fetchTodayStats, todayStats } = useWater();
   const [currentModifyObj, setCurrenModifyObj] = useState(null);
 
   useEffect(() => {
     fetchTodayStats();
   }, [fetchTodayStats]);
-
 
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -106,7 +105,6 @@ export const TodayWaterList = () => {
                       className={css.editBtn}
                       onClick={() => {
                         handleEditItem(waterObj);
-                        console.log('objj', waterObj);
                       }}
                     >
                       <svg>

@@ -126,7 +126,7 @@ export const waterSlice = createSlice({
     });
     builder.addCase(deleteWater.fulfilled, (state, { payload }) => {
       state.todayStats.dayNotes = state.todayStats.dayNotes.filter(
-        waterNote => (waterNote._id = payload._id)
+        waterNote => waterNote._id !== payload._id
       );
 
       state.todayStats.totalVolume = calcTotalVolume(state.todayStats.dayNotes);
