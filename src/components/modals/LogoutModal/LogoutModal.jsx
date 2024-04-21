@@ -1,11 +1,21 @@
 import React from 'react';
 import css from '../LogoutModal/LogoutModal.module.css';
+import { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const LogoutModal = ({ onCloseLogout, onLogout }) => {
-  const handleLogout = () => {
-    onLogout();
-    onCloseLogout();
+  const [loading, setLoading] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+      await onLogout();
+    } catch (error) {
+    } finally {
+      setLoading(false);
+      onCloseLogout();
+    }
   };
 
   return (
@@ -36,7 +46,7 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
             className={css.btn_logout}
             onClick={handleLogout}
           >
-            Logout
+            {loading && <ClipLoader size={24} color="#ffffff" />} Logout
           </button>
         </div>
       </div>
