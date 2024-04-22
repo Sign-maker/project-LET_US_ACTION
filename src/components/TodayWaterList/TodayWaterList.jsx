@@ -128,6 +128,7 @@ export const TodayWaterList = () => {
             />
           </Modal>
         )}
+
         <button
           className={css.addBtn}
           onClick={() => {
@@ -140,6 +141,7 @@ export const TodayWaterList = () => {
           </svg>
           Add water
         </button>
+
       </div>
     </div>
   );
