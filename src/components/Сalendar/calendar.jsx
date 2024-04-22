@@ -8,6 +8,14 @@ const Calendar = () => {
 
   const [waterConsumptionData] = useState([]);
 
+  const isCurrentMonth = () => {
+    const today = new Date();
+    return (
+      currentMonth.getFullYear() === today.getFullYear() &&
+      currentMonth.getMonth() === today.getMonth()
+    );
+  };
+
   const goToPreviousMonth = () => {
     setCurrentMonth(prevMonth => {
       const previousMonth = new Date(prevMonth);
@@ -40,7 +48,11 @@ const Calendar = () => {
             , {currentMonth.getFullYear()}
           </span>
 
-          <button className={css.monthBtn} onClick={goToNextMonth}>
+          <button
+            className={css.monthBtn}
+            onClick={goToNextMonth}
+            disabled={isCurrentMonth()}
+          >
             {'>'}
           </button>
         </div>
