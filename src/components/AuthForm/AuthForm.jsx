@@ -12,8 +12,7 @@ import {
 } from 'components/servises/UserNotification';
 
 const AuthForm = () => {
-  const { logIn, register, error } = useAuth();
-  console.log(error);
+  const { logIn, register } = useAuth();
 
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
