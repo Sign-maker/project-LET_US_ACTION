@@ -1,6 +1,9 @@
 import {
   selectMonthNotes,
   selectTodayStats,
+  selectIsWaterUpdating,
+  selectIsTodayLoading,
+  selectIsMonthLoading,
 } from 'redux-store/water/waterSelectors';
 import * as operations from '../redux-store/water/waterOperations';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +14,9 @@ export const useWater = () => {
   const dispatch = useDispatch();
   const todayStats = useSelector(selectTodayStats);
   const monthNotes = useSelector(selectMonthNotes);
+  const isWaterUpdating = useSelector(selectIsWaterUpdating);
+  const isTodayLoading = useSelector(selectIsTodayLoading);
+  const isMonthLoading = useSelector(selectIsMonthLoading);
 
   const updateStoreByDailyNorma = dailyNorma =>
     dispatch(waterSlice.actions.updateByDailyNorma(dailyNorma));
@@ -39,6 +45,9 @@ export const useWater = () => {
   return {
     todayStats,
     monthNotes,
+    isWaterUpdating,
+    isTodayLoading,
+    isMonthLoading,
     fetchTodayStats,
     fetchMonthStats,
     addWater,

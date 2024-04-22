@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DayList from './dailyList.jsx';
 
 import css from './calendar.module.css';
+import { useWater } from 'hooks/useWater.js';
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-
+  const { fetchMonthStats } = useWater();
   const [waterConsumptionData] = useState([]);
+
+  useEffect(() => {
+    const monthParam = `${currentMonth.getFullYear()}-${(
+      currentMonth.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, '0')}`;
+    fetchMonthStats(monthParam);
+  }, [fetchMonthStats, currentMonth]);
 
   const isCurrentMonth = () => {
     const today = new Date();
