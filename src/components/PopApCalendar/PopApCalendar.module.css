@@ -37,7 +37,7 @@
 
 @media (min-width: 768px) {
   .popup {
-    width: 292px;
+    min-width: 292px;
     padding: 24px 16px;
     transform: translate(-8%, -111%);
   }
@@ -46,10 +46,5 @@
 @media (min-width: 1440px) {
   .popup {
     transform: translate(-1%, -111%);
-  }
-}
-@media (min-width: 1440px) {
-  .popup {
-    transform: translate(-1%, -125%);
   }
 }
