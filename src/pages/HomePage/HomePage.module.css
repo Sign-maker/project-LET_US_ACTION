@@ -42,11 +42,8 @@
 .container_MonthStats {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   border-radius: 10px;
   padding: 24px 8px;
-  /* width: 280px;
-  height: 836px; */
   height: fit-content;
   box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.3);
   background: var(--secondary-2-ECF2FF);

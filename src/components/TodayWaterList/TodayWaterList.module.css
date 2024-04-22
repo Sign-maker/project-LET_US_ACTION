@@ -1,7 +1,6 @@
 .containerToday {
-  /* width: 264px; */
-  height: 258px;
-  margin-bottom: 24px;
+  height: fit-content;
+
 
   @media screen and (min-width: 768px) {
     width: 656px;
@@ -37,7 +36,6 @@
 
 .containerList {
   width: inherit;
-  max-height: 212px;
 
   @media screen and (min-width: 768px) {
     height: 260px;
@@ -47,7 +45,7 @@
 @media only screen and (min-width: 1440px) {}
 
 .ulWrap {
-  height: 212px;
+  height: 188px;
   overflow-y: auto;
 
 
@@ -83,7 +81,18 @@
   margin: 12px 4px 0 4px;
 
   border-bottom: 1px solid var(--secondary-5-D7E3FF);
+
+  &:first-child {
+    margin: 0px 4px 0 4px;
+  }
+
+  @media screen and (max-width: 319px) {
+    gap: 18px;
+
+  }
 }
+
+
 
 .waterItem {
   font-weight: 400;
@@ -92,12 +101,12 @@
 }
 
 .infoWrap {
-  /* width: 166px; */
+  width: 166px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
+
 
   & svg {
     width: 26px;
@@ -110,12 +119,18 @@
     }
   }
 
-  @media only screen and (min-width: 1440px) {
-    & use {
-      x: 5px;
-      y: 2px;
+  & use {
+    x: 5px;
+    y: 2px;
 
-    }
+  }
+
+}
+
+@media screen and (max-width: 319px) {
+  .infoWrap {
+    width: 100%;
+    gap: 5px;
   }
 }
 
@@ -190,9 +205,11 @@
   gap: 8px;
   padding: 12px 0 0 0;
 
+  height: 20px;
   color: var(--primary-blue-407BFF);
   border: none;
   background-color: transparent;
+  align-items: center;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.25;
@@ -216,6 +233,16 @@
 
     & use {
       fill: var(--secondary-orange-FF9D43);
+    }
+  }
+
+  @media only screen and (min-width: 1440px) {
+    height: 24px;
+
+    & svg {
+      width: 24px;
+      height: 24px;
+
     }
   }
 }

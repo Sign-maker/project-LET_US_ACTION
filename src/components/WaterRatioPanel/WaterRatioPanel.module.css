@@ -18,8 +18,6 @@
 
 .containerPanel {
     margin-bottom: 16px;
-    /* height: 82pxz; */
-    /* width: 280px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +56,7 @@
 .percentsRange {
     -webkit-appearance: none;
     appearance: none;
-    width: 256px;
+    width: 100%;
     border-radius: 30px;
     margin: 0 0 7px 0;
     outline: none;
@@ -97,6 +95,11 @@
     }
 
 }
+@media screen and (min-width: 320px) {
+    .percentsRange {
+        width: 256px;
+    }
+}
 
 @media screen and (min-width: 768px) {
     .percentsRange {
@@ -111,7 +114,7 @@
 }
 
 .percentsPoint {
-    width: 256px;
+    width: 100%;
     margin-bottom: 6px;
     display: flex;
     justify-content: space-between;
@@ -119,6 +122,11 @@
     & span {
         font-size: 8px;
         color: var(--secondary-5-D7E3FF);
+    }
+}
+@media screen and (min-width: 320px) {
+    .percentsPoint {
+        width: 256px;
     }
 }
 
@@ -148,19 +156,7 @@
             text-align: center;
             width: 30px;
         }
-    /* & span {
-        color: var(--primary-blue-407BFF);
-        text-align: center;
-        font-size: 12px;
-        line-height: 1.33;
-        width: 30px;
-    } */
 
-    /* & span:nth-child(2) {
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1.25;
-    } */
 }
 
 .valueCurent {
