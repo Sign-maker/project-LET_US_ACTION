@@ -11,13 +11,17 @@ export const useWater = () => {
   const updateStoreByDailyNorma = dailyNorma =>
     dispatch(waterSlice.actions.updateByDailyNorma(dailyNorma));
 
+  const resetWaterStore = () => dispatch(waterSlice.actions.resetValues());
+
   const fetchTodayStats = useCallback(
     () => dispatch(operations.fetchTodayStats()),
     [dispatch]
   );
 
-  const fetchMonthStats = currentMonth =>
-    dispatch(operations.fetchMonthStats(currentMonth)).unwrap();
+  const fetchMonthStats = useCallback(
+    currentMonth => dispatch(operations.fetchMonthStats(currentMonth)),
+    [dispatch]
+  );
 
   const addWater = waterNote =>
     dispatch(operations.addWater(waterNote)).unwrap();
@@ -36,5 +40,6 @@ export const useWater = () => {
     updateWater,
     deleteWater,
     updateStoreByDailyNorma,
+    resetWaterStore,
   };
 };

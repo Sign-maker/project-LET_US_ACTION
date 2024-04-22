@@ -7,11 +7,19 @@ import { TodayWaterList } from '../../components/TodayWaterList/TodayWaterList';
 import { useWater } from 'hooks/useWater';
 
 const HomePage = () => {
-  const { fetchTodayStats } = useWater();
+  const { fetchTodayStats, fetchMonthStats } = useWater();
 
   useEffect(() => {
     fetchTodayStats();
   }, [fetchTodayStats]);
+
+  useEffect(() => {
+    const now = new Date();
+    const monthParam = `${now.getFullYear()}-${(now.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}`;
+    fetchMonthStats(monthParam);
+  }, [fetchMonthStats]);
 
   return (
     <section className={css.section_HomePage}>

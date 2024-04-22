@@ -13,7 +13,13 @@ import {
   toastRejected,
 } from 'components/servises/UserNotification';
 
-const TodayListModal = ({ onClose, isEditing }) => {
+const TodayListModal = ({
+  onClose,
+  isEditing,
+  amountForEdit,
+  editTimeInit,
+  editRecordId,
+}) => {
   const [timeOptions, setTimeOptions] = useState([]);
   const { addWater, updateWater } = useWater();
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -53,13 +59,12 @@ const TodayListModal = ({ onClose, isEditing }) => {
       waterVolume: finalAmount,
       date: createDateFromTimeString(finalTime),
     };
+
     try {
-      const action = !isEditing ? addWater : updateWater;
-      await action(payload);
-      if (addWater) {
-        toastFulfilled('Water add success');
+      if (isEditing) {
+        await updateWater({ _id: editRecordId, ...payload });
       } else {
-        toastFulfilled('Water update success');
+        await addWater(payload);
       }
       resetForm();
       onClose();
@@ -107,8 +112,12 @@ const TodayListModal = ({ onClose, isEditing }) => {
                 {isEditing && (
                   <div className={css.previos_info}>
                     <GlassSVG />
-                    <p className={css.today_volume}>{500} ml</p>
-                    <p className={css.today_time}>{'7:55'}</p>
+                    <p className={css.today_volume}>
+                      {amountForEdit ? `${amountForEdit} ml` : 'No notes yet'}
+                    </p>
+                    <p className={css.today_time}>
+                      {timeFromDate('en-US', editTimeInit)}
+                    </p>
                   </div>
                 )}
                 <h3 className={css.subtitle}>
