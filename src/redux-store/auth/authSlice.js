@@ -30,7 +30,7 @@ const handleAuthPending = state => {
 
 const handleAuthRejected = (state, { payload }) => {
   state.isAuthLoading = false;
-  console.log(payload);
+  // console.log(payload);
   state.error = payload;
 };
 
