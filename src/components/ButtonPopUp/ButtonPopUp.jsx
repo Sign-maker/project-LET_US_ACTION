@@ -10,33 +10,29 @@ import css from './ButtonPopUp.module.css';
 export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
   const { user } = useAuth();
 
-  const baseURL = 'http://localhost:8000/';
+  const url = user.avatarURL;
 
-  // console.log(user);
-  const url = `${baseURL}${user.avatarURL}`;
-
-  // console.log(user.avatarURL);
   return (
     <Popup
       trigger={
         <button className={css.button}>
           {user.avatarURL ? (
             <>
-              <img src={url} alt={user.name} className={css.avatar} />
               <span className={css.name}>{user.name}</span>
+              <img src={url} alt={user.name} className={css.avatar} />
             </>
           ) : user.name ? (
-            <>
-              <div className={css.avatar}>
+            <div className={css.avatarWrapper}>
+              <span className={css.name}>{user.name}</span>
+              <div className={css.fakeAvatar}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
-            </>
+            </div>
           ) : (
-            <span className={css.name}>
+            <div className={css.fakeAvatar}>
               {user.email.charAt(0).toUpperCase()}
-            </span>
+            </div>
           )}
-          {/* <span className={css.name}>{currentName}</span> */}
           <IconContext.Provider value={{ className: css.icon }}>
             <div>
               <GoChevronDown />

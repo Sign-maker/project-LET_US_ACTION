@@ -7,6 +7,7 @@
   z-index: 10;
   transform: translate(3%, -111%);
 }
+
 .currentDate {
   font-size: 16px;
   font-weight: 400;
@@ -45,5 +46,10 @@
 @media (min-width: 1440px) {
   .popup {
     transform: translate(-1%, -111%);
+  }
+}
+@media (min-width: 1440px) {
+  .popup {
+    transform: translate(-1%, -125%);
   }
 }

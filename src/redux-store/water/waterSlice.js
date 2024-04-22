@@ -54,8 +54,9 @@ export const waterSlice = createSlice({
       state.isTodayLoading = false;
       state.error = null;
     });
-    builder.addCase(fetchTodayStats.rejected, state => {
+    builder.addCase(fetchTodayStats.rejected, (state, { payload }) => {
       state.isTodayLoading = false;
+      state.error = payload;
     });
     //fetchMonthStats
     builder.addCase(fetchMonthStats.pending, state => {
@@ -66,8 +67,9 @@ export const waterSlice = createSlice({
       state.isMonthLoading = false;
       state.error = null;
     });
-    builder.addCase(fetchMonthStats.rejected, state => {
+    builder.addCase(fetchMonthStats.rejected, (state, { payload }) => {
       state.isMonthLoading = false;
+      state.error = payload;
     });
     //addWater
     builder.addCase(addWater.pending, state => {
@@ -86,8 +88,9 @@ export const waterSlice = createSlice({
       state.isWaterUpdating = false;
       state.error = null;
     });
-    builder.addCase(addWater.rejected, state => {
+    builder.addCase(addWater.rejected, (state, { payload }) => {
       state.isWaterUpdating = false;
+      state.error = payload;
     });
     //updateWater
     builder.addCase(updateWater.pending, state => {
@@ -114,8 +117,9 @@ export const waterSlice = createSlice({
       state.isWaterUpdating = false;
       state.error = null;
     });
-    builder.addCase(updateWater.rejected, state => {
+    builder.addCase(updateWater.rejected, (state, { payload }) => {
       state.isWaterUpdating = false;
+      state.error = payload;
     });
     //deleteWater
     builder.addCase(deleteWater.pending, state => {
@@ -137,8 +141,9 @@ export const waterSlice = createSlice({
       state.isWaterUpdating = false;
       state.error = null;
     });
-    builder.addCase(deleteWater.rejected, state => {
+    builder.addCase(deleteWater.rejected, (state, { payload }) => {
       state.isWaterUpdating = false;
+      state.error = payload;
     });
   },
 });

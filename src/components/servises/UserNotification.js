@@ -6,7 +6,7 @@ const toastSettings = {
 };
 
 export const toastFulfilled = notification =>
-  toast.info(notification, toastSettings);
+  toast.success(notification, toastSettings);
 
 export const toastRejected = notification =>
   toast.error(notification, toastSettings);
