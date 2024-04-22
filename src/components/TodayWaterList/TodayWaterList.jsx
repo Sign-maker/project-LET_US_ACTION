@@ -108,6 +108,7 @@ export const TodayWaterList = () => {
               <p className={css.waterItem}>No notes yet</p>
             </li>
           )}
+
           {deleteOpen && (
             <Modal onClose={handleCloseDeleteModal}>
               <DeleteWaterModal
@@ -132,19 +133,20 @@ export const TodayWaterList = () => {
             </Modal>
           )}
         </ul>
-          <button
-            className={css.addBtn}
-            onClick={() => {
-              setIsEditing(false);
-              handleOpenAddModal();
-              }}
-              
-          >
-            <svg>
-              <use href={sprite + '#plus'}></use>
-            </svg>
-            Add water
-          </button>
+
+        <button
+          className={css.addBtn}
+          onClick={() => {
+            setIsEditing(false);
+            handleOpenAddModal();
+          }}
+        >
+          <svg>
+            <use href={sprite + '#plus'}></use>
+          </svg>
+          Add water
+        </button>
+
       </div>
     </div>
   );
