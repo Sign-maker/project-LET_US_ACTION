@@ -9,6 +9,7 @@ const DayList = ({ month }) => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [hasFetched, setHasFetched] = useState(false);
 
   const { monthNotes } = useSelector(state => state.water);
 
@@ -19,8 +20,11 @@ const DayList = ({ month }) => {
     .padStart(2, '0')}`;
 
   useEffect(() => {
-    fetchMonthStats(monthString);
-  }, [monthString, fetchMonthStats, monthNotes]);
+    if (!hasFetched) {
+      fetchMonthStats(monthString);
+      setHasFetched(true);
+    }
+  }, [monthString, fetchMonthStats, hasFetched]);
 
   const handleDayClick = (day, event) => {
     setSelectedDay(day);
