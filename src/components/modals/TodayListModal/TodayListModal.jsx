@@ -23,6 +23,9 @@ const TodayListModal = ({
   const [timeOptions, setTimeOptions] = useState([]);
   const { addWater, updateWater } = useWater();
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [tempAmountForEdit, setTempAmountForEdit] = useState(
+    amountForEdit || 0
+  );
 
   useEffect(() => {
     const now = new Date();
@@ -48,21 +51,32 @@ const TodayListModal = ({
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setSubmitLoading(true);
-    const selectedTime = values.time;
     const selectedAmount = values.amount;
+    const selectedTime = values.time;
+    const finalAmount = selectedAmount ? selectedAmount : 1;
     const finalTime = selectedTime
       ? selectedTime
       : timeFromDate('en-GB', currentDate);
-    const finalAmount = selectedAmount ? selectedAmount : 1;
+
+
+    const timeUpdate = selectedTime
+      ? selectedTime
+      : timeFromDate('en-GB', editTimeInit);
 
     const payload = {
       waterVolume: finalAmount,
       date: createDateFromTimeString(finalTime),
     };
 
+    const updatePayload = {
+      _id: editRecordId,
+      waterVolume: finalAmount,
+      date: createDateFromTimeString(timeUpdate),
+    };
+
     try {
       if (isEditing) {
-        await updateWater({ _id: editRecordId, ...payload });
+        await updateWater(updatePayload);
         toastFulfilled('Water update success');
       } else {
         await addWater(payload);
@@ -102,7 +116,9 @@ const TodayListModal = ({
           </button>
         </div>
         <Formik
-          initialValues={{ amount: 50, time: '' }}
+          initialValues={{
+            amount: isEditing ? tempAmountForEdit : 50,
+          }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
           validateOnChange={true}
@@ -132,8 +148,10 @@ const TodayListModal = ({
                       type="button"
                       className={css.button_ml}
                       onClick={() => {
-                        const newValue = Number(values.amount || 0) - 50;
-                        setFieldValue('amount', newValue > 0 ? newValue : 50);
+                        const currentValue = Number(values.amount || 0);
+                        const newValue = currentValue - 50;
+                        setFieldValue('amount', newValue > 0 ? newValue : 0);
+                        setTempAmountForEdit(newValue > 0 ? newValue : 0);
                       }}
                     >
                       <HiOutlineMinusSmall
@@ -141,17 +159,18 @@ const TodayListModal = ({
                       />
                     </button>
                     <div className={css.amount}>
-                      <p className={css.amoun_water}>{values.amount || 0} ml</p>
+                      <p className={css.amoun_water}>
+                        {isEditing ? tempAmountForEdit : values.amount || 0} ml
+                      </p>
                     </div>
                     <button
                       type="button"
                       className={css.button_ml}
                       onClick={() => {
-                        const newValue = Number(values.amount || 0) + 50;
-                        setFieldValue(
-                          'amount',
-                          newValue < 5000 ? newValue : 5000
-                        );
+                        const currentValue = Number(values.amount || 0);
+                        const newValue = currentValue + 50;
+                        setFieldValue('amount', newValue > 0 ? newValue : 0);
+                        setTempAmountForEdit(newValue > 0 ? newValue : 0);
                       }}
                     >
                       <HiOutlinePlusSmall
@@ -172,11 +191,13 @@ const TodayListModal = ({
                   >
                     <option
                       key="current-time"
-                      value={timeFromDate('en-GB', currentDate)}
+                      // value={timeFromDate('en-GB', currentDate)}
                     >
-                      {timeFromDate('en-GB', currentDate)}
+                      {/* {timeFromDate('en-GB', currentDate)} */}
+                      {isEditing
+                        ? timeFromDate('em-GB', editTimeInit)
+                        : timeFromDate('en-GB', currentDate)}
                     </option>
-
                     {timeOptions.map(option => (
                       <option key={option} value={option}>
                         {option}
@@ -199,6 +220,7 @@ const TodayListModal = ({
                     }`}
                     name="amount"
                     onInput={validateLength}
+                    // value={isEditing ? tempAmountForEdit : values.amount || 0}
                   />
                   {errors.amount && values.amount ? (
                     <div className={css.error_message}>{errors.amount}</div>
@@ -206,7 +228,9 @@ const TodayListModal = ({
                 </div>
 
                 <div className={css.modal_footer}>
-                  <span className={css.span_ml}>{values.amount || 0} ml</span>
+                  <span className={css.span_ml}>
+                    {isEditing ? tempAmountForEdit : values.amount || 0} ml
+                  </span>
                   <button
                     className={css.add_save_btn}
                     type="submit"
