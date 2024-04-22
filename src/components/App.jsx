@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { lazy, useEffect } from 'react';
 
-
 import { useAuth } from 'hooks/useAuth';
 import { RestrictedRoute } from './RestricredRoute';
 import { PrivateRoute } from './PrivateRoute';
@@ -16,11 +15,14 @@ const SigninPage = lazy(() => import('pages/SigninPage/SigninPage'));
 export const App = () => {
   const { refreshUser, isRefreshing } = useAuth();
 
-
   useEffect(() => {
-    refreshUser();
+    const refresh = async () => {
+      try {
+        await refreshUser();
+      } catch (error) {}
+    };
+    refresh();
   }, [refreshUser]);
-
 
   return isRefreshing ? (
     <p>Refreshing user data</p>

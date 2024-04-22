@@ -79,7 +79,7 @@ body {
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 }
 @media (min-width: 320px) {
   .container {

@@ -56,20 +56,21 @@ export const authSlice = createSlice({
       state.token = payload.token;
       state.isLoggedIn = true;
       state.isAuthLoading = false;
+      state.error = null;
     });
     builder.addCase(logIn.rejected, handleAuthRejected);
     //avatars
     builder.addCase(updateAvatar.pending, handleAuthPending);
     builder.addCase(updateAvatar.fulfilled, (state, { payload }) => {
       state.user.avatarURL = payload;
+      state.error = null;
     });
     builder.addCase(updateAvatar.rejected, handleAuthRejected);
     // profile
     builder.addCase(updateProfile.pending, handleAuthPending);
     builder.addCase(updateProfile.fulfilled, (state, { payload }) => {
-      console.log(payload);
-      console.log(state.user);
       state.user = { ...state.user, ...payload.user };
+      state.error = null;
     });
     builder.addCase(updateProfile.rejected, handleAuthRejected);
     //logout
@@ -86,15 +87,18 @@ export const authSlice = createSlice({
       state.user = payload.user;
       state.isLoggedIn = true;
       state.isRefreshing = false;
+      state.error = null;
     });
-    builder.addCase(refreshUser.rejected, state => {
+    builder.addCase(refreshUser.rejected, (state, { payload }) => {
       state.isRefreshing = false;
+      state.error = payload;
     });
     //daylyNorms
     builder.addCase(updateMyDailyNorma.pending, handleAuthPending);
     builder.addCase(updateMyDailyNorma.fulfilled, (state, { payload }) => {
       // console.log(payload);
       state.user.dailyNorma = payload.dailyNorma;
+      state.error = null;
     });
     builder.addCase(updateMyDailyNorma.rejected, handleAuthRejected);
   },
