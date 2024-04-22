@@ -57,31 +57,9 @@ setDeleteOpen(false);
       <h2 className={css.todayText}>Today</h2>
       <div className={css.containerList}>
         <ul className={css.ulWrap}>
-          {/* <li className={css.listItem} key={_id}>
-            <div className={css.infoWrap}>
-              <svg>
-                <use href={sprite + '#cup'}></use>
-              </svg>
-              <p className={css.volume}>{amountWater} ml</p>
-              <p className={css.time}>{timeFromDate(date)}</p>
-            </div>
-            <div className={css.wrapBtn}>
-              <button className={css.editBtn} onClick={handleEditItem}>
-                <svg>
-                  <use href={sprite + '#edit'}></use>
-                </svg>
-              </button>
-              <button className={css.deleteBtn} onClick={() => {}}>
-                <svg>
-                  <use href={sprite + '#trash'}></use>
-                </svg>
-              </button>
-            </div>
-          </li> */}
           {waterNotes?.length > 0 ? (
             waterNotes
-
-              .slice()
+             .slice()
               .sort(
                 (a, b) =>
                   new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -117,20 +95,6 @@ setDeleteOpen(false);
               <p className={css.waterItem}>No notes yet</p>
             </li>
           )}
-
-          <button
-            className={css.addBtn}
-            onClick={() => {
-              setIsEditing(false);
-              handleOpenAddModal();
-            }}
-          >
-            <svg>
-              <use href={sprite + '#plus'}></use>
-            </svg>
-            Add water
-          </button>
-
           {deleteOpen && (
             <Modal onClose={handleCloseDeleteModal}>
               <DeleteWaterModal
@@ -151,6 +115,19 @@ setDeleteOpen(false);
             </Modal>
           )}
         </ul>
+          <button
+            className={css.addBtn}
+            onClick={() => {
+              setIsEditing(false);
+              handleOpenAddModal();
+              }}
+              
+          >
+            <svg>
+              <use href={sprite + '#plus'}></use>
+            </svg>
+            Add water
+          </button>
       </div>
     </div>
   );

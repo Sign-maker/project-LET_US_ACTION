@@ -1,8 +1,7 @@
 .containerToday {
-  max-width: 264px;
-  max-height: 258px;
-  display: flex;
-  flex-direction: column;
+  /* width: 264px; */
+  height: 258px;
+  margin-bottom: 24px;
 
   @media screen and (min-width: 768px) {
     width: 656px;
@@ -29,7 +28,7 @@
   text-align: left;
   color: var(--primary-black-2F2F2F);
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.23;
 
   @media screen and (min-width: 768px) {
@@ -53,13 +52,14 @@
   height: 212px;
   overflow-y: auto;
 
+
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
   }
 
   &::-webkit-scrollbar-track {
     margin-block: 5px;
-    background: var(--secondary-4-9EBBFF);
+    background: var(--secondary-5-D7E3FF);
     border-radius: 50px;
     border: 1px solid var(--secondary-5-D7E3FF);
   }
@@ -81,13 +81,10 @@
   align-items: center;
   gap: 38px;
 
+  padding: 0 0 12px 0;
+  margin: 12px 4px 0 4px;
 
-  margin: 12px 4px 12px 4px;
   border-bottom: 1px solid var(--secondary-5-D7E3FF);
-}
-
-.listItem:first-child {
-  margin: 0px 4px 12px 4px;
 }
 
 .waterItem {
@@ -97,11 +94,12 @@
 }
 
 .infoWrap {
-  width: 166px;
+  /* width: 166px; */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 15px;
 
   & svg {
     width: 26px;
@@ -120,7 +118,7 @@
     & use {
       x: 5px;
       y: 2px;
-    
+
     }
   }
 }
@@ -150,7 +148,7 @@
 
 .editBtn {
   width: 16px;
-  height: 18px;
+  height: 16px;
   padding: 0;
   border: none;
   background-color: transparent;
@@ -190,10 +188,11 @@
   }
 }
 
+
 .addBtn {
   display: flex;
   gap: 8px;
-  /* padding: 12px 0 0 0; */
+  padding: 12px 0 0 0;
   color: var(--primary-blue-407BFF);
   border: none;
   background-color: transparent;

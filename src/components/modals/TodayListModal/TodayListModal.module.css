@@ -71,7 +71,7 @@
 }
 
 h3 {
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
   color: var(--primary-black-2F2F2F);
   font-size: 18px;
   font-weight: 500;
