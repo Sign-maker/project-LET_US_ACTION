@@ -33,13 +33,12 @@ const DayList = ({ month }) => {
     setPopupPosition({ x: event.clientX, y: event.clientY });
   };
 
-  // Функция для извлечения процента выполнения по дате
   const getFulfillmentForDay = day => {
     const dayString = `${month.getFullYear()}-${(month.getMonth() + 1)
       .toString()
       .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     const dayData = monthNotes.find(note => note.date.startsWith(dayString));
-    return dayData ? `${dayData.fulfillment}%` : '0%';
+    return dayData ? dayData.fulfillment : 0;
   };
 
   return (
@@ -54,16 +53,24 @@ const DayList = ({ month }) => {
             ).getDate(),
           },
           (_, i) => i + 1
-        ).map(day => (
-          <li
-            key={day}
-            className={css.day}
-            onClick={event => handleDayClick(day, event)}
-          >
-            <span className={css.daySpan}>{day}</span>
-            <p className={css.percent}>{getFulfillmentForDay(day)}</p>
-          </li>
-        ))}
+        ).map(day => {
+          const fulfillment = getFulfillmentForDay(day);
+          const spanStyle =
+            fulfillment < 100 ? { border: '2px solid #ff9d43' } : {};
+
+          return (
+            <li
+              key={day}
+              className={css.day}
+              onClick={event => handleDayClick(day, event)}
+            >
+              <span className={css.daySpan} style={spanStyle}>
+                {day}
+              </span>
+              <p className={css.percent}>{`${fulfillment}%`}</p>
+            </li>
+          );
+        })}
       </ul>
       <div className={css.popupContainer}>
         <PopUpCalendar
