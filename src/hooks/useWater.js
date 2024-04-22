@@ -18,8 +18,10 @@ export const useWater = () => {
     [dispatch]
   );
 
-  const fetchMonthStats = currentMonth =>
-    dispatch(operations.fetchMonthStats(currentMonth)).unwrap();
+  const fetchMonthStats = useCallback(
+    currentMonth => dispatch(operations.fetchMonthStats(currentMonth)),
+    [dispatch]
+  );
 
   const addWater = waterNote =>
     dispatch(operations.addWater(waterNote)).unwrap();

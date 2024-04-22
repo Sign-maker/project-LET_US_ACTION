@@ -20,10 +20,7 @@ const initialState = {
     fulfillment: null,
     servingsCount: null,
   },
-  monthStats: {
-    currentMonth: null,
-    monthNotes: [],
-  },
+  monthNotes: [],
   isTodayLoading: false,
   isMonthLoading: false,
   isWaterUpdating: false,
@@ -65,7 +62,7 @@ export const waterSlice = createSlice({
       state.isMonthLoading = true;
     });
     builder.addCase(fetchMonthStats.fulfilled, (state, { payload }) => {
-      state.monthStats = payload.monthStats;
+      state.monthNotes = payload.month;
       state.isMonthLoading = false;
       state.error = null;
     });

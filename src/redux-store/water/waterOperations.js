@@ -19,10 +19,7 @@ export const fetchMonthStats = createAsyncThunk(
   async (currentMonth, thunkAPI) => {
     //2024-04
     try {
-      const params = {
-        currentMonth,
-      };
-      const { data } = await axios.get('/water/month', { params });
+      const { data } = await axios.get(`/water/month/${currentMonth}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
