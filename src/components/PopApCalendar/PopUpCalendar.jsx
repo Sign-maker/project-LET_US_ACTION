@@ -72,7 +72,7 @@ const PopUpCalendar = ({
         style={{
           top: adjustedPosition.y,
           left: adjustedPosition.x,
-          position: 'fixed',
+          position: 'absolute',
         }}
       >
         <div className={css.popupContent}>

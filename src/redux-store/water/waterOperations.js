@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axios } from '../auth/authOperations';
-import { toastRejected } from 'components/servises/UserNotification';
 
 export const fetchTodayStats = createAsyncThunk(
   'water/fetchTodayStats',
@@ -9,7 +8,8 @@ export const fetchTodayStats = createAsyncThunk(
       const { data } = await axios.get('/water/today');
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -22,7 +22,8 @@ export const fetchMonthStats = createAsyncThunk(
       const { data } = await axios.get(`/water/month/${currentMonth}`);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -34,7 +35,8 @@ export const addWater = createAsyncThunk(
       const { data } = await axios.post('/water', waterNote);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -50,7 +52,8 @@ export const updateWater = createAsyncThunk(
       });
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );
@@ -63,8 +66,8 @@ export const deleteWater = createAsyncThunk(
       const { data } = await axios.delete(`/water/${_id}`);
       return data;
     } catch (error) {
-      toastRejected('Something went wrong, please try again later!');
-      return thunkAPI.rejectWithValue(error.message);
+      const errorMessage = error.response.data.message;
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );

@@ -8,14 +8,18 @@ import { HiOutlineXMark } from 'react-icons/hi2';
 import { ClipLoader } from 'react-spinners';
 import css from './UserModal.module.css';
 import { useAuth } from 'hooks/useAuth';
+import {
+  toastFulfilled,
+  toastRejected,
+} from 'components/servises/UserNotification';
 
 export const UserModal = ({ onClose }) => {
   const { user, updateProfile, updateAvatar } = useAuth();
   const fileInputRef = useRef(null);
 
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null); // стан для URL-адреси зображення
-  const [file, setFile] = useState(null); // стан для обраного файлу
+  const [imageUrl, setImageUrl] = useState(null);
+  const [file, setFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -30,10 +34,7 @@ export const UserModal = ({ onClose }) => {
     setShowRepeatPassword(!showRepeatPassword);
   };
 
-  const baseURL = 'http://localhost:8000/';
-  // console.log(user);
-  const url = `${baseURL}${user.avatarURL}`;
-  console.log(user.avatarURL);
+  const url = user.avatarURL;
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -44,9 +45,8 @@ export const UserModal = ({ onClose }) => {
       const imageUrl = URL.createObjectURL(selectedFile);
       console.log(file);
 
-      setImageUrl(imageUrl); // оновлення стану URL-адреси
-      setFile(selectedFile); // збереження обраного файлу
-      // Обробка завантаженого файлу
+      setImageUrl(imageUrl);
+      setFile(selectedFile);
     }
   };
   const urlBase = file ? imageUrl : url;
@@ -127,8 +127,10 @@ export const UserModal = ({ onClose }) => {
       try {
         setSubmitLoading(true);
         await updateProfile(newProfile);
+        toastFulfilled('Your data has been successfully updated!');
         onClose();
       } catch (error) {
+        toastRejected(error);
       } finally {
         setSubmitLoading(false);
       }
@@ -141,13 +143,13 @@ export const UserModal = ({ onClose }) => {
     try {
       setSubmitLoading(true);
       await updateAvatar(file);
+      toastFulfilled('Your avatar has been successfully updated!');
       onClose();
     } catch (error) {
+      toastRejected(error);
     } finally {
       setSubmitLoading(false);
     }
-
-    console.log('Form submitted successfully!', values);
   };
 
   return (
@@ -180,7 +182,6 @@ export const UserModal = ({ onClose }) => {
           repeatPassword: '',
         }}
         validationSchema={SignupSchema}
-        // onSubmitCapture={true}
         onSubmit={handleSubmit}
       >
         {({ errors, touched }) => (
@@ -189,7 +190,6 @@ export const UserModal = ({ onClose }) => {
               <label className={css.labelPhoto} htmlFor="photo"></label>
               <input
                 ref={fileInputRef}
-                // className={css.inputPhoto}
                 id="photo"
                 name="photo"
                 type="file"
@@ -209,7 +209,7 @@ export const UserModal = ({ onClose }) => {
                         className={css.radioBtn}
                         type="radio"
                         name="gender"
-                        value="male"
+                        value="female"
                       />
                       Woman
                     </label>
@@ -218,7 +218,7 @@ export const UserModal = ({ onClose }) => {
                         className={css.radioBtn}
                         type="radio"
                         name="gender"
-                        value="female"
+                        value="male"
                       />
                       Man
                     </label>
