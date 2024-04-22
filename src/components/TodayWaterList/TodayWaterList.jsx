@@ -6,17 +6,10 @@ import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
 import { useWater } from 'hooks/useWater';
 import { timeFromDate } from 'helpers/dateHelpers';
-import { useEffect } from 'react';
-// import { current } from '@reduxjs/toolkit';
 
 export const TodayWaterList = () => {
-  const { fetchTodayStats, todayStats } = useWater();
+  const { todayStats } = useWater();
   const [currentModifyObj, setCurrenModifyObj] = useState(null);
-
-  useEffect(() => {
-    fetchTodayStats();
-  }, [fetchTodayStats]);
-
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);

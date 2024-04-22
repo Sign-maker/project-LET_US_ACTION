@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import css from './calendar.module.css';
 import PopUpCalendar from 'components/PopApCalendar/PopUpCalendar';
-import { useSelector } from 'react-redux';
 import { useWater } from 'hooks/useWater';
 
 const DayList = ({ month }) => {
@@ -9,22 +8,8 @@ const DayList = ({ month }) => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
-  const [hasFetched, setHasFetched] = useState(false);
 
-  const { monthNotes } = useSelector(state => state.water);
-
-  const { fetchMonthStats } = useWater();
-
-  const monthString = `${month.getFullYear()}-${(month.getMonth() + 1)
-    .toString()
-    .padStart(2, '0')}`;
-
-  useEffect(() => {
-    if (!hasFetched) {
-      fetchMonthStats(monthString);
-      setHasFetched(true);
-    }
-  }, [monthString, fetchMonthStats, hasFetched]);
+  const { monthNotes } = useWater();
 
   const handleDayClick = (day, event) => {
     setSelectedDay(day);
