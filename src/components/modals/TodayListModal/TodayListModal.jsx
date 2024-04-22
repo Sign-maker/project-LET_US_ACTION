@@ -3,13 +3,26 @@ import css from './TodayListModal.module.css';
 import { ReactComponent as GlassSVG } from '../../../images/logo/glass.svg';
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { useState, useEffect } from 'react';
-import { Formik, ErrorMessage, Field, Form } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { createDateFromTimeString, timeFromDate } from 'helpers/dateHelpers';
+import { useWater } from 'hooks/useWater';
+import {
+  toastFulfilled,
+  toastRejected,
+} from 'components/servises/UserNotification';
 
-const TodayListModal = ({ onClose, isEditing }) => {
-  const [amount, setAmount] = useState('');
-  const [time, setTime] = useState('');
+const TodayListModal = ({
+  onClose,
+  isEditing,
+  amountForEdit,
+  editTimeInit,
+  editRecordId,
+}) => {
   const [timeOptions, setTimeOptions] = useState([]);
+  const { addWater, updateWater } = useWater();
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -17,7 +30,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
     const currentMinute = now.getMinutes();
     const newTimeOptions = [];
 
-    for (let hour = currentHour; hour < 24; hour++) {
+    for (let hour = 0; hour < 24; hour++) {
       for (let minute = 0; minute < 60; minute += 5) {
         if (hour === currentHour && minute < currentMinute) {
           continue;
@@ -28,56 +41,52 @@ const TodayListModal = ({ onClose, isEditing }) => {
         newTimeOptions.push(currentTime);
       }
     }
-
-    const formattedHour = String(currentHour).padStart(2, '0');
-    const formattedMinute = String(currentMinute).padStart(2, '0');
-    const currentTime = `${formattedHour}:${formattedMinute}`;
-    setTime(currentTime);
     setTimeOptions(newTimeOptions);
   }, []);
 
   const currentDate = new Date();
-  const day = String(currentDate.getDate()).padStart(2, '0');
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const year = String(currentDate.getFullYear());
 
-  const formattedDate = `${day}.${month}.${year}`;
-
-  const currentHour = currentDate.getHours();
-  const currentMinute = currentDate.getMinutes();
-
-  const formatTime = (hours, minutes) => {
-    const period = hours >= 12 ? 'PM' : 'AM';
-    const formattedHours = hours % 12 || 12;
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    return `${formattedHours}:${formattedMinutes} ${period}`;
-  };
-
-  const formattedTime = formatTime(currentHour, currentMinute);
-
-  const handleBlur = () => {
-    setAmount(prevAmount => prevAmount || amount || 0);
-  };
-
-  const handleSubmit = async (values, { resetForm, setError }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    setSubmitLoading(true);
     const selectedTime = values.time;
     const selectedAmount = values.amount;
-    const finalTime = selectedTime ? selectedTime : time;
-    const finalAmount = selectedAmount ? selectedAmount : amount;
-    console.log('Form values:', {
-      amount: finalAmount,
-      time: finalTime,
-      date: formattedDate,
-    });
+    const finalTime = selectedTime
+      ? selectedTime
+      : timeFromDate('en-GB', currentDate);
+    const finalAmount = selectedAmount ? selectedAmount : 1;
 
-    resetForm();
-    onClose();
+    const payload = {
+      waterVolume: finalAmount,
+      date: createDateFromTimeString(finalTime),
+    };
+
+    try {
+      if (isEditing) {
+        await updateWater({ _id: editRecordId, ...payload });
+        toastFulfilled('Water update success');
+      } else {
+        await addWater(payload);
+        toastFulfilled('Water add success');
+      }
+      resetForm();
+      onClose();
+    } catch (error) {
+      toastRejected(error);
+    } finally {
+      setSubmitLoading(false);
+      setSubmitting(false);
+    }
   };
 
+  const validateLength = e => {
+    if (e.target.value.length > 4) {
+      e.target.value = e.target.value.slice(0, 4);
+    }
+  };
   const validationSchema = Yup.object().shape({
     amount: Yup.number()
       .required('Amount is required')
-      .min(0, 'Amount must be greater than or equal to 0')
+      .min(1, 'Amount must be at least 1')
       .max(5000, 'Amount cannot exceed 5000'),
   });
 
@@ -93,21 +102,29 @@ const TodayListModal = ({ onClose, isEditing }) => {
           </button>
         </div>
         <Formik
-          initialValues={{ amount: '', time: '' }}
+          initialValues={{ amount: 50, time: '' }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
+          validateOnChange={true}
+          validateOnBlur={true}
         >
-          {({ errors, touched, setFieldValue, values }) => (
+          {({ errors, touched, setFieldValue, values, isSubmitting }) => (
             <Form autoComplete="off">
               <div className={css.add_box_modal}>
                 {isEditing && (
                   <div className={css.previos_info}>
                     <GlassSVG />
-                    <p className={css.today_volume}>{values.amount || 0} ml</p>
-                    <p className={css.today_time}>{formattedTime}</p>
+                    <p className={css.today_volume}>
+                      {amountForEdit ? `${amountForEdit} ml` : 'No notes yet'}
+                    </p>
+                    <p className={css.today_time}>
+                      {timeFromDate('en-US', editTimeInit)}
+                    </p>
                   </div>
                 )}
-                <h3>Correct entered data:</h3>
+                <h3 className={css.subtitle}>
+                  {isEditing ? 'Correct entered data:' : 'Choose a value:'}
+                </h3>
                 <div className={css.add_water}>
                   <p className={css.add_paragraf}>Amount of water:</p>
                   <div className={css.add_water_container_btn}>
@@ -116,7 +133,7 @@ const TodayListModal = ({ onClose, isEditing }) => {
                       className={css.button_ml}
                       onClick={() => {
                         const newValue = Number(values.amount || 0) - 50;
-                        setFieldValue('amount', newValue > 0 ? newValue : 0);
+                        setFieldValue('amount', newValue > 0 ? newValue : 50);
                       }}
                     >
                       <HiOutlineMinusSmall
@@ -151,11 +168,15 @@ const TodayListModal = ({ onClose, isEditing }) => {
                     name="time"
                     style={{ width: '100%' }}
                     className={css.select}
-                    onChange={e => setTime(e.target.value)}
+                    // onChange={e => setTime(e.target.value)}
                   >
-                    <option key="current-time" value={time}>
-                      {time}
+                    <option
+                      key="current-time"
+                      value={timeFromDate('en-GB', currentDate)}
+                    >
+                      {timeFromDate('en-GB', currentDate)}
                     </option>
+
                     {timeOptions.map(option => (
                       <option key={option} value={option}>
                         {option}
@@ -165,32 +186,34 @@ const TodayListModal = ({ onClose, isEditing }) => {
                 </div>
 
                 <div>
-                  <h3>Enter the value of the water used:</h3>
+                  <h3 className={css.subtitle}>
+                    Enter the value of the water used:
+                  </h3>
 
                   <Field
                     type="number"
                     className={`${css.input_number} ${
-                      errors.amount && touched.amount
-                        ? css.inputError
+                      errors.amount && (touched.amount || values.amount)
+                        ? css.input_error
                         : ''
                     }`}
                     name="amount"
-                    min={0}
-                    max={5000}
-                    placeholder="0"
-                    onBlur={handleBlur}
+                    onInput={validateLength}
                   />
-                  <ErrorMessage
-                    name="amount"
-                    component="div"
-                    className={css.errorMessage}
-                  />
+                  {errors.amount && values.amount ? (
+                    <div className={css.error_message}>{errors.amount}</div>
+                  ) : null}
                 </div>
 
                 <div className={css.modal_footer}>
                   <span className={css.span_ml}>{values.amount || 0} ml</span>
-                  <button className={css.add_save_btn} type="submit">
-                    Save
+                  <button
+                    className={css.add_save_btn}
+                    type="submit"
+                    disabled={isSubmitting || submitLoading}
+                  >
+                    {submitLoading && <ClipLoader size={24} color="#ffffff" />}
+                    Save{' '}
                   </button>
                 </div>
               </div>
@@ -203,5 +226,3 @@ const TodayListModal = ({ onClose, isEditing }) => {
 };
 
 export default TodayListModal;
-
-

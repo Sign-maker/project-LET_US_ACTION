@@ -4,6 +4,7 @@
     background-image: url('/src/images/background/mob/bg-main-page-mob@1x.png');
     background-position: center;
     background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .div{
@@ -27,7 +28,6 @@
     .welcomeSection {
         background-image: url('/src/images/background/desktop/bg-main-page-desk@1x.png'), url('/src/images/background/desktop/bg-el-main-page-desk@1x.png');
         padding-top: 49px;
-        background-size: 100%;
         background-position-y: 100%;
     }
     .div{

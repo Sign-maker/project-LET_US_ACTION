@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './HomePage.module.css';
-
 import { DailyNorma } from '../../components/DailyNorma/DailyNorma';
-
 import { WaterRatioPanel } from '../../components/WaterRatioPanel/WaterRatioPanel';
 import Calendar from '../../components/Сalendar/calendar';
 import { TodayWaterList } from '../../components/TodayWaterList/TodayWaterList';
-// import PopUpCalendar from 'components/PopApCalendar/PopUpCalendar';
+import { useWater } from 'hooks/useWater';
 
-// import { useAuth } from 'hooks/useAuth';
-// import { useSelector } from 'react-redux';
 const HomePage = () => {
+  const { fetchTodayStats, fetchMonthStats } = useWater();
+
+  useEffect(() => {
+    fetchTodayStats();
+  }, [fetchTodayStats]);
+
+  useEffect(() => {
+    const now = new Date();
+    const monthParam = `${now.getFullYear()}-${(now.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}`;
+    fetchMonthStats(monthParam);
+  }, [fetchMonthStats]);
+
   return (
     <section className={css.section_HomePage}>
       <h2 className="visually-hidden" aria-label="Water tracker">

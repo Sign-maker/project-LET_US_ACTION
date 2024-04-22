@@ -6,8 +6,14 @@ import css from './MyDailyNormaModal.module.css';
 import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDailyNormaModalBtn';
 
 import { useAuth } from 'hooks/useAuth';
+import { useWater } from 'hooks/useWater';
+import {
+  toastFulfilled,
+  toastRejected,
+} from 'components/servises/UserNotification';
 
 const MyDailyNormaModal = ({ onClose }) => {
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [weight, setWeight] = useState('');
   const [time, setTime] = useState('');
   const [consumedWater, setConsumedWater] = useState('2.0');
@@ -16,6 +22,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   const [userInput, setUserInput] = useState(false);
 
   const { updateMyDailyNorma } = useAuth();
+  const { updateStoreByDailyNorma } = useWater();
 
   useEffect(() => {
     dailyNormaCalc(weight, time, gender);
@@ -47,12 +54,18 @@ const MyDailyNormaModal = ({ onClose }) => {
             ? parseFloat(consumedWater)
             : parseFloat(dailyNorma),
       };
-      await updateMyDailyNorma({ dailyNorma: data.dailyNorma * 1000 });
+      setSubmitLoading(true);
+      const convertedDailyNorma = data.dailyNorma * 1000;
+      await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
+      updateStoreByDailyNorma(convertedDailyNorma);
+      // await fetchTodayStats();
+      toastFulfilled('Your daily water norma has been successfully updated!');
       onClose();
     } catch (error) {
-      console.error('Failed to update daily norma:', error);
+      toastRejected(error);
     } finally {
-      setSubmitting(false);
+      // setSubmitting(false);
+      setSubmitLoading(false);
     }
   };
 
@@ -60,7 +73,7 @@ const MyDailyNormaModal = ({ onClose }) => {
     weight: Yup.number()
       .min(10, 'Weight must be at least 10 kg')
       .when('time', (time, schema) => {
-        return time
+        return time > 0
           ? schema.required('Weight is required if time is provided')
           : schema;
       }),
@@ -222,7 +235,10 @@ const MyDailyNormaModal = ({ onClose }) => {
               )}
             </div>
             <div className={css.saveButton}>
-              <MyDailyNormaModalBtn isSubmitting={isSubmitting} />
+              <MyDailyNormaModalBtn
+                isSubmitting={isSubmitting || submitLoading}
+                disabled={submitLoading}
+              />
             </div>
           </Form>
         )}

@@ -1,7 +1,9 @@
+.calendar {
+  padding-top: 24px;
+}
 .monthHeader {
   display: flex;
   align-items: center;
-  padding-top: 24px;
 }
 .month {
   font-size: 24px;
@@ -62,6 +64,10 @@
   font-size: 10px;
   font-weight: 400;
   line-height: 16px;
+}
+
+.unfulfilledDay {
+  border: 2px solid var(--secondary-orange-FF9D43);
 }
 
 @media (min-width: 768px) {

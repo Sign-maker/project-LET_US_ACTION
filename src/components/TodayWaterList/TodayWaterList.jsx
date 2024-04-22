@@ -4,84 +4,97 @@ import css from './TodayWaterList.module.css';
 import Modal from '../Modal/Modal';
 import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
+import { useWater } from 'hooks/useWater';
+import { timeFromDate } from 'helpers/dateHelpers';
+import { useEffect } from 'react';
+// import { current } from '@reduxjs/toolkit';
 
 export const TodayWaterList = () => {
-   const [isVisible, setIsVisible] = useState(true);
+  const { fetchTodayStats, todayStats } = useWater();
+  const [currentModifyObj, setCurrenModifyObj] = useState(null);
+
+  useEffect(() => {
+    fetchTodayStats();
+  }, [fetchTodayStats]);
+
+  const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false)
-  // const [selectedRecord, setSelectedRecord] = useState(null)
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
   const handleOpenAddModal = () => {
-   setIsVisible(false);
+    setIsVisible(false);
   };
-  
-   const handleOpenEditModal = () => {
-     setIsVisible(false);
+
+  const handleOpenEditModal = () => {
+    setIsVisible(false);
   };
-  
-  const handleOpenDeleteModal = () => {
+
+  const handleOpenDeleteModal = waterObj => {
+    setCurrenModifyObj(waterObj);
     setDeleteOpen(true);
-  }
+  };
 
   const handleCloseDeleteModal = () => {
-setDeleteOpen(false);
-  }
-
- const handleCloseModal = () => {
-   setIsVisible(true);
-  };
-  
-   const handleEditItem = () => {
-     setIsEditing(true);
-     handleOpenEditModal();
-   };
-
-
-  const timeFromDate = date => {
-    return new Date(date).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    setDeleteOpen(false);
   };
 
+  const handleCloseModal = () => {
+    setIsVisible(true);
+  };
 
-  const waterNotes = [
-    { _id: 'id-1', amountWater: '500', date: '4' },
-    { _id: 'id-2', amountWater: '500', date: '4' },
-    { _id: 'id-3', amountWater: '500', date: '6' },
-    { _id: 'id-4', amountWater: '500', date: '2' },
-  ];
+  const handleEditItem = waterObj => {
+    setCurrenModifyObj(waterObj);
+    setIsEditing(true);
+    handleOpenEditModal();
+  };
+
+  const { dayNotes } = todayStats;
+  // const dayNotes = [
+  //   { _id: 'id-1', amountWater: '500', date: '4' },
+  //   { _id: 'id-2', amountWater: '500', date: '4' },
+  //   { _id: 'id-3', amountWater: '500', date: '6' },
+  //   { _id: 'id-4', amountWater: '500', date: '2' },
+  // ];
 
   return (
     <div className={css.containerToday}>
       <h2 className={css.todayText}>Today</h2>
       <div className={css.containerList}>
         <ul className={css.ulWrap}>
-          {waterNotes?.length > 0 ? (
-            waterNotes
+          {dayNotes?.length > 0 ? (
+            dayNotes
              .slice()
               .sort(
                 (a, b) =>
                   new Date(a.date).getTime() - new Date(b.date).getTime()
               )
-              .map(({ amountWater, date, _id }) => (
-                <li className={css.listItem} key={_id}>
+              .map(waterObj => (
+                <li className={css.listItem} key={waterObj._id}>
                   <div className={css.infoWrap}>
                     <svg>
                       <use href={sprite + '#cup'}></use>
                     </svg>
-                    <p className={css.volume}>{amountWater} ml</p>
-                    <p className={css.time}>{timeFromDate(date)}</p>
+                    <p className={css.volume}>{waterObj.waterVolume} ml</p>
+                    <p className={css.time}>
+                      {timeFromDate('en-US', waterObj.date)}
+                    </p>
                   </div>
                   <div className={css.wrapBtn}>
-                    <button className={css.editBtn} onClick={handleEditItem}>
+                    <button
+                      className={css.editBtn}
+                      onClick={() => {
+                        handleEditItem(waterObj);
+                      }}
+                    >
                       <svg>
                         <use href={sprite + '#edit'}></use>
                       </svg>
                     </button>
                     <button
                       className={css.deleteBtn}
-                      onClick={handleOpenDeleteModal}
+                      onClick={() => {
+                        handleOpenDeleteModal(waterObj);
+                      }}
                     >
                       <svg>
                         <use href={sprite + '#trash'}></use>
@@ -99,6 +112,7 @@ setDeleteOpen(false);
             <Modal onClose={handleCloseDeleteModal}>
               <DeleteWaterModal
                 onClose={handleCloseDeleteModal}
+                deleteRecordId={currentModifyObj?._id}
               />
             </Modal>
           )}
@@ -111,6 +125,9 @@ setDeleteOpen(false);
                   handleCloseModal();
                 }}
                 isEditing={isEditing}
+                amountForEdit={currentModifyObj?.waterVolume}
+                editTimeInit={currentModifyObj?.date}
+                editRecordId={currentModifyObj?._id}
               />
             </Modal>
           )}

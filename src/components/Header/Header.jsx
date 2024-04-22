@@ -11,11 +11,15 @@ import LogoutModal from 'components/modals/LogoutModal/LogoutModal';
 import { useAuth } from 'hooks/useAuth';
 import { routes } from 'constants/routes';
 import { UserModal } from 'components/modals/UserModal/UserModal';
+import { useWater } from 'hooks/useWater';
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [isLogoutVisible, setLogoutVisible] = useState(true);
+
+  const [isLogoutVisible, setLogoutVisible] = useState(false);
   const { isLoggedIn, logOut } = useAuth();
+  const { resetWaterStore } = useWater();
+
 
   const navigate = useNavigate();
 
@@ -49,7 +53,7 @@ const Header = () => {
             <ButtonPopUp
               handleOpenModal={handleOpenModal}
               openLogoutModal={() => {
-                setLogoutVisible(false);
+                setLogoutVisible(true);
               }}
             />
           )}
@@ -60,19 +64,21 @@ const Header = () => {
           </Modal>
         )}
 
-        {!isLogoutVisible && (
+        {isLogoutVisible && (
           <Modal
             onClose={() => {
-              setLogoutVisible(true);
+              setLogoutVisible(false);
             }}
           >
             <LogoutModal
               onCloseLogout={() => {
-                setLogoutVisible(true);
+                setLogoutVisible(false);
               }}
-              onLogout={() => {logOut()}}
+              onLogout={() => {
+                logOut();
+                resetWaterStore();
+              }}
             />
-
           </Modal>
         )}
       </div>

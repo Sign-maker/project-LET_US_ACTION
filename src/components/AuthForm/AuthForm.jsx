@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import css from './AuthForm.module.css';
-import { HiOutlineEyeSlash, HiOutlineEye } from 'react-icons/hi2';
+import { HiOutlineEyeOff, HiOutlineEye } from 'react-icons/hi';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
+import { ClipLoader } from 'react-spinners';
+import css from './AuthForm.module.css';
+import {
+  toastFulfilled,
+  toastRejected,
+} from 'components/servises/UserNotification';
 
 const AuthForm = () => {
-  const { logIn, register } = useAuth();
+  const { logIn, register, error } = useAuth();
+  console.log(error);
+
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -43,14 +51,25 @@ const AuthForm = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
+      setSubmitLoading(true);
       const { email, password } = values;
       const action = isSignUp ? register : logIn;
       await action({ email, password });
-      if (isSignUp) resetForm();
+
+      if (isSignUp) {
+        resetForm();
+        toastFulfilled('Registration successful!');
+      } else {
+        toastFulfilled('You have successfully logged into your account!');
+      }
     } catch (error) {
+      console.log(error);
+      toastRejected(error);
+
       console.error(`${isSignUp ? 'Sign Up' : 'Sign In'} failed:`, error);
     } finally {
       setSubmitting(false);
+      setSubmitLoading(false);
     }
   };
 
@@ -102,17 +121,14 @@ const AuthForm = () => {
                   name="password"
                   placeholder="Password"
                 />
-                <div className={css.passwordIconContainer}>
+                <div
+                  className={css.passwordIconContainer}
+                  onClick={togglePasswordVisibility}
+                >
                   {showPassword ? (
-                    <HiOutlineEye
-                      className={css.passwordIcon}
-                      onClick={togglePasswordVisibility}
-                    />
+                    <HiOutlineEye className={css.passwordIcon} />
                   ) : (
-                    <HiOutlineEyeSlash
-                      className={css.passwordIcon}
-                      onClick={togglePasswordVisibility}
-                    />
+                    <HiOutlineEyeOff className={css.passwordIcon} />
                   )}
                 </div>
               </div>
@@ -140,17 +156,14 @@ const AuthForm = () => {
                     name="confirmPassword"
                     placeholder="Repeat Password"
                   />
-                  <div className={css.passwordIconContainer}>
+                  <div
+                    className={css.passwordIconContainer}
+                    onClick={toggleConfirmPasswordVisibility}
+                  >
                     {showConfirmPassword ? (
-                      <HiOutlineEye
-                        className={css.passwordIcon}
-                        onClick={toggleConfirmPasswordVisibility}
-                      />
+                      <HiOutlineEye className={css.passwordIcon} />
                     ) : (
-                      <HiOutlineEyeSlash
-                        className={css.passwordIcon}
-                        onClick={toggleConfirmPasswordVisibility}
-                      />
+                      <HiOutlineEyeOff className={css.passwordIcon} />
                     )}
                   </div>
                 </div>
@@ -162,8 +175,18 @@ const AuthForm = () => {
               </div>
             )}
 
-            <button className={css.button} type="submit">
-              {isSignUp ? 'Sign Up' : 'Sign In'}
+            <button
+              className={css.button}
+              type="submit"
+              disabled={formik.isSubmitting || submitLoading}
+            >
+              {submitLoading ? (
+                <ClipLoader size={20} color="#ffffff" loading={submitLoading} />
+              ) : isSignUp ? (
+                'Sign Up'
+              ) : (
+                'Sign In'
+              )}
             </button>
           </Form>
         )}

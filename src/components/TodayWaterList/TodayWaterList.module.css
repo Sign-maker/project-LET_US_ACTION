@@ -7,7 +7,6 @@
     width: 656px;
     height: 276px;
   }
-
 }
 
 @media screen and (min-width: 1440px) {
@@ -43,10 +42,10 @@
   @media screen and (min-width: 768px) {
     height: 260px;
   }
-
 }
 
-@media only screen and (min-width: 1440px) {}
+@media only screen and (min-width: 1440px) {
+}
 
 .ulWrap {
   height: 212px;
@@ -110,11 +109,9 @@
       width: 36px;
       height: 36px;
     }
-
   }
 
   @media only screen and (min-width: 1440px) {
-
     & use {
       x: 5px;
       y: 2px;
@@ -179,7 +176,7 @@
   transition-timing-function: var(--my-transition-timing-function);
 
   & use {
-    fill: var(--secondary-red-EF5050F)
+    fill: var(--secondary-red-EF5050F);
   }
 
   &:hover {

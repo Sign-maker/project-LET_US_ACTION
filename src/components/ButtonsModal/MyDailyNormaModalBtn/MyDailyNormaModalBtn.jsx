@@ -1,13 +1,23 @@
 import React from 'react';
+import { ClipLoader } from 'react-spinners';
 import css from './MyDailyNormaModalBtn.module.css';
 
-const MyDailyNormaModalBtn = () => {
+const MyDailyNormaModalBtn = ({ isSubmitting, disabled, onClick }) => {
   return (
-    <div>
-      <button type="submit" className={css.saveButton}>
-        Save
-      </button>
-    </div>
+    <button
+      className={css.saveButton}
+      onClick={onClick}
+      type="submit"
+      disabled={disabled}
+    >
+      {isSubmitting ? (
+        <div className={css.spinnerCss}>
+          <ClipLoader size={20} color="#ffffff" loading={isSubmitting} />
+        </div>
+      ) : (
+        'Save'
+      )}
+    </button>
   );
 };
 

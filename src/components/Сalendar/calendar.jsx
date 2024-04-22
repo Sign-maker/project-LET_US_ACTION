@@ -5,23 +5,16 @@ import css from './calendar.module.css';
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  // const [waterConsumptionData, setWaterConsumptionData] = useState([]);
+
   const [waterConsumptionData] = useState([]);
 
-  // const fetchWaterConsumptionData = async (req, res, next) => {
-  //   try {
-  //     const response = await fetch('/');
-  //     const data = await response.json();
-
-  //     setWaterConsumptionData(data);
-  //   } catch (error) {
-  //     console.error('Помилка під час отримання даних:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchWaterConsumptionData();
-  // }, []);
+  const isCurrentMonth = () => {
+    const today = new Date();
+    return (
+      currentMonth.getFullYear() === today.getFullYear() &&
+      currentMonth.getMonth() === today.getMonth()
+    );
+  };
 
   const goToPreviousMonth = () => {
     setCurrentMonth(prevMonth => {
@@ -55,7 +48,11 @@ const Calendar = () => {
             , {currentMonth.getFullYear()}
           </span>
 
-          <button className={css.monthBtn} onClick={goToNextMonth}>
+          <button
+            className={css.monthBtn}
+            onClick={goToNextMonth}
+            disabled={isCurrentMonth()}
+          >
             {'>'}
           </button>
         </div>

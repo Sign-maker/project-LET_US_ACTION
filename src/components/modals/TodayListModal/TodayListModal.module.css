@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 24px 12px; 
+  padding: 24px 12px;
   background-color: var(--primary-white-FFFFFF);
   border-radius: 10px;
   min-width: 280px;
@@ -16,7 +16,7 @@
 }
 
 .modal_content::-webkit-scrollbar {
-  width: 0px; 
+  width: 0px;
 }
 
 .modal_content::-webkit-scrollbar-thumb {
@@ -24,7 +24,7 @@
 }
 
 .modal_content::-webkit-scrollbar-track {
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 .header {
@@ -33,8 +33,6 @@
   justify-content: space-between;
   font-size: 26px;
   font-weight: 600;
-  margin-bottom: 24px;
-  padding-left: 12px;
 }
 
 .btn_close {
@@ -55,23 +53,20 @@
 .title {
   color: var(--primary-black-2F2F2F);
   width: 200px;
-  height: 64px;
   font-size: 26px;
   font-weight: 500;
   line-height: 1.2;
 }
 
 .add_box_modal {
-  padding-left: 12px;
   min-width: 280px;
-  padding-right: 12px;
-  padding-bottom: 24px;
   display: flex;
   flex-direction: column;
 }
 
-h3 {
-  /* margin-bottom: 16px; */
+.subtitle {
+  margin-top: 24px;
+  margin-bottom: 16px;
   color: var(--primary-black-2F2F2F);
   font-size: 18px;
   font-weight: 500;
@@ -87,13 +82,8 @@ h3 {
   background-color: var(--secondary-2-ECF2FF);
   width: 254px;
   margin-bottom: 24px;
+  margin-top: 24px;
 }
-
-/* .icon_glass {
-  width: 26px;
-  height: 26px;
-  margin-right: 12px;
-} */
 
 .today_volume {
   font-size: 18px;
@@ -183,10 +173,10 @@ h3 {
 }
 
 .select {
-   -webkit-appearance: none;
+  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
- color: var(--primary-blue-407BFF);
+  color: var(--primary-blue-407BFF);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
@@ -201,30 +191,13 @@ h3 {
 }
 
 .select:hover {
-     color: var(--primary-blue-407BFF);
+  color: var(--primary-blue-407BFF);
   border: 1px solid var(--primary-blue-407BFF);
-  }
+}
 
-  .select:focus {
+.select:focus {
   outline: none;
   border: 1px solid var(--primary-blue-407BFF);
-}
-
-.error_message {
-   position: absolute;
-  bottom: 1px;
-  left: 0;
-  color: var(--secondary-red-EF5050F);
-  font-size: 14px;
-}
-
-.inputError {
-  border: 1px solid var(--secondary-red-EF5050F);
-  color: var(--secondary-red-EF5050F);
-}
-
-.inputError::placeholder {
-  color: var(--secondary-red-EF5050F);
 }
 
 .input_time {
@@ -277,6 +250,7 @@ h3 {
   border-radius: 6px;
   border: 1px solid rgb(215, 227, 255);
   background-color: var(--primary-white-FFFFFF);
+  outline: none;
 }
 
 .input_number::-webkit-outer-spin-button,
@@ -291,17 +265,15 @@ h3 {
 
 .input_number:hover {
   color: var(--primary-blue-407BFF);
-  border: 1px solid var(--primary-blue-407BFF);
 }
 
 .input_number:focus {
   outline: none;
-  border: 1px solid var(--primary-blue-407BFF);
 }
 
-.input_number:not(:placeholder-shown) {
+/* .input_number:not(:placeholder-shown) {
   color: var(--primary-blue-407BFF);
-}
+} */
 
 .modal_footer {
   margin-top: 24px;
@@ -311,11 +283,11 @@ h3 {
 }
 
 .span_ml {
-   color: var(--primary-blue-407BFF);
-    text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.33;
+  color: var(--primary-blue-407BFF);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.33;
 }
 .add_save_btn {
   display: flex;
@@ -337,29 +309,34 @@ h3 {
   box-shadow: 0 4px 8px rgba(64, 123, 255, 0.18);
 }
 
+.error_message {
+  position: absolute;
+  bottom: 77px;
+  color: var(--secondary-red-EF5050F);
+  font-size: 14px;
+}
+
+.input_error {
+  border: 1px solid var(--secondary-red-EF5050F);
+  color: var(--secondary-red-EF5050F);
+}
+
+.input_error::placeholder {
+  color: var(--secondary-red-EF5050F);
+}
+
 /*? ---------------------------------- Tablet -------------------------- */
 
 @media screen and (min-width: 768px) {
   .modal_content {
-    min-width: 592px;
-  }
-
-  .add_box_modal {
     min-width: 704px;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-bottom: 32px;
+    padding: 32px 24px;
   }
 
   .title {
     width: 384px;
     height: 32px;
   }
-
-  /* .icon_glass {
-    width: 36px;
-    height: 36px;
-  } */
 
   .modal_footer {
     flex-direction: row;
@@ -374,15 +351,13 @@ h3 {
   }
 
   .select {
-     width: 97%;
+    width: 97%;
   }
 }
 
-
-
 /*? ----------------------------------- Desctop -------------------------- */
 @media screen and (min-width: 1440px) {
-  .add_box_modal {
+  .modal_content {
     min-width: 592px;
   }
 }
