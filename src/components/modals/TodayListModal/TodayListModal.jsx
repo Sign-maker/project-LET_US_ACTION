@@ -8,6 +8,10 @@ import * as Yup from 'yup';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { createDateFromTimeString, timeFromDate } from 'helpers/dateHelpers';
 import { useWater } from 'hooks/useWater';
+import {
+  toastFulfilled,
+  toastRejected,
+} from 'components/servises/UserNotification';
 
 const TodayListModal = ({ onClose, isEditing }) => {
   const [timeOptions, setTimeOptions] = useState([]);
@@ -52,9 +56,15 @@ const TodayListModal = ({ onClose, isEditing }) => {
     try {
       const action = !isEditing ? addWater : updateWater;
       await action(payload);
+      if (addWater) {
+        toastFulfilled('Water add success');
+      } else {
+        toastFulfilled('Water update success');
+      }
       resetForm();
       onClose();
     } catch (error) {
+      toastRejected(error);
     } finally {
       setSubmitLoading(false);
       setSubmitting(false);

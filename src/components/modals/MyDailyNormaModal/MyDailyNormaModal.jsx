@@ -7,7 +7,10 @@ import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDail
 
 import { useAuth } from 'hooks/useAuth';
 import { useWater } from 'hooks/useWater';
-import { toastRejected } from 'components/servises/UserNotification';
+import {
+  toastFulfilled,
+  toastRejected,
+} from 'components/servises/UserNotification';
 
 const MyDailyNormaModal = ({ onClose }) => {
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -56,7 +59,7 @@ const MyDailyNormaModal = ({ onClose }) => {
       await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
       updateStoreByDailyNorma(convertedDailyNorma);
       // await fetchTodayStats();
-
+      toastFulfilled('Your daily water norma has been successfully updated!');
       onClose();
     } catch (error) {
       toastRejected(error);

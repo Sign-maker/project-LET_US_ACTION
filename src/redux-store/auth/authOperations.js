@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios1 from 'axios';
-import { toastFulfilled } from 'components/servises/UserNotification';
 
 const baseURL = process.env.REACT_APP_BASE_BACKEND_URL;
 
@@ -20,7 +19,7 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/signup', credentials);
-      toastFulfilled('Registration successful!');
+
       setAuthHeader(data.token);
       return data;
     } catch (error) {
@@ -35,7 +34,7 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/signin', credentials);
-      // toastFulfilled('You have successfully logged into your account!');
+
       setAuthHeader(data.token);
 
       return data;
@@ -63,7 +62,6 @@ export const updateProfile = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.patch('/users/profile', credentials);
-      toastFulfilled('Your data has been successfully updated!');
       return data;
     } catch (error) {
       const errorMessage = error.response.data.message;
@@ -83,7 +81,7 @@ export const updateAvatar = createAsyncThunk(
           'Content-Type': 'multipart/form-data',
         },
       });
-      toastFulfilled('Your avatar has been successfully updated!');
+
       return data.avatarURL;
     } catch (error) {
       const errorMessage = error.response.data.message;
@@ -119,8 +117,6 @@ export const updateMyDailyNorma = createAsyncThunk(
 
     try {
       const { data } = await axios.patch('users/waterrate', dailyNorma);
-
-      toastFulfilled('Your daily water norma has been successfully updated!');
 
       return data;
     } catch (error) {
