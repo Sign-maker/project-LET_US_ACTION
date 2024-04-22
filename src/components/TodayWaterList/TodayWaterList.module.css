@@ -1,10 +1,9 @@
 .containerToday {
   height: fit-content;
-
+  width: 100%;
 
   @media screen and (min-width: 768px) {
     width: 656px;
-    height: 276px;
   }
 }
 
@@ -45,7 +44,8 @@
 @media only screen and (min-width: 1440px) {}
 
 .ulWrap {
-  height: 188px;
+  max-height: 188px;
+  height: fit-content;
   overflow-y: auto;
 
 
