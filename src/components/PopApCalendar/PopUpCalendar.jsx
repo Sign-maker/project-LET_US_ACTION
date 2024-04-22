@@ -32,7 +32,7 @@ const PopUpCalendar = ({
       }
     };
     const handleScroll = () => {
-      onClose(); // Close the popup when scrolling
+      onClose(); 
     };
     const adjustPosition = () => {
       const containerRect = containerRef.current.getBoundingClientRect();
@@ -48,7 +48,7 @@ const PopUpCalendar = ({
       setAdjustedPosition({ x: adjustedX, y: adjustedY });
     };
     const handleResize = () => {
-      onClose(); // Закрываем окно при изменении размера экрана
+      onClose(); 
     };
 
     if (isOpen) {
