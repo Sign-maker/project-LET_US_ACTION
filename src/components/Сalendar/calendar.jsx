@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import DayList from './dailyList.jsx';
+import Loader from '../Loader/Loader.module.css';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 import css from './calendar.module.css';
 import { useWater } from 'hooks/useWater.js';
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const { fetchMonthStats } = useWater();
+  const { fetchMonthStats, isMonthLoading } = useWater();
   const [waterConsumptionData] = useState([]);
 
   useEffect(() => {
@@ -67,11 +69,16 @@ const Calendar = () => {
           </button>
         </div>
       </div>
-
-      <DayList
-        month={currentMonth}
-        waterConsumptionData={waterConsumptionData}
-      />
+      {isMonthLoading ? (
+        <div className={Loader.loaderContainer}>
+          <ClipLoader size={50} color="#407bff" />
+        </div>
+      ) : (
+        <DayList
+          month={currentMonth}
+          waterConsumptionData={waterConsumptionData}
+        />
+      )}
     </div>
   );
 };

@@ -58,7 +58,6 @@ const TodayListModal = ({
       ? selectedTime
       : timeFromDate('en-GB', currentDate);
 
-
     const timeUpdate = selectedTime
       ? selectedTime
       : timeFromDate('en-GB', editTimeInit);
@@ -187,13 +186,10 @@ const TodayListModal = ({
                     name="time"
                     style={{ width: '100%' }}
                     className={css.select}
-                    // onChange={e => setTime(e.target.value)}
                   >
                     <option
                       key="current-time"
-                      // value={timeFromDate('en-GB', currentDate)}
                     >
-                      {/* {timeFromDate('en-GB', currentDate)} */}
                       {isEditing
                         ? timeFromDate('em-GB', editTimeInit)
                         : timeFromDate('en-GB', currentDate)}
@@ -220,7 +216,6 @@ const TodayListModal = ({
                     }`}
                     name="amount"
                     onInput={validateLength}
-                    // value={isEditing ? tempAmountForEdit : values.amount || 0}
                   />
                   {errors.amount && values.amount ? (
                     <div className={css.error_message}>{errors.amount}</div>

@@ -6,9 +6,11 @@ import TodayListModal from 'components/modals/TodayListModal/TodayListModal';
 import DeleteWaterModal from '../../components/modals/DeleteWaterModal/DeleteWaterModal';
 import { useWater } from 'hooks/useWater';
 import { timeFromDate } from 'helpers/dateHelpers';
+import ClipLoader from 'react-spinners/ClipLoader';
+import Loader from '../Loader/Loader.module.css';
 
 export const TodayWaterList = () => {
-  const { todayStats } = useWater();
+  const { todayStats, isTodayLoading } = useWater();
   const [currentModifyObj, setCurrenModifyObj] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -42,90 +44,90 @@ export const TodayWaterList = () => {
   };
 
   const { dayNotes } = todayStats;
-  // const dayNotes = [
-  //   { _id: 'id-1', amountWater: '500', date: '4' },
-  //   { _id: 'id-2', amountWater: '500', date: '4' },
-  //   { _id: 'id-3', amountWater: '500', date: '6' },
-  //   { _id: 'id-4', amountWater: '500', date: '2' },
-  // ];
 
   return (
     <div className={css.containerToday}>
       <h2 className={css.todayText}>Today</h2>
       <div className={css.containerList}>
-        <ul className={css.ulWrap}>
-          {dayNotes?.length > 0 ? (
-            dayNotes
-             .slice()
-              .sort(
-                (a, b) =>
-                  new Date(a.date).getTime() - new Date(b.date).getTime()
-              )
-              .map(waterObj => (
-                <li className={css.listItem} key={waterObj._id}>
-                  <div className={css.infoWrap}>
-                    <svg>
-                      <use href={sprite + '#cup'}></use>
-                    </svg>
-                    <p className={css.volume}>{waterObj.waterVolume} ml</p>
-                    <p className={css.time}>
-                      {timeFromDate('en-US', waterObj.date)}
-                    </p>
-                  </div>
-                  <div className={css.wrapBtn}>
-                    <button
-                      className={css.editBtn}
-                      onClick={() => {
-                        handleEditItem(waterObj);
-                      }}
-                    >
+        {isTodayLoading ? (
+          <div className={Loader.loaderContainer}>
+            <ClipLoader size={50} color="#407bff" />
+          </div>
+        ) : (
+          <ul className={css.ulWrap}>
+            {dayNotes?.length > 0 ? (
+              dayNotes
+                .slice()
+                .sort(
+                  (a, b) =>
+                    new Date(a.date).getTime() - new Date(b.date).getTime()
+                )
+                .map(waterObj => (
+                  <li className={css.listItem} key={waterObj._id}>
+                    <div className={css.infoWrap}>
                       <svg>
-                        <use href={sprite + '#edit'}></use>
+                        <use href={sprite + '#cup'}></use>
                       </svg>
-                    </button>
-                    <button
-                      className={css.deleteBtn}
-                      onClick={() => {
-                        handleOpenDeleteModal(waterObj);
-                      }}
-                    >
-                      <svg>
-                        <use href={sprite + '#trash'}></use>
-                      </svg>
-                    </button>
-                  </div>
-                </li>
-              ))
-          ) : (
-            <li>
-              <p className={css.waterItem}>No notes yet</p>
-            </li>
-          )}
+                      <p className={css.volume}>{waterObj.waterVolume} ml</p>
+                      <p className={css.time}>
+                        {timeFromDate('en-US', waterObj.date)}
+                      </p>
+                    </div>
+                    <div className={css.wrapBtn}>
+                      <button
+                        className={css.editBtn}
+                        onClick={() => {
+                          handleEditItem(waterObj);
+                        }}
+                      >
+                        <svg>
+                          <use href={sprite + '#edit'}></use>
+                        </svg>
+                      </button>
+                      <button
+                        className={css.deleteBtn}
+                        onClick={() => {
+                          handleOpenDeleteModal(waterObj);
+                        }}
+                      >
+                        <svg>
+                          <use href={sprite + '#trash'}></use>
+                        </svg>
+                      </button>
+                    </div>
+                  </li>
+                ))
+            ) : (
+              <li>
+                <p className={css.waterItem}>No notes yet</p>
+              </li>
+            )}
+          </ul>
+        )}
 
-          {deleteOpen && (
-            <Modal onClose={handleCloseDeleteModal}>
-              <DeleteWaterModal
-                onClose={handleCloseDeleteModal}
-                deleteRecordId={currentModifyObj?._id}
-              />
-            </Modal>
-          )}
+        {deleteOpen && (
+          <Modal onClose={handleCloseDeleteModal}>
+            <DeleteWaterModal
+              onClose={handleCloseDeleteModal}
+              deleteRecordId={currentModifyObj?._id}
+            />
+          </Modal>
+        )}
 
-          {!isVisible && (
-            <Modal onClose={handleCloseModal}>
-              <TodayListModal
-                onClose={() => {
-                  setIsEditing(false);
-                  handleCloseModal();
-                }}
-                isEditing={isEditing}
-                amountForEdit={currentModifyObj?.waterVolume}
-                editTimeInit={currentModifyObj?.date}
-                editRecordId={currentModifyObj?._id}
-              />
-            </Modal>
-          )}
-        </ul>
+        {!isVisible && (
+          <Modal onClose={handleCloseModal}>
+            <TodayListModal
+              onClose={() => {
+                setIsEditing(false);
+                handleCloseModal();
+              }}
+              isEditing={isEditing}
+              amountForEdit={currentModifyObj?.waterVolume}
+              editTimeInit={currentModifyObj?.date}
+              editRecordId={currentModifyObj?._id}
+            />
+          </Modal>
+        )}
 
         <button
           className={css.addBtn}

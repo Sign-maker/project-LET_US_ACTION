@@ -1,12 +1,13 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { lazy, useEffect } from 'react';
 
-
 import { useAuth } from 'hooks/useAuth';
 import { RestrictedRoute } from './RestricredRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { routes } from 'constants/routes';
 import { SharedLayout } from './SharedLayout/SharedLayout';
+import ClipLoader from 'react-spinners/ClipLoader';
+import Loader from './Loader/Loader';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const WelcomePage = lazy(() => import('pages/WelcomePage/WelcomePage'));
@@ -14,16 +15,16 @@ const SignupPage = lazy(() => import('pages/SignupPage/SignupPage'));
 const SigninPage = lazy(() => import('pages/SigninPage/SigninPage'));
 
 export const App = () => {
-  const { refreshUser, isRefreshing } = useAuth();
-
+  const { refreshUser, isRefreshing} = useAuth();
 
   useEffect(() => {
     refreshUser();
   }, [refreshUser]);
 
-
   return isRefreshing ? (
-    <p>Refreshing user data</p>
+    <Loader>
+      <ClipLoader size={60} color="#407bff" />
+    </Loader>
   ) : (
     <Routes>
       <Route path={routes.MAIN} element={<SharedLayout />}>
