@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import css from './calendar.module.css';
 import PopUpCalendar from 'components/PopApCalendar/PopUpCalendar';
+import { useSelector } from 'react-redux';
+import { useWater } from 'hooks/useWater';
 
 const DayList = ({ month }) => {
   const [selectedDay, setSelectedDay] = useState(null);
@@ -8,11 +10,32 @@ const DayList = ({ month }) => {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
 
+  const { monthNotes } = useSelector(state => state.water);
+
+  const { fetchMonthStats } = useWater();
+
+  const monthString = `${month.getFullYear()}-${(month.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}`;
+
+  useEffect(() => {
+    fetchMonthStats(monthString);
+  }, [monthString, fetchMonthStats, monthNotes]);
+
   const handleDayClick = (day, event) => {
     setSelectedDay(day);
     setSelectedMonth(month.toLocaleString('en-US', { month: 'long' }));
     setIsPopUpOpen(true);
     setPopupPosition({ x: event.clientX, y: event.clientY });
+  };
+
+  // Функция для извлечения процента выполнения по дате
+  const getFulfillmentForDay = day => {
+    const dayString = `${month.getFullYear()}-${(month.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    const dayData = monthNotes.find(note => note.date.startsWith(dayString));
+    return dayData ? `${dayData.fulfillment}%` : '0%';
   };
 
   return (
@@ -31,10 +54,10 @@ const DayList = ({ month }) => {
           <li
             key={day}
             className={css.day}
-            onClick={event => handleDayClick(day, event)} // Передаем event в функцию handleDayClick
+            onClick={event => handleDayClick(day, event)}
           >
             <span className={css.daySpan}>{day}</span>
-            <p className={css.percent}>{'20%'}</p>
+            <p className={css.percent}>{getFulfillmentForDay(day)}</p>
           </li>
         ))}
       </ul>
