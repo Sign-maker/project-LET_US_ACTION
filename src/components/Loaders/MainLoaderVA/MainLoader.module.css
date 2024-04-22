@@ -1,0 +1,41 @@
+.mask {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100px;
+  font-size: 6vw;
+  font-weight: 700;
+  text-align: center;
+  line-height: 90px;
+  background-image: -webkit-radial-gradient(
+    center 10px,
+    80px 100px,
+    #bdc9d8 50%,
+    #7ca4ff 51%
+  );
+  background-size: 38px 180px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation-name: wave-animation;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes wave-animation {
+  0% {
+    background-position: 200px 10px;
+  }
+  50% {
+    background-position: 100px -20px;
+  }
+  100% {
+    background-position: 0px -40px;
+  }
+}
+
+.box {
+  background-image: -webkit-linear-gradient(45deg, 0%, 100%);
+  opacity: 0.95;
+}

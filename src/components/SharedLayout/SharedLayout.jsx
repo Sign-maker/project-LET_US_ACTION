@@ -1,4 +1,5 @@
 import Header from 'components/Header/Header';
+import MainLoader from 'components/Loaders/MainLoaderVA/MainLoader';
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -9,7 +10,7 @@ export const SharedLayout = () => {
     <>
       <Header />
       <main>
-        <Suspense fallback={<div>Component Loading....</div>}>
+        <Suspense fallback={<MainLoader />}>
           <Outlet />
         </Suspense>
       </main>
