@@ -31,6 +31,9 @@ const PopUpCalendar = ({
         onClose();
       }
     };
+    const handleScroll = () => {
+      onClose(); // Close the popup when scrolling
+    };
     const adjustPosition = () => {
       const containerRect = containerRef.current.getBoundingClientRect();
       const popUpRect = popUpRef.current.getBoundingClientRect();
@@ -53,12 +56,14 @@ const PopUpCalendar = ({
       document.addEventListener('keydown', handleEscKeyPress);
       document.addEventListener('mousedown', handleClickOutside);
       window.addEventListener('resize', handleResize);
+      document.addEventListener('scroll', handleScroll);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscKeyPress);
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('scroll', handleScroll);
     };
   }, [isOpen, onClose, position]);
 
@@ -72,7 +77,7 @@ const PopUpCalendar = ({
         style={{
           top: adjustedPosition.y,
           left: adjustedPosition.x,
-          position: 'absolute',
+          position: 'fixed',
         }}
       >
         <div className={css.popupContent}>
