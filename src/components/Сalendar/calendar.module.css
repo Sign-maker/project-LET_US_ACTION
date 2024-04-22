@@ -66,6 +66,10 @@
   line-height: 16px;
 }
 
+.unfulfilledDay {
+  border: 2px solid var(--secondary-orange-FF9D43);
+}
+
 @media (min-width: 768px) {
   .monthHeader {
     width: 656px;

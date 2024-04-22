@@ -28,8 +28,10 @@ const handleAuthPending = state => {
   state.isAuthLoading = true;
 };
 
-const handleAuthRejected = state => {
+const handleAuthRejected = (state, { payload }) => {
   state.isAuthLoading = false;
+  // console.log(payload);
+  state.error = payload;
 };
 
 export const authSlice = createSlice({
