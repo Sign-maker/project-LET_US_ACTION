@@ -4,6 +4,10 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { useState } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useWater } from 'hooks/useWater';
+import {
+  toastFulfilled,
+  toastRejected,
+} from 'components/servises/UserNotification';
 
 const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
   const { deleteWater } = useWater();
@@ -13,8 +17,10 @@ const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
     try {
       setLoading(true);
       await deleteWater({ _id: deleteRecordId });
+      toastFulfilled('Delete success');
       onClose();
     } catch (error) {
+      toastRejected(error);
     } finally {
       setLoading(false);
     }

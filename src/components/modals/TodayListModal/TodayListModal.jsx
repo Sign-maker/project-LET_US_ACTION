@@ -63,8 +63,10 @@ const TodayListModal = ({
     try {
       if (isEditing) {
         await updateWater({ _id: editRecordId, ...payload });
+        toastFulfilled('Water update success');
       } else {
         await addWater(payload);
+        toastFulfilled('Water add success');
       }
       resetForm();
       onClose();
