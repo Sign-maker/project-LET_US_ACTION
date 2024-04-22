@@ -54,30 +54,9 @@ export const TodayWaterList = () => {
       <h2 className={css.todayText}>Today</h2>
       <div className={css.containerList}>
         <ul className={css.ulWrap}>
-          {/* <li className={css.listItem} key={_id}>
-            <div className={css.infoWrap}>
-              <svg>
-                <use href={sprite + '#cup'}></use>
-              </svg>
-              <p className={css.volume}>{amountWater} ml</p>
-              <p className={css.time}>{timeFromDate(date)}</p>
-            </div>
-            <div className={css.wrapBtn}>
-              <button className={css.editBtn} onClick={handleEditItem}>
-                <svg>
-                  <use href={sprite + '#edit'}></use>
-                </svg>
-              </button>
-              <button className={css.deleteBtn} onClick={() => {}}>
-                <svg>
-                  <use href={sprite + '#trash'}></use>
-                </svg>
-              </button>
-            </div>
-          </li> */}
           {dayNotes?.length > 0 ? (
             dayNotes
-              .slice()
+             .slice()
               .sort(
                 (a, b) =>
                   new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -147,6 +126,7 @@ export const TodayWaterList = () => {
             </Modal>
           )}
         </ul>
+
         <button
           className={css.addBtn}
           onClick={() => {
@@ -159,6 +139,7 @@ export const TodayWaterList = () => {
           </svg>
           Add water
         </button>
+
       </div>
     </div>
   );
