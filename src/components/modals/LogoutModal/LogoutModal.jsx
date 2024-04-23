@@ -12,8 +12,10 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
       await onLogout();
     } catch (error) {
     } finally {
-      setLoading(false);
-      onCloseLogout();
+      setTimeout(() => {
+        setLoading(false);
+        onCloseLogout();
+      }, 500);
     }
   };
 
@@ -44,8 +46,10 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
             type="button"
             className={css.btn_logout}
             onClick={handleLogout}
+            disabled={loading}
           >
-            {loading && <ClipLoader size={24} color="#ffffff" />} Logout
+            {loading && <ClipLoader size={24} color="#ffffff" />}
+            Logout
           </button>
         </div>
       </div>
