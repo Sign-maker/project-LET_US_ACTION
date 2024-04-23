@@ -2,10 +2,10 @@
   position: absolute;
   top: 40px;
   width: 280px;
-  max-height: 98vh;
+  /* max-height: 98vh; */
   padding: 24px 12px;
   border-radius: 10px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   background-color: var(--primary-white-FFFFFF);
 }
 .header {
