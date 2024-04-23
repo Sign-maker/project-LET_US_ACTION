@@ -1,6 +1,7 @@
 .modal {
   position: absolute;
   top: 40px;
+  bottom: 40px;
   width: 280px;
   max-height: 100vh;
   padding: 24px 12px;
