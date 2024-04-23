@@ -32,6 +32,27 @@ export const waterSlice = createSlice({
   initialState,
   reducers: {
     updateByDailyNorma: (state, { payload }) => {
+      state.monthNotes.map((note, idx) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const noteDate = new Date(note.date);
+
+        if (
+          noteDate.getTime() >= today.getTime() &&
+          noteDate.getTime() < tomorrow.getTime()
+        ) {
+          state.monthNotes[idx].dailyNorma = payload;
+          state.monthNotes[idx].fulfillment = calcFulfillment(
+            state.monthNotes[idx].totalVolume,
+            payload
+          );
+          console.log(state.monthNotes[idx]);
+        }
+        return {};
+      });
+
       state.todayStats.dailyNorma = payload;
       if (state.todayStats.dayNotes.length > 0) {
         state.todayStats.fulfillment = calcFulfillment(
