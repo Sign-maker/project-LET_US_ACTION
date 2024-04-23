@@ -79,7 +79,7 @@ To run the application locally, follow these steps:
    <img src = './src/images/readme-img/npm start.png' alt='Example how to run the app'>
 
 4. Open [http://localhost:8000](http://localhost:8000) in your browser (Note:
-   the port may be changed if 5173 port is occupied by another website).
+   the port may be changed if 8000 port is occupied by another website).
 
    ## Technologies Used
 

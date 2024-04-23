@@ -1,59 +1,55 @@
-# Water Tracker - Your Reliable Guide to a Healthy Lifestyle
+# Water Tracker - Ваш надійний путівник до здорового способу життя
 
-WaterTracker is a user-friendly application designed to assist you in
-maintaining a healthy lifestyle by keeping track of your daily water intake.
-Proper hydration is key to overall well-being, and this app aims to make it
-easier for you to monitor and improve your water consumption habits.
+WaterTracker – це зручний інструмент, розроблений для покращення вашого здоров'я
+шляхом відстеження щоденного вживання води. Правильне зволоження є важливим для
+загального самопочуття, і цей додаток спрощує контроль та покращення ваших
+звичок у споживанні води.
 
-## Table of content
+## Зміст
 
-- [Water Tracker - Your Reliable Guide to a Healthy Lifestyle](#water-tracker---your-reliable-guide-to-a-healthy-lifestyle)
-  - [Table of content](#table-of-content)
-  - [Features](#features)
+- [Water Tracker - Ваш надійний путівник до здорового способу життя](#water-tracker---ваш-надійний-путівник-до-здорового-способу-життя)
+  - [Зміст](#зміст)
+  - [Особливості](#особливості)
   - [Contributors](#contributors)
     - [Front End](#front-end)
     - [Back End](#back-end)
-  - [Getting Started](#getting-started)
-  - [Technologies Used](#technologies-used)
+  - [Починаємо](#починаємо)
+  - [Технології що використовуються](#технології-що-використовуються)
   - [API](#api)
 
-## Features
+## Особливості
 
-1. Personalized Recommendations: Receive customized hydration recommendations
-   based on your lifestyle, and physical activity.
+1. Персоналізовані рекомендації: отримуйте індивідуальні рекомендації щодо зволоження
+   залежно від вашого способу життя та фізичної активності.
 
-2. Convenient Monitoring: Easily log and track your daily water intake through
-   our intuitive and user-friendly interface.
+2. Зручний моніторинг: легко реєструйте та відстежуйте щоденне споживання води
+   наш інтуїтивно зрозумілий і зручний інтерфейс.
 
-3. Progress Analytics: Visualize your hydration progress over time with detailed
-   statistics and insightful analytics.
+3. Аналітика прогресу: візуалізуйте свій прогрес гідратації з часом із детальною інформацією
+   статистика та глибока аналітика.
 
-4. Goal Setting: Set personal hydration goals and track your achievements,
-   fostering a sense of accomplishment and motivation.
+4. Постановка цілей: встановіть особисті цілі гідратації та відстежуйте свої досягнення,
+   сприяння почуттю досягнення та мотивації.
 
-5. Educational Resources: Access a wealth of educational materials and articles
-   about the importance of water, its role in the body, and the benefits of
-   maintaining a proper hydration routine.
+5. Освітні ресурси: доступ до великої кількості навчальних матеріалів і статей
+   про значення води, її роль в організмі та користь
+   дотримання правильної процедури гідратації.
 
 ## Contributors
 
 ### Front End
-- Dmytro Muratov [GitHub](https://github.com/Sign-maker) - Team Lead
 
-- Maksym Lytovchenko [GitHub](https://github.com/LITOHA-77) - Developer
+- Dmytro Muratov [GitHub](https://github.com/Sign-maker) - Team Lid
+
+- Maksym Lytovchenko [GitHub](https://github.com/LITOHA-77) - Develope
 
 - Oleksandr Tobert [GitHub](https://github.com/AlexanderTobert) - Developer
 
 - Serhii Bondariev [GitHub](https://github.com/Serhii-Bondariev) - Dveloper
-  
 - Alina Cherevko [GitHub](https://github.com/AlinaCherevko) - Developer
-  
 - Tetiana Luzhanska [GitHub](https://github.com/Tetiana85) - Developer
-  
 - Uyrii Rudenko [GitHub](https://github.com/barin2010) - Developer
-  
 - Ruslan Korniichenko [GitHub](https://github.com/RuslanKorni) - Developer
-
 
   ### Back End
 
@@ -63,25 +59,23 @@ easier for you to monitor and improve your water consumption habits.
 
 - Tetiana Luzhanska [GitHub](https://github.com/Tetiana85) - Developer
 
+## Починаємо
 
+Щоб запустити програму локально, виконайте такі дії:
 
-## Getting Started
-
-To run the application locally, follow these steps:
-
-1. Clone the repository:
+1. Клонуйте репозиторій:
    `git clone https://github.com/Sign-maker/project-LET_US_ACTION`
    <img src = './src/images/readme-img/git clone.png' alt='Example how to clone the repository' >
-2. Install dependencies: `npm install`
+2. Встановіть залежності: `npm install`
    <img src = './src/images/readme-img/npm install.png' alt='Example how to install dependencies'>
 
-3. Run the app: `npm start`
+3. Запустіть програму: `npm start`
    <img src = './src/images/readme-img/npm start.png' alt='Example how to run the app'>
 
-4. Open [http://localhost:8000](http://localhost:8000) in your browser (Note:
-   the port may be changed if 5173 port is occupied by another website).
+4. Відкрийте [http://localhost:8000](http://localhost:8000) у своєму браузері (Примітка:
+   порт може бути змінений, якщо порт 8000 зайнятий іншим веб-сайтом)..
 
-   ## Technologies Used
+   ## Технології що використовуються
 
 - React
 - Redux Toolkit
@@ -92,6 +86,6 @@ To run the application locally, follow these steps:
 
 ## API
 
-The application utilizes a backend developed by our team. Feel free to
-familiarize yourself with it
-[here](https://github.com/Sign-maker/API_project-LET_US_ACTION)
+Додаток використовує бекенд, розроблений нашою командою. Не соромтеся
+ознайомтеся з ним
+[тут](https://github.com/Sign-maker/API_project-LET_US_ACTION)
