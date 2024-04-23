@@ -92,15 +92,13 @@ const PopUpCalendar = ({
               <li className={css.tableList}>
                 Daily norma:
                 <span className={css.listNorma}>
-                  {dayNote.dailyNorma
-                    ? `${(dayNote.dailyNorma / 1000).toFixed(1)} L`
-                    : '0 L'}
+                  {`${(dayNote.dailyNorma / 1000).toFixed(1)} L` ?? 0}
                 </span>
               </li>
               <li className={css.tableList}>
                 Fulfillment of the daily norm:
                 <span className={css.listNorma}>
-                  {dayNote.fulfillment ? `${dayNote.fulfillment}%` : '0%'}
+                  {`${dayNote.fulfillment}%` ?? 0}
                 </span>
               </li>
               <li className={css.tableList}>

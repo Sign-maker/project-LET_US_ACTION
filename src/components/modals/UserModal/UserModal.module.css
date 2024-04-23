@@ -6,7 +6,7 @@
   background-color: var(--primary-white-FFFFFF);
   border-radius: 10px;
   overflow-y: auto;
-  max-height: 100vh;
+  max-height: 95vh;
 }
 .title {
   margin-bottom: 24px;
@@ -19,10 +19,7 @@
   line-height: 20px;
   font-weight: 500;
 }
-/* .icon {
-  stroke: var(--primary-blue-407BFF);
-  color: transparent;
-} */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -136,11 +133,7 @@ input::placeholder {
   transform: translateY(-50%);
   cursor: pointer;
 }
-/* .errorMessage {
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--secondary-red-EF5050F);
-} */
+
 .errorNameMessage {
   position: absolute;
   left: 0;

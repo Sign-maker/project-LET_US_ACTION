@@ -6,7 +6,6 @@ import ClipLoader from 'react-spinners/ClipLoader';
 
 const LogoutModal = ({ onCloseLogout, onLogout }) => {
   const [loading, setLoading] = useState(false);
-
   const handleLogout = async () => {
     try {
       setLoading(true);
