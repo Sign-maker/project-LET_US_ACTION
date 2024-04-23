@@ -64,6 +64,9 @@ const Calendar = () => {
             className={css.monthBtn}
             onClick={goToNextMonth}
             disabled={isCurrentMonth()}
+            style={{
+              color: isCurrentMonth() ? 'var(--secondary-4-9EBBFF)' : '',
+            }}
           >
             {'>'}
           </button>

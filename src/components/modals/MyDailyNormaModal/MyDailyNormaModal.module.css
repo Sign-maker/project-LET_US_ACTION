@@ -47,6 +47,7 @@
   flex-direction: column;
   gap: 24px;
 }
+
 .formulaBlock {
   display: flex;
   flex-direction: column;
@@ -154,6 +155,7 @@
   font-size: 16px;
   background-color: transparent;
   outline: none;
+  position: relative;
 }
 .calcInput::placeholder {
   color: var(--primary-blue-407BFF);
@@ -161,6 +163,7 @@
 .calcQuantity {
   display: flex;
   gap: 6px;
+  position: relative;
 }
 .quantitytext {
   width: 190px;
@@ -188,6 +191,7 @@
   height: 44px;
   font-size: 16px;
   outline: none;
+  position: relative;
 }
 .drinkInput::placeholder {
   color: var(--primary-blue-407BFF);
@@ -201,12 +205,19 @@
   font-size: 14px;
 }
 
+.error_consumedWater {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  color: var(--secondary-red-EF5050F);
+  font-size: 14px;
+}
+
 .inputError {
   border-color: var(--secondary-red-EF5050F);
   color: var(--secondary-red-EF5050F);
 }
-@media (min-width: 320px) {
-}
+
 @media (min-width: 768px) {
   .modal {
     width: 704px;

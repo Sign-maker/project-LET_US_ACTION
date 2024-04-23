@@ -11,7 +11,14 @@ const DayList = ({ month }) => {
 
   const { monthNotes } = useWater();
 
+  const isFutureDay = day => {
+    const today = new Date();
+    const checkDate = new Date(month.getFullYear(), month.getMonth(), day);
+    return checkDate > today;
+  };
+
   const handleDayClick = (day, event) => {
+    if (isFutureDay(day)) return;
     setSelectedDay(day);
     setSelectedMonth(month.toLocaleString('en-US', { month: 'long' }));
     setIsPopUpOpen(true);
@@ -49,14 +56,21 @@ const DayList = ({ month }) => {
           (_, i) => i + 1
         ).map(day => {
           const fulfillment = getFulfillmentForDay(day);
-          const spanStyle =
-            fulfillment < 100 ? { border: '2px solid #ff9d43' } : {};
+          const isFuture = isFutureDay(day);
+          const spanStyle = isFuture
+            ? {}
+            : fulfillment < 100
+            ? { border: '1px solid var(--secondary-orange-FF9D43)' }
+            : {};
 
           return (
             <li
               key={day}
               className={css.day}
-              onClick={event => handleDayClick(day, event)}
+              onClick={
+                !isFuture ? event => handleDayClick(day, event) : undefined
+              }
+              style={isFuture ? { cursor: 'not-allowed', opacity: 0.5 } : {}}
             >
               <span className={css.daySpan} style={spanStyle}>
                 {day}
