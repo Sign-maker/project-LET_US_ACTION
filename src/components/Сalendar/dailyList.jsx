@@ -3,7 +3,6 @@ import css from './calendar.module.css';
 import PopUpCalendar from 'components/PopApCalendar/PopUpCalendar';
 import { useWater } from 'hooks/useWater';
 
-
 const DayList = ({ month }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
@@ -25,6 +24,15 @@ const DayList = ({ month }) => {
       .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     const dayData = monthNotes.find(note => note.date.startsWith(dayString));
     return dayData ? dayData.fulfillment : 0;
+  };
+
+  const getDayNote = day => {
+    if (!day) return;
+    const dayString = `${month.getFullYear()}-${(month.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    const dayData = monthNotes.find(note => note.date.startsWith(dayString));
+    return dayData ? dayData : {};
   };
 
   return (
@@ -65,6 +73,7 @@ const DayList = ({ month }) => {
           selectedDay={selectedDay}
           selectedMonth={selectedMonth}
           position={popupPosition}
+          dayNote={getDayNote(selectedDay)}
         />
       </div>
     </div>

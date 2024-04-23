@@ -7,6 +7,7 @@ const PopUpCalendar = ({
   selectedDay,
   selectedMonth,
   position,
+  dayNote,
 }) => {
   const popUpRef = useRef(null);
   const containerRef = useRef(null);
@@ -32,7 +33,7 @@ const PopUpCalendar = ({
       }
     };
     const handleScroll = () => {
-      onClose(); 
+      onClose();
     };
     const adjustPosition = () => {
       const containerRect = containerRef.current.getBoundingClientRect();
@@ -48,7 +49,7 @@ const PopUpCalendar = ({
       setAdjustedPosition({ x: adjustedX, y: adjustedY });
     };
     const handleResize = () => {
-      onClose(); 
+      onClose();
     };
 
     if (isOpen) {
@@ -84,19 +85,28 @@ const PopUpCalendar = ({
           <p className={css.currentDate}>
             {selectedDay}, {selectedMonth}
           </p>
-          <ul className={css.table}>
-            <li className={css.tableList}>
-              Daily norma:<span className={css.listNorma}>1.5L</span>
-            </li>
-            <li className={css.tableList}>
-              Fulfillment of the daily norm:
-              <span className={css.listNorma}>100%</span>
-            </li>
-            <li className={css.tableList}>
-              How many servings of water:
-              <span className={css.listNorma}>6</span>
-            </li>
-          </ul>
+          {!dayNote.servingsCount ? (
+            <span className={css.listNorma}>No notes</span>
+          ) : (
+            <ul className={css.table}>
+              <li className={css.tableList}>
+                Daily norma:
+                <span className={css.listNorma}>{dayNote.dailyNorma ?? 0}</span>
+              </li>
+              <li className={css.tableList}>
+                Fulfillment of the daily norm:
+                <span className={css.listNorma}>
+                  {dayNote.fulfillment ?? 0}
+                </span>
+              </li>
+              <li className={css.tableList}>
+                How many servings of water:
+                <span className={css.listNorma}>
+                  {dayNote.servingsCount ?? 0}
+                </span>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>
