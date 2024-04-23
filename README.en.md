@@ -1,105 +1,97 @@
-# React homework template
+# Water Tracker - Your Reliable Guide to a Healthy Lifestyle
 
-This project was created with
-[Create React App](https://github.com/facebook/create-react-app). To get
-acquainted and configure additional features
-[refer to documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+WaterTracker is a user-friendly application designed to assist you in
+maintaining a healthy lifestyle by keeping track of your daily water intake.
+Proper hydration is key to overall well-being, and this app aims to make it
+easier for you to monitor and improve your water consumption habits.
 
-## Creating a repository by template
+## Table of content
 
-Use this GoIT repository as a template for creating a repository
-of your project. To use it just tap the `«Use this template»` button and choose
-`«Create a new repository»` option, as you can see on the image below.
+- [Water Tracker - Your Reliable Guide to a Healthy Lifestyle](#water-tracker---your-reliable-guide-to-a-healthy-lifestyle)
+  - [Table of content](#table-of-content)
+  - [Features](#features)
+  - [Contributors](#contributors)
+    - [Front End](#front-end)
+    - [Back End](#back-end)
+  - [Getting Started](#getting-started)
+  - [Technologies Used](#technologies-used)
+  - [API](#api)
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+## Features
 
-The page for creating a new repository will open on the next step. Fill out
-the Name field and make sure the repository is public, then click
-`«Create repository from template»` button.
+1. Personalized Recommendations: Receive customized hydration recommendations
+   based on your lifestyle, and physical activity.
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+2. Convenient Monitoring: Easily log and track your daily water intake through
+   our intuitive and user-friendly interface.
 
-You now have a personal project repository, having a repository-template file 
-and folder structure. After that, you can work with it as you would with any 
-other private repository: clone it on your computer, write code, commit, and 
-send it to GitHub.
+3. Progress Analytics: Visualize your hydration progress over time with detailed
+   statistics and insightful analytics.
 
-## Preparing for coding
+4. Goal Setting: Set personal hydration goals and track your achievements,
+   fostering a sense of accomplishment and motivation.
 
-1. Make sure you have an LTS version of Node.js installed on your computer.
-   [Download and install](https://nodejs.org/en/) if needed.
-2. Install the project's base dependencies with the `npm install` command.
-3. Start development mode by running the `npm start` command.
-4. Go to [http://localhost:3000](http://localhost:3000) in your browser. This
-   page will automatically reload after saving changes to the project files.
+5. Educational Resources: Access a wealth of educational materials and articles
+   about the importance of water, its role in the body, and the benefits of
+   maintaining a proper hydration routine.
 
-## Deploy
+## Contributors
 
-The production version of the project will automatically be linted, built, and
-deployed to GitHub Pages, in the `gh-pages` branch, every time the `main` branch
-is updated. For example, after a direct push or an accepted pull request. To do
-this, you need to edit the `homepage` field in the `package.json` file,
-replacing `your_username` and `your_repo_name` with your own, and submit the
-changes to GitHub.
+### Front End
+- Dmytro Muratov [GitHub](https://github.com/Sign-maker) - Team Lead
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+- Maksym Lytovchenko [GitHub](https://github.com/LITOHA-77) - Developer
 
-Next, you need to go to the settings of the GitHub repository (`Settings` >
-`Pages`) and set the distribution of the production version of files from the
-`/root` folder of the `gh-pages` branch, if this was not done automatically.
+- Oleksandr Tobert [GitHub](https://github.com/AlexanderTobert) - Developer
 
-![GitHub Pages settings](./assets/repo-settings.png)
+- Serhii Bondariev [GitHub](https://github.com/Serhii-Bondariev) - Dveloper
+  
+- Alina Cherevko [GitHub](https://github.com/AlinaCherevko) - Developer
+  
+- Tetiana Luzhanska [GitHub](https://github.com/Tetiana85) - Developer
+  
+- Uyrii Rudenko [GitHub](https://github.com/barin2010) - Developer
+  
+- Ruslan Korniichenko [GitHub](https://github.com/RuslanKorni) - Developer
 
-### Deployment status
 
-The deployment status of the latest commit is displayed with an icon next to its
-ID.
+  ### Back End
 
-- **Yellow color** - the project is being built and deployed.
-- **Green color** - deployment completed successfully.
-- **Red color** - an error occurred during linting, build or deployment.
+- Dmytro Muratov [GitHub](https://github.com/Sign-maker) - Team Lead
 
-More detailed information about the status can be viewed by clicking on the
-icon, and in the drop-down window, follow the link `Details`.
+- Oleksandr Tobert [GitHub](https://github.com/AlexanderTobert) - Developer
 
-![Deployment status](./assets/deploy-status.png)
+- Tetiana Luzhanska [GitHub](https://github.com/Tetiana85) - Developer
 
-### Live page
 
-After some time, usually a couple of minutes, the live page can be viewed at the
-address specified in the edited `homepage` property. For example, here is a link
-to a live version for this repository
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
 
-If a blank page opens, make sure there are no errors in the `Console` tab
-related to incorrect paths to the CSS and JS files of the project (**404**). You
-most likely have the wrong value for the `homepage` property in the
-`package.json` file.
+## Getting Started
 
-### Routing
+To run the application locally, follow these steps:
 
-If your application uses the `react-router-dom` library for routing, you must
-additionally configure the `<BrowserRouter>` component by passing the exact name
-of your repository in the `basename` prop. Slashes at the beginning and end of
-the line are required.
+1. Clone the repository:
+   `git clone https://github.com/Sign-maker/project-LET_US_ACTION`
+   <img src = './src/images/readme-img/git clone.png' alt='Example how to clone the repository' >
+2. Install dependencies: `npm install`
+   <img src = './src/images/readme-img/npm install.png' alt='Example how to install dependencies'>
 
-```jsx
-<BrowserRouter basename="/your_repo_name/">
-  <App />
-</BrowserRouter>
-```
+3. Run the app: `npm start`
+   <img src = './src/images/readme-img/npm start.png' alt='Example how to run the app'>
 
-## How it works
+4. Open [http://localhost:8000](http://localhost:8000) in your browser (Note:
+   the port may be changed if 8000 port is occupied by another website).
 
-![How it works](./assets/how-it-works.png)
+   ## Technologies Used
 
-1. After each push to the `main` branch of the GitHub repository, a special
-   script (GitHub Action) is launched from the `.github/workflows/deploy.yml`
-   file.
-2. All repository files are copied to the server, where the project is
-   initialized and linted and built before deployment.
-3. If all steps are successful, the built production version of the project
-   files is sent to the `gh-pages` branch. Otherwise, the script execution log
-   will indicate what the problem is.
+- React
+- Redux Toolkit
+- React Router
+- Axios (for API requests)
+- css-module
+- Formik
+
+## API
+
+The application utilizes a backend developed by our team. Feel free to
+familiarize yourself with it
+[here](https://github.com/Sign-maker/API_project-LET_US_ACTION)
