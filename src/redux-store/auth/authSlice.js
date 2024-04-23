@@ -30,7 +30,7 @@ const handleAuthPending = state => {
 
 const handleAuthRejected = (state, { payload }) => {
   state.isAuthLoading = false;
-  // console.log(payload);
+
   state.error = payload;
 };
 
@@ -93,7 +93,6 @@ export const authSlice = createSlice({
     //daylyNorms
     builder.addCase(updateMyDailyNorma.pending, handleAuthPending);
     builder.addCase(updateMyDailyNorma.fulfilled, (state, { payload }) => {
-      // console.log(payload);
       state.user.dailyNorma = payload.dailyNorma;
     });
     builder.addCase(updateMyDailyNorma.rejected, handleAuthRejected);
