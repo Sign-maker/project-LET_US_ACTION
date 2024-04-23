@@ -62,10 +62,11 @@ const AuthForm = () => {
         toastFulfilled('You have successfully logged into your account!');
       }
     } catch (error) {
-      console.log(error);
-      toastRejected(error);
+      if (error.message) {
+        toastRejected('Something wrong occurred');
+      }
 
-      console.error(`${isSignUp ? 'Sign Up' : 'Sign In'} failed:`, error);
+      toastRejected(error);
     } finally {
       setSubmitting(false);
       setSubmitLoading(false);

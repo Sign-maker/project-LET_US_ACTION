@@ -43,7 +43,6 @@ export const UserModal = ({ onClose }) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const imageUrl = URL.createObjectURL(selectedFile);
-      console.log(file);
 
       setImageUrl(imageUrl);
       setFile(selectedFile);
@@ -123,7 +122,6 @@ export const UserModal = ({ onClose }) => {
       };
     }
     if (Object.keys(newProfile).length > 0) {
-      console.log(newProfile);
       try {
         setSubmitLoading(true);
         await updateProfile(newProfile);
