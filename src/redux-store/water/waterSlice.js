@@ -27,31 +27,32 @@ const initialState = {
   error: null,
 };
 
+const isDateToday = date => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const noteDate = new Date(date);
+
+  return noteDate.getTime() >= today.getTime() &&
+    noteDate.getTime() < tomorrow.getTime()
+    ? true
+    : false;
+};
+
 export const waterSlice = createSlice({
   name: 'water',
   initialState,
   reducers: {
     updateByDailyNorma: (state, { payload }) => {
-      state.monthNotes.map((note, idx) => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const noteDate = new Date(note.date);
-
-        if (
-          noteDate.getTime() >= today.getTime() &&
-          noteDate.getTime() < tomorrow.getTime()
-        ) {
-          state.monthNotes[idx].dailyNorma = payload;
-          state.monthNotes[idx].fulfillment = calcFulfillment(
-            state.monthNotes[idx].totalVolume,
-            payload
-          );
-          console.log(state.monthNotes[idx]);
-        }
-        return {};
-      });
+      const idx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      if (idx !== -1) {
+        state.monthNotes[idx].dailyNorma = payload;
+        state.monthNotes[idx].fulfillment = calcFulfillment(
+          state.monthNotes[idx].totalVolume,
+          payload
+        );
+      }
 
       state.todayStats.dailyNorma = payload;
       if (state.todayStats.dayNotes.length > 0) {
@@ -98,14 +99,24 @@ export const waterSlice = createSlice({
     });
     builder.addCase(addWater.fulfilled, (state, { payload }) => {
       state.todayStats.dayNotes = [...state.todayStats.dayNotes, payload];
-      state.todayStats.totalVolume = calcTotalVolume(state.todayStats.dayNotes);
-      state.todayStats.fulfillment = calcFulfillment(
+      const totalVolume = calcTotalVolume(state.todayStats.dayNotes);
+      state.todayStats.totalVolume = totalVolume;
+
+      const fulfillment = calcFulfillment(
         state.todayStats.totalVolume,
         state.todayStats.dailyNorma
       );
-      state.todayStats.servingsCount = calcServingsCount(
-        state.todayStats.dayNotes
-      );
+      state.todayStats.fulfillment = fulfillment;
+
+      const servingsCount = calcServingsCount(state.todayStats.dayNotes);
+      state.todayStats.servingsCount = servingsCount;
+
+      const idx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      if (idx !== -1) {
+        state.monthNotes[idx].totalVolume = totalVolume;
+        state.monthNotes[idx].fulfillment = fulfillment;
+        state.monthNotes[idx].servingsCount = servingsCount;
+      }
       state.isWaterUpdating = false;
       state.error = null;
     });
@@ -135,6 +146,13 @@ export const waterSlice = createSlice({
         );
       }
 
+      const mIdx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      if (mIdx !== -1) {
+        state.monthNotes[mIdx].totalVolume = state.todayStats.totalVolume;
+        state.monthNotes[mIdx].fulfillment = state.todayStats.fulfillment;
+        state.monthNotes[mIdx].servingsCount = state.todayStats.servingsCount;
+      }
+
       state.isWaterUpdating = false;
       state.error = null;
     });
@@ -159,6 +177,13 @@ export const waterSlice = createSlice({
       state.todayStats.servingsCount = calcServingsCount(
         state.todayStats.dayNotes
       );
+
+      const mIdx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      if (mIdx !== -1) {
+        state.monthNotes[mIdx].totalVolume = state.todayStats.totalVolume;
+        state.monthNotes[mIdx].fulfillment = state.todayStats.fulfillment;
+        state.monthNotes[mIdx].servingsCount = state.todayStats.servingsCount;
+      }
       state.isWaterUpdating = false;
       state.error = null;
     });
