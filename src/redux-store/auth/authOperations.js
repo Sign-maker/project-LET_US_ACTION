@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios1 from 'axios';
 
-// const baseURL = process.env.REACT_APP_BASE_BACKEND_URL;
+//const baseURL = process.env.REACT_APP_BASE_BACKEND_URL;
 const baseURL = 'https://water-tracker-api-6z23.onrender.com/api';
 
 export const axios = axios1.create({

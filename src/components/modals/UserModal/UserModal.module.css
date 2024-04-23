@@ -5,8 +5,8 @@
   padding: 32px 12px;
   background-color: var(--primary-white-FFFFFF);
   border-radius: 10px;
-  overflow-y: auto;
-  max-height: 95vh;
+  /* overflow-y: auto;
+  max-height: 98vh; */
 }
 .title {
   margin-bottom: 24px;

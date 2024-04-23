@@ -43,7 +43,6 @@ export const UserModal = ({ onClose }) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const imageUrl = URL.createObjectURL(selectedFile);
-
       setImageUrl(imageUrl);
       setFile(selectedFile);
     }
