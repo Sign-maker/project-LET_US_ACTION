@@ -46,7 +46,7 @@ const MyDailyNormaModal = ({ onClose }) => {
     }
   };
 
-  const handleSave = async ({ setSubmitting }) => {
+  const handleSave = async (values, { setSubmitting }) => {
     try {
       const data = {
         dailyNorma:
@@ -54,6 +54,7 @@ const MyDailyNormaModal = ({ onClose }) => {
             ? parseFloat(consumedWater)
             : parseFloat(dailyNorma),
       };
+
       setSubmitLoading(true);
       const convertedDailyNorma = data.dailyNorma * 1000;
       await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
@@ -72,6 +73,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   const validationSchema = Yup.object({
     weight: Yup.number()
       .min(10, 'Weight must be at least 10 kg')
+      .max(250, 'Weight must be at most 250 kg')
       .when('time', (time, schema) => {
         return time > 0
           ? schema.required('Weight is required if time is provided')
@@ -80,7 +82,8 @@ const MyDailyNormaModal = ({ onClose }) => {
     time: Yup.number().max(24, 'Time must be at most 24 hours').nullable(),
     consumedWater: Yup.number()
       .required('Consumed water is required')
-      .min(0, 'Consumed water must be at least 0'),
+      .min(0, 'Consumed water must be at least 1')
+      .max(15, 'Consumed water must be no more than 15'),
   });
 
   return (
@@ -99,8 +102,10 @@ const MyDailyNormaModal = ({ onClose }) => {
         }}
         validationSchema={validationSchema}
         onSubmit={handleSave}
+        validateOnChange={true}
+        validateOnBlur={true}
       >
-        {({ isSubmitting, errors, touched, setFieldValue }) => (
+        {({ isSubmitting, errors, touched, setFieldValue, values }) => (
           <Form className={css.formulaBody}>
             <div className={css.formulaBlock}>
               <div className={css.formula}>
@@ -171,7 +176,7 @@ const MyDailyNormaModal = ({ onClose }) => {
                   onChange={e => {
                     setFieldValue('weight', e.target.value);
                     setWeight(e.target.value);
-                    setUserInput(false);
+                    // setUserInput(false);
                   }}
                 />
                 {errors.weight && touched.weight && (
@@ -193,7 +198,7 @@ const MyDailyNormaModal = ({ onClose }) => {
                   onChange={e => {
                     setFieldValue('time', e.target.value);
                     setTime(e.target.value);
-                    setUserInput(false);
+                    // setUserInput(false);
                   }}
                 />
                 {errors.time && touched.time && (
@@ -213,26 +218,25 @@ const MyDailyNormaModal = ({ onClose }) => {
               </p>
               <Field
                 className={`${css.drinkInput} ${
-                  errors.consumedWater && touched.consumedWater
+                  errors.consumedWater &&
+                  (touched.consumedWater || values.consumedWater)
                     ? css.inputError
                     : ''
                 }`}
                 type="number"
                 name="consumedWater"
                 placeholder="0"
-                min="0"
-                max="15"
-                step="any"
                 value={consumedWater}
                 onChange={e => {
                   setFieldValue('consumedWater', e.target.value);
                   setConsumedWater(e.target.value);
-                  setUserInput(true);
                 }}
               />
-              {errors.consumedWater && touched.consumedWater && (
-                <div className={css.error}>{errors.consumedWater}</div>
-              )}
+              {errors.consumedWater && values.consumedWater ? (
+                <div className={css.error_consumedWater}>
+                  {errors.consumedWater}
+                </div>
+              ) : null}
             </div>
             <div className={css.saveButton}>
               <MyDailyNormaModalBtn
