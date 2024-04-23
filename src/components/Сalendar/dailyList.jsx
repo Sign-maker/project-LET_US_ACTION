@@ -26,6 +26,15 @@ const DayList = ({ month }) => {
     return dayData ? dayData.fulfillment : 0;
   };
 
+  const getDayNote = day => {
+    if (!day) return;
+    const dayString = `${month.getFullYear()}-${(month.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    const dayData = monthNotes.find(note => note.date.startsWith(dayString));
+    return dayData ? dayData : {};
+  };
+
   return (
     <div>
       <ul className={css.dayliList}>
@@ -64,6 +73,7 @@ const DayList = ({ month }) => {
           selectedDay={selectedDay}
           selectedMonth={selectedMonth}
           position={popupPosition}
+          dayNote={getDayNote(selectedDay)}
         />
       </div>
     </div>
