@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 24px;
+  padding-bottom: 44px;
 
   @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
@@ -53,6 +54,7 @@
 @media screen and (min-width: 768px) {
   .section_HomePage {
     padding-top: 40px;
+    padding-bottom: 40px;
     background-position: center 0px;
     background-image: url(../../images/background/tab/bg-el-home-page-tab@1x.png);
   }
@@ -118,7 +120,6 @@
     background-size: 59%;
     background-position: left -60px top 34px;   
     flex-direction: row;
-    height: 92vh;
     gap: 32px;
     justify-content: center;
   }

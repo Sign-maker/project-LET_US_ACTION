@@ -13,14 +13,6 @@ const HomePage = () => {
     fetchTodayStats();
   }, [fetchTodayStats]);
 
-  // useEffect(() => {
-  //   const now = new Date();
-  //   const monthParam = `${now.getFullYear()}-${(now.getMonth() + 1)
-  //     .toString()
-  //     .padStart(2, '0')}`;
-  //   fetchMonthStats(monthParam);
-  // }, [fetchMonthStats]);
-
   return (
     <section className={css.section_HomePage}>
       <h1 className="visually-hidden" aria-label="Water tracker">
@@ -35,10 +27,7 @@ const HomePage = () => {
 
           <div className={css.container_MonthStats}>
             <TodayWaterList />
-
             <Calendar />
-            {/* <PopUpCalendar /> */}
-            {/* <CalendarContainer /> */}
           </div>
         </div>
       </div>

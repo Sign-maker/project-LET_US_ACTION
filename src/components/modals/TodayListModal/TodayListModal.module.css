@@ -271,9 +271,6 @@
   outline: none;
 }
 
-/* .input_number:not(:placeholder-shown) {
-  color: var(--primary-blue-407BFF);
-} */
 
 .modal_footer {
   margin-top: 24px;
@@ -325,7 +322,6 @@
   color: var(--secondary-red-EF5050F);
 }
 
-/*? ---------------------------------- Tablet -------------------------- */
 
 @media screen and (min-width: 768px) {
   .modal_content {
@@ -355,7 +351,6 @@
   }
 }
 
-/*? ----------------------------------- Desctop -------------------------- */
 @media screen and (min-width: 1440px) {
   .modal_content {
     min-width: 592px;
