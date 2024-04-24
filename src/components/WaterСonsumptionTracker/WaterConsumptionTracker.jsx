@@ -20,7 +20,7 @@ const WaterConsumptionTracker = ({ handleClick }) => {
           </li>
         </ul>
       </div>
-      <button className={css.btn} onClick={handleClick} type="button">
+      <button className={css.btn} onClick={handleClick} type="button" value='try tracker'>
         Try tracker
       </button>
     </div>

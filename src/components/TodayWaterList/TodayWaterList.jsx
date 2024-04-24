@@ -47,7 +47,7 @@ export const TodayWaterList = () => {
 
   return (
     <div className={css.containerToday}>
-      <h2 className={css.todayText}>Today</h2>
+      <h2 aria-label='text today' className={css.todayText}>Today</h2>
       <div className={css.containerList}>
         {isTodayLoading ? (
           <div className={Loader.loaderContainer}>
@@ -63,7 +63,7 @@ export const TodayWaterList = () => {
                     new Date(a.date).getTime() - new Date(b.date).getTime()
                 )
                 .map(waterObj => (
-                  <li className={css.listItem} key={waterObj._id}>
+                  <li  className={css.listItem} key={waterObj._id}>
                     <div className={css.infoWrap}>
                       <svg>
                         <use href={sprite + '#cup'}></use>
@@ -75,21 +75,25 @@ export const TodayWaterList = () => {
                     </div>
                     <div className={css.wrapBtn}>
                       <button
+                        type="submit"
+                        value="edit water button"
                         className={css.editBtn}
                         onClick={() => {
                           handleEditItem(waterObj);
                         }}
-                      >
+                      ><p className={'visually-hidden'}>edit water button</p> 
                         <svg>
                           <use href={sprite + '#edit'}></use>
                         </svg>
                       </button>
                       <button
+                        type="submit"
+                        value="delete water button"
                         className={css.deleteBtn}
                         onClick={() => {
                           handleOpenDeleteModal(waterObj);
                         }}
-                      >
+                      ><p className={'visually-hidden'}>delete water button</p> 
                         <svg>
                           <use href={sprite + '#trash'}></use>
                         </svg>
@@ -130,12 +134,14 @@ export const TodayWaterList = () => {
         )}
 
         <button
+          type="submit"
+          value="add water button"
           className={css.addBtn}
           onClick={() => {
             setIsEditing(false);
             handleOpenAddModal();
           }}
-        >
+        ><p className={'visually-hidden'}>add water button</p> 
           <svg>
             <use href={sprite + '#plus'}></use>
           </svg>

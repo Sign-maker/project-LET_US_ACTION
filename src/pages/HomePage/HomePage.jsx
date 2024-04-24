@@ -23,9 +23,9 @@ const HomePage = () => {
 
   return (
     <section className={css.section_HomePage}>
-      <h2 className="visually-hidden" aria-label="Water tracker">
+      <h1 className="visually-hidden" aria-label="Water tracker">
         Water tracker join us
-      </h2>
+      </h1>
       <div className={'container'}>
         <div className={css.container_HomePage}>
           <div className={css.container_daliNorma}>

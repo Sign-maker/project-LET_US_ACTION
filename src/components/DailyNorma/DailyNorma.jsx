@@ -21,12 +21,13 @@ export const DailyNorma = () => {
   return (
     <div className={css.container}>
       <div className={css.contentsDailyNorma}>
-        <h3 className={css.titleDailyNorma}>My daily norma</h3>
+        <h2 className={css.titleDailyNorma}>My daily norma</h2>
         <div className={css.contentsDailyNormaWater}>
-          <p className={css.titleDailyNormaWater}>{`${dailyNormaCalc} L`}</p>
+          <span className={css.titleDailyNormaWater}>{`${dailyNormaCalc} L`}</span>
           <button
             className={css.Button}
-            type="button"
+            type="submit"
+            value="edit water button"
             onClick={handleEditClick}
           >
             Edit

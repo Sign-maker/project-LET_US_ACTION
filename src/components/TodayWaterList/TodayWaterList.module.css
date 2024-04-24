@@ -75,21 +75,21 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 38px;
 
   padding: 0 0 12px 0;
   margin: 12px 4px 0 4px;
 
   border-bottom: 1px solid var(--secondary-5-D7E3FF);
-
+ 
   &:first-child {
     margin: 0px 4px 0 4px;
   }
 
-  @media screen and (max-width: 319px) {
-    gap: 18px;
-
-  }
+    @media screen and (max-width: 319px) {
+      gap: 18px;
+      transition-duration: var(--my-transition-duration);
+      transition-timing-function: var(--my-transition-timing-function);
+    }
 }
 
 
@@ -127,12 +127,6 @@
 
 }
 
-@media screen and (max-width: 319px) {
-  .infoWrap {
-    width: 100%;
-    gap: 5px;
-  }
-}
 
 .wrapBtn {
   display: flex;

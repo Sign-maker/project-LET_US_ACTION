@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-
+    
     @media screen and (min-width: 768px) {
         max-width: 704px;
         display: flex;
@@ -61,6 +61,8 @@
     margin: 0 0 7px 0;
     outline: none;
     background: var(--secondary-5-D7E3FF);
+    transition-duration: var(--my-transition-duration);
+    transition-timing-function: var(--my-transition-timing-function);
 
     background-image: linear-gradient(to right,
         var(--secondary-4-9EBBFF),

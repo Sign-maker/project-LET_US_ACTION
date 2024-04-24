@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DayList from './dailyList.jsx';
 import Loader from '../Loader/Loader.module.css';
 import ClipLoader from 'react-spinners/ClipLoader';
+import sprite from '../../images/sprite.svg';
 
 import css from './calendar.module.css';
 import { useWater } from 'hooks/useWater.js';
@@ -47,13 +48,17 @@ const Calendar = () => {
   return (
     <div className={css.calendar}>
       <div className={css.monthHeader}>
-        <p className={css.month}>Month</p>
+        <h2 aria-label='text today' className={css.month}>Month</h2>
         <div className={css.monthHeaderBtn}>
-          <button className={css.monthBtn} onClick={goToPreviousMonth}>
-            {'<'}
+          <button className={css.monthBtn} onClick={goToPreviousMonth}
+            type="submit"
+             value="previous month button"><p className={'visually-hidden'}>previous month button</p>
+            <svg>
+              <use href={sprite + '#arrow-left'}></use>
+            </svg>
           </button>
 
-          <span className={css.monthName}>
+          <span className={css.monthName} aria-label='current month'>
             {currentMonth.toLocaleString('en-US', {
               month: 'long',
             })}
@@ -62,13 +67,17 @@ const Calendar = () => {
 
           <button
             className={css.monthBtn}
+            type="submit"
+            value="next month button"
             onClick={goToNextMonth}
             disabled={isCurrentMonth()}
             style={{
-              color: isCurrentMonth() ? 'var(--secondary-4-9EBBFF)' : '',
+              fill: isCurrentMonth() ? 'var(--secondary-4-9EBBFF)' : '',
             }}
-          >
-            {'>'}
+          ><p className={'visually-hidden'}>next month button</p>
+            <svg>
+              <use href={sprite + '#arrow-right'}></use>
+            </svg>
           </button>
         </div>
       </div>

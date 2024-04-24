@@ -36,15 +36,16 @@ export const WaterRatioPanel = () => {
           min="0"
           max="100"
           step="1"
+          aria-label='water slider' 
         />
 
-        <label className={css.percentsPoint}>
+        <label aria-label='decor' className={css.percentsPoint}>
           <span>|</span>
           <span>|</span>
           <span>|</span>
         </label>
 
-        <label className={css.percentsValue}>
+        <label aria-label='percents Range'className={css.percentsValue}>
           <span className={range === 0 ? css.valueCurent : css.valueNotCurent}>
             0%
           </span>

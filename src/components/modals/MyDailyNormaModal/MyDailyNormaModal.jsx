@@ -103,7 +103,8 @@ const MyDailyNormaModal = ({ onClose }) => {
     <div className={css.modal}>
       <div className={css.header}>
         <p className={css.title}>My Daily Norma</p>
-        <button className={css.closeButton} onClick={onClose}>
+        <button type="submit" value="close button"
+          className={css.closeButton} onClick={onClose}>
           <VscChromeClose className={css.closeIcon} />
         </button>
       </div>

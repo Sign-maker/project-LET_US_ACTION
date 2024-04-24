@@ -110,7 +110,7 @@ const TodayListModal = ({
           <h2 className={css.title}>
             {isEditing ? 'Edit the entered amount of water' : 'Add water'}
           </h2>
-          <button type="button" className={css.btn_close} onClick={onClose}>
+          <button type="button" value="close button" className={css.btn_close} onClick={onClose}>
             <IoCloseOutline className={css.icon_close} />
           </button>
         </div>

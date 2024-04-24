@@ -37,12 +37,12 @@ const Header = () => {
     <header className={css.header}>
       <div className="container">
         <div className={css.wrap}>
-          <NavLink className={css.logo} to={routes.MAIN}>
-            <Logo />
+          <NavLink className={css.logo} to={routes.MAIN} aria-label="logo tracker">
+            <Logo aria-label="logo tracker"/>
           </NavLink>
           {!isLoggedIn ? (
-            <button className={css.button} onClick={handleClick}>
-              <span className={css.signIn}>Sign in</span>
+            <button className={css.button} onClick={handleClick} aria-label='sign In button'>
+              <span className={css.signIn} aria-label="text sing in">Sign in</span>
               <IconContext.Provider value={{ className: css.icon }}>
                 <div>
                   <HiOutlineUserCircle />
