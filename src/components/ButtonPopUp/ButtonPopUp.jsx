@@ -15,7 +15,9 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
   return (
     <Popup
       trigger={
-        <button className={css.button}>
+        <button className={css.button}
+          value='change avatar'
+          type='submit'>
           {user.avatarURL ? (
             <>
               <span className={css.name}>{user.name}</span>
@@ -43,7 +45,8 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
       position="bottom right"
     >
       <div className={css.content}>
-        <button className={css.button} onClick={handleOpenModal}>
+        <button className={css.button} onClick={handleOpenModal}
+          aria-label='open setting'>
           <IconContext.Provider value={{ className: css.icon }}>
             <div>
               <HiOutlineCog6Tooth />
@@ -52,6 +55,7 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
           <span className={css.span}>Setting</span>
         </button>
         <button
+          aria-label='open Log out'
           className={css.button}
           onClick={() => {
             openLogoutModal();

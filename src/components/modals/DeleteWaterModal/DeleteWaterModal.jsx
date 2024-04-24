@@ -31,7 +31,7 @@ const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
       <div className={css.modal_content}>
         <div className={css.header}>
           <h2 className={css.title}>Delete entry</h2>
-          <button type="button" className={css.btn_close} onClick={onClose}>
+          <button type="button" value='close button' className={css.btn_close} onClick={onClose}>
             <IoCloseOutline className={css.icon_close} />
           </button>
         </div>
@@ -40,11 +40,12 @@ const DeleteWaterModal = ({ onClose, deleteRecordId }) => {
         </p>
 
         <div className={css.btn_container}>
-          <button type="button" className={css.btn_cancel} onClick={onClose}>
+          <button type="button" value='close cancel' className={css.btn_cancel} onClick={onClose}>
             Cancel
           </button>
           <button
             type="button"
+            value='logout button'
             className={css.btn_logout}
             onClick={handleDelete}
           >

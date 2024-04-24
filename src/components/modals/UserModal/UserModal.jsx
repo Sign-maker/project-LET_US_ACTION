@@ -151,7 +151,9 @@ export const UserModal = ({ onClose }) => {
 
   return (
     <div className={css.modalWrap}>
-      <button className={css.closeBtn}>
+      <button className={css.closeBtn}
+        type="submit"
+        value="close button">
         <HiOutlineXMark className={css.closeIcon} onClick={onClose} />
       </button>
       <h1 className={css.title}>Setting</h1>
@@ -165,7 +167,9 @@ export const UserModal = ({ onClose }) => {
           <img src={urlBase} alt={user.name} className={css.img} />
         )}
 
-        <button className={css.buttonAvatar} onClick={handleButtonClick}>
+        <button className={css.buttonAvatar} onClick={handleButtonClick}
+          type="submit"
+          value="Upload a photo button">
           <HiOutlineArrowUpTray /> Upload a photo
         </button>
       </div>

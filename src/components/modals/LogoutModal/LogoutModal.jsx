@@ -25,7 +25,7 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
         <div className={css.header}>
           <h2 className={css.title}>Log out</h2>
           <button
-            type="button"
+            type="button" value="close button"
             className={css.btn_close}
             onClick={onCloseLogout}
           >
@@ -37,6 +37,7 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
         <div className={css.btn_container}>
           <button
             type="button"
+            value="cancel button"
             className={css.btn_cancel}
             onClick={onCloseLogout}
           >
@@ -44,6 +45,7 @@ const LogoutModal = ({ onCloseLogout, onLogout }) => {
           </button>
           <button
             type="button"
+            value="logout button"
             className={css.btn_logout}
             onClick={handleLogout}
             disabled={loading}
