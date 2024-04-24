@@ -89,15 +89,21 @@
 
 @media (max-width: 319px) {
   .dayliList {
-    padding-left: 25px;
+    padding-left: 26px;
+    transition-duration: var(--my-transition-duration);
+    transition-timing-function: var(--my-transition-timing-function);
   }
 }
 
-@media (max-width: 289px) {
+
+@media (max-width: 287px) {
   .dayliList {
-    padding-left: 31px;
+    padding-left: 30px;
+    transition-duration: var(--my-transition-duration);
+    transition-timing-function: var(--my-transition-timing-function);
   }
 }
+
 
 @media (min-width: 768px) {
 

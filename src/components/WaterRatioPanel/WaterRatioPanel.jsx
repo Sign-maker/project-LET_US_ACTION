@@ -26,7 +26,7 @@ export const WaterRatioPanel = () => {
   return (
     <div className={css.container}>
       <div className={css.containerPanel}>
-        <label className={css.panelText}>Today</label>
+        <label aria-label='list of water consumption' className={css.panelText}>Today</label>
         <input
           className={css.percentsRange}
           style={{ backgroundSize: `${range}% 100%` }}
@@ -36,6 +36,7 @@ export const WaterRatioPanel = () => {
           min="0"
           max="100"
           step="1"
+          aria-label='water slider' 
         />
 
         <label className={css.percentsPoint}>
