@@ -50,6 +50,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px 26px;
+  transition-duration: var(--my-transition-duration-500);
 
 }
 
@@ -87,20 +88,14 @@
 }
 
 
-@media (max-width: 319px) {
+@media (max-width: 319.9px) {
   .dayliList {
-    padding-left: 26px;
-    transition-duration: var(--my-transition-duration);
-    transition-timing-function: var(--my-transition-timing-function);
-  }
-}
-
-
-@media (max-width: 287px) {
-  .dayliList {
-    padding-left: 30px;
-    transition-duration: var(--my-transition-duration);
-    transition-timing-function: var(--my-transition-timing-function);
+    display: grid;
+    gap: 16px 0px;
+    grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+    max-width: 235px;
+    transition-duration: var(--my-transition-duration-500);
+     
   }
 }
 
@@ -115,6 +110,7 @@
   .dayliList {
     column-gap: 35.1px;
     row-gap: 20px;
+    transition-duration: 0ms;
   }
 
   .daySpan {
