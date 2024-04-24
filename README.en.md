@@ -38,6 +38,7 @@ easier for you to monitor and improve your water consumption habits.
 ## Contributors
 
 ### Front End
+
 - Dmytro Muratov [GitHub](https://github.com/Sign-maker) - Team Lead
 
 - Maksym Lytovchenko [GitHub](https://github.com/LITOHA-77) - Developer
@@ -45,15 +46,10 @@ easier for you to monitor and improve your water consumption habits.
 - Oleksandr Tobert [GitHub](https://github.com/AlexanderTobert) - Developer
 
 - Serhii Bondariev [GitHub](https://github.com/Serhii-Bondariev) - Dveloper
-  
 - Alina Cherevko [GitHub](https://github.com/AlinaCherevko) - Developer
-  
 - Tetiana Luzhanska [GitHub](https://github.com/Tetiana85) - Developer
-  
 - Uyrii Rudenko [GitHub](https://github.com/barin2010) - Developer
-  
 - Ruslan Korniichenko [GitHub](https://github.com/RuslanKorni) - Developer
-
 
   ### Back End
 
@@ -63,7 +59,7 @@ easier for you to monitor and improve your water consumption habits.
 
 - Tetiana Luzhanska [GitHub](https://github.com/Tetiana85) - Developer
 
-
+- Alina Cherevko [GitHub](https://github.com/AlinaCherevko) - Developer
 
 ## Getting Started
 
