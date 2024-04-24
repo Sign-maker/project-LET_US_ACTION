@@ -1,11 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axios } from '../auth/authOperations';
 
+const getTodayStart = () => {
+  const dayStart = new Date();
+  dayStart.setHours(0, 0, 0, 0);
+  return dayStart;
+};
+
 export const fetchTodayStats = createAsyncThunk(
   'water/fetchTodayStats',
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get('/water/today');
+      const { data } = await axios.get(`/water/today/${getTodayStart()}`);
       return data;
     } catch (error) {
       const errorMessage = error.response.data.message;
@@ -32,7 +38,7 @@ export const addWater = createAsyncThunk(
   'water/addWater',
   async (waterNote, thunkAPI) => {
     try {
-      const { data } = await axios.post('/water', waterNote);
+      const { data } = await axios.post(`/water/${getTodayStart()}`, waterNote);
       return data;
     } catch (error) {
       const errorMessage = error.response.data.message;

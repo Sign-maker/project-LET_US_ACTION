@@ -72,7 +72,7 @@ export const waterSlice = createSlice({
       state.isTodayLoading = true;
     });
     builder.addCase(fetchTodayStats.fulfilled, (state, { payload }) => {
-      state.todayStats = { ...state.todayStats, ...payload };
+      state.todayStats = { ...payload };
       state.isTodayLoading = false;
       state.error = null;
     });
@@ -178,7 +178,12 @@ export const waterSlice = createSlice({
         state.todayStats.dayNotes
       );
 
-      const mIdx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      const mIdx = state.monthNotes.findIndex(({ date }) => {
+        const is = isDateToday(date);
+        console.log(date, is);
+        return is;
+      });
+      console.log(mIdx);
       if (mIdx !== -1) {
         state.monthNotes[mIdx].totalVolume = state.todayStats.totalVolume;
         state.monthNotes[mIdx].fulfillment = state.todayStats.fulfillment;
