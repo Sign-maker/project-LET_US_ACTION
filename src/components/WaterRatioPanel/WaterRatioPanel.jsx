@@ -17,10 +17,6 @@ export const WaterRatioPanel = () => {
     setIsVisible(true);
   };
 
-  // const todayNorma = (user.dailyNorma * 1000).toFixed(1);
-  // const todayNotes = 750;
-
-  // const range = (todayNotes / todayNorma) * 100;
   const range = todayStats.fulfillment ?? 0;
 
   return (

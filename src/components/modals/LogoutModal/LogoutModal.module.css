@@ -1,4 +1,4 @@
-/**--------------------- Mobile ----------------------*/
+
 .modal_text {
   margin-bottom: 24px;
   width: 232px;
@@ -106,7 +106,6 @@
   }
 }
 
-/**--------------------- Tablet ----------------------*/
 
 @media screen and (min-width: 768px) {
   .modal_content {
@@ -133,7 +132,6 @@
   }
 }
 
-/**--------------------- Desktop ----------------------*/
 
 @media screen and (min-width: 1440px) {
   .btn_container {
