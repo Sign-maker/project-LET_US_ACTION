@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { VscChromeClose } from 'react-icons/vsc';
 import css from './MyDailyNormaModal.module.css';
 import MyDailyNormaModalBtn from '../../ButtonsModal/MyDailyNormaModalBtn/MyDailyNormaModalBtn';
+import { useSelector } from 'react-redux';
 
 import { useAuth } from 'hooks/useAuth';
 import { useWater } from 'hooks/useWater';
@@ -13,12 +14,19 @@ import {
 } from 'components/servises/UserNotification';
 
 const MyDailyNormaModal = ({ onClose }) => {
+  const { dailyNorma: reduxDailyNormaMl } = useSelector(
+    state => state.auth.user
+  );
+  const reduxDailyNormaL = reduxDailyNormaMl
+    ? (reduxDailyNormaMl / 1000).toFixed(1)
+    : '2.0';
+
   const [submitLoading, setSubmitLoading] = useState(false);
   const [weight, setWeight] = useState('');
   const [time, setTime] = useState('');
-  const [consumedWater, setConsumedWater] = useState('2.0');
+  const [consumedWater, setConsumedWater] = useState(reduxDailyNormaL);
   const [gender, setGender] = useState('female');
-  const [dailyNorma, setDailyNorma] = useState(2);
+  const [dailyNorma, setDailyNorma] = useState(reduxDailyNormaL);
   const [userInput, setUserInput] = useState(false);
 
   const { updateMyDailyNorma } = useAuth();
@@ -30,9 +38,17 @@ const MyDailyNormaModal = ({ onClose }) => {
 
   useEffect(() => {
     if (!userInput) {
-      setConsumedWater(dailyNorma.toString());
+      setConsumedWater(dailyNorma);
     }
   }, [dailyNorma, userInput]);
+
+  useEffect(() => {
+    if (reduxDailyNormaMl !== null) {
+      const normaInLiters = (reduxDailyNormaMl / 1000).toFixed(1);
+      setDailyNorma(normaInLiters);
+      setConsumedWater(normaInLiters);
+    }
+  }, [reduxDailyNormaMl]);
 
   const dailyNormaCalc = (weight, time, gender) => {
     if (weight > 0 && time >= 0) {
@@ -51,21 +67,18 @@ const MyDailyNormaModal = ({ onClose }) => {
       const data = {
         dailyNorma:
           parseFloat(consumedWater) > 0
-            ? parseFloat(consumedWater)
-            : parseFloat(dailyNorma),
+            ? parseFloat(consumedWater) * 1000
+            : parseFloat(dailyNorma) * 1000,
       };
 
       setSubmitLoading(true);
-      const convertedDailyNorma = data.dailyNorma * 1000;
-      await updateMyDailyNorma({ dailyNorma: convertedDailyNorma });
-      updateStoreByDailyNorma(convertedDailyNorma);
-      // await fetchTodayStats();
+      await updateMyDailyNorma({ dailyNorma: data.dailyNorma });
+      updateStoreByDailyNorma(data.dailyNorma);
       toastFulfilled('Your daily water norma has been successfully updated!');
       onClose();
     } catch (error) {
       toastRejected(error);
     } finally {
-      // setSubmitting(false);
       setSubmitLoading(false);
     }
   };
@@ -98,7 +111,7 @@ const MyDailyNormaModal = ({ onClose }) => {
         initialValues={{
           weight: '',
           time: '',
-          consumedWater: '2.0',
+          consumedWater: reduxDailyNormaL,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSave}
@@ -176,7 +189,6 @@ const MyDailyNormaModal = ({ onClose }) => {
                   onChange={e => {
                     setFieldValue('weight', e.target.value);
                     setWeight(e.target.value);
-                    // setUserInput(false);
                   }}
                 />
                 {errors.weight && touched.weight && (
@@ -198,7 +210,6 @@ const MyDailyNormaModal = ({ onClose }) => {
                   onChange={e => {
                     setFieldValue('time', e.target.value);
                     setTime(e.target.value);
-                    // setUserInput(false);
                   }}
                 />
                 {errors.time && touched.time && (
@@ -206,10 +217,10 @@ const MyDailyNormaModal = ({ onClose }) => {
                 )}
               </div>
               <label className={css.calcQuantity}>
-                <span className={css.quantitytext}>
+                <span className={css.quantityText}>
                   The required amount of water in liters per day:
                 </span>
-                <label className={css.quantityInput}>{dailyNorma} L</label>
+                <span className={css.quantityInput}>{dailyNorma} L</span>
               </label>
             </div>
             <div className={css.drinkQuantity}>
@@ -232,11 +243,11 @@ const MyDailyNormaModal = ({ onClose }) => {
                   setConsumedWater(e.target.value);
                 }}
               />
-              {errors.consumedWater && values.consumedWater ? (
+              {errors.consumedWater && values.consumedWater && (
                 <div className={css.error_consumedWater}>
                   {errors.consumedWater}
                 </div>
-              ) : null}
+              )}
             </div>
             <div className={css.saveButton}>
               <MyDailyNormaModalBtn
