@@ -147,3 +147,9 @@
     height: 680px;
   }
 }
+
+@media (max-width: 319px) {
+  .container_HomePage {
+    min-width: 235px
+  }
+}

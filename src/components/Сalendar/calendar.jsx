@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DayList from './dailyList.jsx';
 import Loader from '../Loader/Loader.module.css';
 import ClipLoader from 'react-spinners/ClipLoader';
+import sprite from '../../images/sprite.svg';
 
 import css from './calendar.module.css';
 import { useWater } from 'hooks/useWater.js';
@@ -49,8 +50,11 @@ const Calendar = () => {
       <div className={css.monthHeader}>
         <p className={css.month}>Month</p>
         <div className={css.monthHeaderBtn}>
-          <button className={css.monthBtn} onClick={goToPreviousMonth}>
-            {'<'}
+          <button className={css.monthBtn} onClick={goToPreviousMonth}
+            aria-label='month change button'>
+            <svg>
+              <use href={sprite + '#arrow-left'}></use>
+            </svg>
           </button>
 
           <span className={css.monthName}>
@@ -62,13 +66,16 @@ const Calendar = () => {
 
           <button
             className={css.monthBtn}
+            aria-label='month change button'
             onClick={goToNextMonth}
             disabled={isCurrentMonth()}
             style={{
-              color: isCurrentMonth() ? 'var(--secondary-4-9EBBFF)' : '',
+              fill: isCurrentMonth() ? 'var(--secondary-4-9EBBFF)' : '',
             }}
           >
-            {'>'}
+            <svg>
+              <use href={sprite + '#arrow-right'}></use>
+            </svg>
           </button>
         </div>
       </div>

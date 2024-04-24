@@ -1,66 +1,80 @@
 .calendar {
   padding-top: 24px;
+  display: flex;
+  flex-direction: column;
 }
+
 .monthHeader {
   display: flex;
+  margin-bottom: 16px;
+  justify-content: space-between;
   align-items: center;
 }
+
 .month {
   font-size: 24px;
   font-weight: 500;
-  margin-right: auto;
   line-height: 30px;
+
 }
+
 .monthHeaderBtn {
-  width: 167px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .monthBtn {
-  background-color: inherit;
-  color: var(--primary-blue-407BFF);
   width: 14px;
   height: 14px;
-}
-.monthName {
-  color: var(--primary-blue-407BFF);
+  background-color: transparent;
+  fill: var(--primary-blue-407BFF);
 
-  font-size: 16px;
+  & svg {
+    width: 14px;
+    height: 14px;
+  }
+
+}
+
+.monthName {
+  padding: 0 8px;
   font-weight: 400;
+  font-size: 16px;
   line-height: 20px;
-  margin-right: auto;
-  margin-left: auto;
+  color: var(--primary-blue-407BFF);
 }
 
 .dayliList {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 24px;
-  row-gap: 16px;
-  padding-top: 16px;
+  gap: 16px 26px;
+
 }
+
 .day {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
+  position: relative;
 }
+
 .daySpan {
   width: 32px;
   height: 32px;
-  background-color: white;
   border-radius: 50%;
-  padding: 7px 6px;
-  margin-bottom: 4px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
+  background-color: var(--primary-white-FFFFFF);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 18px;
 }
+
 .percent {
+  margin-top: 4px;
   color: var(--secondary-4-9EBBFF);
   color: #9ebbff;
   font-size: 10px;
@@ -71,33 +85,38 @@
 .unfulfilledDay {
   border: 2px solid var(--secondary-orange-FF9D43);
 }
+
+
 @media (max-width: 319px) {
   .dayliList {
-    column-gap: 19px;
+    padding-left: 25px;
+  }
+}
+
+@media (max-width: 289px) {
+  .dayliList {
+    padding-left: 31px;
   }
 }
 
 @media (min-width: 768px) {
-  .monthHeader {
-    width: 656px;
-  }
+
   .month {
     font-size: 26px;
-    font-weight: 500;
     line-height: 32px;
   }
 
   .dayliList {
-    column-gap: 34px;
+    column-gap: 35.1px;
     row-gap: 20px;
-    width: 704px;
   }
+
   .daySpan {
     width: 34px;
     height: 34px;
     font-size: 16px;
     line-height: 20px;
-    padding: 7px;
+
   }
 
   .percent {
@@ -107,18 +126,9 @@
 }
 
 @media (min-width: 1440px) {
-  .monthHeader {
-    width: 544px;
-  }
-  .monthName {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-  }
   .dayliList {
-    column-gap: 22px;
-    row-gap: 20px;
-    width: 544px;
+    column-gap: 22.6px;
+
   }
 
   .percent {
