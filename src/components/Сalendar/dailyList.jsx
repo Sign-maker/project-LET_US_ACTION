@@ -11,6 +11,12 @@ const DayList = ({ month }) => {
 
   const { monthNotes } = useWater();
 
+  const getDayBorders = (month, day) => {
+    const dayStart = new Date(month.getFullYear(), month.getMonth(), day, 0);
+    const dayEnd = new Date(month.getFullYear(), month.getMonth(), day + 1, 0);
+    return { dayStart, dayEnd };
+  };
+
   const isFutureDay = day => {
     const today = new Date();
     const checkDate = new Date(month.getFullYear(), month.getMonth(), day);
@@ -25,21 +31,24 @@ const DayList = ({ month }) => {
     setPopupPosition({ x: event.clientX, y: event.clientY });
   };
 
-  const getFulfillmentForDay = day => {
-    const dayString = `${month.getFullYear()}-${(month.getMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    const dayData = monthNotes.find(note => note.date.startsWith(dayString));
-    return dayData ? dayData.fulfillment : 0;
-  };
-
   const getDayNote = day => {
     if (!day) return;
-    const dayString = `${month.getFullYear()}-${(month.getMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    const dayData = monthNotes.find(note => note.date.startsWith(dayString));
-    return dayData ? dayData : {};
+    const { dayStart, dayEnd } = getDayBorders(month, day);
+
+    const dayData = monthNotes.find(note => {
+      const noteDate = new Date(note.date);
+      return (
+        noteDate.getTime() >= dayStart.getTime() &&
+        noteDate.getTime() < dayEnd.getTime()
+      );
+    });
+
+    return dayData ? dayData : null;
+  };
+
+  const getFulfillmentForDay = day => {
+    const dayNote = getDayNote(day);
+    return dayNote ? dayNote.fulfillment : 0;
   };
 
   return (

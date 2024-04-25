@@ -12,24 +12,14 @@ import {
   calcTotalVolume,
 } from 'helpers/statsHelpers';
 
-const initialState = {
-  todayStats: {
-    dailyNorma: null,
-    dayNotes: [],
-    totalVolume: null,
-    fulfillment: null,
-    servingsCount: null,
-  },
-  monthNotes: [],
-  isTodayLoading: false,
-  isMonthLoading: false,
-  isWaterUpdating: false,
-  error: null,
+const getTodayStart = () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
 };
 
 const isDateToday = date => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = getTodayStart();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
   const noteDate = new Date(date);
@@ -40,16 +30,52 @@ const isDateToday = date => {
     : false;
 };
 
+const getCurrentMonthStart = () => {
+  const date = new Date();
+  date.setHours(0, 0, 0, 0);
+  date.setDate(1);
+  return date;
+};
+
+const isCurrentMonth = month => {
+  const monthStart = getCurrentMonthStart();
+  const monthEnd = new Date(monthStart);
+  monthEnd.setDate(monthEnd.getDate() + 1);
+  const currentMonth = new Date(month);
+
+  return (
+    currentMonth.getTime() >= monthStart.getTime() &&
+    currentMonth.getTime() < monthEnd.getTime()
+  );
+};
+
+const initialState = {
+  todayStats: {
+    dailyNorma: null,
+    dayNotes: [],
+    totalVolume: null,
+    fulfillment: null,
+    servingsCount: null,
+  },
+  monthStats: { month: getCurrentMonthStart().toISOString(), monthNotes: [] },
+  isTodayLoading: false,
+  isMonthLoading: false,
+  isWaterUpdating: false,
+  error: null,
+};
+
 export const waterSlice = createSlice({
   name: 'water',
   initialState,
   reducers: {
     updateByDailyNorma: (state, { payload }) => {
-      const idx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      const idx = state.monthStats.monthNotes.findIndex(({ date }) =>
+        isDateToday(date)
+      );
       if (idx !== -1) {
-        state.monthNotes[idx].dailyNorma = payload;
-        state.monthNotes[idx].fulfillment = calcFulfillment(
-          state.monthNotes[idx].totalVolume,
+        state.monthStats.monthNotes[idx].dailyNorma = payload;
+        state.monthStats.monthNotes[idx].fulfillment = calcFulfillment(
+          state.monthStats.monthNotes[idx].totalVolume,
           payload
         );
       }
@@ -72,7 +98,7 @@ export const waterSlice = createSlice({
       state.isTodayLoading = true;
     });
     builder.addCase(fetchTodayStats.fulfilled, (state, { payload }) => {
-      state.todayStats = { ...state.todayStats, ...payload };
+      state.todayStats = { ...payload };
       state.isTodayLoading = false;
       state.error = null;
     });
@@ -85,7 +111,7 @@ export const waterSlice = createSlice({
       state.isMonthLoading = true;
     });
     builder.addCase(fetchMonthStats.fulfilled, (state, { payload }) => {
-      state.monthNotes = payload.month;
+      state.monthStats = payload;
       state.isMonthLoading = false;
       state.error = null;
     });
@@ -111,11 +137,24 @@ export const waterSlice = createSlice({
       const servingsCount = calcServingsCount(state.todayStats.dayNotes);
       state.todayStats.servingsCount = servingsCount;
 
-      const idx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      const idx = state.monthStats.monthNotes.findIndex(({ date }) =>
+        isDateToday(date)
+      );
+
+      if (idx === -1 && isCurrentMonth(state.monthStats.month)) {
+        state.monthStats.monthNotes.push({
+          date: getTodayStart().toISOString(),
+          dailyNorma: state.todayStats.dailyNorma,
+          totalVolume,
+          fulfillment,
+          servingsCount,
+        });
+      }
+
       if (idx !== -1) {
-        state.monthNotes[idx].totalVolume = totalVolume;
-        state.monthNotes[idx].fulfillment = fulfillment;
-        state.monthNotes[idx].servingsCount = servingsCount;
+        state.monthStats.monthNotes[idx].totalVolume = totalVolume;
+        state.monthStats.monthNotes[idx].fulfillment = fulfillment;
+        state.monthStats.monthNotes[idx].servingsCount = servingsCount;
       }
       state.isWaterUpdating = false;
       state.error = null;
@@ -146,11 +185,16 @@ export const waterSlice = createSlice({
         );
       }
 
-      const mIdx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      const mIdx = state.monthStats.monthNotes.findIndex(({ date }) =>
+        isDateToday(date)
+      );
       if (mIdx !== -1) {
-        state.monthNotes[mIdx].totalVolume = state.todayStats.totalVolume;
-        state.monthNotes[mIdx].fulfillment = state.todayStats.fulfillment;
-        state.monthNotes[mIdx].servingsCount = state.todayStats.servingsCount;
+        state.monthStats.monthNotes[mIdx].totalVolume =
+          state.todayStats.totalVolume;
+        state.monthStats.monthNotes[mIdx].fulfillment =
+          state.todayStats.fulfillment;
+        state.monthStats.monthNotes[mIdx].servingsCount =
+          state.todayStats.servingsCount;
       }
 
       state.isWaterUpdating = false;
@@ -178,11 +222,17 @@ export const waterSlice = createSlice({
         state.todayStats.dayNotes
       );
 
-      const mIdx = state.monthNotes.findIndex(({ date }) => isDateToday(date));
+      const mIdx = state.monthStats.monthNotes.findIndex(({ date }) =>
+        isDateToday(date)
+      );
+
       if (mIdx !== -1) {
-        state.monthNotes[mIdx].totalVolume = state.todayStats.totalVolume;
-        state.monthNotes[mIdx].fulfillment = state.todayStats.fulfillment;
-        state.monthNotes[mIdx].servingsCount = state.todayStats.servingsCount;
+        state.monthStats.monthNotes[mIdx].totalVolume =
+          state.todayStats.totalVolume;
+        state.monthStats.monthNotes[mIdx].fulfillment =
+          state.todayStats.fulfillment;
+        state.monthStats.monthNotes[mIdx].servingsCount =
+          state.todayStats.servingsCount;
       }
       state.isWaterUpdating = false;
       state.error = null;

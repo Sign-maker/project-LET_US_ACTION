@@ -2,10 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios1 from 'axios';
 
 const baseURL = 'https://water-tracker-api-6z23.onrender.com/api';
+// const baseURL = 'http://localhost:8000/api';
 
 export const axios = axios1.create({
   baseURL,
 });
+
+const getTodayStart = () => {
+  const dayStart = new Date();
+  dayStart.setHours(0, 0, 0, 0);
+  return dayStart;
+};
 
 const setAuthHeader = token => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -113,7 +120,10 @@ export const updateMyDailyNorma = createAsyncThunk(
   'auth/dailyNorma',
   async (dailyNorma, thunkAPI) => {
     try {
-      const { data } = await axios.patch('users/waterrate', dailyNorma);
+      const params = { todayStart: getTodayStart() };
+      const { data } = await axios.patch('users/waterrate', dailyNorma, {
+        params,
+      });
 
       return data;
     } catch (error) {

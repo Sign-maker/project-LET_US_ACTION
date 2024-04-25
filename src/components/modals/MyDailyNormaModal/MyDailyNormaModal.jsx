@@ -19,7 +19,7 @@ const MyDailyNormaModal = ({ onClose }) => {
   );
   const reduxDailyNormaL = reduxDailyNormaMl
     ? (reduxDailyNormaMl / 1000).toFixed(1)
-    : '2.0';
+    : 2;
 
   const [submitLoading, setSubmitLoading] = useState(false);
   const [weight, setWeight] = useState('');
@@ -103,8 +103,12 @@ const MyDailyNormaModal = ({ onClose }) => {
     <div className={css.modal}>
       <div className={css.header}>
         <p className={css.title}>My Daily Norma</p>
-        <button type="submit" value="close button"
-          className={css.closeButton} onClick={onClose}>
+        <button
+          type="submit"
+          value="close button"
+          className={css.closeButton}
+          onClick={onClose}
+        >
           <VscChromeClose className={css.closeIcon} />
         </button>
       </div>
