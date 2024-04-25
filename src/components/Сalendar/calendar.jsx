@@ -13,12 +13,12 @@ const Calendar = () => {
   const [waterConsumptionData] = useState([]);
 
   useEffect(() => {
-    const monthParam = `${currentMonth.getFullYear()}-${(
-      currentMonth.getMonth() + 1
-    )
-      .toString()
-      .padStart(2, '0')}`;
-    fetchMonthStats(monthParam);
+    const getMonthStart = month => {
+      const monthStart = new Date(month.getFullYear(), month.getMonth(), 1, 0);
+
+      return monthStart;
+    };
+    fetchMonthStats(getMonthStart(currentMonth));
   }, [fetchMonthStats, currentMonth]);
 
   const isCurrentMonth = () => {
@@ -48,17 +48,23 @@ const Calendar = () => {
   return (
     <div className={css.calendar}>
       <div className={css.monthHeader}>
-        <h2 aria-label='text today' className={css.month}>Month</h2>
+        <h2 aria-label="text today" className={css.month}>
+          Month
+        </h2>
         <div className={css.monthHeaderBtn}>
-          <button className={css.monthBtn} onClick={goToPreviousMonth}
+          <button
+            className={css.monthBtn}
+            onClick={goToPreviousMonth}
             type="submit"
-             value="previous month button"><p className={'visually-hidden'}>previous month button</p>
+            value="previous month button"
+          >
+            <p className={'visually-hidden'}>previous month button</p>
             <svg>
               <use href={sprite + '#arrow-left'}></use>
             </svg>
           </button>
 
-          <span className={css.monthName} aria-label='current month'>
+          <span className={css.monthName} aria-label="current month">
             {currentMonth.toLocaleString('en-US', {
               month: 'long',
             })}
@@ -74,7 +80,8 @@ const Calendar = () => {
             style={{
               fill: isCurrentMonth() ? 'var(--secondary-4-9EBBFF)' : '',
             }}
-          ><p className={'visually-hidden'}>next month button</p>
+          >
+            <p className={'visually-hidden'}>next month button</p>
             <svg>
               <use href={sprite + '#arrow-right'}></use>
             </svg>

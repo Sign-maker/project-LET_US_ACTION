@@ -85,26 +85,26 @@ const PopUpCalendar = ({
           <p className={css.currentDate}>
             {selectedDay}, {selectedMonth}
           </p>
-          {!dayNote.servingsCount ? (
+          {!dayNote ? (
             <span className={css.listNorma}>No notes</span>
           ) : (
             <ul className={css.table}>
               <li className={css.tableList}>
                 Daily norma:
                 <span className={css.listNorma}>
-                  {`${(dayNote.dailyNorma / 1000).toFixed(1)} L` ?? 0}
+                  {dayNote ? `${(dayNote.dailyNorma / 1000).toFixed(1)} L` : 0}
                 </span>
               </li>
               <li className={css.tableList}>
                 Fulfillment of the daily norm:
                 <span className={css.listNorma}>
-                  {`${dayNote.fulfillment}%` ?? 0}
+                  {dayNote ? `${dayNote.fulfillment}%` : 0}
                 </span>
               </li>
               <li className={css.tableList}>
                 How many servings of water:
                 <span className={css.listNorma}>
-                  {dayNote.servingsCount ?? 0}
+                  {dayNote ? dayNote.servingsCount : 0}
                 </span>
               </li>
             </ul>
