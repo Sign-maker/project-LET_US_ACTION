@@ -11,22 +11,22 @@ export const ButtonPopUp = ({ handleOpenModal, openLogoutModal }) => {
   const { user } = useAuth();
 
   const url = user.avatarURL;
-
   return (
     <Popup
       trigger={
         <button className={css.button}
           value='change avatar'
-          type='submit'>
+          type='submit'
+          aria-label='popup-2'>
           {user.avatarURL ? (
             <>
               <span className={css.name}>{user.name}</span>
-              <img src={url} alt={user.name} className={css.avatar} />
+              <img src={url} alt={`user avatar ${user.name}`} className={css.avatar} />
             </>
           ) : user.name ? (
             <div className={css.avatarWrapper}>
               <span className={css.name}>{user.name}</span>
-              <div className={css.fakeAvatar}>
+              <div aria-label='fake avatar' className={css.fakeAvatar}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
             </div>
